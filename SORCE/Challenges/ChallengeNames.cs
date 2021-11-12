@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace SORCE.Challenges
 {
 	public static class cChallenge
-
 	{
 		public const string
 				Buildings_Hide = "Buildings_Hide",
@@ -68,7 +67,6 @@ namespace SORCE.Challenges
 				ShantyTown
 		};
 	}
-
 	public static class vFloor // Vanilla Floor Tiles
 	{
 		public const string
@@ -189,7 +187,6 @@ namespace SORCE.Challenges
 				RugRed,
 		};
 	}
-
 	public static class vFloorTileGroup // Vanilla Floor Tile Groups
 	{
 		public const string
@@ -208,7 +205,6 @@ namespace SORCE.Challenges
 				Wall = "WallTiles",
 				Water = "WaterTiles";
 	}
-
 	public static class vLevelFeature // Vanilla Features
 	{
 		public const string
@@ -251,5 +247,27 @@ namespace SORCE.Challenges
 				Tree = "Tree",
 				VendingMachine = "VendingMachine",
 				VendorCart = "VendorCart";
+	}
+	public static class vWall // Vanilla Walls
+	{
+		public const string
+				BarbedWire = "BarbedWire",
+				Bars = "Bars",
+				Border = "Border",
+				Brick = "Normal",
+				Cave = "Cave",
+				Glass = "Glass",
+				Hedge = "Hedge",
+				Null = "",
+				Steel = "Steel",
+				Wood = "Wood";
+	}
+	public static class vWallGroup // Vanilla Wall Groups
+	{
+		public const string
+				Hideout = "WallsHideout",
+				Normal = "WallsNormal",
+				Strong = "WallsStrong",
+				Weak = "WallsWeak";
 	}
 }

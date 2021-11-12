@@ -73,6 +73,8 @@
     <Compile Include="Challenges\ChallengeNames.cs" />
     <Compile Include="Challenges\C_Overhauls\SpelunkyDory.cs" />
     <Compile Include="Challenges\EChallengeConflictGroup.cs" />
+    <Compile Include="Challenges\migrated.cs" />
+    <Compile Include="LevelGenTools.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
     <Compile Include="Properties\ModInfo.cs" />
     <Compile Include="Core.cs" />
