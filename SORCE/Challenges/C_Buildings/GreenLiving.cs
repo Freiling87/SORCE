@@ -15,16 +15,16 @@ namespace BunnyMod.Content.Challenges.C_Buildings
 		static void Start()
 		{
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.GreenLiving, true))
-				.WithDescription(new CustomNameInfo 
-				{
-					[LanguageCode.English] = "Buildings: Green Living",
-				})
-				.WithName(new CustomNameInfo
+				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "The Mayor has retrofitted most buildings to eco-friendly plant-based construction. The air is mighty fresh... except near the compost-burning stoves.",
+				})
+				.WithName(new CustomNameInfo 
+				{
+					[LanguageCode.English] = cChallenge.GreenLiving,
 				});
 
-			BMChallengesManager.RegisterChallenge<GreenLiving>(new ChallengeInfo(cChallenge.GreenLiving, unlockBuilder)
+			ChallengeManager.RegisterChallenge<GreenLiving>(new ChallengeInfo(cChallenge.GreenLiving, unlockBuilder)
 				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
 		}
 	}

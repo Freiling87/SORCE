@@ -15,16 +15,16 @@ namespace BunnyMod.Content.Challenges.C_Buildings
 		static void Start()
 		{
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.SpelunkyDory, true))
-				.WithDescription(new CustomNameInfo 
+				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Buildings: Spelunky Dory",
+					[LanguageCode.English] = "You and your fellow citizens live in a disgusting cave complex. As the mayor says, \"Don't be a CAN'Tibal, be a CANnibal!\"\n\nMan, fuck the Mayor.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "You and your fellow citizens live in a disgusting cave complex. As the mayor says, \"Don't be a CAN'Tibal, be a CANnibal!\"\n\nMan, fuck the Mayor.",
+					[LanguageCode.English] = cChallenge.SpelunkyDory,
 				});
 
-			BMChallengesManager.RegisterChallenge<SpelunkyDory>(new ChallengeInfo(cChallenge.SpelunkyDory, unlockBuilder)
+			ChallengeManager.RegisterChallenge<SpelunkyDory>(new ChallengeInfo(cChallenge.SpelunkyDory, unlockBuilder)
 				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
 		}
 	}

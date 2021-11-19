@@ -14,17 +14,17 @@ namespace BunnyMod.Content.Challenges.C_Buildings
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(SORCE.Challenges.cChallenge.CityOfSteel, true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.CityOfSteel, true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Buildings: City Of Steel",
+					[LanguageCode.English] = "A gleaming city of steel! The world of the future, today. Mankind's dream in... Wow, it *really* smells like steel cleaner. Like, it fucking stinks. This is pungent.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "A gleaming city of steel! The world of the future, today. Mankind's dream in... Wow, it *really* smells like steel cleaner. Like, it fucking stinks. This is pungent.",
+					[LanguageCode.English] = cChallenge.CityOfSteel,
 				});
 
-			BMChallengesManager.RegisterChallenge<CityOfSteel>(new ChallengeInfo(SORCE.Challenges.cChallenge.CityOfSteel, unlockBuilder)
+			ChallengeManager.RegisterChallenge<CityOfSteel>(new ChallengeInfo(cChallenge.CityOfSteel, unlockBuilder)
 				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
 		}
 	}

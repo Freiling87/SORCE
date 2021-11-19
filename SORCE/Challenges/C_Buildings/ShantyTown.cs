@@ -15,16 +15,16 @@ namespace BunnyMod.Content.Challenges.C_Buildings
 		static void Start()
 		{
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.ShantyTown, true))
-				.WithDescription(new CustomNameInfo 
+				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Buildings: Shanty Town",
+					[LanguageCode.English] = "More wooden construction: A tinderbox on cinder blocks.\n\nHard mode for Firefighters, easy mode for arsonists. Fun mode for psychopaths.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "More wooden construction: A tinderbox on cinder blocks.\n\nHard mode for Firefighters, easy mode for arsonists. Fun mode for psychopaths.",
+					[LanguageCode.English] = cChallenge.ShantyTown,
 				});
 
-			BMChallengesManager.RegisterChallenge<ShantyTown>(new ChallengeInfo(cChallenge.ShantyTown, unlockBuilder)
+			ChallengeManager.RegisterChallenge<ShantyTown>(new ChallengeInfo(cChallenge.ShantyTown, unlockBuilder)
 				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
 		}
 	}

@@ -43,6 +43,9 @@
     <Reference Include="BTHarmonyUtils">
       <HintPath>..\Libraries\BTHarmonyUtils.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.multiplayer-hlapi.Runtime">
+      <HintPath>..\Libraries\com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="RogueLibsCore">
       <HintPath>..\Libraries\RogueLibsCore.dll</HintPath>
     </Reference>
@@ -76,6 +79,11 @@
     <Compile Include="Challenges\migrated.cs" />
     <Compile Include="LevelGenTools.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
+    <Compile Include="Patches\P_BasicFloor.cs" />
+    <Compile Include="Patches\P_BasicWall.cs" />
+    <Compile Include="Patches\P_LoadLevel.cs" />
+    <Compile Include="Patches\P_RandomOther.cs" />
+    <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Properties\ModInfo.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,7 +91,9 @@
   <ItemGroup>
     <Folder Include="Challenges\C_Features\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Patches\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scratchpad.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

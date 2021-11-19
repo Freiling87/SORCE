@@ -15,16 +15,16 @@ namespace BunnyMod.Content.Challenges.C_Buildings
 		static void Start()
 		{
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.Panoptikopolis, true))
-				.WithDescription(new CustomNameInfo 
+				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Buildings: Panoptikopolis",
+					[LanguageCode.English] = "Authoritarian surveillance measures mandate that most buildings have to be built with glass walls. If you have nothing to hide, what are you worried about, citizen?",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Authoritarian surveillance measures mandate that most buildings have to be built with glass walls. If you have nothing to hide, what are you worried about, citizen?",
+					[LanguageCode.English] = cChallenge.Panoptikopolis,
 				});
 
-			BMChallengesManager.RegisterChallenge<Panoptikopolis>(new ChallengeInfo(cChallenge.Panoptikopolis, unlockBuilder)
+			ChallengeManager.RegisterChallenge<Panoptikopolis>(new ChallengeInfo(cChallenge.Panoptikopolis, unlockBuilder)
 				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
 		}
 	}

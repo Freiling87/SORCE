@@ -7,9 +7,9 @@ using SORCE.Challenges;
 using BepInEx.Logging;
 using SORCE.Logging;
 
-namespace BunnyMod.Content.Challenges
+namespace SORCE.Challenges
 {
-	public static class BMChallengesManager
+	public static class ChallengeManager
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		private static GameController GC => GameController.gameController;
@@ -20,6 +20,26 @@ namespace BunnyMod.Content.Challenges
 		/// mapping of ConflictGroups to the ChallengeTypes in that ConflictGroup
 		/// </summary>
 		private static readonly Dictionary<EChallengeConflictGroup, List<Type>> conflictGroupDict = new Dictionary<EChallengeConflictGroup, List<Type>>();
+
+		public static string GetActiveChallengeFromList(List<string> challengeList)
+		{
+			foreach (string mutator in challengeList)
+				if (GC.challenges.Contains(mutator))
+					return mutator;
+
+			return null;
+		}
+
+		/// <summary>
+		/// Should be called *after* all of the custom Challenges have been registered.
+		/// </summary>
+		public static void FinalizeChallenges()
+		{
+			foreach (KeyValuePair<Type, ChallengeInfo> ChallengeEntry in registeredChallenges)
+			{
+				RegisterCancellations(ChallengeEntry.Key, ChallengeEntry.Value);
+			}
+		}
 
 		public static ChallengeInfo GetChallengeInfo<ChallengeType>()
 		{
@@ -33,15 +53,13 @@ namespace BunnyMod.Content.Challenges
 					: null;
 		}
 
-		/// <summary>
-		/// Should be called *after* all of the custom Challenges have been registered.
-		/// </summary>
-		public static void FinalizeChallenges()
+		public static bool IsChallengeFromListActive(List<string> challengeList)
 		{
-			foreach (KeyValuePair<Type, ChallengeInfo> ChallengeEntry in registeredChallenges)
-			{
-				RegisterCancellations(ChallengeEntry.Key, ChallengeEntry.Value);
-			}
+			foreach (string mutator in challengeList)
+				if (GC.challenges.Contains(mutator))
+					return true;
+
+			return false;
 		}
 
 		public static void RegisterChallenge<ChallengeType>(ChallengeInfo info)
