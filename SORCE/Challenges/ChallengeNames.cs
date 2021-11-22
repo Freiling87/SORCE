@@ -21,7 +21,7 @@ namespace SORCE.Challenges
 
 			FloorsExterior_Hide = "Floor Exteriors [-]",
 			FloorsExterior_Show = "Floor Exteriors [+]",
-			ArcologyEcology = "Floor Exteriors - Arcology Ecology",
+			Arcology = "Floor Exteriors - Arcology",
 
 			Features_Hide = "Features [-]",
 			Features_Show = "Features [+]",
@@ -33,10 +33,11 @@ namespace SORCE.Challenges
 			SkywayDistrict = "Features - Skyway District",
 			SurveillanceSociety = "Features - Surveillance Society",
 			ThePollutionSolution = "Features - The Pollution Solution",
+			ThisLandIsMineLand = "Features - This Land Is Mine Land",
 
 			MapSize_Hide = "Map Size [-]",
 			MapSize_Show = "Map Size [+]",
-			ACityForAnts = "Map Size - A City for Ants",
+			ACityForAnts = "Map Size - A City for Ants?!",
 			Claustropolis = "Map Size - Claustropolis",
 			Megalopolis = "Map Size - Megalopolis",
 			Ultrapolis = "Map Size - Ultrapolis",
@@ -47,6 +48,7 @@ namespace SORCE.Challenges
 			DiscoCityDanceoff = "Overhaul - DiscoCityDanceoff",
 			MACITS = "Overhaul - MACITS",
 			PoliceState = "Overhaul - PoliceState",
+			Technocracy = "Overhaul - Technocracy",
 
 			Population_Hide = "Population [-]",
 			Population_Show = "Population [+]",
@@ -84,7 +86,7 @@ namespace SORCE.Challenges
 		};
 		public static List<string> FloorMutators = new List<string>()
 		{
-				ArcologyEcology,
+				Arcology,
 				SpelunkyDory
 		};
 		public static List<string> MapSizeMutators = new List<string>()

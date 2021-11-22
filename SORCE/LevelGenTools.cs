@@ -2,6 +2,7 @@
 using BunnyMod.Content.Challenges.C_Buildings;
 using SORCE.Challenges;
 using SORCE.Logging;
+using SORCE.Traits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace SORCE
 
 			switch (curMutator)
 			{
-				case cChallenge.ArcologyEcology:
+				case cChallenge.Arcology:
 					return vFloor.Grass;
 				default:
 					return null;
@@ -83,7 +84,7 @@ namespace SORCE
 
 			switch (curMutator)
 			{
-				case cChallenge.ArcologyEcology:
+				case cChallenge.Arcology:
 					return vFloorTileGroup.Park;
 				default:
 					return vFloorTileGroup.Building;
@@ -187,34 +188,185 @@ namespace SORCE
 			return null;
 		}
 
+		// * Not transpiled yet
+		public static string AmbientAudio(string chunkDescription)
+		{
+			string ambientAudio = "";
+
+			if (chunkDescription == vChunkType.Casino)
+				ambientAudio = vAmbience.Casino;
+			else if (
+				chunkDescription != vChunkType.Bathhouse &&
+				chunkDescription != vChunkType.Casino &&
+				chunkDescription != vChunkType.Cave &&
+				chunkDescription != vChunkType.CityPark &&
+				chunkDescription != vChunkType.Graveyard)
+			{
+				if (GC.challenges.Contains(cChallenge.Arcology))
+					ambientAudio = vAmbience.Park;
+				
+				if (GC.challenges.Contains(cChallenge.SpelunkyDory))
+					ambientAudio = vAmbience.Cave;
+
+				if (GC.challenges.Contains(cChallenge.GhostTown))
+					ambientAudio = vAmbience.Graveyard;
+			}
+
+			return ambientAudio;
+		}
+		public static bool HasBarbecues(bool vanilla) =>
+			vanilla; // *
+		public static bool HasBoulders(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.SpelunkyDory) || 
+			GC.challenges.Contains(cChallenge.Arcology) ? true :
+			vanilla;
+		public static bool HasBushes(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.Arcology) ? true :
+			vanilla; // *
+		public static bool HasCopBots(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.Technocracy) ? true :
+			vanilla; // *
+		public static bool HasCops(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.AnCapistan) ||
+			GC.challenges.Contains(cChallenge.Technocracy) ? false :
+			GC.challenges.Contains(cChallenge.PoliceState) ? true :
+			vanilla; // *
+		public static bool HasCopsExtra(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.AnCapistan) ||
+			GC.challenges.Contains(cChallenge.Technocracy) ? false :
+			GC.challenges.Contains(cChallenge.PoliceState) ? true :
+			vanilla; //* 
+		public static bool HasFireHydrants(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.AnCapistan) ? false : vanilla;
+		public static bool HasFlamingBarrels(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.AnCapistan) ? true :
+			GC.challenges.Contains(cChallenge.PoliceState) ||
+			GC.challenges.Contains(cChallenge.MACITS) ? false :
+			vanilla;
+		public static bool HasGangbangers(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.YoungMenInTheNeighborhood) ||
+			GC.challenges.Contains(cChallenge.AnCapistan) ? true :
+			GC.challenges.Contains(cChallenge.PoliceState) ||
+			GC.challenges.Contains(cChallenge.MACITS) ? false :
+			vanilla; // *
+		public static bool HasLandMines(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.ThisLandIsMineLand) ? true :
+			vanilla; // *
+		public static bool HasManholesVanilla(bool vanilla) =>
+			//	Underdark Citizen uses a different Manhole algorithm that requires deactivation of vanilla.
+			TraitManager.IsPlayerTraitActive("Underdark Citizen") || GC.challenges.Contains(cChallenge.AnCapistan) ? false :
+			vanilla;
+		public static bool HasMobsters(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.MobTown) ||
+			GC.challenges.Contains(cChallenge.AnCapistan) ? true :
+			GC.challenges.Contains(cChallenge.PoliceState) ||
+			GC.challenges.Contains(cChallenge.MACITS) ? false :
+			vanilla; // *
+		public static bool HasPollutionFeatures(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.ThePollutionSolution) ? false : vanilla;
+		public static bool HasPoliceBoxesAndAlarmButtons(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.PoliceState) || GC.challenges.Contains(cChallenge.MACITS) ? true :
+			GC.challenges.Contains(cChallenge.AnCapistan) ? false :
+			vanilla;
+		public static bool HasPowerBoxes(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.PowerWhelming) ? true : vanilla;
+		public static bool HasTrashCans(bool vanilla)
+		{
+			if (GC.challenges.Contains(cChallenge.AnCapistan))
+				vanilla = false;
+
+			if (GC.challenges.Contains(cChallenge.Arcology) ||
+				GC.challenges.Contains(cChallenge.PoliceState) ||
+				GC.challenges.Contains(cChallenge.MACITS))
+				vanilla = true;
+
+			return vanilla;
+		}
+		public static bool HasTrees(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.Arcology) ? true :
+			GC.challenges.Contains(cChallenge.AnCapistan) ? false :
+			vanilla;
+		public static bool HasVendorCarts(bool vanilla) =>
+			GC.challenges.Contains(cChallenge.CartOfTheDeal) ? true : vanilla;
+		public static string RoamerAgentType(string vanilla)
+		{
+			// TODO: Adjustments for MACITS, etc.
+
+			if (vanilla == "Thief")
+			{
+				string generalRoamer = GC.levelTheme == 4 || GC.levelTheme == 5 ? vAgent.UpperCruster : vAgent.SlumDweller;
+
+				int thiefReduction =
+					GC.challenges.Contains(cChallenge.HordeAlmighty) ? 50 :
+					GC.challenges.Contains(cChallenge.LetMeSeeThatThrong) ? 75 :
+					GC.challenges.Contains(cChallenge.SwarmWelcome) ? 88 :
+					0;
+
+				if (thiefReduction != 0 && GC.percentChance(thiefReduction))
+					vanilla = generalRoamer;
+			}
+
+			return vanilla;
+		}
+		public static void SetHasLakes(LoadLevel __instance)
+		{
+			if (GC.challenges.Contains(cChallenge.LakeItOrLeaveIt))
+				__instance.hasLakes = true;
+		}
+		public static void SetHasFlameGrates(LoadLevel __instance)
+		{
+			return;
+		}
+		public static void SetLevelSizeModifier(LoadLevel __instance)
+		{
+			int newVal = __instance.levelSizeMax;
+
+			string active = ChallengeManager.GetActiveChallengeFromList(cChallenge.CitySizeChallenges);
+
+			if (active == cChallenge.ACityForAnts)
+				newVal = 4;
+			else if (active == cChallenge.Claustropolis)
+				newVal = 12;
+			else if (active == cChallenge.Megalopolis)
+				newVal = 48;
+			else if (active == cChallenge.Ultrapolis)
+				newVal = 64;
+
+			__instance.levelSizeMax = newVal;
+		}
 		/// <summary>
 		/// TODO: This one isn't called anywhere yet. 
 		///		So like, maybe call it.
 		///	TODO: Set LevelFeatures in editor
 		/// </summary>
 		/// <param name="__instance"></param>
-		public static void SpawnFeatures_Master(LoadLevel __instance)
+		public static void SpawnMaster(LoadLevel __instance)
 		{
 			// TODO: Call this
 
 			if ((GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
 				(GC.customLevel && __instance.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
-				GC.challenges.Contains(cChallenge.BadNeighborhoods)) 
-				BreakWindows(__instance);
+				GC.challenges.Contains(cChallenge.BadNeighborhoods))
+				BreakWindows();
+
+			if (GC.challenges.Contains(cChallenge.SpelunkyDory))
+				SpawnCaveWallOutcroppings(__instance);
+
+			if (GC.challenges.Contains(cChallenge.BroughtBackFountain))
+				SpawnFountains();
 
 			if (GC.challenges.Contains(cChallenge.DiscoCityDanceoff))
 			{
-				SpawnFeatures_JukeboxesAndSpeakers(__instance);
-				SpawnFeatures_Turntables();
+				SpawnJukeboxesAndSpeakers(__instance);
+				SpawnTurntables();
 			}
 
-			if (GC.challenges.Contains(cChallenge.LitterallyTheWorst))
-				SpawnFeatures_Litter(__instance);
+			// Trait check for UDC
 
-			if (GC.challenges.Contains(cChallenge.SpelunkyDory))
-				SpawnFeatures_CaveWallOutcroppings(__instance);
+			if (GC.challenges.Contains(cChallenge.PoliceState))
+				SpawnSecurityCamsAndTurrets(__instance);
 		}
-		private static void BreakWindows(LoadLevel __instance)
+		private static void BreakWindows()
 		{
 			logger.LogDebug("Breaking Windows");
 
@@ -222,7 +374,7 @@ namespace SORCE
 				if (objectReal is Window window && GC.percentChance(2))
 					window.DamagedObject(window, 0f);
 		}
-		private static void SpawnFeatures_CaveWallOutcroppings(LoadLevel __instance)
+		private static void SpawnCaveWallOutcroppings(LoadLevel __instance)
 		{
 			Debug.Log("Loading SpelunkyDory Cave Wall Outcroppings");
 			int maxSpawns = (int)((float)Random.Range(48, 64) * __instance.levelSizeModifier);
@@ -422,7 +574,34 @@ namespace SORCE
 				itemCountIterator = i;
 			}
 		}
-		private static void SpawnFeatures_JukeboxesAndSpeakers(LoadLevel __instance)
+		private static void SpawnFountains()
+		{
+			Debug.Log("Loading Fountains");
+			int numObjects = Mathf.Clamp(3 * LevelSizeRatio(), 1, 5);
+			float objectBuffer = 14f;
+
+			for (int i = 0; i < numObjects; i++)
+			{
+				Vector2 location = Vector2.zero;
+				int attempts = 0;
+
+				do
+				{
+					location = GC.tileInfo.FindRandLocationGeneral(2f);
+
+					for (int j = 0; j < GC.objectRealList.Count; j++)
+						if (GC.objectRealList[j].objectName == "Fountain" && Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSizeRatio()))
+							location = Vector2.zero;
+
+					attempts++;
+				} 
+				while ((location == Vector2.zero || Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) && attempts < 100);
+
+				if (location != Vector2.zero)
+					GC.spawnerMain.spawnObjectReal(location, null, "Fountain");
+			}
+		}
+		private static void SpawnJukeboxesAndSpeakers(LoadLevel __instance)
 		{
 			if (GC.challenges.Contains(cChallenge.DiscoCityDanceoff))
 			{
@@ -597,14 +776,13 @@ namespace SORCE
 				spawnedInChunks = null;
 			}
 		}
-		private static void SpawnFeatures_Litter(LoadLevel __instance)
+		private static void SpawnLitter(LoadLevel __instance)
 		{
 			Debug.Log("Loading Litter");
 
 			int numObjects = (int)((5 - GC.levelTheme) * 20 * __instance.levelSizeModifier);
-			int num2;
 
-			for (int i = 0; i < numObjects; i = num2 + 1)
+			for (int i = 0; i < numObjects; i++)
 			{
 				Vector2 location = Vector2.zero;
 				int j = 0;
@@ -612,19 +790,18 @@ namespace SORCE
 				do
 				{
 					location = GC.tileInfo.FindRandLocationGeneral(0f); // Vanilla 2f
-
 					j++;
-				} while (location == Vector2.zero && j < 100);
+				} 
+				while (location == Vector2.zero && j < 100);
 
 				if (location != Vector2.zero)
 					GC.spawnerMain.SpawnWreckagePileObject(location,
 						GC.Choose<string>(vObject.Shelf, vObject.Lamp, vObject.Counter, vObject.VendorCart), false);
 
 				Random.InitState(__instance.randomSeedNum + i);
-				num2 = i;
 			}
 		}
-		private static void SpawnFeatures_Manholes_Underdark(LoadLevel __instance)
+		private static void SpawnManholes_Underdark(LoadLevel __instance)
 		{
 			Debug.Log("Loading Underdark Manholes");
 			int bigTries = (int)((float)Random.Range(8, 12) * __instance.levelSizeModifier);
@@ -708,7 +885,7 @@ namespace SORCE
 					Random.InitState(__instance.randomSeedNum + i);
 				}
 		}
-		private static void SpawnFeatures_Turntables()
+		private static void SpawnTurntables()
 		{
 			int maximumLocations = 6;
 			float distanceBetween = 28f;
@@ -750,7 +927,7 @@ namespace SORCE
 					GC.spawnerMain.spawnObjectReal(location, null, vObject.Turntables);
 			}
 		}
-		private static void SpawnFeatures_SecurityCamsAndTurrets(LoadLevel __instance)
+		private static void SpawnSecurityCamsAndTurrets(LoadLevel __instance)
 		{
 			logger.LogDebug("Loading Public Security Cams");
 
@@ -1028,60 +1205,5 @@ namespace SORCE
 				num2 = numObjects;
 			}
 		}
-		public static void SetHasLakes(LoadLevel __instance)
-		{
-			if (GC.challenges.Contains(cChallenge.LakeItOrLeaveIt))
-				__instance.hasLakes = true;
-		}
-		public static void SetLevelSizeModifier(LoadLevel __instance)
-		{
-			int newVal = __instance.levelSizeMax;
-
-			string active = ChallengeManager.GetActiveChallengeFromList(cChallenge.CitySizeChallenges);
-
-			if (active == cChallenge.ACityForAnts)
-				newVal = 4;
-			else if (active == cChallenge.Claustropolis)
-				newVal = 12;
-			else if (active == cChallenge.Megalopolis)
-				newVal = 48;
-			else if (active == cChallenge.Ultrapolis)
-				newVal = 64;
-
-			__instance.levelSizeMax = newVal;
-		}
-		public static bool HasFireHydrants(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.AnCapistan) ? false : vanilla;
-		/// <summary>
-		/// Note:
-		///		Underdark Citizen uses a different Manhole algorithm that requires deactivation of vanilla.
-		/// </summary>
-		/// <param name="vanilla"></param>
-		/// <returns></returns>
-		public static bool HasManholesVanilla(bool vanilla) =>
-			migrated.IsPlayerTraitActive("Underdark Citizen") || GC.challenges.Contains(cChallenge.AnCapistan) ? false :
-			vanilla;
-		public static bool HasPollutionFeatures(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.ThePollutionSolution) ? false : vanilla;
-		public static bool HasPoliceBoxesAndAlarmButtons(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.PoliceState) || GC.challenges.Contains(cChallenge.MACITS) ? true :
-			GC.challenges.Contains(cChallenge.AnCapistan) ? false :
-			vanilla;
-		public static bool HasPowerBoxes(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.PowerWhelming) ? true : vanilla;
-		public static bool HasTrashCans(bool vanilla)
-		{
-			if (GC.challenges.Contains(cChallenge.AnCapistan))
-				vanilla = false;
-
-			if (GC.challenges.Contains(cChallenge.ArcologyEcology) ||
-				GC.challenges.Contains(cChallenge.PoliceState) ||
-				GC.challenges.Contains(cChallenge.MACITS))
-				vanilla = true;
-
-			return vanilla;
-		}
-		public static bool HasVendorCarts(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.CartOfTheDeal) ? true : vanilla;
 	}
 }

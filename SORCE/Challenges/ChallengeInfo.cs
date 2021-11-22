@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using BunnyMod.Content.Challenges;
 using RogueLibsCore;
 
-namespace BunnyMod.Content.Challenges
+namespace SORCE.Challenges
 {
 	public class ChallengeInfo
 	{

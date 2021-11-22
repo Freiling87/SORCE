@@ -1,4 +1,4 @@
-namespace BunnyMod.Content.Challenges
+namespace SORCE.Challenges
 {
 	public enum EChallengeConflictGroup
 	{

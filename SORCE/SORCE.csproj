@@ -74,6 +74,19 @@
     <Compile Include="Challenges\C_Buildings\Panoptikopolis.cs" />
     <Compile Include="Challenges\C_Buildings\ShantyTown.cs" />
     <Compile Include="Challenges\ChallengeNames.cs" />
+    <Compile Include="Challenges\C_Exteriors\Arcology.cs" />
+    <Compile Include="Challenges\C_Features\BroughtBackFountain.cs" />
+    <Compile Include="Challenges\C_Features\CartOfTheDeal.cs" />
+    <Compile Include="Challenges\C_Features\LakeItOrLeaveIt.cs" />
+    <Compile Include="Challenges\C_Features\PowerWhelming.cs" />
+    <Compile Include="Challenges\C_Features\SkywayDistrict.cs" />
+    <Compile Include="Challenges\C_Features\SurveillanceSociety.cs" />
+    <Compile Include="Challenges\C_Features\ThePollutionSolution.cs" />
+    <Compile Include="Challenges\C_Features\BadNeighborhoods.cs" />
+    <Compile Include="Challenges\C_MapSize\Claustropolis.cs" />
+    <Compile Include="Challenges\C_MapSize\Megapolis.cs" />
+    <Compile Include="Challenges\C_MapSize\Ultrapolis.cs" />
+    <Compile Include="Challenges\C_MapSize\ACityForAnts.cs" />
     <Compile Include="Challenges\C_Overhauls\SpelunkyDory.cs" />
     <Compile Include="Challenges\EChallengeConflictGroup.cs" />
     <Compile Include="Challenges\migrated.cs" />
@@ -87,9 +100,9 @@
     <Compile Include="Properties\ModInfo.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Traits\TraitManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Challenges\C_Features\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
