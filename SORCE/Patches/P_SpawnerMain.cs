@@ -28,7 +28,7 @@ namespace BunnyMod.Content.Patches.P_LevelGen
 		/// <param name="___defaultColor"></param>
 		/// <returns></returns>
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.GetLightColor), argumentTypes: new[] { typeof(string) })]
-		public static bool GetLightColor_Prefix(string lightRealName, SpawnerMain __instance, ref Color __result, Color32 ___defaultColor)
+		public static bool GetLightColor_Prefix(string lightRealName, ref Color __result)
 		{
 			string challenge = ChallengeManager.GetActiveChallengeFromList(cChallenge.AffectsLights);
 

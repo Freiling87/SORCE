@@ -63,6 +63,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\Libraries\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Challenges\ChallengeController.cs" />
@@ -89,14 +92,16 @@
     <Compile Include="Challenges\C_MapSize\ACityForAnts.cs" />
     <Compile Include="Challenges\C_Overhauls\SpelunkyDory.cs" />
     <Compile Include="Challenges\EChallengeConflictGroup.cs" />
-    <Compile Include="Challenges\migrated.cs" />
     <Compile Include="LevelGenTools.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
     <Compile Include="Patches\P_BasicFloor.cs" />
     <Compile Include="Patches\P_BasicWall.cs" />
     <Compile Include="Patches\P_LoadLevel.cs" />
     <Compile Include="Patches\P_RandomOther.cs" />
+    <Compile Include="Patches\P_RandomWalls.cs" />
+    <Compile Include="Patches\P_SpawnerFloor.cs" />
     <Compile Include="Patches\P_SpawnerMain.cs" />
+    <Compile Include="Patches\P_SpawnerObject.cs" />
     <Compile Include="Properties\ModInfo.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

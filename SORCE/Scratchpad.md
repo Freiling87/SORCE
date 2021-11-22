@@ -14,3 +14,4 @@
 Migrate to other mods:
     LevelGenTools.SpawnLitter
     LevelGenTools.SpawnManholes_Underdark
+    BroughtBackFountain (Object mod)

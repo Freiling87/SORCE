@@ -23,7 +23,7 @@ namespace SORCE.Patches
 		/// <param name="___component"></param>
 		/// <param name="___rList"></param>
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(RandomOther.fillOther))]
-		public static void fillOther_Postfix(ref RandomSelection ___component, ref RandomList ___rList) // Postfix
+		public static void FillOther_Postfix(ref RandomSelection ___component, ref RandomList ___rList)
 		{
 			logger.LogDebug("RandomOther_fillOther");
 			// Pay special attention to this. If this is only called at Game Start, you need to find another place post-mutator to mod this.

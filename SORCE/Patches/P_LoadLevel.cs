@@ -20,6 +20,7 @@ using JetBrains.Annotations;
 
 namespace SORCE.Patches
 {
+	[HarmonyPatch(declaringType: typeof(LoadLevel))]
 	public static class P_LoadLevel
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
@@ -58,97 +59,11 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Floor mods
-		/// </summary>
-		/// <param name="__instance"></param>
-		/// <param name="__result"></param>
-		/// <param name="___tilemapFloors2"></param>
-		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: "FillFloors")]
-		public static bool FillFloors_Prefix(LoadLevel __instance, ref IEnumerator __result, ref tk2dTileMap ___tilemapFloors2)
-		{
-			if (ChallengeManager.IsChallengeFromListActive(cChallenge.FloorMutators))
-			{
-				__result = FillFloors_Enumerator(__instance, ___tilemapFloors2);
-
-				return false;
-			}
-
-			return true;
-		}
-		public static IEnumerator FillFloors_Enumerator(LoadLevel __instance, tk2dTileMap ___tilemapFloors2)
-		{
-			// Attempt at FloorMod. No visible effect yet.
-
-			float maxChunkTime = 0.02f;
-			float realtimeSinceStartup = Time.realtimeSinceStartup;
-			int triesCount = 0;
-			int num;
-
-			for (int i2 = 0; i2 < __instance.levelSizeAxis; i2 = num + 1)
-			{
-				for (int j2 = 0; j2 < __instance.levelSizeAxis; j2 = num + 1)
-				{
-					num = triesCount;
-					triesCount = num + 1;
-					int num2 = i2 * 16;
-					int num3 = i2 * 16 + 16;
-					int num4 = 160 - j2 * 16;
-					int num5 = 160 - j2 * 16 - 16;
-
-					for (int k = num2; k < num3; k++)
-					{
-						for (int l = num4; l > num5; l--)
-						{
-							__instance.tileInfo.tileArray[k, l - 1].chunkID = __instance.mapChunkArray[i2, j2].chunkID;
-							string floorTileGroup = vFloorTileGroup.Building; // Homebase is default
-
-							if (ChallengeManager.IsChallengeFromListActive(cChallenge.FloorMutators))
-								floorTileGroup = vFloorTileGroup.Industrial; // No effect?
-							else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
-							{
-								if (GC.levelTheme == 0)
-									floorTileGroup = vFloorTileGroup.Slums;
-								else if (GC.levelTheme == 1)
-									floorTileGroup = vFloorTileGroup.Industrial;
-								else if (GC.levelTheme == 2)
-									floorTileGroup = vFloorTileGroup.Park;
-								else if (GC.levelTheme == 3)
-									floorTileGroup = vFloorTileGroup.Downtown;
-								else if (GC.levelTheme == 4)
-									floorTileGroup = vFloorTileGroup.Uptown;
-								else if (GC.levelTheme == 5)
-									floorTileGroup = vFloorTileGroup.MayorVillage;
-							}
-
-							int tile = int.Parse(GC.rnd.RandomSelect(floorTileGroup, "RandomFloorsWalls"));
-
-							___tilemapFloors2.SetTile(k, l - 1, 0, tile);
-						}
-					}
-
-					if (Time.realtimeSinceStartup - realtimeSinceStartup > maxChunkTime)
-					{
-						yield return null;
-						realtimeSinceStartup = Time.realtimeSinceStartup;
-					}
-
-					Random.InitState(__instance.randomSeedNum + triesCount);
-					num = j2;
-				}
-
-				num = i2;
-			}
-
-			__instance.allChunksFilled = true;
-
-			yield break;
-		}
 
 		/// <summary>
 		/// Floor Exteriors
 		///		This works in two different places, which work on different levels.
+		///	TODO: Transpiler
 		/// </summary>
 		/// <param name="__instance"></param>
 		/// <param name="__result"></param>
@@ -163,7 +78,6 @@ namespace SORCE.Patches
 		}
 		public static IEnumerator FillMapChunks_Replacement(LoadLevel __instance, tk2dTileMap ___tilemapWalls, tk2dTileMap ___tilemapFloors2)
 		{
-			int log = 0;
 			logger.LogDebug("LoadLevel_FillMapChunks_Replacement");
 
 			float maxChunkTime = 0.02f;
@@ -330,7 +244,7 @@ namespace SORCE.Patches
 		/// <param name="__instance"></param>
 		/// <returns></returns>
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2))]
-		public static bool loadStuff2_Prefix(LoadLevel __instance)
+		public static bool LoadStuff2_Prefix()
 		{
 			logger.LogDebug("LoadLevel_loadStuff2_Prefix");
 
@@ -341,6 +255,8 @@ namespace SORCE.Patches
 
 			return true;
 		}
+
+		// SetupMore3_3 in own class, below
 
 		/// <summary>
 		/// WallMod Borders
@@ -421,43 +337,10 @@ namespace SORCE.Patches
 
 			return false;
 		}
-
-		/// <summary>
-		/// Lake It or Leave It
-		/// </summary>
-		/// <param name="instructionsEnumerable"></param>
-		/// <param name="generator"></param>
-		/// <returns></returns>
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Lakes(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
-		{
-			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
-			FieldInfo loadLevel_hasLakes = AccessTools.Field(typeof(LoadLevel), nameof(LoadLevel.hasLakes));
-			MethodInfo levelGenTools_SetHasLakes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.SetHasLakes), new[] { typeof(LoadLevel) });
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					// Line 30
-
-					new CodeInstruction(OpCodes.Ldfld, loadLevel_hasLakes),
-					new CodeInstruction(OpCodes.Brfalse),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					// Call SetupMore3_3_SetHasLakes(__instance);
-
-					new CodeInstruction(OpCodes.Ldarg_0), // __instance
-					new CodeInstruction(OpCodes.Call, levelGenTools_SetHasLakes), // Clear
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
 	}
 	
 	[HarmonyPatch]
-	static class SetupMore3_3_Patches
+	static class P_LoadLevel_SetupMore3_3_Patches
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;

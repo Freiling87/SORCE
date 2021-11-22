@@ -18,7 +18,7 @@ namespace SORCE.Patches
 		public static GameController GC => GameController.gameController;
 
 		/// <summary>
-		/// Floor Interiors, 
+		///		Floor Interiors, 
 		/// </summary>
 		/// <param name="spawner"></param>
 		/// <param name="floorName"></param>

@@ -27,10 +27,12 @@ namespace BunnyMod.Content.Patches
 		/// <param name="myScale"></param>
 		/// <param name="startingChunkReal"></param>
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(BasicWall.Spawn), argumentTypes: new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
-		public static void Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
+		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
 			if (LevelGenTools.IsWallModActive())
 				wallName = LevelGenTools.GetWallTypeFromMutator();
+
+			return true;
 		}
 	}
 }
