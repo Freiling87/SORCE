@@ -26,7 +26,7 @@ namespace SORCE.Patches
 		/// <param name="myScale"></param>
 		/// <param name="startingChunkReal"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(BasicFloor.Spawn), argumentTypes: new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
+		[HarmonyPrefix, HarmonyPatch(nameof(BasicFloor.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string floorName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
 			if (LevelGenTools.GetActiveFloorMod() != null)
