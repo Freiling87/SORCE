@@ -113,5 +113,8 @@
   <ItemGroup>
     <None Include="Scratchpad.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\SORCE_64x64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
