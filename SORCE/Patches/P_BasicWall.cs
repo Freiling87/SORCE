@@ -10,7 +10,7 @@ using SORCE;
 using SORCE.Challenges;
 using SORCE.Logging;
 
-namespace BunnyMod.Content.Patches
+namespace SORCE.Content.Patches
 {
 	[HarmonyPatch(declaringType: typeof(BasicWall))]
 	public static class P_BasicWall
@@ -30,7 +30,7 @@ namespace BunnyMod.Content.Patches
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
 			if (LevelGenTools.IsWallModActive())
-				wallName = LevelGenTools.GetWallTypeFromMutator();
+				wallName = LevelGenTools.WallTypeFromMutator();
 
 			return true;
 		}

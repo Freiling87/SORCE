@@ -10,7 +10,7 @@ using Light2D;
 using SORCE.Challenges;
 using SORCE.Logging;
 
-namespace BunnyMod.Content.Patches.P_LevelGen
+namespace SORCE.Content.Patches.P_LevelGen
 {
 	[HarmonyPatch(declaringType: typeof(SpawnerMain))]
 	public static class P_SpawnerMain

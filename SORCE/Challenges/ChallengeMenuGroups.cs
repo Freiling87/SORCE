@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RogueLibsCore;
 
-namespace BunnyMod.Content.Challenges
+namespace SORCE.Content.Challenges
 {
 	public static class ChallengeMenuGroups
 	{

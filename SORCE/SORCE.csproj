@@ -92,7 +92,14 @@
     <Compile Include="Challenges\C_MapSize\Megapolis.cs" />
     <Compile Include="Challenges\C_MapSize\Ultrapolis.cs" />
     <Compile Include="Challenges\C_MapSize\ACityForAnts.cs" />
-    <Compile Include="Challenges\C_Overhauls\SpelunkyDory.cs" />
+    <Compile Include="Challenges\C_Buildings\SpelunkyDory.cs" />
+    <Compile Include="Challenges\C_Population\HordeAlmighty.cs" />
+    <Compile Include="Challenges\C_Population\LetMeSeeThatThrong.cs" />
+    <Compile Include="Challenges\C_Population\SwarmWelcome.cs" />
+    <Compile Include="Challenges\C_Population\GhostTown.cs" />
+    <Compile Include="Challenges\C_Roamers\MobTown.cs" />
+    <Compile Include="Challenges\C_Roamers\YoungMenInTheNeighborhood.cs" />
+    <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
     <Compile Include="Challenges\EChallengeConflictGroup.cs" />
     <Compile Include="LevelGenTools.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
@@ -114,7 +121,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="README.md" />
     <None Include="Scratchpad.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\SORCE_64x64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

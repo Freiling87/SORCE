@@ -8,7 +8,7 @@ using SORCE.Logging;
 using UnityEngine;
 using SorceLogger = SORCE.Logging.SORCELogger;
 
-namespace BunnyMod.Content.Challenges
+namespace SORCE.Content.Challenges
 {
 	/// <summary>
 	/// Provides methods for interfacing with BM Custom Challenges

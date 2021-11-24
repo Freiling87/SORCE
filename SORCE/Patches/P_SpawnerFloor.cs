@@ -30,10 +30,10 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerFloor.spawn), argumentTypes: new[] { typeof(string) })]
 		public static bool Spawn_Prefix(string floorName, SpawnerFloor __instance, ref tk2dTileMap ___tilemapFloors, ref tk2dTileMap ___tilemapFloors3, ref tk2dTileMap ___tilemapFloors4)
 		{
-			if (LevelGenTools.GetActiveFloorMod() == null)
+			if (LevelGenTools.ActiveFloorMod() == null)
 				return true;
 
-			floorName = LevelGenTools.GetFloorTile();
+			floorName = LevelGenTools.FloorTile();
 
 			if (GC.levelTheme == 2 && floorName == "FlamePit")
 				floorName = "Hole";

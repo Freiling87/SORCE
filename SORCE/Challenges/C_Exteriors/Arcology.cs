@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using BunnyMod;
+using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
-using BunnyMod.Content.Challenges;
+using SORCE.Content.Challenges;
 
 namespace SORCE.Challenges.C_Exteriors
 {

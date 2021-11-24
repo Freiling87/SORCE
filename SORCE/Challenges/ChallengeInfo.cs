@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using BunnyMod.Content.Challenges;
+using SORCE.Content.Challenges;
 using RogueLibsCore;
 
 namespace SORCE.Challenges
