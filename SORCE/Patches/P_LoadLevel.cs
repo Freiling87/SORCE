@@ -59,7 +59,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-
 		/// <summary>
 		/// Floor Exteriors
 		///		This works in two different places, which work on different levels.
@@ -718,7 +717,7 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_PoliceBoxes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo hasPoliceBoxes = AccessTools.Field(typeof(LoadLevel), "hasPoliceBoxes");
+			MethodInfo hasPoliceBoxes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPoliceBoxesAndAlarmButtons), new[] { typeof(bool) });
 			MethodInfo loadLevel_HasPoliceBoxes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPoliceBoxesAndAlarmButtons), new[] { typeof(bool) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -791,7 +790,7 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgents(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentType), new[] { typeof(string), typeof(int) });
+			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentType), new[] { typeof(string) });
 			FieldInfo gameController = AccessTools.Field(typeof(LoadLevel), "gc");
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
