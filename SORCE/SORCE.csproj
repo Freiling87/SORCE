@@ -74,12 +74,12 @@
     <Compile Include="Challenges\ChallengeInfo.cs" />
     <Compile Include="Challenges\ChallengeManager.cs" />
     <Compile Include="Challenges\ChallengeMenuGroups.cs" />
-    <Compile Include="Challenges\C_Buildings\CityOfSteel.cs" />
-    <Compile Include="Challenges\C_Buildings\GreenLiving.cs" />
-    <Compile Include="Challenges\C_Buildings\Panoptikopolis.cs" />
-    <Compile Include="Challenges\C_Buildings\ShantyTown.cs" />
+    <Compile Include="Challenges\C_FloorInteriorsWalls\CityOfSteel.cs" />
+    <Compile Include="Challenges\C_FloorInteriorsWalls\GreenLiving.cs" />
+    <Compile Include="Challenges\C_FloorInteriorsWalls\Panoptikopolis.cs" />
+    <Compile Include="Challenges\C_FloorInteriorsWalls\ShantyTown.cs" />
     <Compile Include="Challenges\ChallengeNames.cs" />
-    <Compile Include="Challenges\C_Exteriors\Arcology.cs" />
+    <Compile Include="Challenges\C_FloorExteriors\Arcology.cs" />
     <Compile Include="Challenges\C_Features\BroughtBackFountain.cs" />
     <Compile Include="Challenges\C_Features\CartOfTheDeal.cs" />
     <Compile Include="Challenges\C_Features\LakeItOrLeaveIt.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="Challenges\C_MapSize\Megapolis.cs" />
     <Compile Include="Challenges\C_MapSize\Ultrapolis.cs" />
     <Compile Include="Challenges\C_MapSize\ACityForAnts.cs" />
-    <Compile Include="Challenges\C_Buildings\SpelunkyDory.cs" />
+    <Compile Include="Challenges\C_FloorInteriorsWalls\SpelunkyDory.cs" />
     <Compile Include="Challenges\C_Population\HordeAlmighty.cs" />
     <Compile Include="Challenges\C_Population\LetMeSeeThatThrong.cs" />
     <Compile Include="Challenges\C_Population\SwarmWelcome.cs" />

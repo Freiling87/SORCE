@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Content.Challenges;
 
-namespace SORCE.Challenges.C_Exteriors
+namespace SORCE.Challenges.C_FloorExteriors
 {
 	public class Arcology
 	{

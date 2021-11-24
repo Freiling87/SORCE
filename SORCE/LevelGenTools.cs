@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using SORCE.Content.Challenges.C_Buildings;
+using SORCE.Content.Challenges.C_FloorInteriorsWalls;
 using SORCE.Challenges;
 using SORCE.Logging;
 using SORCE.Traits;

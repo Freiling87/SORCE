@@ -22,9 +22,11 @@ namespace SORCE.Patches
 		/// </summary>
 		/// <param name="___component"></param>
 		/// <param name="___rList"></param>
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(RandomOther.fillOther))]
 		public static void FillOther_Postfix(ref RandomSelection ___component, ref RandomList ___rList)
 		{
+			// Deleted the instruction for this one.
+			// I think we're better off intercepting this elsewhere, perhaps in the method that makes random selections and passes that extremely unique string as an argument.
+
 			logger.LogDebug("RandomOther_fillOther");
 			// Pay special attention to this. If this is only called at Game Start, you need to find another place post-mutator to mod this.
 

@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 
-namespace SORCE.Content.Challenges.C_Buildings
+namespace SORCE.Content.Challenges.C_FloorInteriorsWalls
 {
 	public class CityOfSteel
 	{

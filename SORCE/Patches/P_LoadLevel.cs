@@ -717,8 +717,10 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_PoliceBoxes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo hasPoliceBoxes = AccessTools.Field(typeof(LoadLevel), "hasPoliceBoxes");
-			MethodInfo loadLevel_HasPoliceBoxes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPoliceBoxesAndAlarmButtons), new[] { typeof(bool) });
+			Type enumeratorType = PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(LoadLevel), "SetupMore3_3")).DeclaringType;
+			FieldInfo hasPoliceBoxes = AccessTools.Field(enumeratorType, "<hasPoliceBoxes>5__7");
+
+			MethodInfo HasPoliceBoxesAndAlarmButtons = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPoliceBoxesAndAlarmButtons), new[] { typeof(bool) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -728,18 +730,19 @@ namespace SORCE.Patches
 					// if (hasPoliceBoxes)
 
 					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld, hasPoliceBoxes),
 					new CodeInstruction(OpCodes.Brfalse),
 					new CodeInstruction(OpCodes.Ldstr, "Loading Police Boxes"),
-				},
+				}, 
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					// __instance.hasPoliceBoxes = LevelGenTools.HasPoliceBoxes(__instance.hasPoliceBoxes);
 
 					new CodeInstruction(OpCodes.Ldarg_0), // __instance
-					new CodeInstruction(OpCodes.Ldloc_S, hasPoliceBoxes), // __instance.hasPoliceBoxes
-					new CodeInstruction(OpCodes.Call, loadLevel_HasPoliceBoxes), // bool
-					new CodeInstruction(OpCodes.Stloc_S, hasPoliceBoxes), // Clear
+					new CodeInstruction(OpCodes.Ldarg_0), // __instance, __instance
+					new CodeInstruction(OpCodes.Ldfld, hasPoliceBoxes), // __instance, __instance.hasPoliceBoxes
+					new CodeInstruction(OpCodes.Call, HasPoliceBoxesAndAlarmButtons), // __instance, bool
+					new CodeInstruction(OpCodes.Stfld, hasPoliceBoxes), // Clear
 				});
 
 			patch.ApplySafe(instructions, logger);
