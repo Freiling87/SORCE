@@ -107,7 +107,7 @@ namespace SORCE.Patches
 								string tilemapGroup = vFloorTileGroup.Building;
 
 								if (ChallengeManager.IsChallengeFromListActive(cChallenge.FloorMutators))
-									tilemapGroup = LevelGenTools.GetFloorTileGroup(); // Works on: Slums,
+									tilemapGroup = LevelGenTools.FloorTileGroup(); // Works on: Slums,
 								else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 								{
 									if (GC.levelTheme == 0)
@@ -327,7 +327,7 @@ namespace SORCE.Patches
 									tileData.wallMaterialOffset = wallMaterialOffset;
 									tileData.wallMaterialOffsetTop = wallMaterialOffsetTop;
 									tileData.wallFrontVariation = true;
-									tileData.wallMaterial = LevelGenTools.GetBorderWallMaterialFromMutator(); //
+									tileData.wallMaterial = LevelGenTools.BorderWallMaterialFromMutator(); //
 									int tile2 = Random.Range(0, 0);
 									___tilemapFloors2.SetTile(m, n - 1, 0, tile2);
 									tileData.chunkID = __instance.mapChunkArray[i, j].chunkID;
@@ -717,7 +717,7 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_PoliceBoxes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo hasPoliceBoxes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPoliceBoxesAndAlarmButtons), new[] { typeof(bool) });
+			FieldInfo hasPoliceBoxes = AccessTools.Field(typeof(LoadLevel), "hasPoliceBoxes");
 			MethodInfo loadLevel_HasPoliceBoxes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPoliceBoxesAndAlarmButtons), new[] { typeof(bool) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -728,7 +728,7 @@ namespace SORCE.Patches
 					// if (hasPoliceBoxes)
 
 					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldfld, hasPoliceBoxes),
+					new CodeInstruction(OpCodes.Ldfld),
 					new CodeInstruction(OpCodes.Brfalse),
 					new CodeInstruction(OpCodes.Ldstr, "Loading Police Boxes"),
 				},
@@ -737,9 +737,9 @@ namespace SORCE.Patches
 					// __instance.hasPoliceBoxes = LevelGenTools.HasPoliceBoxes(__instance.hasPoliceBoxes);
 
 					new CodeInstruction(OpCodes.Ldarg_0), // __instance
-					new CodeInstruction(OpCodes.Ldfld, hasPoliceBoxes), // __instance.hasPoliceBoxes
+					new CodeInstruction(OpCodes.Ldloc_S, hasPoliceBoxes), // __instance.hasPoliceBoxes
 					new CodeInstruction(OpCodes.Call, loadLevel_HasPoliceBoxes), // bool
-					new CodeInstruction(OpCodes.Stfld, hasPoliceBoxes), // Clear
+					new CodeInstruction(OpCodes.Stloc_S, hasPoliceBoxes), // Clear
 				});
 
 			patch.ApplySafe(instructions, logger);

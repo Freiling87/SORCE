@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using BunnyMod;
+using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 
-namespace BunnyMod.Content.Challenges.C_MapSize
+namespace SORCE.Content.Challenges.C_MapSize
 {
 	public class Claustropolis
 	{

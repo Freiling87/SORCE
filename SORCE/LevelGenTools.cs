@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using BunnyMod.Content.Challenges.C_Buildings;
+using SORCE.Content.Challenges.C_Buildings;
 using SORCE.Challenges;
 using SORCE.Logging;
 using SORCE.Traits;
@@ -18,19 +18,13 @@ namespace SORCE
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static string GetActiveFloorMod()
+		public static string ActiveFloorMod() =>
+			cChallenge.FloorMutators.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
+		public static wallMaterialType BorderWallMaterialFromMutator()
 		{
-			foreach (string mutator in cChallenge.WallMutators)
-				if (GC.challenges.Contains(mutator))
-					return mutator;
+			logger.LogDebug("GetWallBorderTypeFromMutator: '" + WallMutator() + "'");
 
-			return null;
-		}
-		public static wallMaterialType GetBorderWallMaterialFromMutator()
-		{
-			logger.LogDebug("GetWallBorderTypeFromMutator: '" + GetWallMutator() + "'");
-
-			switch (GetWallMutator())
+			switch (WallMutator())
 			{
 				case cChallenge.CityOfSteel:
 					return wallMaterialType.Steel;
@@ -51,7 +45,7 @@ namespace SORCE
 					return wallMaterialType.Border;
 			}
 		}
-		public static string GetFloorTile()
+		public static string FloorTile()
 		{
 			string curMutator = ChallengeManager.GetActiveChallengeFromList(cChallenge.FloorMutators);
 
@@ -63,7 +57,7 @@ namespace SORCE
 					return null;
 			}
 		}
-		public static string GetFloorTileGroup()
+		public static string FloorTileGroup()
 		{
 			string curMutator = "";
 
@@ -79,11 +73,11 @@ namespace SORCE
 					return vFloorTileGroup.Building;
 			}
 		}
-		public static string GetWallTypeFromMutator()
+		public static string WallTypeFromMutator()
 		{
-			logger.LogDebug("GetWallTypeFromMutator: '" + GetWallMutator() + "'");
+			logger.LogDebug("GetWallTypeFromMutator: '" + WallMutator() + "'");
 
-			switch (GetWallMutator())
+			switch (WallMutator())
 			{
 				case cChallenge.CityOfSteel:
 					return vWall.Steel;
@@ -103,74 +97,40 @@ namespace SORCE
 
 			return null;
 		}
-		public static string GetWallMutator()
-		{
-			foreach (string mutator in GC.challenges)
-				if (cChallenge.WallMutators.Contains(mutator))
-					return mutator;
-
-			return null;
-		}
+		public static string WallMutator() =>
+			cChallenge.WallMutators.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
 		public static bool IsNextToLake(Vector2 spot) =>
-				GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).lake ||
-				GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y + 0.64f)).lake ||
-				GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y + 0.64f)).lake ||
-				GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y)).lake ||
-				GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y - 0.64f)).lake ||
-				GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
-				GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
-				GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).lake;
-		public static bool IsWallModActive()
-		{
-			foreach (string mutator in cChallenge.WallMutators)
-				if (GC.challenges.Contains(mutator))
-					return true;
-
-			return false;
-		}
-		public static int LevelSizeModifier(int vanilla)
-		{
-			if (GC.challenges.Contains(cChallenge.ACityForAnts))
-				vanilla = 4;
-			else if (GC.challenges.Contains(cChallenge.Claustropolis))
-				vanilla = 12;
-			else if (GC.challenges.Contains(cChallenge.Megalopolis))
-				vanilla = 48;
-			else if (GC.challenges.Contains(cChallenge.Ultrapolis))
-				vanilla = 64;
-
-			return vanilla;
-		}
-		public static int LevelSizeRatio()
-		{
-			return LevelSizeModifier(30) / 30;
-		}
-		public static int PopulationGang(int vanilla)
-		{
-			logger.LogDebug("SetGangCount");
-
-			if (GC.challenges.Contains(cChallenge.HoodlumsWonderland))
-				vanilla = 12;
-
-			return vanilla;
-		}
-		public static int PopulationGeneral(int vanilla)
-		{
-			if (GC.challenges.Contains(cChallenge.GhostTown))
-				vanilla *= 0;
-			else if (GC.challenges.Contains(cChallenge.HordeAlmighty))
-				vanilla *= 2;
-			else if (GC.challenges.Contains(cChallenge.LetMeSeeThatThrong))
-				vanilla *= 4;
-			else if (GC.challenges.Contains(cChallenge.SwarmWelcome))
-				vanilla *= 8;
-
-			return vanilla;
-		}
-		public static int PopulationMafia(int vanilla)
-		{
-			return vanilla;
-		}
+			GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).lake ||
+			GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y + 0.64f)).lake ||
+			GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y + 0.64f)).lake ||
+			GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y)).lake ||
+			GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y - 0.64f)).lake ||
+			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
+			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
+			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).lake;
+		public static bool IsWallModActive() =>
+			cChallenge.WallMutators.Where(t => GC.challenges.Contains(t)).Any();
+		public static int LevelSizeModifier(int vanilla) =>
+			GC.challenges.Contains(cChallenge.ACityForAnts) ? 4 :
+			GC.challenges.Contains(cChallenge.Claustropolis) ? 12 :
+			GC.challenges.Contains(cChallenge.Megalopolis) ? 48 :
+			GC.challenges.Contains(cChallenge.Ultrapolis) ? 64 : 
+			vanilla;
+		public static int LevelSizeRatio() =>
+			LevelSizeModifier(30) / 30;
+		public static int PopulationGang(int vanilla) =>
+			GC.challenges.Contains(cChallenge.HoodlumsWonderland) ? 12 :
+			vanilla;
+		public static int PopulationGeneral(int vanilla) =>
+			vanilla * (
+			GC.challenges.Contains(cChallenge.GhostTown) ? 0 :
+			GC.challenges.Contains(cChallenge.HordeAlmighty) ? 2 :
+			GC.challenges.Contains(cChallenge.LetMeSeeThatThrong) ? 4 :
+			GC.challenges.Contains(cChallenge.SwarmWelcome) ? 8 : 
+			1 );
+		// TODO obv
+		public static int PopulationMafia(int vanilla) => 
+			vanilla;
 
 		/// <summary>
 		/// TODO: Call this somewhere

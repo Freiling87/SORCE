@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RogueLibsCore;
-using BunnyMod.Content.Challenges;
+using SORCE.Content.Challenges;
 using SORCE.Challenges;
 using BepInEx.Logging;
 using SORCE.Logging;
