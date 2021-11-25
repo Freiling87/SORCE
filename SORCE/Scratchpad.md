@@ -4,20 +4,24 @@
 Currently deactivated, need to learn what system BT had in mind
 ##		CT	Features
 Never called that Spawn method, now's the time.
-###			T	Bad Neighborhoods
-Log message showed up
+###			C	Bad Neighborhoods
+- Windows work
+- Possibly lock/steel doors?
 ###			√	Brought Back Fountain
 Works
 Needs to go in Object mod though
 ###			C	Cart of the Deal
+No effect
 ###			C	Department of Public Comfiness
 - For use in "Treehouse City"
 - Spawns Armchairs, Rugs and Fireplaces at random places in public
 ###			T	Lake it or Leave it
 - Some are polluted
   - Pollution Solution has no effect
-###			T	Power Whelming
-###			T	Skyway District
+###			C	Power Whelming
+No effect
+###			√	Skyway District
+Complete
 ###			C	Surveillance Society
 No effect
 ###			C	The Pollution Solution

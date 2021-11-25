@@ -297,9 +297,10 @@ namespace SORCE
 				SpawnTurntables();
 			}
 
-			// Trait check for UDC
+			if (TraitManager.IsPlayerTraitActive("UnderdarkCitizen"))
+				SpawnManholes_Underdark(__instance);
 
-			if (GC.challenges.Contains(cChallenge.PoliceState))
+			if (GC.challenges.Contains(cChallenge.PoliceState) || GC.challenges.Contains(cChallenge.SurveillanceSociety))
 				SpawnSecurityCamsAndTurrets(__instance);
 		}
 		private static void BreakWindows()
