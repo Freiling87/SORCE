@@ -1,13 +1,27 @@
 ﻿#	C	Mutators
+##		C	00 Fix strings
 ##		C	Cancellations
 Currently deactivated, need to learn what system BT had in mind
 ##		CT	Features
 Never called that Spawn method, now's the time.
-###			T	Lake it or Leave it
-Lakes DO generate, some are poisoned (Pollution Solution?)
+###			T	Bad Neighborhoods
+Log message showed up
+###			√	Brought Back Fountain
+Works
+Needs to go in Object mod though
+###			C	Cart of the Deal
 ###			C	Department of Public Comfiness
 - For use in "Treehouse City"
 - Spawns Armchairs, Rugs and Fireplaces at random places in public
+###			T	Lake it or Leave it
+- Some are polluted
+  - Pollution Solution has no effect
+###			T	Power Whelming
+###			T	Skyway District
+###			C	Surveillance Society
+No effect
+###			C	The Pollution Solution
+No effect
 ##		C	Floor Exteriors & Borders
 How to do these? Tie them to Border walls for parallel to Interiors/building walls. Then name them after that
 Wood/Wood: Treehouse City

@@ -31,7 +31,7 @@ namespace SORCE.Patches
 		/// </summary>
 		/// <param name="instructionsEnumerable"></param>
 		/// <returns></returns>
-		[HarmonyTranspiler, HarmonyPatch(methodName: "CreateInitialMap")]
+		[HarmonyTranspiler, HarmonyPatch(methodName: "CreateInitialMap", new Type[] { })]
 		private static IEnumerable<CodeInstruction> CreateInitialMap_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
 		{
 			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
@@ -69,7 +69,7 @@ namespace SORCE.Patches
 		/// <param name="___tilemapWalls"></param>
 		/// <param name="___tilemapFloors2"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: "FillMapChunks")]
+		[HarmonyPrefix, HarmonyPatch(methodName: "FillMapChunks", new Type[] { })]
 		public static bool FillMapChunks_Prefix(LoadLevel __instance, ref IEnumerator __result, ref tk2dTileMap ___tilemapWalls, ref tk2dTileMap ___tilemapFloors2)
 		{
 			__result = FillMapChunks_Replacement(__instance, ___tilemapWalls, ___tilemapFloors2);
@@ -242,7 +242,7 @@ namespace SORCE.Patches
 		/// </summary>
 		/// <param name="__instance"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2))]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2), new Type[] { })]
 		public static bool LoadStuff2_Prefix()
 		{
 			logger.LogDebug("LoadLevel_loadStuff2_Prefix");
@@ -255,8 +255,6 @@ namespace SORCE.Patches
 			return true;
 		}
 
-		// SetupMore3_3 in own class, below
-
 		/// <summary>
 		/// WallMod Borders
 		/// TODO: Transpiler
@@ -265,7 +263,7 @@ namespace SORCE.Patches
 		/// <param name="___tilemapWalls"></param>
 		/// <param name="___tilemapFloors2"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.SetupBasicLevel))]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.SetupBasicLevel), new Type[] { })]
 		public static bool SetupBasicLevel_Prefix(LoadLevel __instance, tk2dTileMap ___tilemapWalls, tk2dTileMap ___tilemapFloors2)
 		{
 			for (int i = 0; i < __instance.levelSizeAxis; i++)
@@ -335,6 +333,12 @@ namespace SORCE.Patches
 					}
 
 			return false;
+		}
+
+		[HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3", new Type[] { })]
+		public static void SetupMore3_3_Postfix(LoadLevel __instance)
+		{
+			LevelGenTools.SpawnMaster(__instance);
 		}
 	}
 	

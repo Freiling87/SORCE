@@ -22,8 +22,6 @@ namespace SORCE
 			cChallenge.FloorMutators.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
 		public static wallMaterialType BorderWallMaterialFromMutator()
 		{
-			logger.LogDebug("GetWallBorderTypeFromMutator: '" + WallMutator() + "'");
-
 			switch (WallMutator())
 			{
 				case cChallenge.CityOfSteel:
@@ -75,8 +73,6 @@ namespace SORCE
 		}
 		public static string WallTypeFromMutator()
 		{
-			logger.LogDebug("GetWallTypeFromMutator: '" + WallMutator() + "'");
-
 			switch (WallMutator())
 			{
 				case cChallenge.CityOfSteel:
@@ -282,16 +278,8 @@ namespace SORCE
 
 			__instance.levelSizeMax = newVal;
 		}
-		/// <summary>
-		/// TODO: This one isn't called anywhere yet. 
-		///		So like, maybe call it.
-		///	TODO: Set LevelFeatures in editor
-		/// </summary>
-		/// <param name="__instance"></param>
 		public static void SpawnMaster(LoadLevel __instance)
 		{
-			// TODO: Call this
-
 			if ((GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
 				(GC.customLevel && __instance.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
 				GC.challenges.Contains(cChallenge.BadNeighborhoods))
