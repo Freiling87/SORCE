@@ -61,7 +61,8 @@ namespace SORCE.Patches
 
 		/// <summary>
 		/// Floor Exteriors
-		///		This works in two different places, which work on different levels.
+		///		This works in two different places, which work on different districts.
+		///			Like, what the fuck.
 		///	TODO: Transpiler
 		/// </summary>
 		/// <param name="__instance"></param>
@@ -77,8 +78,6 @@ namespace SORCE.Patches
 		}
 		public static IEnumerator FillMapChunks_Replacement(LoadLevel __instance, tk2dTileMap ___tilemapWalls, tk2dTileMap ___tilemapFloors2)
 		{
-			logger.LogDebug("LoadLevel_FillMapChunks_Replacement");
-
 			float maxChunkTime = 0.02f;
 			float realtimeSinceStartup = Time.realtimeSinceStartup;
 			int triesCount = 0;
@@ -227,11 +226,9 @@ namespace SORCE.Patches
 				__instance.allChunksFilled = true;
 			else
 			{
-				logger.LogDebug("\tA");
 				MethodInfo FillMapChunks2_Private = AccessTools.Method(typeof(LoadLevel), "FillMapChunks2", new Type[0] { });
 				IEnumerator FillMapChunks2_Private_IEnumerator = (IEnumerator)FillMapChunks2_Private.Invoke(__instance, new object[0]);
 				__instance.StartCoroutine(FillMapChunks2_Private_IEnumerator);
-				logger.LogDebug("\tB");
 			}
 
 			yield break;
@@ -338,7 +335,7 @@ namespace SORCE.Patches
 		[HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3", new Type[] { })]
 		public static void SetupMore3_3_Postfix(LoadLevel __instance)
 		{
-			LevelGenTools.SpawnMaster(__instance);
+			LevelGenTools.Spawn_Master(__instance);
 		}
 	}
 	
@@ -352,11 +349,6 @@ namespace SORCE.Patches
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
 			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(LoadLevel), "SetupMore3_3", new Type[] { }));
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_AlarmButtons(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -388,11 +380,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_AmbientAudio(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -421,11 +408,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Boulders(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -457,11 +439,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_ExplodingAndSlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -494,11 +471,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_FireHydrants(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -529,11 +501,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_FlameGrates(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -566,11 +533,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_FlamingBarrels(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -602,11 +564,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Lakes(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -635,11 +592,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Manholes(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -671,11 +623,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_OilSpills(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -712,11 +659,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_PoliceBoxes(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -753,16 +695,11 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_PowerBoxes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo levelGenTools_HasPowerBoxes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPowerBoxes), new[] { typeof(bool) });
+			MethodInfo hasPowerBoxes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPowerBoxes), new[] { typeof(bool) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -777,10 +714,10 @@ namespace SORCE.Patches
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					// flag = SetupMore3_3_HasPowerBoxes(flag);
+					// flag = LevelgenTools.HasPowerBoxes(flag);
 
 					new CodeInstruction(OpCodes.Ldloc_2), // flag
-					new CodeInstruction(OpCodes.Call, levelGenTools_HasPowerBoxes), // bool
+					new CodeInstruction(OpCodes.Call, hasPowerBoxes), // bool
 					new CodeInstruction(OpCodes.Stloc_2) // Clear
 				});
 
@@ -788,13 +725,44 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgents(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgentNumber(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentFactor), new[] { typeof(string) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					//	Line 2414
+					//		Debug.Log("Loading Slum Dwellers");
+					//		int bigTries = (int)((float)Random.Range(16, 20) * this.levelSizeModifier);
+
+					new CodeInstruction(OpCodes.Ldstr, "Loading Slum Dwellers"),
+					new CodeInstruction(OpCodes.Call), 
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldc_I4_S, 16),
+					new CodeInstruction(OpCodes.Ldc_I4_S, 20),
+					new CodeInstruction(OpCodes.Call),
+					new CodeInstruction(OpCodes.Conv_R4),
+					new CodeInstruction(OpCodes.Ldloc_1),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Mul),
+					new CodeInstruction(OpCodes.Conv_I4),
+					new CodeInstruction(OpCodes.Stfld),
+
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgentType(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentType), new[] { typeof(string) });
@@ -830,11 +798,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_SlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -865,11 +828,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_TrashCans(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -901,11 +859,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Trees(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -937,11 +890,6 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		/// <summary>
-		/// Test
-		/// </summary>
-		/// <param name="codeInstructions"></param>
-		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_VendorCarts(IEnumerable<CodeInstruction> codeInstructions)
 		{
@@ -955,7 +903,6 @@ namespace SORCE.Patches
 					// Line 838
 					// if (flag10)
 
-					new CodeInstruction(OpCodes.Stloc_S, 7),
 					new CodeInstruction(OpCodes.Ldloc_S, 7),
 					new CodeInstruction(OpCodes.Brfalse),
 					new CodeInstruction(OpCodes.Ldstr, "Loading Vendor Carts"),

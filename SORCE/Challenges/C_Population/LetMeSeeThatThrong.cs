@@ -16,10 +16,10 @@ namespace SORCE.Challenges.C_Population
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = 
-					"Ooh that City so scandalous\n" +
-					"And you know another player couldn't handle it\n" +
-					"See you playing that thing like \"Who's the ish?\"" +
-					"With a look in your eye so devilish, ugh" +
+					"Ooh that City so scandalous" +
+					"\nand you know another player couldn't handle it," +
+					"\nsee you playing that thing like \"Who's the ish?\"" +
+					"\nwith a look in your eye so devilish, uh!" +
 					"\n\n- Wandering population set to 400%",
 				})
 				.WithName(new CustomNameInfo

@@ -3,15 +3,13 @@
 ##		C	Cancellations
 Currently deactivated, need to learn what system BT had in mind
 ##		CT	Features
-Never called that Spawn method, now's the time.
-###			C	Bad Neighborhoods
-- Windows work
-- Possibly lock/steel doors?
+###			√	Bad Neighborhoods
+Complete
 ###			√	Brought Back Fountain
 Works
 Needs to go in Object mod though
-###			C	Cart of the Deal
-No effect
+###			√	Cart of the Deal
+Complete
 ###			C	Department of Public Comfiness
 - For use in "Treehouse City"
 - Spawns Armchairs, Rugs and Fireplaces at random places in public
@@ -54,6 +52,7 @@ No floor type?
 ###			√	Shanty Town
 ###			C	Spelunky Dory
 Exterior walls are now wood?? Lol something got messed up, but maybe use it in the other.
+Change rugs back to Grass
 ##		√	MapSize
 ###			√	A City For Ants
 ###			√	Claustropolis

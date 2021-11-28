@@ -51,22 +51,24 @@ namespace SORCE
 			{
 				case cChallenge.Arcology:
 					return vFloor.Grass;
+				case cChallenge.SpelunkyDory:
+					return vFloor.CaveFloor;
 				default:
 					return null;
 			}
 		}
 		public static string FloorTileGroup()
 		{
-			string curMutator = "";
-
-			foreach (string mutator in cChallenge.FloorMutators)
-				if (GC.challenges.Contains(mutator))
-					curMutator = mutator;
+			string curMutator = cChallenge.FloorMutators.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
 
 			switch (curMutator)
 			{
 				case cChallenge.Arcology:
 					return vFloorTileGroup.Park;
+				//case cChallenge.TransitExperiment:
+				//	return vFloorTileGroup.Ice;
+				//case cChallenge.CanalCity:
+				//	return vFloorTileGroup.Water;
 				default:
 					return vFloorTileGroup.Building;
 			}
@@ -117,7 +119,7 @@ namespace SORCE
 		public static int PopulationGang(int vanilla) =>
 			GC.challenges.Contains(cChallenge.HoodlumsWonderland) ? 12 :
 			vanilla;
-		public static int PopulationGeneral(int vanilla) =>
+		public static int RoamerAgentFactor(int vanilla) =>
 			vanilla * (
 			GC.challenges.Contains(cChallenge.GhostTown) ? 0 :
 			GC.challenges.Contains(cChallenge.HordeAlmighty) ? 2 :
@@ -278,7 +280,7 @@ namespace SORCE
 
 			__instance.levelSizeMax = newVal;
 		}
-		public static void SpawnMaster(LoadLevel __instance)
+		public static void Spawn_Master(LoadLevel __instance)
 		{
 			if ((GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
 				(GC.customLevel && __instance.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
@@ -290,12 +292,6 @@ namespace SORCE
 
 			if (GC.challenges.Contains(cChallenge.BroughtBackFountain))
 				SpawnFountains();
-
-			if (GC.challenges.Contains(cChallenge.DiscoCityDanceoff))
-			{
-				SpawnJukeboxesAndSpeakers(__instance);
-				SpawnTurntables();
-			}
 
 			if (TraitManager.IsPlayerTraitActive("UnderdarkCitizen"))
 				SpawnManholes_Underdark(__instance);
@@ -314,6 +310,7 @@ namespace SORCE
 		private static void SpawnCaveWallOutcroppings(LoadLevel __instance)
 		{
 			Debug.Log("Loading SpelunkyDory Cave Wall Outcroppings");
+
 			int maxSpawns = (int)((float)Random.Range(48, 64) * __instance.levelSizeModifier);
 			List<int> spawnedCount = new List<int>();
 			int itemCountIterator;
@@ -537,6 +534,10 @@ namespace SORCE
 				if (location != Vector2.zero)
 					GC.spawnerMain.spawnObjectReal(location, null, "Fountain");
 			}
+		}
+		private static void SpawnArmchairsFireplaces()
+		{
+			// Fireplace in middle, armchairs on sides
 		}
 		private static void SpawnJukeboxesAndSpeakers(LoadLevel __instance)
 		{
@@ -822,47 +823,10 @@ namespace SORCE
 					Random.InitState(__instance.randomSeedNum + i);
 				}
 		}
-		private static void SpawnTurntables()
+		private static void SpawnRugs()
 		{
-			int maximumLocations = 6;
-			float distanceBetween = 28f;
+			// Alternative: replace all public floors with rug, it doesn't matter that much
 
-			for (int i = 0; i < maximumLocations; i++)
-			{
-				Vector2 location = Vector2.zero;
-				int j = 0;
-
-				do
-				{
-					location = GC.tileInfo.FindRandLocationGeneral(2f);
-
-					for (int k = 0; k < GC.objectRealList.Count; k++)
-						if (GC.objectRealList[k].objectName == vObject.Turntables &&
-								Vector2.Distance(GC.objectRealList[k].tr.position, location) < distanceBetween)
-							location = Vector2.zero;
-
-					if (location != Vector2.zero)
-					{
-						if (GC.tileInfo.WaterNearby(location))
-							location = Vector2.zero;
-
-						if (GC.tileInfo.IceNearby(location))
-							location = Vector2.zero;
-
-						if (GC.tileInfo.BridgeNearby(location))
-							location = Vector2.zero;
-					}
-
-					j++;
-				}
-				while (j < 100 &&
-					(location == Vector2.zero ||
-					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f ||
-					Vector2.Distance(location, GC.elevatorDown.tr.position) < 5f));
-
-				if (location != Vector2.zero)
-					GC.spawnerMain.spawnObjectReal(location, null, vObject.Turntables);
-			}
 		}
 		private static void SpawnSecurityCamsAndTurrets(LoadLevel __instance)
 		{
@@ -1140,6 +1104,48 @@ namespace SORCE
 
 				Random.InitState(__instance.randomSeedNum + numObjects);
 				num2 = numObjects;
+			}
+		}
+		private static void SpawnTurntables()
+		{
+			int maximumLocations = 6;
+			float distanceBetween = 28f;
+
+			for (int i = 0; i < maximumLocations; i++)
+			{
+				Vector2 location = Vector2.zero;
+				int j = 0;
+
+				do
+				{
+					location = GC.tileInfo.FindRandLocationGeneral(2f);
+
+					for (int k = 0; k < GC.objectRealList.Count; k++)
+						if (GC.objectRealList[k].objectName == vObject.Turntables &&
+								Vector2.Distance(GC.objectRealList[k].tr.position, location) < distanceBetween)
+							location = Vector2.zero;
+
+					if (location != Vector2.zero)
+					{
+						if (GC.tileInfo.WaterNearby(location))
+							location = Vector2.zero;
+
+						if (GC.tileInfo.IceNearby(location))
+							location = Vector2.zero;
+
+						if (GC.tileInfo.BridgeNearby(location))
+							location = Vector2.zero;
+					}
+
+					j++;
+				}
+				while (j < 100 &&
+					(location == Vector2.zero ||
+					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f ||
+					Vector2.Distance(location, GC.elevatorDown.tr.position) < 5f));
+
+				if (location != Vector2.zero)
+					GC.spawnerMain.spawnObjectReal(location, null, vObject.Turntables);
 			}
 		}
 	}
