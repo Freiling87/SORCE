@@ -12,23 +12,12 @@ namespace SORCE.Challenges.C_Population
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.LetMeSeeThatThrong, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = 
-					"Ooh that City so scandalous" +
-					"\nand you know another player couldn't handle it," +
-					"\nsee you playing that thing like \"Who's the ish?\"" +
-					"\nwith a look in your eye so devilish, uh!" +
-					"\n\n- Wandering population set to 400%",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.LetMeSeeThatThrong,
-				});
+			const string name = nameof(LetMeSeeThatThrong);
 
-			ChallengeManager.RegisterChallenge<LetMeSeeThatThrong>(new ChallengeInfo(cChallenge.LetMeSeeThatThrong, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+
+			ChallengeManager.RegisterChallenge<LetMeSeeThatThrong>(new ChallengeInfo(name, unlockBuilder)
+				.WithConflictGroup(EChallengeConflictGroup.Population));
 		}
 	}
 }

@@ -11,22 +11,14 @@ namespace SORCE.Content.Challenges.C_Roamers
 {
 	public class MobTown
 	{
+		const string name = nameof(MobTown);
+
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.MobTown, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "Enable dis mutatah, or else. Stugots!" +
-					"\n\nThe Mob is in every district.",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.MobTown,
-				});
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<MobTown>(new ChallengeInfo(cChallenge.MobTown, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			ChallengeManager.RegisterChallenge<MobTown>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }

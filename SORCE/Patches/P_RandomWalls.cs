@@ -9,6 +9,7 @@ using System;
 using Light2D;
 using SORCE.Challenges;
 using SORCE.Logging;
+using SORCE.Localization;
 
 namespace SORCE.Patches
 {
@@ -23,8 +24,8 @@ namespace SORCE.Patches
 		{
 			string wallType = null;
 
-			if (LevelGenTools.IsWallModActive())
-				wallType = LevelGenTools.WallTypeFromMutator();
+			if (LevelGenTools.IsInteriorsModActive())
+				wallType = LevelGenTools.InteriorWallType();
 
 			if (wallType == null)
 				return true;

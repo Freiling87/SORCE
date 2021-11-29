@@ -12,21 +12,14 @@ namespace SORCE.Challenges.C_Features
 {
 	public class BadNeighborhoods
 	{
+		const string name = nameof(BadNeighborhoods);
+
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.BadNeighborhoods, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "This place sure went to shit, didn't it?\n\n- Small chance for any given window to start out broken.",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.BadNeighborhoods
-				});
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<BadNeighborhoods>(new ChallengeInfo(cChallenge.BadNeighborhoods, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			ChallengeManager.RegisterChallenge<BadNeighborhoods>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }

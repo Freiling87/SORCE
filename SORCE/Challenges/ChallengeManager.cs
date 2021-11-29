@@ -29,7 +29,6 @@ namespace SORCE.Challenges
 
 			return null;
 		}
-
 		/// <summary>
 		/// Should be called *after* all of the custom Challenges have been registered.
 		/// </summary>

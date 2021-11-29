@@ -17,6 +17,8 @@ using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using System.Reflection.Emit;
 using JetBrains.Annotations;
+using SORCE.Challenges.C_Features;
+using SORCE.Localization;
 
 namespace SORCE.Patches
 {
@@ -105,8 +107,8 @@ namespace SORCE.Patches
 								__instance.tileInfo.tileArray[k, l - 1].chunkID = __instance.mapChunkArray[i, j].chunkID;
 								string tilemapGroup = vFloorTileGroup.Building;
 
-								if (ChallengeManager.IsChallengeFromListActive(cChallenge.FloorMutators))
-									tilemapGroup = LevelGenTools.FloorTileGroup(); // Works on: Slums,
+								if (ChallengeManager.IsChallengeFromListActive(cChallenge.Exteriors))
+									tilemapGroup = LevelGenTools.ExteriorFloorTileGroup(); // Works on: Slums,
 								else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 								{
 									if (GC.levelTheme == 0)
@@ -182,7 +184,7 @@ namespace SORCE.Patches
 									tileData.wallMaterial = wallMaterialType.Border;
 									string tilemapGroup = vFloorTileGroup.Building;
 
-									if (ChallengeManager.IsChallengeFromListActive(cChallenge.FloorMutators))
+									if (ChallengeManager.IsChallengeFromListActive(cChallenge.Exteriors))
 										tilemapGroup = vFloorTileGroup.MayorVillage; // Works on: Park, 
 									else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 									{
@@ -244,7 +246,7 @@ namespace SORCE.Patches
 		{
 			logger.LogDebug("LoadLevel_loadStuff2_Prefix");
 
-			if (GC.challenges.Contains(cChallenge.SkywayDistrict))
+			if (GC.challenges.Contains(nameof(SkywayDistrict)))
 				GC.canalHoles = true;
 			else
 				GC.canalHoles = false;
@@ -322,7 +324,7 @@ namespace SORCE.Patches
 									tileData.wallMaterialOffset = wallMaterialOffset;
 									tileData.wallMaterialOffsetTop = wallMaterialOffsetTop;
 									tileData.wallFrontVariation = true;
-									tileData.wallMaterial = LevelGenTools.BorderWallMaterialFromMutator(); //
+									tileData.wallMaterial = LevelGenTools.BorderWallMaterial(); //
 									int tile2 = Random.Range(0, 0);
 									___tilemapFloors2.SetTile(m, n - 1, 0, tile2);
 									tileData.chunkID = __instance.mapChunkArray[i, j].chunkID;

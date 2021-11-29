@@ -8,6 +8,8 @@ using System.Reflection;
 using System;
 using SORCE.Logging;
 using SORCE.Challenges;
+using SORCE.Content.Challenges.C_Interiors;
+using SORCE.Localization;
 
 namespace SORCE.Patches
 {
@@ -29,56 +31,56 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(nameof(BasicFloor.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string floorName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (LevelGenTools.ActiveFloorMod() != null)
+			if (LevelGenTools.IsInteriorsModActive())
 			{
 				if (vFloor.Natural.Contains(floorName))
 				{
-					if (GC.challenges.Contains(cChallenge.GreenLiving))
+					if (GC.challenges.Contains(nameof(GreenLiving)))
 						floorName = vFloor.Grass;
-					else if (GC.challenges.Contains(cChallenge.SpelunkyDory))
+					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
 						floorName = vFloor.CaveFloor;
 				}
 				else if (vFloor.Rugs.Contains(floorName))
 				{
-					if (GC.challenges.Contains(cChallenge.DiscoCityDanceoff)) // Overrides some non-exclusive challenges
-						floorName = vFloor.CasinoFloor;
-					else if (GC.challenges.Contains(cChallenge.CityOfSteel))
+					//if (GC.challenges.Contains(nameof(DiscoCityDanceoff))) // Overrides some non-exclusive challenges
+					//	floorName = vFloor.CasinoFloor;
+					if (GC.challenges.Contains(nameof(CityOfSteel)))
 						floorName = vFloor.MetalPlates;
-					else if (GC.challenges.Contains(cChallenge.GreenLiving))
+					else if (GC.challenges.Contains(nameof(GreenLiving)))
 						floorName = vFloor.Grass;
-					else if (GC.challenges.Contains(cChallenge.Panoptikopolis))
+					else if (GC.challenges.Contains(nameof(Panoptikopolis)))
 						floorName = vFloor.ClearFloor;
-					else if (GC.challenges.Contains(cChallenge.SpelunkyDory))
+					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
 						floorName = vFloor.DirtFloor;
 				}
 				else if (vFloor.Constructed.Contains(floorName))
 				{
-					if (GC.challenges.Contains(cChallenge.DiscoCityDanceoff)) // Overrides some non-exclusive challenges
-						floorName = vFloor.BathroomTile;
-					else if (GC.challenges.Contains(cChallenge.CityOfSteel))
+					//if (GC.challenges.Contains(nameof(DiscoCityDanceoff))) // Overrides some non-exclusive challenges
+					//	floorName = vFloor.BathroomTile;
+					if (GC.challenges.Contains(nameof(CityOfSteel)))
 						floorName = vFloor.MetalFloor;
-					else if (GC.challenges.Contains(cChallenge.GreenLiving))
+					else if (GC.challenges.Contains(nameof(GreenLiving)))
 						floorName = vFloor.DirtFloor;
-					else if (GC.challenges.Contains(cChallenge.Panoptikopolis))
+					else if (GC.challenges.Contains(nameof(Panoptikopolis)))
 						floorName = vFloor.CleanTiles;
-					else if (GC.challenges.Contains(cChallenge.ShantyTown))
+					else if (GC.challenges.Contains(nameof(ShantyTown)))
 						floorName = vFloor.DrugDenFloor;
-					else if (GC.challenges.Contains(cChallenge.SpelunkyDory))
+					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
 						floorName = vFloor.CaveFloor;
 				}
 				else if (vFloor.Raised.Contains(floorName))
 				{
-					if (GC.challenges.Contains(cChallenge.DiscoCityDanceoff)) // Overrides some non-exclusive challenges
-						floorName = vFloor.DanceFloorRaised;
-					else if (GC.challenges.Contains(cChallenge.CityOfSteel))
+					//if (GC.challenges.Contains(nameof(DiscoCityDanceoff))) // Overrides some non-exclusive challenges
+					//	floorName = vFloor.DanceFloorRaised;
+					if (GC.challenges.Contains(nameof(CityOfSteel)))
 						floorName = vFloor.SolidPlates;
-					else if (GC.challenges.Contains(cChallenge.GreenLiving))
+					else if (GC.challenges.Contains(nameof(GreenLiving)))
 						floorName = vFloor.CaveFloor;
-					else if (GC.challenges.Contains(cChallenge.Panoptikopolis))
+					else if (GC.challenges.Contains(nameof(Panoptikopolis)))
 						floorName = vFloor.CleanTilesRaised;
-					else if (GC.challenges.Contains(cChallenge.ShantyTown))
+					else if (GC.challenges.Contains(nameof(ShantyTown)))
 						floorName = vFloor.DirtyTiles;
-					else if (GC.challenges.Contains(cChallenge.SpelunkyDory))
+					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
 						floorName = vFloor.Grass;
 				}
 			}

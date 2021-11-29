@@ -2,6 +2,11 @@ namespace SORCE.Challenges
 {
 	public enum EChallengeConflictGroup
 	{
-		BuildingChallenges,
+		Arcology,
+		Exteriors,
+		Interiors,
+		MapSize,
+		Overhaul,
+		Population,
 	}
 }

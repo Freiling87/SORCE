@@ -7,25 +7,19 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 
-namespace SORCE.Content.Challenges.C_MapSize
+namespace SORCE.Challenges.C_MapSize
 {
 	public class Claustropolis
 	{
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.Claustropolis, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "Damn, this city is cramped! Who's Claus, anyway?\n\n- Map size set to 37.5%",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.Claustropolis,
-				});
+			const string name = nameof(Claustropolis);
 
-			ChallengeManager.RegisterChallenge<Claustropolis>(new ChallengeInfo(cChallenge.Claustropolis, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+
+			ChallengeManager.RegisterChallenge<Claustropolis>(new ChallengeInfo(name, unlockBuilder)
+				.WithConflictGroup(EChallengeConflictGroup.MapSize));
 		}
 	}
 }

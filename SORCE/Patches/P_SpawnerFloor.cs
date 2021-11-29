@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Object = UnityEngine.Object;
 using SORCE.Logging;
 using SORCE.Challenges;
+using SORCE.Localization;
 
 namespace SORCE.Patches
 {
@@ -33,7 +34,7 @@ namespace SORCE.Patches
 			if (LevelGenTools.ActiveFloorMod() == null)
 				return true;
 
-			floorName = LevelGenTools.FloorTile();
+			floorName = LevelGenTools.ExteriorFloorTile();
 
 			if (GC.levelTheme == 2 && floorName == "FlamePit")
 				floorName = "Hole";

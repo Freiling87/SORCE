@@ -9,6 +9,8 @@ using System;
 using Light2D;
 using SORCE.Challenges;
 using SORCE.Logging;
+using SORCE.Content.Challenges.C_Interiors;
+using SORCE.Localization;
 
 namespace SORCE.Content.Patches.P_LevelGen
 {
@@ -36,11 +38,11 @@ namespace SORCE.Content.Patches.P_LevelGen
 
 			if (challenge == null)
 				return true;
-			else if (challenge == cChallenge.DiscoCityDanceoff)
-				lightReal.lightReal2Color = vColor.discoColors.RandomElement<Color32>();
-			else if (challenge == cChallenge.GreenLiving)
+			//else if (challenge == nameof(DiscoCityDanceoff))
+			//	lightReal.lightReal2Color = vColor.discoColors.RandomElement<Color32>();
+			else if (challenge == nameof(GreenLiving))
 				lightReal.lightReal2Color = vColor.homeColor;
-			else if (challenge == cChallenge.Panoptikopolis)
+			else if (challenge == nameof(Panoptikopolis))
 				lightReal.lightReal2Color = vColor.whiteColor;
 
 			__result = lightReal.lightReal2Color;

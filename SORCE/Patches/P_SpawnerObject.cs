@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using SORCE.Challenges;
+using SORCE.Localization;
 using SORCE.Logging;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace SORCE.Patches
 			logger.LogDebug("SpawnerObject_spawn:");
 			logger.LogDebug("\tobjectRealName = '" + objectRealName + "'");
 
-			if (ChallengeManager.IsChallengeFromListActive(cChallenge.WallMutatorsFlammable) && objectRealName == vObject.FireSpewer)
+			if (ChallengeManager.IsChallengeFromListActive(cChallenge.InteriorsFlammable) && objectRealName == vObject.FireSpewer)
 				objectRealName = vObject.SecurityCam;
 
 			return true;
