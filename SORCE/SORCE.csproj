@@ -146,13 +146,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set DllDirectory="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"
-copy /y "SORCE.dll" %25DllDirectory%25
-copy /y "BTHarmonyUtils.dll" %25DllDirectory%25
-copy /y "RogueLibsCore.dll" %25DllDirectory%25
+    <PostBuildEvent>set modDir="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"
+copy /y "SORCE.dll" %25modDir%25
+copy /y "BTHarmonyUtils.dll" %25modDir%25
+copy /y "RogueLibsCore.dll" %25modDir%25
 
-set locDir="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\config\SORCE"
-copy /y "$(ProjectDir)/Localization/SORCE_Challenges.yaml" %25locDir%25
+set locDir="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue_Data\Localization"
+copy /y "$(ProjectDir)\Localization\SORCE_Abilities.yaml" %25locDir%25  
+copy /y "$(ProjectDir)\Localization\SORCE_Traits.yaml" %25locDir%25  
 
 Start "" "C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"</PostBuildEvent>
   </PropertyGroup>
