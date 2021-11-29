@@ -1,4 +1,10 @@
-﻿using System;
+﻿using SORCE.Challenges.C_Exteriors;
+using SORCE.Challenges.C_MapSize;
+using SORCE.Challenges.C_Overhaul;
+using SORCE.Challenges.C_Population;
+using SORCE.Content.Challenges.C_Interiors;
+using SORCE.Content.Challenges.C_Roamers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,117 +15,55 @@ namespace SORCE.Challenges
 {
 	public static class cChallenge
 	{
-		#region Originals
-		public const string
-			Buildings_Hide = "Buildings [-]",
-			Buildings_Show = "Buildings [+]",
-			CityOfSteel = "Buildings - City Of Steel",
-			GreenLiving = "Buildings - Green Living",
-			Panoptikopolis = "Buildings - Panoptikopolis",
-			ShantyTown = "Buildings - Shanty Town",
-			SpelunkyDory = "Buildings - Spelunky Dory",
-
-			FloorsExterior_Hide = "Floor Exteriors [-]",
-			FloorsExterior_Show = "Floor Exteriors [+]",
-			Arcology = "Floor Exteriors - Arcology",
-
-			Features_Hide = "Features [-]",
-			Features_Show = "Features [+]",
-			BadNeighborhoods = "Features - Bad Neighborhoods",
-			BroughtBackFountain = "Features - Brought Back Fountain",
-			CartOfTheDeal = "Features - Cart of the Deal",
-			LakeItOrLeaveIt = "Features - Lake it or Leave it",
-			PowerWhelming = "Features - Power Whelming",
-			SkywayDistrict = "Features - Skyway District",
-			SurveillanceSociety = "Features - Surveillance Society",
-			ThePollutionSolution = "Features - The Pollution Solution",
-			ThisLandIsMineLand = "Features - This Land Is Mine Land",
-
-			MapSize_Hide = "Map Size [-]",
-			MapSize_Show = "Map Size [+]",
-			ACityForAnts = "Map Size - A City for Ants?!",
-			Claustropolis = "Map Size - Claustropolis",
-			Megalopolis = "Map Size - Megalopolis",
-			Ultrapolis = "Map Size - Ultrapolis",
-
-			Overhauls_Hide = "Overhauls [-]",
-			Overhauls_Show = "Overhauls [+]",
-			AnCapistan = "Overhaul - AnCapistan",
-			DiscoCityDanceoff = "Overhaul - DiscoCityDanceoff",
-			MACITS = "Overhaul - MACITS",
-			PoliceState = "Overhaul - PoliceState",
-			Technocracy = "Overhaul - Technocracy",
-
-			Population_Hide = "Population [-]",
-			Population_Show = "Population [+]",
-			GhostTown = "Population - GhostTown",
-			HordeAlmighty = "Population - HordeAlmighty",
-			LetMeSeeThatThrong = "Population - LetMeSeeThatThrong",
-			SwarmWelcome = "Population - SwarmWelcome",
-
-			Roamers_Hide = "Roamers [-]",
-			Roamers_Show = "Roamers [+]",
-			HoodlumsWonderland = "Roamers - Hoodlum's Wonderland",
-			MobTown = "Roamers - MobTown",
-			YoungMenInTheNeighborhood = "Roamers - Young Men in the Neighborhood",
-
-			Lastentry = "";
-		#endregion
-
-		public static List<string> AddCriminals = new List<string>()
+		public static List<string> AddsCriminals = new List<string>()
 		{
-				HoodlumsWonderland,
-				MobTown,
-				YoungMenInTheNeighborhood,
+			nameof(HoodlumsWonderland),
+			nameof(MobTown),
+			nameof(YoungMenInTheNeighborhood),
 		};
 		public static List<string> AffectsLights = new List<string>()
 		{
-			DiscoCityDanceoff,
-			GreenLiving,
+			nameof(DiscoCityDanceoff),
+			nameof(GreenLiving),
 		};
-		public static List<string> CitySizeChallenges = new List<string>()
+		public static List<string> Exteriors = new List<string>()
 		{
-			ACityForAnts,
-			Claustropolis,
-			Megalopolis,
-			Ultrapolis,
+			nameof(Arcology),
+			nameof(CanalCity),
+			nameof(TransitExperiment),
 		};
-		public static List<string> FloorMutators = new List<string>()
+		public static List<string> Interiors = new List<string>()
 		{
-				Arcology,
-				SpelunkyDory
+			nameof(CityOfSteel),
+			nameof(GreenLiving),
+			nameof(Panoptikopolis),
+			nameof(ShantyTown),
+			nameof(SpelunkyDory)
 		};
-		public static List<string> MapSizeMutators = new List<string>()
+		public static List<string> InteriorsFlammable = new List<string>()
 		{
-				ACityForAnts,
-				Claustropolis,
-				Megalopolis,
-				Ultrapolis
+			nameof(GreenLiving),
+			nameof(ShantyTown)
 		};
-		public static List<string> Overhauls = new List<string>()
+		public static List<string> MapSize = new List<string>()
 		{
-				AnCapistan,
-				MACITS,
-				PoliceState
+			nameof(ACityForAnts),
+			nameof(Claustropolis),
+			nameof(Megalopolis),
+			nameof(Ultrapolis)
+		};
+		public static List<string> Overhaul = new List<string>()
+		{
+			nameof(AnCapistan),
+			nameof(MACITS),
+			nameof(PoliceState)
 		};
 		public static List<string> Population = new List<string>()
 		{
-				GhostTown,
-				LetMeSeeThatThrong,
-				SwarmWelcome,
-		};
-		public static List<string> WallMutators = new List<string>()
-		{
-				CityOfSteel,
-				GreenLiving,
-				Panoptikopolis,
-				ShantyTown,
-				SpelunkyDory
-		};
-		public static List<string> WallMutatorsFlammable = new List<string>()
-		{
-				GreenLiving,
-				ShantyTown
+			nameof(GhostTown),
+			nameof(HordeAlmighty),
+			nameof(LetMeSeeThatThrong),
+			nameof(SwarmWelcome),
 		};
 	}
 	public static class cLevelFeature // Custom Level Features

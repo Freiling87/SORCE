@@ -15,18 +15,11 @@ namespace SORCE.Challenges.C_Features
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.SkywayDistrict, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "The Canal water Downtown was sold off for a pretty penny. So now there's just a huge chasm where it used to be. It's a hazard, but the profit was massive!",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.SkywayDistrict
-				});
+			const string name = nameof(SkywayDistrict);
 
-			ChallengeManager.RegisterChallenge<SkywayDistrict>(new ChallengeInfo(cChallenge.SkywayDistrict, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+
+			ChallengeManager.RegisterChallenge<SkywayDistrict>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }

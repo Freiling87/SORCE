@@ -10,16 +10,16 @@ using SORCE.Content.Challenges;
 
 namespace SORCE.Challenges.C_Features
 {
-	public class PowerWhelming
+	public class ThisLandIsMineLand
 	{
+		const string name = nameof(ThisLandIsMineLand);
+
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(PowerWhelming);
-
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<PowerWhelming>(new ChallengeInfo(name, unlockBuilder));
+			ChallengeManager.RegisterChallenge<BadNeighborhoods>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }

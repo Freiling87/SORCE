@@ -15,18 +15,11 @@ namespace SORCE.Challenges.C_Features
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.SurveillanceSociety, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "Those cameras? For your safety.\n\nOh, the turrets? For their safety.\n\nThe midnight raids and people disappearing? Um... what's your name, citizen?\n\n- Spawns Security Cameras & Turrets in public, aligned with The Law.",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.SurveillanceSociety
-				});
+			const string name = nameof(SurveillanceSociety); 
 
-			ChallengeManager.RegisterChallenge<SurveillanceSociety>(new ChallengeInfo(cChallenge.SurveillanceSociety, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+
+			ChallengeManager.RegisterChallenge<SurveillanceSociety>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }

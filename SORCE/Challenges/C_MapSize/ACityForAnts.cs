@@ -14,18 +14,12 @@ namespace SORCE.Challenges.C_MapSize
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.ACityForAnts, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "\"The Streets of Rogue City Building For Slum Dwellers Who Can't Be Rich Good\"\n\n  - Inscription over the entrance to the Slums, District 420, Floor 69 \n\n- Map size set to 12.5%",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.ACityForAnts,
-				});
+			const string name = nameof(ACityForAnts);
 
-			ChallengeManager.RegisterChallenge<ACityForAnts>(new ChallengeInfo(cChallenge.ACityForAnts, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+
+			ChallengeManager.RegisterChallenge<ACityForAnts>(new ChallengeInfo(name, unlockBuilder)
+				.WithConflictGroup(EChallengeConflictGroup.MapSize));
 		}
 	}
 }

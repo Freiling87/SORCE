@@ -14,19 +14,12 @@ namespace SORCE.Content.Challenges.C_Roamers
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.YoungMenInTheNeighborhood, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "Beause the young gentlemen in the hood are always polite; If you start acting rude, we'll set you right!" +
-					"\n\nYour friendly local Gangbangers now roam every district."
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.YoungMenInTheNeighborhood,
-				});
+			const string name = nameof(YoungMenInTheNeighborhood);
 
-			ChallengeManager.RegisterChallenge<YoungMenInTheNeighborhood>(new ChallengeInfo(cChallenge.YoungMenInTheNeighborhood, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+
+			ChallengeManager.RegisterChallenge<YoungMenInTheNeighborhood>(new ChallengeInfo(name, unlockBuilder)
+				.WithConflictGroup(EChallengeConflictGroup.Arcology));
 		}
 	}
 }

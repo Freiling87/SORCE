@@ -1,5 +1,5 @@
 ﻿using BepInEx.Logging;
-using SORCE.Content.Challenges.C_FloorInteriorsWalls;
+using SORCE.Content.Challenges.C_Interiors;
 using SORCE.Challenges;
 using SORCE.Logging;
 using SORCE.Traits;
@@ -10,6 +10,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using SORCE.Challenges.C_Population;
+using SORCE.Content.Challenges.C_Roamers;
+using SORCE.Challenges.C_MapSize;
+using SORCE.Challenges.C_Exteriors;
+using SORCE.Challenges.C_Overhaul;
+using SORCE.Challenges.C_Features;
 
 namespace SORCE
 {
@@ -19,24 +25,24 @@ namespace SORCE
 		public static GameController GC => GameController.gameController;
 
 		public static string ActiveFloorMod() =>
-			cChallenge.FloorMutators.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
+			cChallenge.Exteriors.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
 		public static wallMaterialType BorderWallMaterialFromMutator()
 		{
 			switch (WallMutator())
 			{
-				case cChallenge.CityOfSteel:
+				case nameof(CityOfSteel):
 					return wallMaterialType.Steel;
 
-				case cChallenge.GreenLiving:
+				case nameof(GreenLiving):
 					return wallMaterialType.Wood;
 
-				case cChallenge.Panoptikopolis:
+				case nameof(Panoptikopolis):
 					return wallMaterialType.Glass;
 
-				case cChallenge.ShantyTown:
+				case nameof(ShantyTown):
 					return wallMaterialType.Wood;
 
-				case cChallenge.SpelunkyDory:
+				case nameof(SpelunkyDory):
 					return wallMaterialType.Border;
 
 				default:
@@ -45,13 +51,13 @@ namespace SORCE
 		}
 		public static string FloorTile()
 		{
-			string curMutator = ChallengeManager.GetActiveChallengeFromList(cChallenge.FloorMutators);
+			string curMutator = ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors);
 
 			switch (curMutator)
 			{
-				case cChallenge.Arcology:
+				case nameof(Arcology):
 					return vFloor.Grass;
-				case cChallenge.SpelunkyDory:
+				case nameof(SpelunkyDory):
 					return vFloor.CaveFloor;
 				default:
 					return null;
@@ -59,16 +65,16 @@ namespace SORCE
 		}
 		public static string FloorTileGroup()
 		{
-			string curMutator = cChallenge.FloorMutators.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
+			string curMutator = ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors);
 
 			switch (curMutator)
 			{
-				case cChallenge.Arcology:
+				case nameof(Arcology):
 					return vFloorTileGroup.Park;
-				//case cChallenge.TransitExperiment:
-				//	return vFloorTileGroup.Ice;
-				//case cChallenge.CanalCity:
-				//	return vFloorTileGroup.Water;
+				case nameof(TransitExperiment):
+					return vFloorTileGroup.Ice;
+				case nameof(CanalCity):
+					return vFloorTileGroup.Water;
 				default:
 					return vFloorTileGroup.Building;
 			}
@@ -77,26 +83,26 @@ namespace SORCE
 		{
 			switch (WallMutator())
 			{
-				case cChallenge.CityOfSteel:
+				case nameof(CityOfSteel):
 					return vWall.Steel;
 
-				case cChallenge.GreenLiving:
+				case nameof(GreenLiving):
 					return vWall.Hedge;
 
-				case cChallenge.Panoptikopolis:
+				case nameof(Panoptikopolis):
 					return vWall.Glass;
 
-				case cChallenge.ShantyTown:
+				case nameof(ShantyTown):
 					return vWall.Wood;
 
-				case cChallenge.SpelunkyDory:
+				case nameof(SpelunkyDory):
 					return vWall.Cave;
 			}
 
 			return null;
 		}
 		public static string WallMutator() =>
-			cChallenge.WallMutators.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
+			cChallenge.Interiors.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
 		public static bool IsNextToLake(Vector2 spot) =>
 			GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).lake ||
 			GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y + 0.64f)).lake ||
@@ -107,24 +113,24 @@ namespace SORCE
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).lake;
 		public static bool IsWallModActive() =>
-			cChallenge.WallMutators.Where(t => GC.challenges.Contains(t)).Any();
+			cChallenge.Interiors.Where(t => GC.challenges.Contains(t)).Any();
 		public static int LevelSizeModifier(int vanilla) =>
-			GC.challenges.Contains(cChallenge.ACityForAnts) ? 4 :
-			GC.challenges.Contains(cChallenge.Claustropolis) ? 12 :
-			GC.challenges.Contains(cChallenge.Megalopolis) ? 48 :
-			GC.challenges.Contains(cChallenge.Ultrapolis) ? 64 : 
+			GC.challenges.Contains(nameof(ACityForAnts)) ? 4 :
+			GC.challenges.Contains(nameof(Claustropolis)) ? 12 :
+			GC.challenges.Contains(nameof(Megalopolis)) ? 48 :
+			GC.challenges.Contains(nameof(Ultrapolis)) ? 64 : 
 			vanilla;
 		public static int LevelSizeRatio() =>
 			LevelSizeModifier(30) / 30;
 		public static int PopulationGang(int vanilla) =>
-			GC.challenges.Contains(cChallenge.HoodlumsWonderland) ? 12 :
+			GC.challenges.Contains(nameof(HoodlumsWonderland)) ? 12 :
 			vanilla;
 		public static int RoamerAgentFactor(int vanilla) =>
 			vanilla * (
-			GC.challenges.Contains(cChallenge.GhostTown) ? 0 :
-			GC.challenges.Contains(cChallenge.HordeAlmighty) ? 2 :
-			GC.challenges.Contains(cChallenge.LetMeSeeThatThrong) ? 4 :
-			GC.challenges.Contains(cChallenge.SwarmWelcome) ? 8 : 
+			GC.challenges.Contains(nameof(GhostTown)) ? 0 :
+			GC.challenges.Contains(nameof(HordeAlmighty)) ? 2 :
+			GC.challenges.Contains(nameof(LetMeSeeThatThrong)) ? 4 :
+			GC.challenges.Contains(nameof(SwarmWelcome)) ? 8 : 
 			1 );
 		// TODO obv
 		public static int PopulationMafia(int vanilla) => 
@@ -148,13 +154,13 @@ namespace SORCE
 				chunkDescription != vChunkType.CityPark &&
 				chunkDescription != vChunkType.Graveyard)
 			{
-				if (GC.challenges.Contains(cChallenge.Arcology))
+				if (GC.challenges.Contains(nameof(Arcology)))
 					ambientAudio = vAmbience.Park;
 				
-				if (GC.challenges.Contains(cChallenge.SpelunkyDory))
+				if (GC.challenges.Contains(nameof(SpelunkyDory)))
 					ambientAudio = vAmbience.Cave;
 
-				if (GC.challenges.Contains(cChallenge.GhostTown))
+				if (GC.challenges.Contains(nameof(GhostTown)))
 					ambientAudio = vAmbience.Graveyard;
 			}
 
@@ -163,77 +169,77 @@ namespace SORCE
 		public static bool HasBarbecues(bool vanilla) =>
 			vanilla; // *
 		public static bool HasBoulders(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.SpelunkyDory) || 
-			GC.challenges.Contains(cChallenge.Arcology) ? true :
+			GC.challenges.Contains(nameof(SpelunkyDory)) || 
+			GC.challenges.Contains(nameof(Arcology))  ? true :
 			vanilla;
 		public static bool HasBushes(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.Arcology) ? true :
+			GC.challenges.Contains(nameof(Arcology)) ? true :
 			vanilla; // *
 		public static bool HasCopBots(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.Technocracy) ? true :
+			GC.challenges.Contains(nameof(Technocracy)) ? true :
 			vanilla; // *
 		public static bool HasCops(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.AnCapistan) ||
-			GC.challenges.Contains(cChallenge.Technocracy) ? false :
-			GC.challenges.Contains(cChallenge.PoliceState) ? true :
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(Technocracy)) ? false :
+			GC.challenges.Contains(nameof(PoliceState)) ? true :
 			vanilla; // *
 		public static bool HasCopsExtra(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.AnCapistan) ||
-			GC.challenges.Contains(cChallenge.Technocracy) ? false :
-			GC.challenges.Contains(cChallenge.PoliceState) ? true :
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(Technocracy)) ? false :
+			GC.challenges.Contains(nameof(PoliceState)) ? true :
 			vanilla; //* 
 		public static bool HasFireHydrants(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.AnCapistan) ? false : vanilla;
+			GC.challenges.Contains(nameof(AnCapistan)) ? false : vanilla;
 		public static bool HasFlamingBarrels(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.AnCapistan) ? true :
-			GC.challenges.Contains(cChallenge.PoliceState) ||
-			GC.challenges.Contains(cChallenge.MACITS) ? false :
+			GC.challenges.Contains(nameof(AnCapistan)) ? true :
+			GC.challenges.Contains(nameof(PoliceState)) ||
+			GC.challenges.Contains(nameof(MACITS)) ? false :
 			vanilla;
 		public static bool HasGangbangers(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.YoungMenInTheNeighborhood) ||
-			GC.challenges.Contains(cChallenge.AnCapistan) ? true :
-			GC.challenges.Contains(cChallenge.PoliceState) ||
-			GC.challenges.Contains(cChallenge.MACITS) ? false :
+			GC.challenges.Contains(nameof(YoungMenInTheNeighborhood)) ||
+			GC.challenges.Contains(nameof(AnCapistan)) ? true :
+			GC.challenges.Contains(nameof(PoliceState)) ||
+			GC.challenges.Contains(nameof(MACITS)) ? false :
 			vanilla; // *
 		public static bool HasLandMines(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.ThisLandIsMineLand) ? true :
+			GC.challenges.Contains(nameof(ThisLandIsMineLand)) ? true :
 			vanilla; // *
 		public static bool HasManholesVanilla(bool vanilla) =>
 			//	Underdark Citizen uses a different Manhole algorithm that requires deactivation of vanilla.
-			TraitManager.IsPlayerTraitActive("Underdark Citizen") || GC.challenges.Contains(cChallenge.AnCapistan) ? false :
+			TraitManager.IsPlayerTraitActive("Underdark Citizen") || GC.challenges.Contains(nameof(AnCapistan)) ? false :
 			vanilla;
 		public static bool HasMobsters(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.MobTown) ||
-			GC.challenges.Contains(cChallenge.AnCapistan) ? true :
-			GC.challenges.Contains(cChallenge.PoliceState) ||
-			GC.challenges.Contains(cChallenge.MACITS) ? false :
+			GC.challenges.Contains(nameof(MobTown)) ||
+			GC.challenges.Contains(nameof(AnCapistan)) ? true :
+			GC.challenges.Contains(nameof(PoliceState)) ||
+			GC.challenges.Contains(nameof(MACITS)) ? false :
 			vanilla; // *
 		public static bool HasPollutionFeatures(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.ThePollutionSolution) ? false : vanilla;
+			GC.challenges.Contains(nameof(ThePollutionSolution)) ? false : vanilla;
 		public static bool HasPoliceBoxesAndAlarmButtons(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.PoliceState) || GC.challenges.Contains(cChallenge.MACITS) ? true :
-			GC.challenges.Contains(cChallenge.AnCapistan) ? false :
+			GC.challenges.Contains(nameof(PoliceState)) || GC.challenges.Contains(nameof(MACITS)) ? true :
+			GC.challenges.Contains(nameof(AnCapistan)) ? false :
 			vanilla;
 		public static bool HasPowerBoxes(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.PowerWhelming) ? true : vanilla;
+			GC.challenges.Contains(nameof(PowerWhelming)) ? true : vanilla;
 		public static bool HasTrashCans(bool vanilla)
 		{
-			if (GC.challenges.Contains(cChallenge.AnCapistan))
+			if (GC.challenges.Contains(nameof(AnCapistan)))
 				vanilla = false;
 
-			if (GC.challenges.Contains(cChallenge.Arcology) ||
-				GC.challenges.Contains(cChallenge.PoliceState) ||
-				GC.challenges.Contains(cChallenge.MACITS))
+			if (GC.challenges.Contains(nameof(Arcology)) ||
+				GC.challenges.Contains(nameof(PoliceState)) ||
+				GC.challenges.Contains(nameof(MACITS)))
 				vanilla = true;
 
 			return vanilla;
 		}
 		public static bool HasTrees(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.Arcology) ? true :
-			GC.challenges.Contains(cChallenge.AnCapistan) ? false :
+			GC.challenges.Contains(nameof(Arcology)) ? true :
+			GC.challenges.Contains(nameof(AnCapistan)) ? false :
 			vanilla;
 		public static bool HasVendorCarts(bool vanilla) =>
-			GC.challenges.Contains(cChallenge.CartOfTheDeal) ? true : vanilla;
+			GC.challenges.Contains(nameof(CartOfTheDeal)) ? true : vanilla;
 		public static string RoamerAgentType(string vanilla)
 		{
 			// TODO: Adjustments for MACITS, etc.
@@ -243,9 +249,9 @@ namespace SORCE
 				string generalRoamer = GC.levelTheme == 4 || GC.levelTheme == 5 ? vAgent.UpperCruster : vAgent.SlumDweller;
 
 				int thiefReduction =
-					GC.challenges.Contains(cChallenge.HordeAlmighty) ? 50 :
-					GC.challenges.Contains(cChallenge.LetMeSeeThatThrong) ? 75 :
-					GC.challenges.Contains(cChallenge.SwarmWelcome) ? 88 :
+					GC.challenges.Contains(nameof(HordeAlmighty)) ? 50 :
+					GC.challenges.Contains(nameof(LetMeSeeThatThrong)) ? 75 :
+					GC.challenges.Contains(nameof(SwarmWelcome)) ? 88 :
 					0;
 
 				if (thiefReduction != 0 && GC.percentChance(thiefReduction))
@@ -256,7 +262,7 @@ namespace SORCE
 		}
 		public static void SetHasLakes(LoadLevel __instance)
 		{
-			if (GC.challenges.Contains(cChallenge.LakeItOrLeaveIt))
+			if (GC.challenges.Contains(nameof(LakeItOrLeaveIt)))
 				__instance.hasLakes = true;
 		}
 		public static void SetHasFlameGrates(LoadLevel __instance)
@@ -267,15 +273,15 @@ namespace SORCE
 		{
 			int newVal = __instance.levelSizeMax;
 
-			string active = ChallengeManager.GetActiveChallengeFromList(cChallenge.CitySizeChallenges);
+			string active = ChallengeManager.GetActiveChallengeFromList(cChallenge.MapSize);
 
-			if (active == cChallenge.ACityForAnts)
+			if (active == nameof(ACityForAnts))
 				newVal = 4;
-			else if (active == cChallenge.Claustropolis)
+			else if (active == nameof(Claustropolis))
 				newVal = 12;
-			else if (active == cChallenge.Megalopolis)
+			else if (active == nameof(Megalopolis))
 				newVal = 48;
-			else if (active == cChallenge.Ultrapolis)
+			else if (active == nameof(Ultrapolis))
 				newVal = 64;
 
 			__instance.levelSizeMax = newVal;
@@ -284,19 +290,19 @@ namespace SORCE
 		{
 			if ((GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
 				(GC.customLevel && __instance.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
-				GC.challenges.Contains(cChallenge.BadNeighborhoods))
+				GC.challenges.Contains(nameof(BadNeighborhoods)))
 				BreakWindows();
 
-			if (GC.challenges.Contains(cChallenge.SpelunkyDory))
+			if (GC.challenges.Contains(nameof(SpelunkyDory)))
 				SpawnCaveWallOutcroppings(__instance);
 
-			if (GC.challenges.Contains(cChallenge.BroughtBackFountain))
+			if (GC.challenges.Contains(nameof(BroughtBackFountain)))
 				SpawnFountains();
 
 			if (TraitManager.IsPlayerTraitActive("UnderdarkCitizen"))
 				SpawnManholes_Underdark(__instance);
 
-			if (GC.challenges.Contains(cChallenge.PoliceState) || GC.challenges.Contains(cChallenge.SurveillanceSociety))
+			if (GC.challenges.Contains(nameof(PoliceState)) || GC.challenges.Contains(nameof(SurveillanceSociety)))
 				SpawnSecurityCamsAndTurrets(__instance);
 		}
 		private static void BreakWindows()
@@ -541,7 +547,7 @@ namespace SORCE
 		}
 		private static void SpawnJukeboxesAndSpeakers(LoadLevel __instance)
 		{
-			if (GC.challenges.Contains(cChallenge.DiscoCityDanceoff))
+			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
 			{
 				Debug.Log("Loading Disco Shit");
 				int maxSpawns = (int)((float)Random.Range(6, 12) * __instance.levelSizeModifier);

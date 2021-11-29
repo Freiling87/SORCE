@@ -8,6 +8,7 @@ using System.Reflection;
 using System;
 using SORCE.Challenges;
 using SORCE.Logging;
+using SORCE.Content.Challenges.C_Interiors;
 
 namespace SORCE.Patches
 {
@@ -30,7 +31,7 @@ namespace SORCE.Patches
 			logger.LogDebug("RandomOther_fillOther");
 			// Pay special attention to this. If this is only called at Game Start, you need to find another place post-mutator to mod this.
 
-			if (GC.challenges.Contains(cChallenge.ShantyTown) || GC.challenges.Contains(cChallenge.GreenLiving))
+			if (GC.challenges.Contains(nameof(ShantyTown)) || GC.challenges.Contains(nameof(GreenLiving)))
 			{
 				___rList = ___component.CreateRandomList("FireSpewerSpawnChance1", "Others", "Other");
 				___component.CreateRandomElement(___rList, "No", 5);

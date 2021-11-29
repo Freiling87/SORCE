@@ -11,22 +11,14 @@ namespace SORCE.Content.Challenges.C_Roamers
 {
 	public class HoodlumsWonderland
 	{
+		const string name = nameof(HoodlumsWonderland);
+
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.HoodlumsWonderland, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "The annual charity drive for the Blahds and Crepes happened to overlap this year. They're in tough competition to sell the most cookies!" +
-					"\n\nRoaming gang spawns are increased. By a lot.",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.HoodlumsWonderland,
-				});
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<HoodlumsWonderland>(new ChallengeInfo(cChallenge.HoodlumsWonderland, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			ChallengeManager.RegisterChallenge<HoodlumsWonderland>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }

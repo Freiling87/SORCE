@@ -12,21 +12,14 @@ namespace SORCE.Challenges.C_Features
 {
 	public class BroughtBackFountain
 	{
+		const string name = nameof(BroughtBackFountain);
+
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(cChallenge.BroughtBackFountain, true))
-				.WithDescription(new CustomNameInfo
-				{
-					[LanguageCode.English] = "\"He could smell Jack - the intensely familiar odor of cigarettes, musky sweat, and a faint sweetness like grass, and with it the rushing cold of the fountain.\"\n\n- Adds Fountains\n- Doesn't make you gay",
-				})
-				.WithName(new CustomNameInfo
-				{
-					[LanguageCode.English] = cChallenge.BroughtBackFountain
-				});
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<BroughtBackFountain>(new ChallengeInfo(cChallenge.BroughtBackFountain, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.BuildingChallenges));
+			ChallengeManager.RegisterChallenge<BroughtBackFountain>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }
