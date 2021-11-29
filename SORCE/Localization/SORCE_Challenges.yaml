@@ -16,6 +16,69 @@
         Spanish:
             Name:
             Desc:
+    CanalCity:
+        English:
+            Name: "Exteriors - Canal City"
+            Desc: |
+                - 
+                - "- Public floors are Water"
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    DUMP:
+        English:
+            Name: "Exteriors - DUMP"
+            Desc: |
+                - "Deep Underground Metropolitan Principality"
+                - 
+                - "- Public floors are Cave"
+                - "- Border walls are Cave"
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    GrandCityHotel:
+        English:
+            Name: "Exteriors - Grand City Hotel"
+            Desc: |
+                - 
+                - "- Public floors are Rugs"
+                - "- Border walls are Wood"
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    TestTubeCity:
+        English:
+            Name: "Exteriors - Test Tube City"
+            Desc: |
+                - 
+                - "- Border walls are Glass"
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    Transit Experiment:
+        English:
+            Name: "Exteriors - Transit Experiment"
+            Desc: |
+                - 
+                - "- Public floors are Ice"
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
 # FEATURES
     BadNeighborhoods:
         English:
