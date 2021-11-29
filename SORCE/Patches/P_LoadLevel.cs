@@ -18,6 +18,7 @@ using BTHarmonyUtils.TranspilerUtils;
 using System.Reflection.Emit;
 using JetBrains.Annotations;
 using SORCE.Challenges.C_Features;
+using SORCE.Localization;
 
 namespace SORCE.Patches
 {

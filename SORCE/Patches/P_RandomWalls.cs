@@ -9,6 +9,7 @@ using System;
 using Light2D;
 using SORCE.Challenges;
 using SORCE.Logging;
+using SORCE.Localization;
 
 namespace SORCE.Patches
 {

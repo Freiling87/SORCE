@@ -16,6 +16,7 @@ using SORCE.Challenges.C_MapSize;
 using SORCE.Challenges.C_Exteriors;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Features;
+using SORCE.Localization;
 
 namespace SORCE
 {

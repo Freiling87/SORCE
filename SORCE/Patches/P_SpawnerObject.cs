@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using SORCE.Challenges;
+using SORCE.Localization;
 using SORCE.Logging;
 using System;
 using System.Collections.Generic;

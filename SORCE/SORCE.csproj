@@ -68,6 +68,9 @@
     <Reference Include="UnityEngine.Physics2DModule">
       <HintPath>..\Libraries\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.11.2.1\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Challenges\ChallengeController.cs" />
@@ -81,7 +84,9 @@
     <Compile Include="Challenges\C_Interiors\GreenLiving.cs" />
     <Compile Include="Challenges\C_Interiors\Panoptikopolis.cs" />
     <Compile Include="Challenges\C_Interiors\ShantyTown.cs" />
-    <Compile Include="Challenges\ChallengeNames.cs" />
+    <Compile Include="Localization\L_Challenge.cs" />
+    <Compile Include="Localization\LocalizationManager.cs" />
+    <Compile Include="Localization\NameLists.cs" />
     <Compile Include="Challenges\C_Exteriors\Arcology.cs" />
     <Compile Include="Challenges\C_Features\BroughtBackFountain.cs" />
     <Compile Include="Challenges\C_Features\CartOfTheDeal.cs" />
@@ -138,17 +143,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set gameDirectory="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"
-if exist %25gameDirectory%25 (ECHO "Destination directory found") ELSE (ECHO "Destination directory not found")
+    <PostBuildEvent>set DllDirectory="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\plugins"
+copy /y "SORCE.dll" %25DllDirectory%25
+copy /y "BTHarmonyUtils.dll" %25DllDirectory%25
+copy /y "RogueLibsCore.dll" %25DllDirectory%25
 
-set dll="SORCE.dll"
-set dll2="BTHarmonyUtils.dll"
-set dll3="RogueLibsCore.dll"
-if exist %25dll%25 (ECHO "Mod DLL found") ELSE (ECHO "Mod DLL not found")
-if exist %25gameDirectory%25 copy /y %25dll%25 %25gameDirectory%25
-if exist %25gameDirectory%25 copy /y %25dll2%25 %25gameDirectory%25
-if exist %25gameDirectory%25 copy /y %25dll3%25 %25gameDirectory%25
+set locDir="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\BepInEx\config\SORCE"
+copy /y "$(ProjectDir)/Localization/SORCE_Challenges.yaml" %25locDir%25
 
-if exist %25gameDirectory%25 Start "" "C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"</PostBuildEvent>
+Start "" "C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"</PostBuildEvent>
   </PropertyGroup>
 </Project>

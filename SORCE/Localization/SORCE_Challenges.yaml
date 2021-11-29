@@ -105,8 +105,8 @@
             Name: "Features - Surveillance Society"
             Desc: |
                 - "Those cameras? For your safety." 
-                - "Oh, the turrets? For their safety."
-                - "The midnight raids and people disappearing? Hm... what's your name, citizen?"
+                - "Oh, the turrets? For the cameras' safety."
+                - "The midnight raids and disappearances? Hm... what's your name, citizen?"
                 - 
                 - "- Spawns Security Cameras & Turrets in public, aligned with The Law."
         Russian:
@@ -123,6 +123,19 @@
                 - 
                 - "- Pollution features spawn in all districts"
                 - "- Lakes have 80% chance of being poisoned."
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    ThisLandIsMineLand:
+        English:
+            Name: "Features - This Land is Mine Land"
+            Desc: |
+                - "This hand was maimed for you and me (not looking where we step)"
+                - 
+                - "- Land mines spawn in all districts"
         Russian:
             Name:
             Desc:
@@ -250,6 +263,62 @@
                 - 
                 - "- Map size set to 200%"
                 - "- Average 60 chunks per level"
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+# OVERHAUL
+    AnCapistan:
+        English:
+            Name: "Overhaul - AnCapistan"
+            Desc: |
+                - 
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    DiscoCityDanceoff:
+        English:
+            Name: "Overhaul - Disco City Danceoff"
+            Desc: |
+                - 
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    MACITS:
+        English:
+            Name: "Overhaul - MACITS"
+            Desc: |
+                - "Mostly Automated Comfortable Inclusive Terrestrial Socialism"
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    PoliceState:
+        English:
+            Name: "Overhaul - Police State"
+            Desc: |
+                - 
+        Russian:
+            Name:
+            Desc:
+        Spanish:
+            Name:
+            Desc:
+    Technocracy:
+        English:
+            Name: "Overhaul - Technocracy"
+            Desc: |
+                - 
         Russian:
             Name:
             Desc:

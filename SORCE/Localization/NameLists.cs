@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace SORCE.Challenges
+namespace SORCE.Localization
 {
 	public static class cChallenge
 	{

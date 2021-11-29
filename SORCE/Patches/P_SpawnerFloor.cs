@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Object = UnityEngine.Object;
 using SORCE.Logging;
 using SORCE.Challenges;
+using SORCE.Localization;
 
 namespace SORCE.Patches
 {

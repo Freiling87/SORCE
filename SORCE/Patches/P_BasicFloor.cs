@@ -9,6 +9,7 @@ using System;
 using SORCE.Logging;
 using SORCE.Challenges;
 using SORCE.Content.Challenges.C_Interiors;
+using SORCE.Localization;
 
 namespace SORCE.Patches
 {
