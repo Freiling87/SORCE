@@ -24,8 +24,8 @@ namespace SORCE.Patches
 		{
 			string wallType = null;
 
-			if (LevelGenTools.IsWallModActive())
-				wallType = LevelGenTools.WallTypeFromMutator();
+			if (LevelGenTools.IsInteriorsModActive())
+				wallType = LevelGenTools.InteriorWallType();
 
 			if (wallType == null)
 				return true;

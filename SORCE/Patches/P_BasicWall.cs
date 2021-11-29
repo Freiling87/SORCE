@@ -29,8 +29,8 @@ namespace SORCE.Content.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(BasicWall.Spawn), argumentTypes: new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (LevelGenTools.IsWallModActive())
-				wallName = LevelGenTools.WallTypeFromMutator();
+			if (LevelGenTools.IsInteriorsModActive())
+				wallName = LevelGenTools.InteriorWallType();
 
 			return true;
 		}

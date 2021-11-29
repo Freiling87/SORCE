@@ -25,85 +25,91 @@ namespace SORCE
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static string ActiveFloorMod() =>
-			cChallenge.Exteriors.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
-		public static wallMaterialType BorderWallMaterialFromMutator()
+		public static wallMaterialType BorderWallMaterial()
 		{
-			switch (WallMutator())
+			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors))
 			{
-				case nameof(CityOfSteel):
-					return wallMaterialType.Steel;
-
-				case nameof(GreenLiving):
-					return wallMaterialType.Wood;
-
-				case nameof(Panoptikopolis):
+				case (nameof(Arcology)):
 					return wallMaterialType.Glass;
-
-				case nameof(ShantyTown):
-					return wallMaterialType.Wood;
-
-				case nameof(SpelunkyDory):
+				case (nameof(CanalCity)):
 					return wallMaterialType.Border;
-
+				//case (nameof(DUMP)):
+				//	return wallMaterialType.Cave;
+				case (nameof(GrandCityHotel)):
+					return wallMaterialType.Wood;
+				case (nameof(TestTubeCity)):
+					return wallMaterialType.Glass;
+				case (nameof(TransitExperiment)):
+					return wallMaterialType.Border;
 				default:
 					return wallMaterialType.Border;
 			}
 		}
-		public static string FloorTile()
+		public static string RandomRugType()
 		{
-			string curMutator = ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors);
+			var random = new System.Random();
+			int index = random.Next(vFloor.Rugs.Count);
 
-			switch (curMutator)
+			return vFloor.Rugs[index];
+		}
+		public static string ExteriorFloorTile()
+		{
+			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors))
 			{
 				case nameof(Arcology):
 					return vFloor.Grass;
-				case nameof(SpelunkyDory):
+				case nameof(CanalCity):
+					return vFloor.Water;
+				case nameof(DUMP):
 					return vFloor.CaveFloor;
+				case nameof(GrandCityHotel):
+					return RandomRugType();
+				case nameof(TestTubeCity):
+					return vFloor.CleanTiles;
+				case nameof(TransitExperiment):
+					return vFloor.IceRink;
 				default:
 					return null;
 			}
 		}
-		public static string FloorTileGroup()
+		public static string ExteriorFloorTileGroup()
 		{
-			string curMutator = ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors);
-
-			switch (curMutator)
+			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors))
 			{
 				case nameof(Arcology):
 					return vFloorTileGroup.Park;
-				case nameof(TransitExperiment):
-					return vFloorTileGroup.Ice;
 				case nameof(CanalCity):
 					return vFloorTileGroup.Water;
+				case nameof(DUMP):
+					return vFloorTileGroup.Industrial;
+				case nameof(GrandCityHotel):
+					return vFloorTileGroup.Rug;
+				case nameof(TestTubeCity):
+					return vFloorTileGroup.Building;
+				case nameof(TransitExperiment):
+					return vFloorTileGroup.Ice;
 				default:
 					return vFloorTileGroup.Building;
 			}
 		}
-		public static string WallTypeFromMutator()
+		public static string InteriorWallType()
 		{
-			switch (WallMutator())
+			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Interiors))
 			{
 				case nameof(CityOfSteel):
 					return vWall.Steel;
-
 				case nameof(GreenLiving):
 					return vWall.Hedge;
-
 				case nameof(Panoptikopolis):
 					return vWall.Glass;
-
 				case nameof(ShantyTown):
 					return vWall.Wood;
-
 				case nameof(SpelunkyDory):
 					return vWall.Cave;
 			}
 
 			return null;
 		}
-		public static string WallMutator() =>
-			cChallenge.Interiors.Where(m => GC.challenges.Contains(m)).FirstOrDefault();
 		public static bool IsNextToLake(Vector2 spot) =>
 			GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).lake ||
 			GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y + 0.64f)).lake ||
@@ -113,7 +119,7 @@ namespace SORCE
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).lake;
-		public static bool IsWallModActive() =>
+		public static bool IsInteriorsModActive() =>
 			cChallenge.Interiors.Where(t => GC.challenges.Contains(t)).Any();
 		public static int LevelSizeModifier(int vanilla) =>
 			GC.challenges.Contains(nameof(ACityForAnts)) ? 4 :

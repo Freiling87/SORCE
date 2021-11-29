@@ -77,6 +77,9 @@
     <Compile Include="Challenges\ChallengeInfo.cs" />
     <Compile Include="Challenges\ChallengeManager.cs" />
     <Compile Include="Challenges\ChallengeMenuGroups.cs" />
+    <Compile Include="Challenges\C_Exteriors\DUMP.cs" />
+    <Compile Include="Challenges\C_Exteriors\GrandCityHotel.cs" />
+    <Compile Include="Challenges\C_Exteriors\TestTubeCity.cs" />
     <Compile Include="Challenges\C_Exteriors\TransitExperiment.cs" />
     <Compile Include="Challenges\C_Exteriors\CanalCity.cs" />
     <Compile Include="Challenges\C_Features\ThisLandIsMineLand.cs" />

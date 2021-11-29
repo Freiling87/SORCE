@@ -31,7 +31,7 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(nameof(BasicFloor.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string floorName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (LevelGenTools.ActiveFloorMod() != null)
+			if (LevelGenTools.IsInteriorsModActive())
 			{
 				if (vFloor.Natural.Contains(floorName))
 				{

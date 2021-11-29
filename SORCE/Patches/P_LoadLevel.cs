@@ -108,7 +108,7 @@ namespace SORCE.Patches
 								string tilemapGroup = vFloorTileGroup.Building;
 
 								if (ChallengeManager.IsChallengeFromListActive(cChallenge.Exteriors))
-									tilemapGroup = LevelGenTools.FloorTileGroup(); // Works on: Slums,
+									tilemapGroup = LevelGenTools.ExteriorFloorTileGroup(); // Works on: Slums,
 								else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 								{
 									if (GC.levelTheme == 0)
@@ -324,7 +324,7 @@ namespace SORCE.Patches
 									tileData.wallMaterialOffset = wallMaterialOffset;
 									tileData.wallMaterialOffsetTop = wallMaterialOffsetTop;
 									tileData.wallFrontVariation = true;
-									tileData.wallMaterial = LevelGenTools.BorderWallMaterialFromMutator(); //
+									tileData.wallMaterial = LevelGenTools.BorderWallMaterial(); //
 									int tile2 = Random.Range(0, 0);
 									___tilemapFloors2.SetTile(m, n - 1, 0, tile2);
 									tileData.chunkID = __instance.mapChunkArray[i, j].chunkID;

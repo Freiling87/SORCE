@@ -24,23 +24,22 @@ Complete
 No effect
 ###			C	The Pollution Solution
 No effect
-##		C	Floor Exteriors & Borders
-How to do these? Tie them to Border walls for parallel to Interiors/building walls. Then name them after that
-Wood/Wood: Treehouse City
-Steel/Steel: SPASE SHIP
+###			C	This Land is Mine Land
+New
+##		C	Exteriors & Borders
 ###			C	Arcology
 Hedges for Borders
-###			C	The Grand City Hotel
+###			C	Canal City
+New
+###			C	DUMP
+Cave
+###			C	Grand City Hotel
 Random-colored Rug
 Wooden walls
-###			C	Treehouse City
-Borders Wood, Floors Wood
-###			C	Spase Ship
-Steel Borders & Floors
-###			C	Underground Bunker
-Cave Floors & Walls
 ###			C	Test Tube City
 Glass walls & Glass-y floors
+###			C	Transit Experiment
+New
 ##		C	Floor Interiors & Walls
 ###			C	00 Move Borders to other mutator set
 Borders should be tied to Exterior floors
