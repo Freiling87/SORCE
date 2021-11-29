@@ -735,7 +735,7 @@ namespace SORCE.Patches
 				expectedMatches: 1,
 				prefixInstructionSequence: new List<CodeInstruction>
 				{
-					//	Line 2414
+					//	Line 2414 
 					//		Debug.Log("Loading Slum Dwellers");
 					//		int bigTries = (int)((float)Random.Range(16, 20) * this.levelSizeModifier);
 
