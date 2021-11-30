@@ -33,7 +33,7 @@ namespace SORCE.Localization
 		{
 			IDeserializer deserializer = new DeserializerBuilder().Build();
 
-			string configBasePath = Application.dataPath + "/../BepInEx/config/";
+			string configBasePath = Application.dataPath + "/../StreetsOfRogue_Data/Localization/";
 			ChallengeLocalization = ReadFromFile<L_Challenge>(deserializer, configBasePath + "SORCE_Challenges.yaml");
 		}
 	}

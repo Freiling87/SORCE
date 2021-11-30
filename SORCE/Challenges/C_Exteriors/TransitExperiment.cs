@@ -19,7 +19,7 @@ namespace SORCE.Challenges.C_Exteriors
 
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<Arcology>(new ChallengeInfo(name, unlockBuilder)
+			ChallengeManager.RegisterChallenge<TransitExperiment>(new ChallengeInfo(name, unlockBuilder)
 				.WithConflictGroup(EChallengeConflictGroup.Exteriors));
 		}
 	}

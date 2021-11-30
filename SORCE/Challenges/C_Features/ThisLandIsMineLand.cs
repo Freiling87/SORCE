@@ -19,7 +19,7 @@ namespace SORCE.Challenges.C_Features
 		{
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<BadNeighborhoods>(new ChallengeInfo(name, unlockBuilder));
+			ChallengeManager.RegisterChallenge<ThisLandIsMineLand>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }

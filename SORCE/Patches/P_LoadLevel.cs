@@ -731,7 +731,7 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgentNumber(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentFactor), new[] { typeof(string) });
+			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentFactor), new[] { typeof(int) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,

@@ -16,7 +16,7 @@ namespace SORCE.Challenges.C_Overhaul
 
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<AnCapistan>(new ChallengeInfo(name, unlockBuilder)
+			ChallengeManager.RegisterChallenge<DiscoCityDanceoff>(new ChallengeInfo(name, unlockBuilder)
 				.WithConflictGroup(EChallengeConflictGroup.Overhaul));
 		}
 	}

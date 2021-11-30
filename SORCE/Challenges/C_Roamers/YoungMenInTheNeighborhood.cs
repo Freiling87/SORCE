@@ -18,8 +18,7 @@ namespace SORCE.Content.Challenges.C_Roamers
 
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
 
-			ChallengeManager.RegisterChallenge<YoungMenInTheNeighborhood>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Arcology));
+			ChallengeManager.RegisterChallenge<YoungMenInTheNeighborhood>(new ChallengeInfo(name, unlockBuilder));
 		}
 	}
 }
