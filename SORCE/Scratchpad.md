@@ -68,7 +68,8 @@ None work
 ###			C	HoodlumsWonderland
 ###			C	Mob Town
 ###			C	YMITN
-
+#	C	Traits
+##		C	Underdark Citizen
 #	Migrate Out
 ##		LevelGenTools.SpawnLitter
 ##		LevelGenTools.SpawnManholes_Underdark
