@@ -1,23 +1,34 @@
 ﻿using RogueLibsCore;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+using SORCE;
+using Random = UnityEngine.Random;
+using Object = UnityEngine.Object;
+using SORCE.Challenges;
+using SORCE.Content.Challenges;
+using SORCE.Localization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SORCE.Challenges.C_Population
+namespace SORCE.Challenges.C_Features
 {
-	class SwarmWelcome
+	public class SwarmWelcome
 	{
 		[RLSetup]
 		static void Start()
 		{
 			const string name = nameof(SwarmWelcome);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<SwarmWelcome>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Population));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Population.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo(
+					"Population - Swarm Welcome"))
+				.WithDescription(new CustomNameInfo(
+					"This whole city feels like a crowded subway. Pickpocketing is bad enough, but the frottage is out of control!\n\n" +
+					"- Roaming population set to 800%\n" +
+					"- You might get pregnant"));
 		}
 	}
 }

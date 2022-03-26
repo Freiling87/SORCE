@@ -8,8 +8,8 @@ using System.Reflection;
 using System;
 using SORCE.Logging;
 using SORCE.Challenges;
-using SORCE.Content.Challenges.C_Interiors;
 using SORCE.Localization;
+using SORCE.Challenges.C_Interiors;
 
 namespace SORCE.Patches
 {

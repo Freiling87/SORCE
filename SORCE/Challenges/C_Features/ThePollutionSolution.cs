@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_Features
 {
@@ -17,10 +19,15 @@ namespace SORCE.Challenges.C_Features
 		{
 			const string name = nameof(ThePollutionSolution);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<ThePollutionSolution>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Arcology));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+			})
+				.WithName(new CustomNameInfo(
+					"Features - The Pollution Solution"))
+				.WithDescription(new CustomNameInfo(
+					"We've finally solved pollution! Make more, dump it everywhere, and then ignore it. It will become so ubiquitous you won't even notice it anymore. Problem solved!\n\n" +
+					"- Pollution features spawn in all districts\n" +
+					"- Lakes have 80% chance of being poisoned"));
 		}
 	}
 }

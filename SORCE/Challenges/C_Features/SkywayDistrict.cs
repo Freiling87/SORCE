@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_Features
 {
@@ -17,9 +19,17 @@ namespace SORCE.Challenges.C_Features
 		{
 			const string name = nameof(SkywayDistrict);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<SkywayDistrict>(new ChallengeInfo(name, unlockBuilder));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+			})
+				.WithName(new CustomNameInfo(
+					"Features - Skyway District"))
+				.WithDescription(new CustomNameInfo(
+					"Okay, the Mayor sold all the water. Before you freak out, here are the Pros:\n" +
+					"    1. We just made a ton of money.\n" +
+					"    2. Downtown smells better.\n" +
+					"    3. The view is... uh, bottomless. But Chasm-side apartments are going up in value!\n\n" +
+					"You might also plummet to your death, but that makes you the egg in the delicious omelet of massive profits!"));
 		}
 	}
 }

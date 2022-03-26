@@ -6,8 +6,11 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
+using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
-namespace SORCE.Content.Challenges.C_Interiors
+namespace SORCE.Challenges.C_Interiors
 {
 	public class GreenLiving
 	{
@@ -16,10 +19,15 @@ namespace SORCE.Content.Challenges.C_Interiors
 		{
 			const string name = nameof(GreenLiving);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<GreenLiving>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Interiors));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Interiors.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo(
+					"Interiors - Green Living"))
+				.WithDescription(new CustomNameInfo(
+					"The Mayor has retrofitted most buildings to eco-friendly plant-based construction. The air is mighty fresh... except near the compost-burning stoves.\n\n" +
+					"- Most buildings spawn with Hedge walls"));
 		}
 	}
 }

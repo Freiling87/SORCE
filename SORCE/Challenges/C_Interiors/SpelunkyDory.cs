@@ -6,8 +6,11 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
+using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
-namespace SORCE.Content.Challenges.C_Interiors
+namespace SORCE.Challenges.C_Interiors
 {
 	public class SpelunkyDory
 	{
@@ -16,10 +19,15 @@ namespace SORCE.Content.Challenges.C_Interiors
 		{
 			const string name = nameof(SpelunkyDory);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<SpelunkyDory>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Interiors));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Interiors.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo(
+					"Interiors - Spelunky Dory"))
+				.WithDescription(new CustomNameInfo(
+					"You and your fellow citizens live in a disgusting cave complex. As the mayor says, \"Don't be a CAN'Tibal, be a CANnibal!\" Man, fuck the Mayor.\n\n" +
+					"- Most buildings spawn with Cave walls"));
 		}
 	}
 }

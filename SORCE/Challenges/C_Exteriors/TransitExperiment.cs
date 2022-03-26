@@ -7,20 +7,27 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_Exteriors
 {
 	public class TransitExperiment
 	{
-		[RLSetup]
+		//[RLSetup]
 		static void Start()
 		{
 			const string name = nameof(TransitExperiment);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<TransitExperiment>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Exteriors));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Exteriors.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo(
+					"Exteriors - Transit Experiment"))
+				.WithDescription(new CustomNameInfo(
+					"DESCRIPTIONS? PSHAW\n\n" +
+					"- Public floors are Ice"));
 		}
 	}
 }

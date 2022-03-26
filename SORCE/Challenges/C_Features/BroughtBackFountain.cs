@@ -7,19 +7,27 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_Features
 {
-	public class BroughtBackFountain
+	public class BroughtbackFountain
 	{
-		const string name = nameof(BroughtBackFountain);
-
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+			const string name = nameof(BroughtbackFountain);
 
-			ChallengeManager.RegisterChallenge<BroughtBackFountain>(new ChallengeInfo(name, unlockBuilder));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+			})
+				.WithName(new CustomNameInfo(
+					"Features - Broughtback Fountain"))
+				.WithDescription(new CustomNameInfo(
+					"\"He could smell Jack - the intensely familiar odor of cigarettes, musky sweat, and a faint sweetness like grass, and with it the rushing cold of the fountain.\"\n\n" +
+					"- Fountains spawn in all districts\n" +
+					"- Doesn't make you gay"));
 		}
 	}
 }

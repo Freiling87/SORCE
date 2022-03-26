@@ -1,5 +1,4 @@
 ﻿using BepInEx.Logging;
-using SORCE.Content.Challenges.C_Interiors;
 using SORCE.Challenges;
 using SORCE.Logging;
 using SORCE.Traits;
@@ -10,13 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using SORCE.Challenges.C_Population;
-using SORCE.Content.Challenges.C_Roamers;
 using SORCE.Challenges.C_MapSize;
 using SORCE.Challenges.C_Exteriors;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Features;
 using SORCE.Localization;
+using SORCE.Challenges.C_Interiors;
+using SORCE.Challenges.C_Roamers;
 
 namespace SORCE
 {
@@ -30,11 +29,11 @@ namespace SORCE
 			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors))
 			{
 				case (nameof(Arcology)):
-					return wallMaterialType.Glass;
+					return wallMaterialType.Border;
 				case (nameof(CanalCity)):
 					return wallMaterialType.Border;
-				//case (nameof(DUMP)):
-				//	return wallMaterialType.Cave;
+				case (nameof(DUMP)):
+					return wallMaterialType.Steel;
 				case (nameof(GrandCityHotel)):
 					return wallMaterialType.Wood;
 				case (nameof(TestTubeCity)):
@@ -122,9 +121,9 @@ namespace SORCE
 		public static bool IsInteriorsModActive() =>
 			cChallenge.Interiors.Where(t => GC.challenges.Contains(t)).Any();
 		public static int LevelSizeModifier(int vanilla) =>
-			GC.challenges.Contains(nameof(ACityForAnts)) ? 4 :
+			GC.challenges.Contains(nameof(Arthropolis)) ? 4 :
 			GC.challenges.Contains(nameof(Claustropolis)) ? 12 :
-			GC.challenges.Contains(nameof(Megalopolis)) ? 48 :
+			GC.challenges.Contains(nameof(Megapolis)) ? 48 :
 			GC.challenges.Contains(nameof(Ultrapolis)) ? 64 : 
 			vanilla;
 		public static int LevelSizeRatio() =>
@@ -282,11 +281,11 @@ namespace SORCE
 
 			string active = ChallengeManager.GetActiveChallengeFromList(cChallenge.MapSize);
 
-			if (active == nameof(ACityForAnts))
+			if (active == nameof(Arthropolis))
 				newVal = 4;
 			else if (active == nameof(Claustropolis))
 				newVal = 12;
-			else if (active == nameof(Megalopolis))
+			else if (active == nameof(Megapolis))
 				newVal = 48;
 			else if (active == nameof(Ultrapolis))
 				newVal = 64;
@@ -303,11 +302,24 @@ namespace SORCE
 			if (GC.challenges.Contains(nameof(SpelunkyDory)))
 				SpawnCaveWallOutcroppings(__instance);
 
-			if (GC.challenges.Contains(nameof(BroughtBackFountain)))
+			if (GC.challenges.Contains(nameof(BroughtbackFountain)))
 				SpawnFountains();
+
+			if (GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)))
+				SpawnArmchairsFireplaces();
+
+			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
+			{
+				SpawnJukeboxesAndSpeakers(__instance);
+				SpawnTurntables();
+			}
 
 			if (TraitManager.IsPlayerTraitActive("UnderdarkCitizen"))
 				SpawnManholes_Underdark(__instance);
+
+			if (GC.challenges.Contains(nameof(GrandCityHotel)) ||
+				GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)))
+				SpawnRugs();
 
 			if (GC.challenges.Contains(nameof(PoliceState)) || GC.challenges.Contains(nameof(SurveillanceSociety)))
 				SpawnSecurityCamsAndTurrets(__instance);
@@ -322,7 +334,7 @@ namespace SORCE
 		}
 		private static void SpawnCaveWallOutcroppings(LoadLevel __instance)
 		{
-			Debug.Log("Loading SpelunkyDory Cave Wall Outcroppings");
+			Debug.Log("SORCE: Loading SpelunkyDory Cave Wall Outcroppings");
 
 			int maxSpawns = (int)((float)Random.Range(48, 64) * __instance.levelSizeModifier);
 			List<int> spawnedCount = new List<int>();
@@ -523,7 +535,7 @@ namespace SORCE
 		}
 		private static void SpawnFountains()
 		{
-			Debug.Log("Loading Fountains");
+			Debug.Log("SORCE: Loading Fountains");
 			int numObjects = Mathf.Clamp(3 * LevelSizeRatio(), 1, 5);
 			float objectBuffer = 14f;
 
@@ -556,7 +568,7 @@ namespace SORCE
 		{
 			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
 			{
-				Debug.Log("Loading Disco Shit");
+				Debug.Log("SORCE: Loading Disco Shit");
 				int maxSpawns = (int)((float)Random.Range(6, 12) * __instance.levelSizeModifier);
 				List<int> spawnedInChunks = new List<int>();
 
@@ -729,7 +741,7 @@ namespace SORCE
 		}
 		private static void SpawnLitter(LoadLevel __instance)
 		{
-			Debug.Log("Loading Litter");
+			Debug.Log("SORCE: Loading Litter");
 
 			int numObjects = (int)((5 - GC.levelTheme) * 20 * __instance.levelSizeModifier);
 
@@ -754,7 +766,7 @@ namespace SORCE
 		}
 		private static void SpawnManholes_Underdark(LoadLevel __instance)
 		{
-			Debug.Log("Loading Underdark Manholes");
+			Debug.Log("SORCE: Loading Underdark Manholes");
 			int bigTries = (int)((float)Random.Range(8, 12) * __instance.levelSizeModifier);
 
 			for (int i = 0; i < bigTries; i++)
@@ -843,7 +855,7 @@ namespace SORCE
 		}
 		private static void SpawnSecurityCamsAndTurrets(LoadLevel __instance)
 		{
-			logger.LogDebug("Loading Public Security Cams");
+			logger.LogDebug("SORCE: Loading Public Security Cams");
 
 			int bigTries = (int)((float)Random.Range(8, 12) * __instance.levelSizeModifier);
 			List<int> spawnedInChunks = new List<int>();

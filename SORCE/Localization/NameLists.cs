@@ -1,9 +1,9 @@
 ﻿using SORCE.Challenges.C_Exteriors;
+using SORCE.Challenges.C_Features;
+using SORCE.Challenges.C_Interiors;
 using SORCE.Challenges.C_MapSize;
 using SORCE.Challenges.C_Overhaul;
-using SORCE.Challenges.C_Population;
-using SORCE.Content.Challenges.C_Interiors;
-using SORCE.Content.Challenges.C_Roamers;
+using SORCE.Challenges.C_Roamers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +30,9 @@ namespace SORCE.Localization
 		{
 			nameof(Arcology),
 			nameof(CanalCity),
+			nameof(DUMP),
+			nameof(GrandCityHotel),
+			nameof(TestTubeCity),
 			nameof(TransitExperiment),
 		};
 		public static List<string> Interiors = new List<string>()
@@ -47,9 +50,9 @@ namespace SORCE.Localization
 		};
 		public static List<string> MapSize = new List<string>()
 		{
-			nameof(ACityForAnts),
+			nameof(Arthropolis),
 			nameof(Claustropolis),
-			nameof(Megalopolis),
+			nameof(Megapolis),
 			nameof(Ultrapolis)
 		};
 		public static List<string> Overhaul = new List<string>()

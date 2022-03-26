@@ -9,8 +9,8 @@ using System;
 using Light2D;
 using SORCE.Challenges;
 using SORCE.Logging;
-using SORCE.Content.Challenges.C_Interiors;
 using SORCE.Localization;
+using SORCE.Challenges.C_Interiors;
 
 namespace SORCE.Content.Patches.P_LevelGen
 {

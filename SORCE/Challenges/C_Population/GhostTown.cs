@@ -1,23 +1,34 @@
 ﻿using RogueLibsCore;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+using SORCE;
+using Random = UnityEngine.Random;
+using Object = UnityEngine.Object;
+using SORCE.Challenges;
+using SORCE.Content.Challenges;
+using SORCE.Localization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SORCE.Challenges.C_Population
+namespace SORCE.Challenges.C_Features
 {
-	class GhostTown
+	public class GhostTown
 	{
 		[RLSetup]
 		static void Start()
 		{
 			const string name = nameof(GhostTown);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<GhostTown>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Population));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Population.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo(
+					"Population - Ghost Town"))
+				.WithDescription(new CustomNameInfo(
+					"No one walks the streets in this city... something horrible must have happened here to make everyone hide indoors!\n\n" +
+					"Don't act all innocent, I know what you do to people in this game!\n\n" +
+					"- Roaming population set to 0%"));
 		}
 	}
 }

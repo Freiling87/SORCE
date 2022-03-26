@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_Exteriors
 {
@@ -17,12 +19,17 @@ namespace SORCE.Challenges.C_Exteriors
 		{
 			const string name = nameof(Arcology);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<Arcology>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(
-				EChallengeConflictGroup.Arcology, 
-				EChallengeConflictGroup.Exteriors));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Exteriors.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo(
+					"Exteriors - Arcology"))
+				.WithDescription(new CustomNameInfo(
+					"Sustainable Eco-homes! Trees! Less pollution! What's not to love?\n" +
+					"(Answer: Sharing a home with bugs and frogs.)\n\n" +
+					"- Public floors are Grass\n"));
+					// "- Border walls are Hedges\n" + Not implemented
 		}
 	}
-}
+} 

@@ -6,19 +6,28 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
+using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
-namespace SORCE.Content.Challenges.C_Roamers
+namespace SORCE.Challenges.C_Roamers
 {
 	public class MobTown
 	{
-		const string name = nameof(MobTown);
-
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+			const string name = nameof(MobTown);
 
-			ChallengeManager.RegisterChallenge<MobTown>(new ChallengeInfo(name, unlockBuilder));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+			})
+				.WithName(new CustomNameInfo(
+					"Roamers - Mob Town"))
+				.WithDescription(new CustomNameInfo(
+					"Enable dis mutatah, or else. Stugots!\n\n" +
+					"- The Mob spawns in every district" +
+					"- You gotta problem? I'd hate if we had a problem."));
 		}
 	}
 }

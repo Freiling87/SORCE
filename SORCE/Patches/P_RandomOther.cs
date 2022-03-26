@@ -8,7 +8,7 @@ using System.Reflection;
 using System;
 using SORCE.Challenges;
 using SORCE.Logging;
-using SORCE.Content.Challenges.C_Interiors;
+using SORCE.Challenges.C_Interiors;
 
 namespace SORCE.Patches
 {

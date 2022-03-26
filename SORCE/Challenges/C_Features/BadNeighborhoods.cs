@@ -7,19 +7,26 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_Features
 {
 	public class BadNeighborhoods
 	{
-		const string name = nameof(BadNeighborhoods);
-
 		[RLSetup]
 		static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
+			const string name = nameof(BadNeighborhoods);
 
-			ChallengeManager.RegisterChallenge<BadNeighborhoods>(new ChallengeInfo(name, unlockBuilder));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+			})
+				.WithName(new CustomNameInfo(
+					"Features - Bad Neighborhood"))
+				.WithDescription(new CustomNameInfo(
+					"This place sure has gone to shit, hasn't it?\n\n" +
+					"- Small chance for any given window to start out broken"));
 		}
 	}
 }

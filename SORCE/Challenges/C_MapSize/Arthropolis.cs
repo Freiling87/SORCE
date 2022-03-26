@@ -10,24 +10,26 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Features
+namespace SORCE.Challenges.C_MapSize
 {
-	public class CartOfTheDeal
+	public class Arthropolis
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(CartOfTheDeal);
+			const string name = nameof(Arthropolis);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
+				Cancellations = cChallenge.MapSize.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Features - Cart of the Deal"))
+					"Map Size - Arthropolis"))
 				.WithDescription(new CustomNameInfo(
-					"A lot of people - very important people - are saying the City has the best Vendor Carts. The best folks, just tremendous! Don't we love our Vendor Carts?\n\n" +
-					"- Vendor carts spawn in all districts\n" +
-					"- It's gonna be yuge"));
+					"\"The Streets of Rogue City Building For Slum Dwellers Who Can't Be Rich Good\"\n\n" +
+					"    - Inscription over the entrance to the Slums, District 420, Floor 69\n\n" + 
+					" - Map size set to 12.5%\n" +
+					"   (Average 4 chunks per level)"));
 		}
 	}
 }

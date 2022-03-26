@@ -6,8 +6,11 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
+using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
-namespace SORCE.Content.Challenges.C_Interiors
+namespace SORCE.Challenges.C_Interiors
 {
 	public class Panoptikopolis
 	{
@@ -16,10 +19,17 @@ namespace SORCE.Content.Challenges.C_Interiors
 		{
 			const string name = nameof(Panoptikopolis);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<Panoptikopolis>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Interiors));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Interiors.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo(
+					"Interiors - Panoptikopolis"))
+				.WithDescription(new CustomNameInfo(
+					"Authoritarian surveillance measures mandate that most buildings have to be built with glass walls. If you have nothing to hide, what are you worried about, citizen?\n\n" +
+					"- Most buildings spawn with Glass walls\n" +
+					"- People can see you pooping, but you can see them pooping too, sometimes at the same time. So it's best to avoid eye contact.\n" +
+					"  Unless you're into that sort of thing." ));
 		}
 	}
 }

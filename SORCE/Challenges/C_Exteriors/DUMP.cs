@@ -1,13 +1,33 @@
-﻿using System;
+﻿using RogueLibsCore;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
+using SORCE;
+using Random = UnityEngine.Random;
+using Object = UnityEngine.Object;
+using SORCE.Challenges;
+using SORCE.Content.Challenges;
+using SORCE.Localization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SORCE.Challenges.C_Exteriors
 {
-	class DUMP
+	public class DUMP
 	{
-		// Deep Underground Metropolitan Principality
+		//[RLSetup]
+		static void Start()
+		{
+			const string name = nameof(DUMP);
+
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Exteriors.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo(
+					"Exteriors - DUMP"))
+				.WithDescription(new CustomNameInfo(
+					"Deep\nUnderground\nMetropolitan\nPrincipality\n\n" +
+					"- Exteriors are Cave"));
+		}
 	}
 }

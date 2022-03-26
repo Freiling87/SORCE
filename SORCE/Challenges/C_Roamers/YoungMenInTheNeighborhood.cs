@@ -6,8 +6,11 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
+using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
-namespace SORCE.Content.Challenges.C_Roamers
+namespace SORCE.Challenges.C_Roamers
 {
 	public class YoungMenInTheNeighborhood
 	{
@@ -16,9 +19,15 @@ namespace SORCE.Content.Challenges.C_Roamers
 		{
 			const string name = nameof(YoungMenInTheNeighborhood);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<YoungMenInTheNeighborhood>(new ChallengeInfo(name, unlockBuilder));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+			})
+				.WithName(new CustomNameInfo(
+					"Roamers - Young Men in the Neighborhood"))
+				.WithDescription(new CustomNameInfo(
+				"Because the young gentlemen in the hood are always polite;" +
+				"If you start acting rude, we'll set you right!" +
+				"- Friendly local Gangbangers now roam every district"));
 		}
 	}
 }

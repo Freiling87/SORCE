@@ -367,7 +367,7 @@ namespace SORCE.Patches
 					new CodeInstruction(OpCodes.Stloc_S, 8),
 					new CodeInstruction(OpCodes.Ldloc_S, 8),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Alarm Buttons"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Alarm Buttons"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -426,7 +426,7 @@ namespace SORCE.Patches
 					new CodeInstruction(OpCodes.Stloc_S, 15),
 					new CodeInstruction(OpCodes.Ldloc_S, 15),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Boulders"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Boulders"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -488,7 +488,7 @@ namespace SORCE.Patches
 
 					new CodeInstruction(OpCodes.Ldloc_S, 10),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Fire Hydrants"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Fire Hydrants"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -515,13 +515,13 @@ namespace SORCE.Patches
 				{
 					/*	Line 1410
 						if (this.hasFlameGrates) {
-							Debug.Log("Loading Flame Grates");
+							Debug.Log("SORCE: Loading Flame Grates");
 					*/
 
 					new CodeInstruction(OpCodes.Ldloc_1),
 					new CodeInstruction(OpCodes.Ldfld),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Flame Grates"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Flame Grates"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -547,11 +547,11 @@ namespace SORCE.Patches
 				{
 					//	Line 1367
 					//	if (flag16) {
-					//		Debug.Log("Loading Flaming Barrels");
+					//		Debug.Log("SORCE: Loading Flaming Barrels");
 
 					new CodeInstruction(OpCodes.Ldloc_S, 12),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Flaming Barrels"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Flaming Barrels"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -609,7 +609,7 @@ namespace SORCE.Patches
 
 					new CodeInstruction(OpCodes.Ldloc_S, 9),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Manholes"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Manholes"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -646,7 +646,7 @@ namespace SORCE.Patches
 					new CodeInstruction(OpCodes.Ldfld, gc),
 					new CodeInstruction(OpCodes.Ldfld, gc_serverPlayer), 
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Oil Spills"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Oil Spills"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -680,7 +680,7 @@ namespace SORCE.Patches
 					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Ldfld, hasPoliceBoxes),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Police Boxes"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Police Boxes"),
 				}, 
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -712,7 +712,7 @@ namespace SORCE.Patches
 
 					new CodeInstruction(OpCodes.Ldloc_2),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Power Boxes"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Power Boxes"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -738,10 +738,10 @@ namespace SORCE.Patches
 				prefixInstructionSequence: new List<CodeInstruction>
 				{
 					//	Line 2414 
-					//		Debug.Log("Loading Slum Dwellers");
+					//		Debug.Log("SORCE: Loading Slum Dwellers");
 					//		int bigTries = (int)((float)Random.Range(16, 20) * this.levelSizeModifier);
 
-					new CodeInstruction(OpCodes.Ldstr, "Loading Slum Dwellers"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Slum Dwellers"),
 					new CodeInstruction(OpCodes.Call), 
 					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Ldc_I4_S, 16),
@@ -815,7 +815,7 @@ namespace SORCE.Patches
 
 					new CodeInstruction(OpCodes.Ldloc_3),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Slime Barrels"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Slime Barrels"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -845,7 +845,7 @@ namespace SORCE.Patches
 
 					new CodeInstruction(OpCodes.Ldloc_S, 6),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Trash Cans"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Trash Cans"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -877,7 +877,7 @@ namespace SORCE.Patches
 					new CodeInstruction(OpCodes.Stloc_S, 14),
 					new CodeInstruction(OpCodes.Ldloc_S, 14),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Trees"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Trees"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
@@ -907,7 +907,7 @@ namespace SORCE.Patches
 
 					new CodeInstruction(OpCodes.Ldloc_S, 7),
 					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Vendor Carts"),
+					new CodeInstruction(OpCodes.Ldstr, "SORCE: Loading Vendor Carts"),
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{

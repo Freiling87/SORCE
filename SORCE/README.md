@@ -48,10 +48,10 @@ I'd like to get more mods working in this category (ice, water), but the code us
 
 |Name                           |Chunks Per Map, est.   |Percent of Vanilla size    |
 |:------------------------------|----------------------:|--------------------------:|
-|A City for Ants?!              |4                      |12.50 %                    |
-|Claustrophobia                 |12                     |37.50 %                    |
+|Arthropolis	                |4                      |12.50 %                    |
+|Claustropolis                  |12                     |37.50 %                    |
 |Vanilla (for comparison)       |32                     |100.00 %                   |
-|Megalopolis                    |48                     |150.00 %                   |
+|Megapolis                      |48                     |150.00 %                   |
 |Ultrapolis                     |64                     |200.00 %                   |
 
 ### Population *

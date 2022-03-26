@@ -7,20 +7,26 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Content.Challenges;
+using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_Exteriors
 {
 	public class CanalCity
 	{
-		[RLSetup]
+		//[RLSetup] Deactivated, not sure how to make it work.
 		static void Start()
 		{
 			const string name = nameof(CanalCity);
 
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true));
-
-			ChallengeManager.RegisterChallenge<CanalCity>(new ChallengeInfo(name, unlockBuilder)
-				.WithConflictGroup(EChallengeConflictGroup.Exteriors));
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			{
+				Cancellations = cChallenge.Exteriors.Where(i => i != name).ToList()
+			})
+				.WithName(new CustomNameInfo("Exteriors - Canal City"))
+				.WithDescription(new CustomNameInfo(
+					"Sure, it's like Venice... Venice this filthy water gonna get cleaned up?\n\n" +
+					"- Public floors are Water"));
 		}
 	}
 }
