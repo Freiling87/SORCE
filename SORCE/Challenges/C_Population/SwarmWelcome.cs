@@ -21,7 +21,7 @@ namespace SORCE.Challenges.C_Features
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = cChallenge.Population.Where(i => i != name).ToList()
+				Cancellations = NameLists.Population.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Population - Swarm Welcome"))

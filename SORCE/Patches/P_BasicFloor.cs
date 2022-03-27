@@ -10,6 +10,7 @@ using SORCE.Logging;
 using SORCE.Challenges;
 using SORCE.Localization;
 using SORCE.Challenges.C_Interiors;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {

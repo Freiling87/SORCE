@@ -9,6 +9,14 @@ Streets of Rogue Civil Engineering
 
 All traits in categories marked with an asterisk (*) are mutually exclusive with the other traits *within* that category.
 
+###	Ambient Audio
+
+
+
+###	Ambient Light
+
+
+
 ### Buildings *
 
 *N.B.: If a chunk uses non-randomized walls, they will not be affected by these mutators.*
@@ -70,3 +78,12 @@ I'd like to get more mods working in this category (ice, water), but the code us
 |Hoodlum's Wonderland           |- Roaming Gang numbers increased (12 gangs for standard floor size)
 |Mob Town                       |- Mafia Spawn in all Districts
 |Young Men in the Neighborhood  |- Roaming Gangs spawn in all Districts
+
+###	Wreckage
+This is the in-game term for the little fragments that show up when you destroy things. 
+In these mutators, they're used simply to add a degree of setting immersion and visual variety.
+
+|Name                           |Effect |
+|:------------------------------|:------|
+|Dirtier Districts				|- Trash, beautiful trash, everywhere!<br>- May cause performance issues for slower machines
+|Floraler Flora					|- Leaves are scattered around plants and hedges.<br>- May cause performance issues for slower machines

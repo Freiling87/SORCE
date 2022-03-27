@@ -9,7 +9,6 @@ namespace SORCE.Challenges
 	{
 		public string Name { get; }
 		public UnlockBuilder UnlockBuilder { get; }
-		public List<EChallengeConflictGroup> ConflictGroups { get; } = new List<EChallengeConflictGroup>();
 
 		private bool finalized;
 
@@ -23,13 +22,6 @@ namespace SORCE.Challenges
 		{
 			if (finalized)
 				throw new NotSupportedException("cannot modify finalized ChallengeInfo!");
-		}
-
-		public ChallengeInfo WithConflictGroup(params EChallengeConflictGroup[] conflictGroup)
-		{
-			AssertNotFinalized();
-			ConflictGroups.AddRange(conflictGroup);
-			return this;
 		}
 
 		public void FinalizeInfo()

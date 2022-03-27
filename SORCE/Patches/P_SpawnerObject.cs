@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {
@@ -23,7 +24,7 @@ namespace SORCE.Patches
 			logger.LogDebug("SpawnerObject_spawn:");
 			logger.LogDebug("\tobjectRealName = '" + objectRealName + "'");
 
-			if (ChallengeManager.IsChallengeFromListActive(cChallenge.InteriorsFlammable) && objectRealName == vObject.FireSpewer)
+			if (ChallengeManager.IsChallengeFromListActive(NameLists.InteriorsFlammable) && objectRealName == vObject.FireSpewer)
 				objectRealName = vObject.SecurityCam;
 
 			return true;

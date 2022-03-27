@@ -16,6 +16,8 @@ using SORCE.Challenges.C_Features;
 using SORCE.Localization;
 using SORCE.Challenges.C_Interiors;
 using SORCE.Challenges.C_Roamers;
+using static SORCE.Localization.NameLists;
+using SORCE.Challenges.C_Wreckage;
 
 namespace SORCE
 {
@@ -26,7 +28,7 @@ namespace SORCE
 
 		public static wallMaterialType BorderWallMaterial()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors))
+			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Exteriors))
 			{
 				case (nameof(Arcology)):
 					return wallMaterialType.Border;
@@ -53,7 +55,7 @@ namespace SORCE
 		}
 		public static string ExteriorFloorTile()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors))
+			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Exteriors))
 			{
 				case nameof(Arcology):
 					return vFloor.Grass;
@@ -73,7 +75,7 @@ namespace SORCE
 		}
 		public static string ExteriorFloorTileGroup()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Exteriors))
+			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Exteriors))
 			{
 				case nameof(Arcology):
 					return vFloorTileGroup.Park;
@@ -93,7 +95,7 @@ namespace SORCE
 		}
 		public static string InteriorWallType()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(cChallenge.Interiors))
+			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Interiors))
 			{
 				case nameof(CityOfSteel):
 					return vWall.Steel;
@@ -119,7 +121,7 @@ namespace SORCE
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).lake;
 		public static bool IsInteriorsModActive() =>
-			cChallenge.Interiors.Where(t => GC.challenges.Contains(t)).Any();
+			NameLists.Interiors.Where(t => GC.challenges.Contains(t)).Any();
 		public static int LevelSizeModifier(int vanilla) =>
 			GC.challenges.Contains(nameof(Arthropolis)) ? 4 :
 			GC.challenges.Contains(nameof(Claustropolis)) ? 12 :
@@ -279,7 +281,7 @@ namespace SORCE
 		{
 			int newVal = __instance.levelSizeMax;
 
-			string active = ChallengeManager.GetActiveChallengeFromList(cChallenge.MapSize);
+			string active = ChallengeManager.GetActiveChallengeFromList(NameLists.MapSize);
 
 			if (active == nameof(Arthropolis))
 				newVal = 4;
@@ -313,6 +315,10 @@ namespace SORCE
 				SpawnJukeboxesAndSpeakers(__instance);
 				SpawnTurntables();
 			}
+
+			// TODO: Replace litter in Arcology with more leaves
+			if (GC.challenges.Contains(nameof(DirtierDistricts)))
+				SpawnLitter(__instance);
 
 			if (TraitManager.IsPlayerTraitActive("UnderdarkCitizen"))
 				SpawnManholes_Underdark(__instance);
@@ -761,7 +767,7 @@ namespace SORCE
 					GC.spawnerMain.SpawnWreckagePileObject(location,
 						GC.Choose<string>(vObject.Shelf, vObject.Lamp, vObject.Counter, vObject.VendorCart), false);
 
-				Random.InitState(__instance.randomSeedNum + i);
+				//Random.InitState(__instance.randomSeedNum + i);
 			}
 		}
 		private static void SpawnManholes_Underdark(LoadLevel __instance)

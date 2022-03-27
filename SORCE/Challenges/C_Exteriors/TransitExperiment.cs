@@ -21,7 +21,7 @@ namespace SORCE.Challenges.C_Exteriors
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = cChallenge.Exteriors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Exteriors.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Exteriors - Transit Experiment"))

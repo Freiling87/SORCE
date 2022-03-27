@@ -21,7 +21,7 @@ namespace SORCE.Challenges.C_Interiors
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = cChallenge.Interiors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Interiors.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Interiors - Panoptikopolis"))

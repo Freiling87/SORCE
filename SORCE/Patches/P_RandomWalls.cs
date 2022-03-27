@@ -10,6 +10,7 @@ using Light2D;
 using SORCE.Challenges;
 using SORCE.Logging;
 using SORCE.Localization;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {

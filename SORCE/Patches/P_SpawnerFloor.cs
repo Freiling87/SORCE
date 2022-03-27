@@ -11,6 +11,7 @@ using Object = UnityEngine.Object;
 using SORCE.Logging;
 using SORCE.Challenges;
 using SORCE.Localization;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {
@@ -31,7 +32,7 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerFloor.spawn), argumentTypes: new[] { typeof(string) })]
 		public static bool Spawn_Prefix(string floorName, SpawnerFloor __instance, ref tk2dTileMap ___tilemapFloors, ref tk2dTileMap ___tilemapFloors3, ref tk2dTileMap ___tilemapFloors4)
 		{
-			if (ChallengeManager.GetActiveChallengeFromList(cChallenge.Interiors) == null)
+			if (ChallengeManager.GetActiveChallengeFromList(NameLists.Interiors) == null)
 				return true;
 
 			floorName = LevelGenTools.ExteriorFloorTile();

@@ -1,7 +1,83 @@
-﻿#	C	Mutators
+﻿#	√	Insane Markdown note format
+This file is meant to be viewed in raw format. I just use markdown because its collapsible headers are really useful.
+
+|Tag				|Meaning	|
+|:-----------------:|:----------|
+|√					|Feature Complete
+|C					|To Code (Includes any non-testing task)
+|H					|On hold (Should have specifics in header)
+|N					|To be implemented in next release
+|T					|To Test
+#	C	Big Multicategory Chungus of fixes
+Most of these are just v96-introduced IL errors.
+
+	[Info   :   BepInEx] Loading [SORCE 0.1.0]
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_AlarmButtons caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_Boulders caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_FireHydrants caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_FlameGrates caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_FlamingBarrels caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_Manholes caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_OilSpills caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_PoliceBoxes caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_PowerBoxes caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_RoamerAgentNumber caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_SlimeBarrels caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_TrashCans caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_Trees caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_VendorCarts caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
+	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+	[Message:   BepInEx] Chainloader startup complete
+#	C	Mutators
+##		H	Ambient Light
+###			C	00 Migrated color idea list
+Antique = "[CCU] Ambient Lighting - Antique", // Old color TV?
+BlackWhite = "[CCU] Ambient Lighting - Black & White",
+Goodsprings = "[CCU] Ambient Lighting - Goodsprings", // FONV Orange filter
+HalfMoon = "[CCU] Ambient Lighting - Half Moon", // Half-dark
+Neptune = "[CCU] Ambient Lighting - Neptune",
+NuclearWinter = "[CCU] Ambient Lighting - Nuclear Winter",
+Rage = "[CCU] Ambient Lighting - Rage",
+SunnyDay = "[CCU] Ambient Lighting - Sunny Day", // Disable Lamps?
+###			√	New Moon
+###			C	Sepia
+##		H	Ambienter Ambience
+Hold for next release
 ##		CT	Features
+###			C	Aftermath
+Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.
+All objects have a chance to be broken at the start.
+All NPCs have a chance to be missing some health.
+Buildings have a chance to start out on fire, or to have every object inside them destroyed and all items stolen. Police stations have a higher chance.
 ###			C	Bad Neighborhoods
-Stopped working
+This might actually be working...
 ###			C	Brought Back Fountain
 ####			C	Spawns in Home Base
 ####			C	Move this to Object mod
@@ -11,8 +87,9 @@ Complete
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
 ####			C	Spawn public Rugs (overlap with Grand City Hotel)
-###			√	Lake it or Leave it
-Complete
+###			C	Lake it or Leave it
+####			C	Do not make lakes over Downtown bridges
+New
 ###			C	Power Whelming
 Stopped working
 ###			√	Skyway District
@@ -23,6 +100,8 @@ Stopped working
 Stopped working
 ###			C	This Land is Mine Land
 New
+###			C	Warzone
+Spawns dead/burned/exploded bodies, blood splatters
 ##		C	Floor Exteriors & Borders
 ###			√H	Arcology
 ####			√	Exterior Floor - Grass
@@ -73,18 +152,25 @@ No floor type?
 ###			C	Spelunky Dory
 Exterior walls are now wood?? Lol something got messed up, but maybe use it in the other.
 Change rugs back to Grass
+##		H	Light Sources
+Hold for next release
 ##		√	MapSize
 ###			√	A City For Ants
 ###			√	Claustropolis
 ###			√	Megapolis
 ###			√	Ultrapolis
-##		C	Overhauls
+##		H	Overhauls
+These are technically mutator collections. Work on their subfeatures until these are substantial enough to be actual overhauls.
 ###			C	AnCapistan
 ###			C	Disco City Danceoff
 ###			C	MACITS
 ####			C	No Money
 Everything's free
 Obviously would be easy-mode, so I wonder if there's a way to add a twist to this
+####		C	Martial Law
+Soldiers spawn instead of Police, now enforce the law. 
+They skip the Annoyed relationship and go straight to Hostile for the smallest infraction.
+Maybe they don't take sides if you're in a fight, and just kill both parties unless one is fleeing.
 ###			C	Police State
 ####			C	Speech laws
 Telling really bad or really good jokes makes police hostile
@@ -119,10 +205,24 @@ None work
 ###			C	HoodlumsWonderland
 ###			C	Mob Town
 ###			C	YMITN
+##		C	Wreckage
+###			C	00 Move all to Features?
+###			C	Dirtier Districts 
+####			C	Doesn't work anymore
+Logging message did show up.
+###			C	Floraler Flora
+Not sure if it works still
+###			C	Shittier Toilets
 #	C	Traits
+###			C	Trashier Trashcans
+
 ##		C	Underdark Citizen
-#	Migrate Out
-##		LevelGenTools.SpawnLitter
-##		LevelGenTools.SpawnManholes_Underdark
-##		BroughtBackFountain (Object mod)
-##		Vendor Carts (Object mod)
+Move trait to Resistance mod
+#	C	Migrate Out
+Verify all of these, because they were written before the break and now I'm skeptical of them. 
+##		C	LevelGenTools.SpawnLitter
+##		C	LevelGenTools.SpawnManholes_Underdark
+##		C	BroughtBackFountain (Object mod)
+##		C	Vendor Carts (Object mod)
+#	C	Migrate In
+Anything from CCU that would be of interest to the non-designer - that includes all Ambience & Litter.

@@ -21,7 +21,7 @@ namespace SORCE.Challenges.C_MapSize
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = cChallenge.MapSize.Where(i => i != name).ToList()
+				Cancellations = NameLists.MapSize.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Map Size - Ultrapolis"))

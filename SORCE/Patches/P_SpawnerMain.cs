@@ -11,6 +11,8 @@ using SORCE.Challenges;
 using SORCE.Logging;
 using SORCE.Localization;
 using SORCE.Challenges.C_Interiors;
+using static SORCE.Localization.NameLists;
+using SORCE.Challenges.C_Wreckage;
 
 namespace SORCE.Content.Patches.P_LevelGen
 {
@@ -32,7 +34,7 @@ namespace SORCE.Content.Patches.P_LevelGen
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.GetLightColor), argumentTypes: new[] { typeof(string) })]
 		public static bool GetLightColor_Prefix(string lightRealName, ref Color __result)
 		{
-			string challenge = ChallengeManager.GetActiveChallengeFromList(cChallenge.AffectsLights);
+			string challenge = ChallengeManager.GetActiveChallengeFromList(NameLists.AffectsLights);
 
 			LightReal lightReal = new LightReal();
 
@@ -134,5 +136,198 @@ namespace SORCE.Content.Patches.P_LevelGen
 			__result = lightReal.lightReal2Color;
 			return false;
 		}
+
+		/// <summary>
+		/// Wreckage
+		/// </summary>
+		/// <param name="objectPos"></param>
+		/// <param name="objectSource"></param>
+		/// <param name="objectType"></param>
+		/// <param name="myDir"></param>
+		/// <param name="worldDataObjects"></param>
+		/// <param name="worldDataElementPosition"></param>
+		/// <param name="__instance"></param>
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(SpawnerMain.spawnObjectReal), argumentTypes: new[] { typeof(Vector3), typeof(PlayfieldObject), typeof(string), typeof(string), typeof(WorldDataObject), typeof(int) })]
+		public static void SpawnerMain_spawnObjectReal(Vector3 objectPos, PlayfieldObject objectSource, string objectType, string myDir,
+				WorldDataObject worldDataObjects, int worldDataElementPosition, SpawnerMain __instance)
+		{
+			logger.LogDebug("SpawnerMain_spawnObjectReal");
+			logger.LogDebug("\tobjectType: " + objectType);
+
+			float offsetSize = 9999f;
+			string particleType = null;
+			int iteratorChance = 0;
+			int trashLevelInverse = GC.levelTheme; // 0 = Home Base, 5 = Mayor Village 
+			Vector2 loc = objectPos;
+			int chance = 100;
+
+			if (GC.challenges.Contains(nameof(FloralerFlora)) || Core.debugMode)
+				switch (objectType)
+				{
+					case vObject.Bush:
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.64f, 0.64f), 
+								loc.y + Random.Range(-0.64f, 0.64f)),
+								vObject.Bush, false);
+							chance -= 20;
+						}
+
+						break;
+
+					case vObject.KillerPlant:
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.64f, 0.64f), 
+								loc.y + Random.Range(-0.64f, 0.64f)),
+								vObject.Bush, false);
+							chance -= 20;
+						}
+
+						break;
+
+					case vObject.Plant:
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.32f, 0.32f), 
+								loc.y + Random.Range(-0.32f, 0.32f)),
+								vObject.Bush, false);
+							chance -= 66;
+						}
+
+						break;
+
+					case vObject.Tree:
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.64f, 0.64f), 
+								loc.y + Random.Range(-0.64f, 0.64f)),
+								vObject.Bush, false);
+							chance -= 10;
+						}
+
+						break;
+				}
+
+			chance = 100;
+
+			if (GC.challenges.Contains(nameof(DirtierDistricts)) || Core.debugMode)
+				switch (objectType)
+				{
+					case vObject.ATMMachine:
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.48f, 0.48f), 
+								loc.y + Random.Range(-0.48f, 0.48f)),
+								vObject.MovieScreen, false);
+							chance -= 10;
+						}
+
+						break;
+
+					case vObject.Barbecue:
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.24f, 0.24f), 
+								loc.y + Random.Range(-0.12f, 0.12f)),
+								vObject.Bush, true);
+							chance -= 25;
+						}
+
+						break;
+
+					case vObject.Boulder:
+						while (GC.percentChance(1))
+							GC.spawnerMain.SpawnItem(new Vector2(
+								loc.x + Random.Range(-0.48f, 0.48f), 
+								loc.y + Random.Range(-0.48f, 0.48f)), 
+								vItem.Rock);
+
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.48f, 0.48f), 
+								loc.y + Random.Range(-0.48f, 0.48f)),
+								vObject.FlamingBarrel, false);
+							chance -= 15;
+						}
+
+						break;
+
+					case vObject.BoulderSmall:
+						while (GC.percentChance(1))
+							GC.spawnerMain.SpawnItem(new Vector2(
+								loc.x + Random.Range(-0.16f, 0.16f), 
+								loc.y + Random.Range(-0.16f, 0.16f)), 
+								vItem.Rock);
+
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.16f, 0.16f), 
+								loc.y + Random.Range(-0.16f, 0.16f)),
+								vObject.FlamingBarrel, false);
+							chance -= 10;
+						}
+
+						break;
+
+					case vObject.FlamingBarrel:
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.06f, 0.06f), 
+								loc.y + Random.Range(-0.06f, 0.06f)),
+								vObject.Bush, true);
+							chance -= 50;
+						}
+
+						break;
+
+					case vObject.Toilet:
+						while (GC.percentChance(chance))
+						{
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.14f, 0.14f), 
+								loc.y + Random.Range(-0.24f, 0.24f)), 
+								vObject.FlamingBarrel, true); // Shit
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.14f, 0.14f), 
+								loc.y + Random.Range(-0.24f, 0.24f)),
+								vObject.MovieScreen, false); // Toilet Paper
+							chance -= 100;
+						}
+
+						break;
+
+					case vObject.TrashCan:
+						// TODO: See if you can just spawn their contents outside, instead
+						while (GC.percentChance(1))
+							GC.spawnerMain.SpawnItem(new Vector2(
+								loc.x + Random.Range(-0.32f, 0.32f), 
+								loc.y + Random.Range(-0.32f, 0.32f)), 
+								vItem.BananaPeel);
+
+						while (GC.percentChance(chance))
+						{
+							// TODO: Find a way to ensure it doesn't pass walls
+							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
+								loc.x + Random.Range(-0.48f, 0.48f), 
+								loc.y + Random.Range(-0.48f, 0.48f)),
+								cObject.WreckageMisc.RandomElement(), 
+								GC.percentChance(25));
+							chance -= 15;
+						}
+
+						break;
+				}
+		}
+
 	}
 }

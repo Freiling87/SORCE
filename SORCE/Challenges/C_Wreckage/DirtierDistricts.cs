@@ -10,25 +10,24 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_MapSize
+namespace SORCE.Challenges.C_Wreckage
 {
-	public class Megapolis
+	public class DirtierDistricts
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(Megapolis);
+			const string name = nameof(DirtierDistricts);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.MapSize.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Map Size - Megapolis"))
+					"Wreckage - Dirtier Districts"))
 				.WithDescription(new CustomNameInfo(
-					"This town has so gotten big. You remember when it was just a local Mega-Arcology. Now it's a Mega-Mega-Arcology.\n\n" +
-					" - Map size set to 150%\n" +
-					"   (Average 45 chunks per level)"));
+					"Now you don't just live in a disgusting dump, you play in a virtual one too!\n\n" +
+					"- Spawns trash in public areas" +
+					"- Piles of receipts next to ATMs"));
 		}
 	}
 }

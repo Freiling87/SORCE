@@ -74,6 +74,19 @@
     <Compile Include="Challenges\ChallengeInfo.cs" />
     <Compile Include="Challenges\ChallengeManager.cs" />
     <Compile Include="Challenges\ChallengeMenuGroups.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\NuclearWinter.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\Goodsprings.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\BlackAndWhite.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\Shinobi.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\Hellscape.cs" />
+    <Compile Include="Challenges\C_AmbientLightLevel\Blinding.cs" />
+    <Compile Include="Challenges\C_AmbientLightLevel\Daytime.cs" />
+    <Compile Include="Challenges\C_AmbientLightLevel\Evening.cs" />
+    <Compile Include="Challenges\C_AmbientLightLevel\FullMoon.cs" />
+    <Compile Include="Challenges\C_AmbientLightLevel\HalfMoon.cs" />
+    <Compile Include="Challenges\C_AmbientLightLevel\NewMoon.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\Sepia.cs" />
+    <Compile Include="Challenges\C_Audio\AmbienterAmbience.cs" />
     <Compile Include="Challenges\C_Exteriors\DUMP.cs" />
     <Compile Include="Challenges\C_Exteriors\GrandCityHotel.cs" />
     <Compile Include="Challenges\C_Exteriors\TestTubeCity.cs" />
@@ -85,6 +98,8 @@
     <Compile Include="Challenges\C_Interiors\GreenLiving.cs" />
     <Compile Include="Challenges\C_Interiors\Panoptikopolis.cs" />
     <Compile Include="Challenges\C_Interiors\ShantyTown.cs" />
+    <Compile Include="Challenges\C_Wreckage\FloralerFlora.cs" />
+    <Compile Include="Challenges\C_Wreckage\DirtierDistricts.cs" />
     <Compile Include="Localization\NameLists.cs" />
     <Compile Include="Challenges\C_Exteriors\Arcology.cs" />
     <Compile Include="Challenges\C_Features\BroughtbackFountain.cs" />
@@ -112,7 +127,6 @@
     <Compile Include="Challenges\C_Roamers\MobTown.cs" />
     <Compile Include="Challenges\C_Roamers\YoungMenInTheNeighborhood.cs" />
     <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
-    <Compile Include="Challenges\EChallengeConflictGroup.cs" />
     <Compile Include="LevelGenTools.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
     <Compile Include="Patches\P_BasicFloor.cs" />
@@ -120,6 +134,7 @@
     <Compile Include="Patches\P_LoadLevel.cs" />
     <Compile Include="Patches\P_RandomOther.cs" />
     <Compile Include="Patches\P_RandomWalls.cs" />
+    <Compile Include="Patches\P_ScrollingMenu.cs" />
     <Compile Include="Patches\P_SpawnerFloor.cs" />
     <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Patches\P_SpawnerObject.cs" />
@@ -145,10 +160,6 @@
 copy /y "SORCE.dll" %25modDir%25
 copy /y "BTHarmonyUtils.dll" %25modDir%25
 copy /y "RogueLibsCore.dll" %25modDir%25 
-copy /y "YamlDotNet.dll" %25modDir%25
-
-set locDir="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue_Data\Localization"
-copy /y "$(ProjectDir)\Localization\SORCE_Challenges.yaml" %25locDir%25  
 
 Start "" "C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"</PostBuildEvent>
   </PropertyGroup>

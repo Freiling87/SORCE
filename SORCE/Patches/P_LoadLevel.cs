@@ -19,6 +19,7 @@ using System.Reflection.Emit;
 using JetBrains.Annotations;
 using SORCE.Challenges.C_Features;
 using SORCE.Localization;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {
@@ -107,7 +108,7 @@ namespace SORCE.Patches
 								__instance.tileInfo.tileArray[k, l - 1].chunkID = __instance.mapChunkArray[i, j].chunkID;
 								string tilemapGroup = vFloorTileGroup.Building;
 
-								if (ChallengeManager.IsChallengeFromListActive(cChallenge.Exteriors))
+								if (ChallengeManager.IsChallengeFromListActive(NameLists.Exteriors))
 									tilemapGroup = LevelGenTools.ExteriorFloorTileGroup(); // Works on: Slums,
 								else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 								{
@@ -184,7 +185,7 @@ namespace SORCE.Patches
 									tileData.wallMaterial = wallMaterialType.Border;
 									string tilemapGroup = vFloorTileGroup.Building;
 
-									if (ChallengeManager.IsChallengeFromListActive(cChallenge.Exteriors))
+									if (ChallengeManager.IsChallengeFromListActive(NameLists.Exteriors))
 										tilemapGroup = vFloorTileGroup.MayorVillage; // Works on: Park, 
 									else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 									{
