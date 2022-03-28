@@ -213,16 +213,26 @@ None work
 ###			C	Mob Town
 ###			C	YMITN
 ##		C	Wreckage
-###			C	00 Move all to Features?
-###			C	Dirtier Districts 
-####			C	Doesn't work anymore
-Logging message did show up.
+###			C	00 Here's the issue
+This only works on procedurally generated objects. Trashcans, boulders, bushes. Not toilets, etc.
+So the goal here is to turn the current postfix method into one accessible by both original methods,
+the current procgen one and whichever spawns hand-placed objects.
+###			√	Dirtier Districts 
 ###			C	Floraler Flora
-Not sure if it works still
+Got this error, with Arcology: 
+
+	[Info   : Unity Log] Random Number After CreateInitialMap: 531
+	[Info   : Unity Log] Player Info: Playerr (Agent) - Playerr - 0 - True -  - 1668
+	[Error  : Unity Log] FormatException: Input string was not in a correct format.
+	Stack trace:
+	System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
+	System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
+	System.Int32.Parse (System.String s) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
+	SORCE.Patches.P_LoadLevel+<FillMapChunks_Replacement>d__5.MoveNext () (at <7e0375f963ff411db7a924b97eaa5ba6>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
+
 ###			C	Shittier Toilets
 #	C	Traits
-###			C	Trashier Trashcans
-
 ##		C	Underdark Citizen
 Move trait to Resistance mod
 #	C	Migrate Out

@@ -17,9 +17,7 @@ namespace SORCE.Challenges.C_Wreckage
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(DirtierDistricts);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock("DirtierDistricts", true)
 			{
 			})
 				.WithName(new CustomNameInfo(
