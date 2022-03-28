@@ -14,7 +14,7 @@ namespace SORCE.Challenges.C_AmbientLightLevel
 {
 	public class Evening
 	{
-		[RLSetup]
+		//[RLSetup]
 		static void Start()
 		{
 			const string name = nameof(Evening);

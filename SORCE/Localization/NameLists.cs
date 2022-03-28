@@ -15,6 +15,7 @@ using UnityEngine;
 
 namespace SORCE.Localization
 {
+	// TODO: Move this out of here
 	public static class NameLists
 	{
 		public static List<string> AddsCriminals = new List<string>()
@@ -27,20 +28,6 @@ namespace SORCE.Localization
 		{
 			nameof(DiscoCityDanceoff),
 			nameof(GreenLiving),
-		};
-		public static List<string> AmbientLightColor = new List<string>()
-		{
-			nameof(Hellscape),
-			nameof(Sepia),
-		};
-		public static List<string> AmbientLightLevel = new List<string>()
-		{
-			nameof(Blinding),
-			nameof(Daytime),
-			nameof(Evening),
-			nameof(FullMoon),
-			nameof(HalfMoon),
-			nameof(NewMoon),
 		};
 		public static List<string> Exteriors = new List<string>()
 		{
@@ -85,16 +72,62 @@ namespace SORCE.Localization
 			nameof(SwarmWelcome),
 		};
 		#region Colors
-		public static Dictionary<Type, Color32> AmbientLightColors = new Dictionary<Type, Color32>()
+		public static List<string> AmbientLightColor = new List<string>()
 		{
-			{ typeof(Sepia), cColors.Sepia },
+			nameof(ShadowRealm),
+			nameof(Goodsprings),
+			nameof(Hellscape),
+			nameof(NuclearWinter),
+			nameof(Reactor),
+			nameof(Sepia),
+			nameof(ShadowRealm),
+			nameof(Shinobi),
+		};
+		public static Dictionary<string, Color32> AmbientLightColorDict = new Dictionary<string, Color32>()
+		{
+			{ nameof(Goodsprings),		cColors.Goodsprings },
+			{ nameof(Hellscape),		cColors.Hellscape },
+			{ nameof(NuclearWinter),	cColors.NuclearWinter },
+			{ nameof(Reactor),          cColors.Reactor },
+			{ nameof(Sepia),			cColors.Sepia },
+			{ nameof(ShadowRealm),      cColors.ShadowRealm },
+			{ nameof(Shinobi),			cColors.Shinobi },
+		};
+		public static List<string> AmbientLightLevel = new List<string>()
+		{
+			nameof(Blinding),
+			nameof(Daytime),
+			nameof(Evening),
+			nameof(FullMoon),
+			nameof(HalfMoon),
+			nameof(NewMoon),
+		};
+		public static Dictionary<string, int> AmbientLightLevelDict = new Dictionary<string, int>()
+		{
+			{ nameof(Blinding),	255 },
+			{ nameof(Daytime),	200 },
+			{ nameof(Evening),	150 },
+			{ nameof(FullMoon), 100 },
+			{ nameof(HalfMoon), 50 },
+			{ nameof(NewMoon),	0 },
 		};
 		#endregion
 		public static class cColors
 		{
-			public static Color32 Hellscape = new Color32(255, 0, 0, 255);
-			public static Color32 Sepia = new Color32(225, 156, 53, 255);
-			public static Color32 Vanilla = new Color32(128, 128, 128, 255);
+			public static Color32 Goodsprings =		new Color32(200, 125, 25, 190);
+			public static Color32 Hellscape =		new Color32(200, 0, 0, 175);
+			public static Color32 NuclearWinter =	new Color32(255, 255, 255, 175);
+			public static Color32 Reactor =			new Color32(75, 200, 50, 125);
+			public static Color32 Sepia =			new Color32(150, 150, 50, 190);
+			public static Color32 ShadowRealm =		new Color32(75, 75, 75, 175);
+			public static Color32 Shinobi =			new Color32(75, 75, 150, 200);
+
+			public static Color32 TestBlack =		new Color32(0, 0, 0, 255);
+			public static Color32 TestGreen =		new Color32(0, 255, 0, 255);
+			public static Color32 TestRed =			new Color32(255, 0, 0, 255);
+			public static Color32 TestBlue =		new Color32(0, 0, 255, 255);
+			public static Color32 TestPurple =		new Color32(255, 0, 255, 255);
+			public static Color32 TestWhite =		new Color32(255, 255, 255, 255);
 		}
 		public static class cLevelFeature // Custom Level Features
 		{

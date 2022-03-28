@@ -74,9 +74,10 @@
     <Compile Include="Challenges\ChallengeInfo.cs" />
     <Compile Include="Challenges\ChallengeManager.cs" />
     <Compile Include="Challenges\ChallengeMenuGroups.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\Reactor.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\NuclearWinter.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Goodsprings.cs" />
-    <Compile Include="Challenges\C_AmbientLightColor\BlackAndWhite.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\ShadowRealm.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Shinobi.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Hellscape.cs" />
     <Compile Include="Challenges\C_AmbientLightLevel\Blinding.cs" />

@@ -26,8 +26,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Shinobi"))
 				.WithDescription(new CustomNameInfo(
-					"DESCRIPTION HERE\n\n" +
-					"- Blue tint\n"));
+					"Kinda makes you wish for cool toe-shoes."));
 		}
 	}
 }

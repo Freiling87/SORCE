@@ -10,23 +10,23 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_AmbientLightLevel
+namespace SORCE.Challenges.C_AmbientLightColor
 {
-	public class Daytime
+	public class ShadowRealm
 	{
-		//[RLSetup]
+		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(Daytime);
+			const string name = nameof(ShadowRealm);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.AmbientLightLevel.Where(i => i != name).ToList()
+				Cancellations = NameLists.AmbientLightColor.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Ambient Light Level - Daytime"))
+					"Ambient Light Color - Shadow Realm"))
 				.WithDescription(new CustomNameInfo(
-					"- Ambient light to 150%"));
+					"Kinda makes you wish for some fuckin' light."));
 		}
 	}
 }

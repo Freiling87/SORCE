@@ -26,8 +26,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Hellscape"))
 				.WithDescription(new CustomNameInfo(
-					"DESCRIPTION HERE\n\n" +
-					"- Red tint\n"));
+					"Kinda makes you wish for not being in hell.\n\n"));
 		}
 	}
 }

@@ -12,21 +12,21 @@ using System.Linq;
 
 namespace SORCE.Challenges.C_AmbientLightColor
 {
-	public class BlackAndWhite
+	public class Reactor
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(BlackAndWhite);
+			const string name = nameof(Reactor);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
 				Cancellations = NameLists.AmbientLightColor.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Ambient Light Color - Black & White"))
+					"Ambient Light Color - Reactor"))
 				.WithDescription(new CustomNameInfo(
-					"Boooo, color! We hate color!"));
+					"Kinda makes you wish for a hazmat suit, or at least some fun drugs.\n\n"));
 		}
 	}
 }

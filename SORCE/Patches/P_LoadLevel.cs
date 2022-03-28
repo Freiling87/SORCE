@@ -340,6 +340,29 @@ namespace SORCE.Patches
 		{
 			LevelGenTools.Spawn_Master(__instance);
 		}
+
+		/// <summary>
+		/// Ambient Light Color
+		/// </summary>
+		/// <param name="__instance"></param>
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LoadLevel.SetNormalLighting), new Type[] {})]
+		public static void SetNormalLighting_Postfix(LoadLevel __instance)
+		{
+			if (ChallengeManager.IsChallengeFromListActive(AmbientLightColor))
+			{
+				string challenge = ChallengeManager.GetActiveChallengeFromList(AmbientLightColor);
+				Color32 color = AmbientLightColorDict[challenge];
+				int objectColorDivisor = 2;
+				Color32 objectColor = new Color32(color.r, color.g, color.b, (byte)(color.a / objectColorDivisor));
+
+				RenderSettings.ambientLight = objectColor; // Walls, Objects
+				GameObject.Find("Ambient").GetComponent<SpriteRenderer>().color = color; // Floors
+
+				MethodInfo SetRogueVisionLighting_Private = AccessTools.Method(typeof(LoadLevel), "SetRogueVisionLighting", new Type[0] { });
+				IEnumerator SetRogueVisionLighting_Private_IEnumerator = (IEnumerator)SetRogueVisionLighting_Private.Invoke(__instance, new object[0]);
+				__instance.StartCoroutine(SetRogueVisionLighting_Private_IEnumerator);
+			}
+		}
 	}
 	
 	[HarmonyPatch]

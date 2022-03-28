@@ -26,8 +26,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Sepia"))
 				.WithDescription(new CustomNameInfo(
-					"Washed out and yellow, like a photograph from the 1870s of your mom.\n\n" +
-					"- Sepia light filter\n"));
+					"Kinda makes you wish for a good old-fashioned rowdy-dowd.\n\n"));
 		}
 	}
 }
