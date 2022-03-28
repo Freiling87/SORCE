@@ -1,23 +1,33 @@
-# SORCE
+#	SORCE
 Streets of Rogue Civil Engineering
 
-## Installation
+##		Installation
 
 
 
-## Mutators
+##		Mutators
 
 All traits in categories marked with an asterisk (*) are mutually exclusive with the other traits *within* that category.
 
-###	Ambient Audio
+###			Ambient Audio
 
+|Name							|Effect	|
+|:------------------------------|:------|
+|Ambienter Ambience				|Restores ambient audio to Casino and Graveyard chunks.
 
+###			Ambient Light *
 
-###	Ambient Light
+|Name							|Effect	|
+|:------------------------------|:------|
+|Black & White					|Monochrome filter
+|Goodsprings					|Orange filter
+|Hellscape						|Red filter
+|New Moon						|Removes ambient light entirely
+|Nuclear Winter					|White filter
+|Sepia							|Yellow filter
+|Shinobi						|Dark Blue filter
 
-
-
-### Buildings *
+###			Buildings *
 
 *N.B.: If a chunk uses non-randomized walls, they will not be affected by these mutators.*
 
@@ -29,7 +39,7 @@ All traits in categories marked with an asterisk (*) are mutually exclusive with
 |Shanty Town                    |- All randomized walls will spawn as Wood.
 |Spelunky Dory                  |- All randomized walls will spawn as Cave Wall.<br>- Boulders spawn in all districts.
 
-### Exteriors & Features *
+###			Exteriors & Features *
 
 *N.B.: If a chunk uses non-neutral floors, they will not be affected by floor mutators.*
 
@@ -39,7 +49,7 @@ All traits in categories marked with an asterisk (*) are mutually exclusive with
 
 I'd like to get more mods working in this category (ice, water), but the code uses *very* strange algorithms to place floors that I haven't figured out yet.
 
-### Features
+###			Features
 
 |Name                           |Effect |
 |:------------------------------|:------|
@@ -52,7 +62,7 @@ I'd like to get more mods working in this category (ice, water), but the code us
 |Surveillance Society           |- Security Cams & Turrets spawn in public
 |The Pollution Solution         |- Pollution features spawn in all levels<br>- Lakes have 80% chance of being poisoned
 
-### Map Size *
+###			Map Size *
 
 |Name                           |Chunks Per Map, est.   |Percent of Vanilla size    |
 |:------------------------------|----------------------:|--------------------------:|
@@ -62,7 +72,7 @@ I'd like to get more mods working in this category (ice, water), but the code us
 |Megapolis                      |48                     |150.00 %                   |
 |Ultrapolis                     |64                     |200.00 %                   |
 
-### Population *
+###			Population *
 
 |Name                           |Wandering NPC Multiplier   |
 |:------------------------------|--------------------------:|
@@ -71,7 +81,7 @@ I'd like to get more mods working in this category (ice, water), but the code us
 |Let Me See That Throng         | 400 %
 |Swarm Welcome                  | 800 %
 
-### Roamers
+###			Roamers
 
 |Name                           |Effect|
 |:------------------------------|:-----|
@@ -79,7 +89,7 @@ I'd like to get more mods working in this category (ice, water), but the code us
 |Mob Town                       |- Mafia Spawn in all Districts
 |Young Men in the Neighborhood  |- Roaming Gangs spawn in all Districts
 
-###	Wreckage
+###			Wreckage
 This is the in-game term for the little fragments that show up when you destroy things. 
 In these mutators, they're used simply to add a degree of setting immersion and visual variety.
 

@@ -56,18 +56,25 @@ Most of these are just v96-introduced IL errors.
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
 	[Message:   BepInEx] Chainloader startup complete
 #	C	Mutators
-##		H	Ambient Light
-###			C	00 Migrated color idea list
-Antique = "[CCU] Ambient Lighting - Antique", // Old color TV?
-BlackWhite = "[CCU] Ambient Lighting - Black & White",
-Goodsprings = "[CCU] Ambient Lighting - Goodsprings", // FONV Orange filter
-HalfMoon = "[CCU] Ambient Lighting - Half Moon", // Half-dark
-Neptune = "[CCU] Ambient Lighting - Neptune",
-NuclearWinter = "[CCU] Ambient Lighting - Nuclear Winter",
-Rage = "[CCU] Ambient Lighting - Rage",
-SunnyDay = "[CCU] Ambient Lighting - Sunny Day", // Disable Lamps?
+##		C	Ambient Light Color
+###			C	00 Test with Werewolf
+Does not work, returns to filterless color
+###			√	Goodsprings
+###			√	Hellscape	
+###			√	NuclearWinter
+###			√	Sepia
+###			√	ShadowRealm
+###			√	Shinobi
+##		√H	Ambient Light Level
+###			√	00 Test with Werewolf
+Works
+###			H	Blinding
+###			H	Daytime
+###			H	Evening
+###			H	FullMoon
+###			H	HalfMoon
 ###			√	New Moon
-###			C	Sepia
+This is done hackily, but needs to be modular.
 ##		H	Ambienter Ambience
 Hold for next release
 ##		CT	Features

@@ -120,8 +120,6 @@ namespace SORCE
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
 			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).lake;
-		public static bool IsInteriorsModActive() =>
-			NameLists.Interiors.Where(t => GC.challenges.Contains(t)).Any();
 		public static int LevelSizeModifier(int vanilla) =>
 			GC.challenges.Contains(nameof(Arthropolis)) ? 4 :
 			GC.challenges.Contains(nameof(Claustropolis)) ? 12 :

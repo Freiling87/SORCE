@@ -21,7 +21,8 @@ namespace SORCE.Patches
 		public static GameController GC => GameController.gameController;
 
 		/// <summary>
-		///		Floor Interiors, 
+		///		Floor Interiors
+		///		TODO: Change this to use a Dictionary instead
 		/// </summary>
 		/// <param name="spawner"></param>
 		/// <param name="floorName"></param>
@@ -32,7 +33,7 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(nameof(BasicFloor.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string floorName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (LevelGenTools.IsInteriorsModActive())
+			if (ChallengeManager.IsChallengeFromListActive(NameLists.Interiors))
 			{
 				if (vFloor.Natural.Contains(floorName))
 				{
