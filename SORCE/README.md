@@ -87,3 +87,9 @@ In these mutators, they're used simply to add a degree of setting immersion and 
 |:------------------------------|:------|
 |Dirtier Districts				|- Trash, beautiful trash, everywhere!<br>- May cause performance issues for slower machines
 |Floraler Flora					|- Leaves are scattered around plants and hedges.<br>- May cause performance issues for slower machines
+
+##		Traits
+
+|Name                           |Value  |Effect|
+|:------------------------------|------:|:-----|
+|Underdank Citizen              |4      |- Manholes spawn in all Districts<br>- Thieves and Cannibals hiding in Manholes no longer target you<br>- Activate or Fall in Open Manhole: Take no damage and teleport to another entry to the Underdank<br>- Diminutive: Toilets are part of the Underdank network

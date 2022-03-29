@@ -17,6 +17,7 @@ namespace SORCE.Localization
 	// TODO: Move this out of here
 	public static class NameLists
 	{
+		#region Challenges
 		public static List<string> AddsCriminals = new List<string>()
 		{
 			nameof(HoodlumsWonderland),
@@ -61,6 +62,7 @@ namespace SORCE.Localization
 			nameof(LetMeSeeThatThrong),
 			nameof(SwarmWelcome),
 		};
+		#endregion
 		#region Colors
 		public static List<string> AmbientLightColor = new List<string>()
 		{
@@ -101,23 +103,41 @@ namespace SORCE.Localization
 			{ nameof(HalfMoon), 50 },
 			{ nameof(NewMoon),	0 },
 		};
-		#endregion
 		public static class cColors
 		{
-			public static Color32 Goodsprings =		new Color32(200, 125, 25, 190);
-			public static Color32 Hellscape =		new Color32(200, 0, 0, 175);
-			public static Color32 NuclearWinter =	new Color32(255, 255, 255, 175);
-			public static Color32 Reactor =			new Color32(75, 200, 50, 125);
-			public static Color32 Sepia =			new Color32(150, 150, 50, 190);
-			public static Color32 ShadowRealm =		new Color32(75, 75, 75, 175);
-			public static Color32 Shinobi =			new Color32(75, 75, 150, 200);
+			public static Color32 Goodsprings = new Color32(200, 125, 25, 190);
+			public static Color32 Hellscape = new Color32(200, 0, 0, 175);
+			public static Color32 NuclearWinter = new Color32(255, 255, 255, 175);
+			public static Color32 Reactor = new Color32(75, 200, 50, 125);
+			public static Color32 Sepia = new Color32(150, 150, 50, 190);
+			public static Color32 ShadowRealm = new Color32(75, 75, 75, 175);
+			public static Color32 Shinobi = new Color32(75, 75, 150, 200);
 
-			public static Color32 TestBlack =		new Color32(0, 0, 0, 255);
-			public static Color32 TestGreen =		new Color32(0, 255, 0, 255);
-			public static Color32 TestRed =			new Color32(255, 0, 0, 255);
-			public static Color32 TestBlue =		new Color32(0, 0, 255, 255);
-			public static Color32 TestPurple =		new Color32(255, 0, 255, 255);
-			public static Color32 TestWhite =		new Color32(255, 255, 255, 255);
+			public static Color32 TestBlack = new Color32(0, 0, 0, 255);
+			public static Color32 TestGreen = new Color32(0, 255, 0, 255);
+			public static Color32 TestRed = new Color32(255, 0, 0, 255);
+			public static Color32 TestBlue = new Color32(0, 0, 255, 255);
+			public static Color32 TestPurple = new Color32(255, 0, 255, 255);
+			public static Color32 TestWhite = new Color32(255, 255, 255, 255);
+		}
+		#endregion
+		#region Custom Content
+		public static class cDialogue // Custom Dialogue
+		{
+			public const string
+					CantAffordAlarmButton = "AlarmButtonCantAfford",
+					CantAffordElevator = "CantAffordElevator",
+					CantAffordToilet = "ToiletCantAfford",
+					MachineBusy = "MachineBusy",
+					PurchaseElevator = "PurchaseElevator",
+					SlotMachineJackpot_ = "SlotMachineJackpot_", // For concatenation into following
+					SlotMachineJackpot_1 = "SlotMachineJackpot_1",
+					SlotMachineJackpot_2 = "SlotMachineJackpot_2",
+					SlotMachineJackpot_3 = "SlotMachineJackpot_3",
+					SlotMachineJackpot_4 = "SlotMachineJackpot_4",
+					SlotMachineJackpot_5 = "SlotMachineJackpot_5",
+					VeiledThreatsAnnoyed = "ThreatenAnnoyed",
+					WarlordSubmission = "WarlordSubmission";
 		}
 		public static class cLevelFeature // Custom Level Features
 		{
@@ -144,6 +164,8 @@ namespace SORCE.Localization
 					vObject.TableBig,
 			};
 		}
+		#endregion
+		#region Vanilla Content
 		public static class vAgent // Vanilla Agent Classes
 		{
 			public const string
@@ -298,29 +320,6 @@ namespace SORCE.Localization
 					TimeLimitQuestsGiveMoreTime = "TimeLimitQuestsGiveMoreTime",
 					ZombieMutator = "ZombieMutator",
 					ZombiesWelcome = "ZombiesWelcome";
-
-			public static List<string> AddsLawEnforcement = new List<string>()
-		{
-				SupercopLand,
-		};
-
-			public static List<string> AddsNonhumans = new List<string>()
-		{
-				CoolWithCannibals,
-				ZombieMutator,
-				ZombiesWelcome,
-		};
-
-			public static List<string> RemovesLawEnforcement = new List<string>()
-		{
-				NoCops,
-		};
-
-			public static List<string> Zombies = new List<string>()
-		{
-				ZombieMutator,
-				ZombiesWelcome,
-		};
 		}
 		public static class vChunkType // Vanilla Chunks
 		{
@@ -1407,6 +1406,18 @@ namespace SORCE.Localization
 					WarZone = "WarZone",
 					Zombies = "Zombies";
 		}
+		public static class vNameType // Vanilla Name Types
+		{
+			public const string
+					Agent = "Agent",
+					Dialogue = "Dialogue",
+					Description = "Description",
+					Interface = "Interface",
+					Item = "Item",
+					Object = "Object",
+					StatusEffect = "StatusEffect",
+					Unlock = "Unlock";
+		}
 		public static class vObject // Vanilla Objects
 		{
 			public const string
@@ -1487,6 +1498,292 @@ namespace SORCE.Localization
 					Well = "Well",
 					Window = "Window";
 		}
+		public static class vStatusEffect // Vanilla Status Effects
+		{
+			public const string
+					AbovetheLaw = "AboveTheLaw",
+					AccuracyBoosted = "Accurate",
+					Acid = "Acid",
+					AllStatsDecreased = "DecreaseAllStats",
+					AlwaysCrit = "AlwaysCrit",
+					AmmoProcessor = "AmmoProcessor",
+					BadVision = "BadVision",
+					BoomBox = "Boombox",
+					ChargeLevel1 = "ChargeLevel1",
+					ChargeLevel2 = "ChargeLevel2",
+					ChargeLevel3 = "ChargeLevel3",
+					ChargeLevel4 = "ChargeLevel4",
+					Confused = "Confused",
+					CopDebt1 = "OweCops1",
+					CopDebt2 = "OweCops2",
+					CritterUpper = "CritterUpper",
+					Cyanide = "Cyanide",
+					DeliveringPackage = "DeliverPackage",
+					Dizzy = "Dizzy",
+					DNAConnection = "ZombieSpirit",
+					Drunk = "Drunk",
+					Electrocuted = "Electrocuted",
+					ElectroTouch = "ElectroTouch",
+					Fast = "Fast",
+					FeelingGood = "FeelingGood",
+					FeelingLucky = "FeelingLucky",
+					FeelingUnlucky = "FeelingUnlucky",
+					Frozen = "Frozen",
+					Giant = "Giant",
+					HearingBlocked = "HearingBlocked",
+					IgnoreLasers = "IgnoreLasers",
+					IncreaseAllStats = "IncreaseAllStats",
+					InDebt1 = "InDebt",
+					InDebt2 = "InDebt2",
+					InDebt3 = "InDebt3",
+					Invincible = "Invincible",
+					Invisible = "Invisible",
+					InvisiblePermanent = "InvisiblePermanent",
+					InvisibleTemporary = "InvisibleLimited",
+					KillerThrower = "KillerThrower",
+					Loud = "Loud",
+					MindControlling = "MindControlling",
+					NiceSmelling = "NiceSmelling",
+					Nicotine = "Nicotine",
+					NumbtoPain = "NumbToPain",
+					OnFire = "OnFire",
+					Paralyzed = "Paralyzed",
+					Poisoned = "Poisoned",
+					Rage = "Enraged",
+					RegenerateHealth = "RegenerateHealth",
+					RegenerateHealthFaster = "RegenerateHealthFaster",
+					ResistBulletsSmall = "ResistBulletsSmall",
+					ResistDamageLarge = "ResistDamageLarge",
+					ResistDamageMedium = "ResistDamageMed",
+					ResistDamageSmall = "ResistDamageSmall",
+					ResistFire = "ResistFire",
+					Resurrection = "Resurrection",
+					RevenueExtortion = "Revenue",
+					Shrunk = "Shrunk",
+					SlaveHelmetRemover = "SlaveHelmetRemover",
+					Slow = "Slow",
+					StableSystem = "BlockDebuffs",
+					Strength = "Strength",
+					SuperDizzy = "DizzyB",
+					Tranquilized = "Tranquilized",
+					WallBypasser = "WallBypasser",
+					Weak = "Weak",
+					Werewolf = "WerewolfEffect",
+					Withdrawal = "Withdrawal";
+		}
+		public static class vTrait // Vanilla Traits
+		{
+			public const string
+					AbovetheLaw = "AboveTheLaw",
+					Accurate = "Accurate",
+					Addict = "Addict",
+					Aftershocked = "StompDamagesAgents",
+					AmmoScavenger = "MoreAmmoInDroppedWeapons",
+					Antisocial = "NoFollowers",
+					ArmyofFive = "ZombieArmy",
+					ArtoftheDeal = "ArtOfTheDeal",
+					Backstabber = "Backstabber",
+					BananaLover = "BananaLover",
+					BenevolentOwner = "SlavesDontMutiny",
+					BigBang = "BigRemoteBombExplosions",
+					BigBullets = "BigBullets",
+					BlahdBasher = "HatesBlahds",
+					BlasterMaster = "ExplosionsBreakEverything",
+					BlasterSurvivor = "ExplosionsDontDamageCauser",
+					BlazingLasers = "LaserGunChargesFaster",
+					BlendsInNicely = "HardToSeeFromDistance",
+					BlockBreaker = "BlocksSometimesHit",
+					BlockBullets = "MeleeHoldDeflectsBullets",
+					BloodofSteel = "MusicianTakesLessHealth",
+					Bloodlust = "Bloodlust",
+					BloodyMess = "BloodyMess",
+					BodySwapper = "PossessShorterCooldown",
+					Bodyguard = "Bodyguard",
+					BombBaker = "LowerCostRemoteBombs",
+					BottomlessStomach = "BiteFullHealth",
+					Bulky = "BigCollider",
+					BulletBreaker = "BulletsDestroyOtherBullets",
+					BulletSponge = "ResistBulletsTrait",
+					BurningBullets = "BulletsCauseFire",
+					Butterfingerer = "ChanceToKnockWeapons",
+					CameraShy = "InvisibleToCameras",
+					CardboardBoxLike = "StandingStillCausesCamouflage",
+					Charismatic = "Likeable",
+					ChipmunkTeeth = "BiteFaster",
+					ClassSolidarity = "DontHitOwnKind",
+					ClumsinessForgiven = "NoOwnCheckOnBreak",
+					ComputerIlliterate = "NoTechSkill",
+					ConfidentinCrowds = "MoreFollowersCauseMoreDamage",
+					Confused = "Confused",
+					CoolwithCannibals = "CannibalsNeutral",
+					CopsDontCare = "CopsDontCare",
+					CorruptionCosts = "MustPayCops",
+					CovertCrook = "AgentsDontSeePickpocket",
+					CrepeCrusher = "HatesCrepes",
+					Crooked = "LessArrestXPLoss",
+					Crooked2 = "NoArrestXPLoss",
+					CyberNuke = "HacksBlowUpObjects",
+					DeeperPockets = "PickpocketMoreMoney",
+					DestructiveDeaths = "BiggerSlaveHelmetExplosions",
+					Diminutive = "Diminutive",
+					DisturbingFacialExpressions = "ScareEnemiesEasier",
+					Dizzy = "Dizzy",
+					DontMakeMeAngry = "MoreDamageWhenHealthLow",
+					Drugalug = "IdentifyScience",
+					Durabilitacious = "MeleeLastLonger",
+					EggshellWalker = "JokesNeverCauseHate",
+					Electronic = "Electronic",
+					Extortionist = "Shakedowner",
+					Extortionist_2 = "Shakedowner2",
+					FairGame = "EveryoneHatesZombie",
+					FastFood = "CannibalizeFaster",
+					FeatureAct = "JokesMoreSuccessful/JokesAlwaysSuccessful", // TODO actually two traits
+					FireproofSkin = "FireproofSkin",
+					FireproofSkin2 = "FireproofSkin2",
+					FleshFeast = "FleshFeast",
+					FloatsLikeButterfly = "MeleeMobility",
+					FoolproofHacks = "HackingMakesNoSound",
+					FriendoftheCommonFolk = "GenericAgentsAligned",
+					FriendoftheFamily = "MafiaAligned",
+					Frozen = "Frozen",
+					GPYesss = "MapFilled",
+					GoodVibrations = "BiggerStompRadius",
+					Graceful = "DontTriggerFloorHazards",
+					Groupies = "BiggerMindControlRadius",
+					Harmless = "CantAttack",
+					HeartStopper = "EnemiesDieWhenFleeing",
+					HomesicknessKiller = "AgentsFollowToNextLevel",
+					HonorAmongThieves = "HonorAmongThieves",
+					HonorableChallenges = "ChallengeAnyoneToFight",
+					ImOuttie = "FastWhenHealthLow",
+					ImOuttie_2 = "FastWhenHealthLow2",
+					IdeologicalClash = "RandomPeopleSecretHate",
+					ImpatientLunge = "FasterLunge",
+					IncreasedCritChance = "IncreasedCritChance",
+					InfectiousSpirit = "FollowersExtraHealth",
+					InfernoAssailant = "FireExtinguishXP",
+					InhumanStrength = "ZombiesStronger",
+					IntrusionArtist = "ThiefToolsMayNotSubtract",
+					JackofExtraTrades = "MoreTraitChoices",
+					Juggernaut = "ChargeNoHealthLoss",
+					Jugularious = "BloodRestoresHealth",
+					KillerThrower = "KillerThrower",
+					KillingTime = "WerewolfLastLonger",
+					Kneecapper = "ChanceToSlowEnemies",
+					KnockbackKing = "CauseBiggerKnockback",
+					Knuckley = "StrongFists",
+					Knuckley_2 = "StrongFists2",
+					LeisurelyRide = "MoreTimeForDeliveries",
+					LockandLoad = "ReloadWeaponsNewLevel",
+					LonelinessKiller = "StartWithFollowers",
+					LongLunge = "LongLunge",
+					LongerStatusEffects = "StatusEffectsLonger",
+					Loud = "Loud",
+					LowCenterofGravity = "ChargeNoTrip",
+					LowCostJobs = "LowcostJobs",
+					Malodorous = "Unlikeable",
+					MasterofDisaster = "DestructionXP",
+					MedicalProfessional = "MedicalProfessional",
+					ModernWarfarer = "RegenerateHealthWhenLow",
+					Moocher = "CanBorrowMoney",
+					Mugger = "Mugger",
+					Naked = "Naked",
+					NearHarmless = "AttacksOneDamage",
+					NimbleFingers = "OperateQuickly",
+					NoHarminDying = "NoDepossessHealthLoss",
+					NoInFighting = "DontHitAligned",
+					NoTeleports = "CantTeleport",
+					OilLessEssential = "OilRestoresMoreHealth",
+					OilReliant = "OilRestoresHealth",
+					OntheHouse = "ChanceFreeShopItem",
+					Pacifist = "CantUseWeapons",
+					PeaBrained = "CantInteract",
+					PenetratingBullets = "BulletsPassThroughObjects",
+					PoorHandEyeCoordination = "OperateSlowly",
+					PossessionsarePeachyKeen = "NoPossessHate",
+					PotentialtoNotSuck = "IncreaseStatEvery2Levels",
+					PowerLasers = "LaserMorePowerful",
+					PowerWalkers = "MindControlledWalkThroughWalls",
+					PricklySkin = "AttacksDamageAttacker",
+					PromiseIllReturnIt = "NoStealPenalty",
+					PuppetPower = "MindControlledDamageMore",
+					QuickandDead = "ZombiesFaster",
+					QuickTranq = "TranqDartsWorkFaster",
+					Rampager = "BuffFromMultipleKills",
+					RandomReverence = "RandomPeopleAligned",
+					Rechargeable = "Rechargeable",
+					ResearchGunRadiation = "ResearchGunStatusEffects",
+					ResistBullets = "ResistBullets",
+					ResistBulletsLarge = "ResistDamageLarge",
+					ResistBulletsMedium = "ResistDamageMed",
+					ResistBulletsSmall = "ResistBulletsSmall",
+					ResistDamageSmall = "ResistDamageSmall",
+					ResistFire = "ResistFire",
+					ResistGas = "ResistGas",
+					RestlessBeast = "WerewolfShorterCooldown",
+					RiotCannon = "StrongerWaterCannon",
+					RipandTear = "HigherWerewolfDamage",
+					RollerSkates = "RollerSkates",
+					RubberBullets = "BulletKnockouts",
+					SafeinCrowds = "MoreFollowersLessDamageToPlayer",
+					SafeStomp = "StompLessDamage",
+					SapDamage = "MoreDamagePowerSap",
+					SappyHealthy = "MoreHealthFromPowerSap",
+					SausageFingers = "CantUseWeapons2",
+					Savorer = "CannibalizeMoreHealth",
+					ScientistSlayer = "HatesScientist",
+					ScorchingSavior = "FightsFires",
+					ScumbagSlaughterer = "MechHateTrait",
+					SecretVandalizer = "HitObjectsNoNoise",
+					ServeDrinks = "ServeDrinks",
+					SharetheHealth = "HealthItemsGiveFollowersExtraHealth",
+					ShopDrops = "VendorsDropShopItem",
+					SkinnyNerdlinger = "KnockbackMore",
+					SleepKiller = "SleepKiller",
+					Slinky = "BumpsDontEndCamouflage",
+					SlipperyTarget = "HardToShoot",
+					SneakyBomber = "NPCsDontNoticeRemoteBombs",
+					SneakyFingers = "OperateSecretly",
+					Specist = "HatesGorilla",
+					SpeedCoder = "HackImmediate",
+					Sprinter = "FasterCharge",
+					SteadfastSlaves = "SlavesFightForYou",
+					SteadyHead = "WerewolfNoDizzy",
+					StrictCannibal = "CannibalizeRestoresHealth",
+					StubbyFingers = "CantUseGuns",
+					Studious = "MoreSkillPoints",
+					SuperStudious = "MoreSkillPoints2",
+					SubduingSpree = "NoChloroformCooldown",
+					Sucker = "BadTrader",
+					SuperDizzy = "DizzyB",
+					Surging = "MoreMoneyFromDeliveries",
+					Suspicious = "Suspicious",
+					SwiftSpitter = "FasterZombieSpitCharge",
+					SwiftWolf = "HigherWerewolfSpeed",
+					TableManners = "CannibalizeNoAnnoy",
+					Tackler = "ChargeMorePowerful",
+					TeamBuildingExpert = "MoreFollowers",
+					TechExpert = "TechExpert",
+					TeleportHappy = "TeleportAnytime",
+					TheLaw = "TheLaw",
+					TheyreJustKissing = "BiteNoAnnoy",
+					ThickSkinnedPawn = "MindControlledResistDamage",
+					ThroatofIron = "NoZombieSpitHealthLoss",
+					TrustFunder = "MoneyAtLevelStart",
+					UltimateButterfingerer = "KnockWeapons",
+					UnCrits = "ChanceAttacksDoZeroDamage",
+					UnCrits_2 = "ChanceAttacksDoZeroDamage2",
+					UpperCrusty = "UpperCrusty",
+					VeinTapper = "BiteGainMoreHealth",
+					ViciousChameleon = "FailedAttacksDontEndCamouflage",
+					VocallyChallenged = "CantSpeakEnglish",
+					WallWalloper = "MeleeDestroysWalls",
+					WallsWorstNightmare = "MoreKnockingThroughWalls",
+					Wanted = "Naked",
+					WerewolfAWereness = "WerewolfAwareness",
+					WrongBuilding = "OwnersNotHostile",
+					Zombiism = "Zombify";
+		}
 		public static class vWall // Vanilla Walls
 		{
 			public const string
@@ -1509,5 +1806,6 @@ namespace SORCE.Localization
 					Strong = "WallsStrong",
 					Weak = "WallsWeak";
 		}
+		#endregion
 	}
 }

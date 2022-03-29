@@ -216,8 +216,8 @@ namespace SORCE
 		public static bool HasManholesVanilla(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
-			// UnderdarkCitizen uses a different method, SpawnManholes_Underdark.
-			!TraitManager.IsPlayerTraitActive<UnderdarkCitizen>() &&
+			// UnderdankCitizen uses a different method, SpawnManholes_Underdank.
+			!TraitManager.IsPlayerTraitActive<UnderdankCitizen>() &&
 			vanilla;
 		public static bool HasMobsters(bool vanilla) =>
 			!GC.challenges.Contains(nameof(PoliceState)) &&
@@ -328,17 +328,12 @@ namespace SORCE
 				SpawnTurntables();
 			}
 
-			// TODO: Replace litter in Arcology with more leaves
-			if (GC.challenges.Contains(nameof(DirtierDistricts)))
-			{
-				if (GC.challenges.Contains(nameof(Arcology)))
-					SpawnLeafLitter(__instance);
-				else
-					SpawnLitter(__instance);
-			}
+			if (GC.challenges.Contains(nameof(Arcology)) || // Turns to leaves
+				GC.challenges.Contains(nameof(DirtierDistricts)))
+				SpawnLitter(__instance);
 
-			if (TraitManager.IsPlayerTraitActive(nameof(UnderdarkCitizen)))
-				SpawnManholes_Underdark(__instance);
+			if (TraitManager.IsPlayerTraitActive(nameof(UnderdankCitizen)))
+				SpawnManholes_Underdank(__instance);
 			 
 			if (GC.challenges.Contains(nameof(GrandCityHotel)) ||
 				GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)))
@@ -731,21 +726,20 @@ namespace SORCE
 				Vector2 location = GC.tileInfo.FindRandLocationGeneral(0f); // Vanilla 2f
 				
 				GC.spawnerMain.SpawnWreckagePileObject(location, 
-					GC.Choose<string>(vObject.Shelf, vObject.Lamp, vObject.Counter, vObject.VendorCart), false);
+					GC.challenges.Contains(nameof(Arcology)) 
+						? vObject.Bush
+						: GC.Choose<string>(vObject.Shelf, vObject.Lamp, vObject.Counter, vObject.VendorCart), 
+					false);
 			}
-		}
-		private static void SpawnLeafLitter(LoadLevel __instance)
-		{
-
 		}
 		/// <summary>
 		/// This was intentionally made separate from the vanilla algorithm
 		/// TODO: Identify and comment the differences to verify that it's necessary.
 		/// </summary>
 		/// <param name="__instance"></param>
-		private static void SpawnManholes_Underdark(LoadLevel __instance)
+		private static void SpawnManholes_Underdank(LoadLevel __instance)
 		{
-			Debug.Log("SORCE: Loading Underdark Manholes");
+			Debug.Log("SORCE: Loading Underdank Manholes");
 			int bigTries = (int)((float)Random.Range(8, 12) * __instance.levelSizeModifier);
 
 			for (int i = 0; i < bigTries; i++)

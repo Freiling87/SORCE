@@ -10,10 +10,10 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |N					|To be implemented in next release
 |T					|To Test
 
-#	C	Mutators
-##		C	Ambient Light Color
-###			C	00 Test with Werewolf
-Does not work, returns to filterless color
+#	CT	Mutators
+##		T	Ambient Light Color
+###			T	00 Test with Werewolf
+Attempted: StatusEffects.WerewolfTransformBack_Postfix
 ###			√	Goodsprings
 ###			√	Hellscape	
 ###			√	NuclearWinter
@@ -87,6 +87,8 @@ Scope:
 	Public Floors
 	Border Walls
 	Features
+Note:
+	There is overhaul-specific content still in BM. Haven't bothered to migrate it over yet, because this is on hold.
 ###			H	AnCapistan
 Newish
 ###			H	Arcology
@@ -173,34 +175,41 @@ None work
 ###			C	Mob Town
 ###			C	YMITN
 ##		C	Wreckage
+###			C	00 Custom Wreckage Method
+Benefits:
+	More control over number of particles
+	Can spread out more than normal
+	Can set a check for Interior/Exterior/Water
 ###			C	00 Here's the issue
 This only works on procedurally generated objects. Trashcans, boulders, bushes. Not toilets, etc.
 So the goal here is to turn the current postfix method into one accessible by both original methods,
 the current procgen one and whichever spawns hand-placed objects.
 ###			√	Dirtier Districts 
 ###			C	Floraler Flora
-Got this error, with Arcology: 
-
-	[Info   : Unity Log] Random Number After CreateInitialMap: 531
-	[Info   : Unity Log] Player Info: Playerr (Agent) - Playerr - 0 - True -  - 1668
-	[Error  : Unity Log] FormatException: Input string was not in a correct format.
-	Stack trace:
-	System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
-	System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
-	System.Int32.Parse (System.String s) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
-	SORCE.Patches.P_LoadLevel+<FillMapChunks_Replacement>d__5.MoveNext () (at <7e0375f963ff411db7a924b97eaa5ba6>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-
 ###			C	Shittier Toilets
 #	C	Traits
-##		C	Underdark Citizen
-Move trait to Resistance mod
-#	C	Migrate Out
-Verify all of these, because they were written before the break and now I'm skeptical of them. 
-##		C	LevelGenTools.SpawnLitter
-##		C	LevelGenTools.SpawnManholes_Underdark
-##		C	BroughtBackFountain (Object mod)
-##		C	Vendor Carts (Object mod)
+##		C	Underdank Citizen
+###			C	Old Notes
+- Take small damage if you walk into manhole instead of activating
+  - Attempted
+- Walkover version of flushyourself:
+    [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+    Stack trace:
+    BunnyMod.Content.BMObjects.Manhole_FlushYourself (Agent agent, ObjectReal __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
+    BunnyMod.Content.BMObjects.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
+    Hole.EnterRange (UnityEngine.GameObject myObject) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
+    Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
+    - This only occurred when no other manholes were open. There were active toilets.
+    - Walkover version also only sends to self.
+    - One manhole keeps getting excluded. Check that the random selection from lists isn't excluding anything from the running.
+- Water splash
+  - Needs a delay. It's appearing before the player is.
+    - Attempted Immediate teleportation
+  - No longer working
+- Manhole to Toilet
+  - Attempted
+- Toilet to Manhole
+  - Attempted
 #	C	Migrate In
 - Anything from CCU that would be of interest to the non-designer - that includes all Ambience & Litter.
 - Custom object interactions related to city overhauls, e.g. coin-op toilets. They don't all need to be in one mod.

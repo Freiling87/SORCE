@@ -103,6 +103,9 @@
     <Compile Include="Challenges\C_Overhaul\LowTechLowLife.cs" />
     <Compile Include="Challenges\C_Wreckage\FloralerFlora.cs" />
     <Compile Include="Challenges\C_Wreckage\DirtierDistricts.cs" />
+    <Compile Include="Extensions\E_Agent.cs" />
+    <Compile Include="Extensions\E_Enum.cs" />
+    <Compile Include="Extensions\E_PlayfieldObject.cs" />
     <Compile Include="Localization\NameLists.cs" />
     <Compile Include="Challenges\C_Overhaul\Arcology.cs" />
     <Compile Include="Challenges\C_Features\BroughtbackFountain.cs" />
@@ -132,24 +135,27 @@
     <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
     <Compile Include="LevelGenTools.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Hole.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Manhole.cs" />
     <Compile Include="Patches\P_BasicFloor.cs" />
     <Compile Include="Patches\P_BasicWall.cs" />
     <Compile Include="Patches\P_LoadLevel.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_00_ObjectReal.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Toilet.cs" />
     <Compile Include="Patches\P_RandomOther.cs" />
     <Compile Include="Patches\P_RandomWalls.cs" />
     <Compile Include="Patches\P_ScrollingMenu.cs" />
     <Compile Include="Patches\P_SpawnerFloor.cs" />
     <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Patches\P_SpawnerObject.cs" />
+    <Compile Include="Patches\P_StatusEffects.cs" />
     <Compile Include="Properties\ModInfo.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traits\TraitManager.cs" />
-    <Compile Include="Traits\UnderdarkCitizen.cs" />
+    <Compile Include="Traits\UnderdankCitizen.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="README.md" />
