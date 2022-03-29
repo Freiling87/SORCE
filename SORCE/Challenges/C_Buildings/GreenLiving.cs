@@ -10,24 +10,24 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Interiors
+namespace SORCE.Challenges.C_Buildings
 {
-	public class ShantyTown
+	public class GreenLiving
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(ShantyTown);
+			const string name = nameof(GreenLiving);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Interiors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Buildings.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Interiors - Shanty Town"))
+					"Buildings - Green Living"))
 				.WithDescription(new CustomNameInfo(
-					"A whole city made with cheap wooden construction: A tinderbox on cinder blocks. Hard mode for Firefighters, easy mode for arsonists. Fun mode for psychopaths.\n\n" +
-					"- Most buildings spawn with Wood walls"));
+					"The Mayor has retrofitted most buildings to eco-friendly plant-based construction. The air is mighty fresh... except near the compost-burning stoves.\n\n" +
+					"- Most buildings spawn with Hedge walls"));
 		}
 	}
 }

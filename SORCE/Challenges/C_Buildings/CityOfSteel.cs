@@ -10,24 +10,24 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Interiors
+namespace SORCE.Challenges.C_Buildings
 {
-	public class SpelunkyDory
+	public class CityOfSteel
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(SpelunkyDory);
+			const string name = nameof(CityOfSteel);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Interiors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Buildings.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Interiors - Spelunky Dory"))
+					"Buildings - City of Steel"))
 				.WithDescription(new CustomNameInfo(
-					"You and your fellow citizens live in a disgusting cave complex. As the mayor says, \"Don't be a CAN'Tibal, be a CANnibal!\" Man, fuck the Mayor.\n\n" +
-					"- Most buildings spawn with Cave walls"));
+					"A gleaming city of steel! The world of the future, today. Mankind's dream in... Wow, it *really* smells like steel cleaner. Like, it fucking stinks.\n\n" +
+					"- Most buildings spawn with Steel walls"));
 		}
 	}
 }

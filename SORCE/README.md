@@ -39,16 +39,6 @@ All traits in categories marked with an asterisk (*) are mutually exclusive with
 |Shanty Town                    |- All randomized walls will spawn as Wood.
 |Spelunky Dory                  |- All randomized walls will spawn as Cave Wall.<br>- Boulders spawn in all districts.
 
-###			Exteriors & Features *
-
-*N.B.: If a chunk uses non-neutral floors, they will not be affected by floor mutators.*
-
-|Mutator                    |Basic Floor            |Features|
-|:--------------------------|:----------------------|:-------|
-|Arcology		            |Grass                  |- More Nature features<br>- Less pollution features
-
-I'd like to get more mods working in this category (ice, water), but the code uses *very* strange algorithms to place floors that I haven't figured out yet.
-
 ###			Features
 
 |Name                           |Effect |

@@ -21,7 +21,7 @@ namespace SORCE.Challenges.C_Overhaul
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Overhaul.Where(i => i != name).ToList()
+				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Overhaul - Technocracy"))

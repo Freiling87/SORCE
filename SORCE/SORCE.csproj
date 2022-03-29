@@ -88,21 +88,23 @@
     <Compile Include="Challenges\C_AmbientLightLevel\NewMoon.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Sepia.cs" />
     <Compile Include="Challenges\C_Audio\AmbienterAmbience.cs" />
-    <Compile Include="Challenges\C_Exteriors\DUMP.cs" />
-    <Compile Include="Challenges\C_Exteriors\GrandCityHotel.cs" />
-    <Compile Include="Challenges\C_Exteriors\Skyscraper.cs" />
-    <Compile Include="Challenges\C_Exteriors\TransitExperiment.cs" />
-    <Compile Include="Challenges\C_Exteriors\CanalCity.cs" />
+    <Compile Include="Challenges\C_Overhaul\DUMP.cs" />
+    <Compile Include="Challenges\C_Overhaul\GrandCityHotel.cs" />
+    <Compile Include="Challenges\C_Overhaul\MonkeTown.cs" />
+    <Compile Include="Challenges\C_Overhaul\TestTubeCity.cs" />
+    <Compile Include="Challenges\C_Overhaul\Eisburg.cs" />
+    <Compile Include="Challenges\C_Overhaul\CanalCity.cs" />
     <Compile Include="Challenges\C_Features\DepartmentOfPublicComfiness.cs" />
     <Compile Include="Challenges\C_Features\ThisLandIsMineLand.cs" />
-    <Compile Include="Challenges\C_Interiors\CityOfSteel.cs" />
-    <Compile Include="Challenges\C_Interiors\GreenLiving.cs" />
-    <Compile Include="Challenges\C_Interiors\Panoptikopolis.cs" />
-    <Compile Include="Challenges\C_Interiors\ShantyTown.cs" />
+    <Compile Include="Challenges\C_Buildings\CityOfSteel.cs" />
+    <Compile Include="Challenges\C_Buildings\GreenLiving.cs" />
+    <Compile Include="Challenges\C_Buildings\Panoptikopolis.cs" />
+    <Compile Include="Challenges\C_Buildings\ShantyTown.cs" />
+    <Compile Include="Challenges\C_Overhaul\LowTechLowLife.cs" />
     <Compile Include="Challenges\C_Wreckage\FloralerFlora.cs" />
     <Compile Include="Challenges\C_Wreckage\DirtierDistricts.cs" />
     <Compile Include="Localization\NameLists.cs" />
-    <Compile Include="Challenges\C_Exteriors\Arcology.cs" />
+    <Compile Include="Challenges\C_Overhaul\Arcology.cs" />
     <Compile Include="Challenges\C_Features\BroughtbackFountain.cs" />
     <Compile Include="Challenges\C_Features\CartOfTheDeal.cs" />
     <Compile Include="Challenges\C_Features\LakeItOrLeaveIt.cs" />
@@ -115,7 +117,7 @@
     <Compile Include="Challenges\C_MapSize\Megapolis.cs" />
     <Compile Include="Challenges\C_MapSize\Ultrapolis.cs" />
     <Compile Include="Challenges\C_MapSize\Arthropolis.cs" />
-    <Compile Include="Challenges\C_Interiors\SpelunkyDory.cs" />
+    <Compile Include="Challenges\C_Buildings\SpelunkyDory.cs" />
     <Compile Include="Challenges\C_Overhaul\Technocracy.cs" />
     <Compile Include="Challenges\C_Overhaul\PoliceState.cs" />
     <Compile Include="Challenges\C_Overhaul\MACITS.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traits\TraitManager.cs" />
+    <Compile Include="Traits\UnderdarkCitizen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />

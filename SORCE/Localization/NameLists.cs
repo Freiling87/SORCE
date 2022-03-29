@@ -1,8 +1,7 @@
 ﻿using SORCE.Challenges.C_AmbientLightColor;
 using SORCE.Challenges.C_AmbientLightLevel;
-using SORCE.Challenges.C_Exteriors;
 using SORCE.Challenges.C_Features;
-using SORCE.Challenges.C_Interiors;
+using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_MapSize;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Roamers;
@@ -29,16 +28,7 @@ namespace SORCE.Localization
 			nameof(DiscoCityDanceoff),
 			nameof(GreenLiving),
 		};
-		public static List<string> Exteriors = new List<string>()
-		{
-			nameof(Arcology),
-			nameof(CanalCity),
-			nameof(DUMP),
-			nameof(GrandCityHotel),
-			nameof(Skyscraper),
-			nameof(TransitExperiment),
-		};
-		public static List<string> Interiors = new List<string>()
+		public static List<string> Buildings = new List<string>()
 		{
 			nameof(CityOfSteel),
 			nameof(GreenLiving),
@@ -46,7 +36,7 @@ namespace SORCE.Localization
 			nameof(ShantyTown),
 			nameof(SpelunkyDory)
 		};
-		public static List<string> InteriorsFlammable = new List<string>()
+		public static List<string> BuildingsFlammable = new List<string>()
 		{
 			nameof(GreenLiving),
 			nameof(ShantyTown)
@@ -58,7 +48,7 @@ namespace SORCE.Localization
 			nameof(Megapolis),
 			nameof(Ultrapolis)
 		};
-		public static List<string> Overhaul = new List<string>()
+		public static List<string> Overhauls = new List<string>()
 		{
 			nameof(AnCapistan),
 			nameof(MACITS),
@@ -132,13 +122,10 @@ namespace SORCE.Localization
 		public static class cLevelFeature // Custom Level Features
 		{
 			public const string
-					Benches = "Benches",
 					BrokenWindows = "BrokenWindows",
-					Cornstalks = "Cornstalks",
 					Fountains = "Fountains",
 					Litter = "Litter",
-					PublicSecurityCams = "PublicSecurityCams",
-					Statues = "Statues";
+					PublicSecurityCams = "PublicSecurityCams";
 		}
 		public static class cObject
 		{

@@ -10,23 +10,24 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Exteriors
+namespace SORCE.Challenges.C_Overhaul
 {
-	public class CanalCity
+	public class LowTechLowLife
 	{
-		//[RLSetup] Deactivated, not sure how to make it work.
+		//[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(CanalCity);
+			const string name = nameof(LowTechLowLife);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Exteriors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
 			})
-				.WithName(new CustomNameInfo("Exteriors - Canal City"))
+				.WithName(new CustomNameInfo(
+					"Overhaul - Low-tech, Low-Life"))
 				.WithDescription(new CustomNameInfo(
-					"Sure, it's like Venice... Venice this filthy water gonna get cleaned up?\n\n" +
-					"- Public floors are Water"));
+					"The future is already here, it's just not very evenly distributed. Especially not here.\n\n" +
+					"- Removes all high-tech features."));
 		}
 	}
 }

@@ -10,26 +10,28 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Exteriors
+namespace SORCE.Challenges.C_Overhaul
 {
 	public class Arcology
 	{
-		[RLSetup]
+		//[RLSetup]
 		static void Start()
 		{
 			const string name = nameof(Arcology);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Exteriors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Exteriors - Arcology"))
+					"Overhaul - Arcology"))
 				.WithDescription(new CustomNameInfo(
 					"Sustainable Eco-homes! Trees! Less pollution! What's not to love?\n" +
 					"(Answer: Sharing a home with bugs and frogs.)\n\n" +
-					"- Public floors are Grass\n"));
-					// "- Border walls are Hedges\n" + Not implemented
+					"- Public floors are Grass\n" +
+					"- Border walls are Hedges\n" +
+					"- Nature features spawn in all districts\n" + 
+					"- Pollution features disabled"));
 		}
 	}
 } 

@@ -10,7 +10,7 @@ using Light2D;
 using SORCE.Challenges;
 using SORCE.Logging;
 using SORCE.Localization;
-using SORCE.Challenges.C_Interiors;
+using SORCE.Challenges.C_Buildings;
 using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Wreckage;
 

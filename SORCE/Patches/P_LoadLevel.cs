@@ -63,7 +63,7 @@ namespace SORCE.Patches
 		}
 
 		/// <summary>
-		/// Floor Exteriors
+		/// Public floors
 		///		This works in two different places, which work on different districts.
 		///			Like, what the fuck.
 		///	TODO: Transpiler
@@ -108,8 +108,8 @@ namespace SORCE.Patches
 								__instance.tileInfo.tileArray[k, l - 1].chunkID = __instance.mapChunkArray[i, j].chunkID;
 								string tilemapGroup = vFloorTileGroup.Building;
 
-								if (ChallengeManager.IsChallengeFromListActive(NameLists.Exteriors))
-									tilemapGroup = LevelGenTools.ExteriorFloorTileGroup(); // Works on: Slums,
+								if (ChallengeManager.IsChallengeFromListActive(Overhauls))
+									tilemapGroup = LevelGenTools.PublicFloorTileGroup(); // Works on: Slums,
 								else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 								{
 									if (GC.levelTheme == 0)
@@ -185,7 +185,7 @@ namespace SORCE.Patches
 									tileData.wallMaterial = wallMaterialType.Border;
 									string tilemapGroup = vFloorTileGroup.Building;
 
-									if (ChallengeManager.IsChallengeFromListActive(NameLists.Exteriors))
+									if (ChallengeManager.IsChallengeFromListActive(Overhauls))
 										tilemapGroup = vFloorTileGroup.MayorVillage; // Works on: Park, 
 									else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 									{
@@ -469,7 +469,7 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_ExplodingAndSlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo LevelGenTools_HasExplodingAndSlimeBarrels = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasFireHydrants), new[] { typeof(bool) });
+			MethodInfo LevelGenTools_HasExplodingAndSlimeBarrels = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPollutionFeatures), new[] { typeof(bool) });
 			MethodInfo contains = AccessTools.Method(typeof(List<string>), nameof(List<string>.Contains), new[] { typeof(string) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(

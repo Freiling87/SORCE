@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using SORCE.Challenges.C_MapSize;
-using SORCE.Challenges.C_Exteriors;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Features;
 using SORCE.Localization;
-using SORCE.Challenges.C_Interiors;
+using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Roamers;
 using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Wreckage;
@@ -28,7 +27,7 @@ namespace SORCE
 
 		public static wallMaterialType BorderWallMaterial()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Exteriors))
+			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
 			{
 				case (nameof(Arcology)):
 					return wallMaterialType.Border;
@@ -38,9 +37,9 @@ namespace SORCE
 					return wallMaterialType.Steel;
 				case (nameof(GrandCityHotel)):
 					return wallMaterialType.Wood;
-				case (nameof(Skyscraper)):
+				case (nameof(TestTubeCity)):
 					return wallMaterialType.Glass;
-				case (nameof(TransitExperiment)):
+				case (nameof(Eisburg)):
 					return wallMaterialType.Border;
 				default:
 					return wallMaterialType.Border;
@@ -53,9 +52,9 @@ namespace SORCE
 
 			return vFloor.Rugs[index];
 		}
-		public static string ExteriorFloorTile()
+		public static string PublicFloorTile()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Exteriors))
+			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
 			{
 				case nameof(Arcology):
 					return vFloor.Grass;
@@ -65,17 +64,17 @@ namespace SORCE
 					return vFloor.CaveFloor;
 				case nameof(GrandCityHotel):
 					return RandomRugType();
-				case nameof(Skyscraper):
+				case nameof(TestTubeCity):
 					return vFloor.CleanTiles;
-				case nameof(TransitExperiment):
+				case nameof(Eisburg):
 					return vFloor.IceRink;
 				default:
 					return null; 
 			}
 		}
-		public static string ExteriorFloorTileGroup()
+		public static string PublicFloorTileGroup()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Exteriors))
+			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
 			{
 				case nameof(Arcology):
 					return vFloorTileGroup.Park;
@@ -85,17 +84,17 @@ namespace SORCE
 					return vFloorTileGroup.Industrial;
 				case nameof(GrandCityHotel):
 					return vFloorTileGroup.Rug;
-				case nameof(Skyscraper):
+				case nameof(TestTubeCity):
 					return vFloorTileGroup.Building;
-				case nameof(TransitExperiment):
+				case nameof(Eisburg):
 					return vFloorTileGroup.Ice;
 				default:
 					return vFloorTileGroup.Building;
 			}
 		}
-		public static string InteriorWallType()
+		public static string BuildingWallType()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Interiors))
+			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Buildings))
 			{
 				case nameof(CityOfSteel):
 					return vWall.Steel;
@@ -142,11 +141,6 @@ namespace SORCE
 		public static int PopulationMafia(int vanilla) => 
 			vanilla;
 
-		/// <summary>
-		/// TODO: Call this somewhere
-		/// </summary>
-		/// <param name="chunkDescription"></param>
-		/// <returns></returns>
 		public static string AmbientAudio(string chunkDescription)
 		{
 			string ambientAudio = "";
@@ -173,113 +167,133 @@ namespace SORCE
 			return ambientAudio;
 		}
 		public static bool HasBarbecues(bool vanilla) =>
-			vanilla; // *
-		public static bool HasBoulders(bool vanilla) =>
-			GC.challenges.Contains(nameof(SpelunkyDory)) || 
-			GC.challenges.Contains(nameof(Arcology))  ? true :
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			GC.challenges.Contains(nameof(Arcology)) ||
+			vanilla;
+		public static bool HasBoulders(bool vanilla) => 
+			GC.challenges.Contains(nameof(Arcology))  ||
+			GC.challenges.Contains(nameof(DUMP)) ||
+			GC.challenges.Contains(nameof(SpelunkyDory)) ||
 			vanilla;
 		public static bool HasBushes(bool vanilla) =>
-			GC.challenges.Contains(nameof(Arcology)) ? true :
-			vanilla; // *
+			GC.challenges.Contains(nameof(Arcology)) ||
+			vanilla;
 		public static bool HasCopBots(bool vanilla) =>
-			GC.challenges.Contains(nameof(Technocracy)) ? true :
-			vanilla; // *
-		public static bool HasCops(bool vanilla) =>
-			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(Technocracy)) ? false :
-			GC.challenges.Contains(nameof(PoliceState)) ? true :
-			vanilla; // *
-		public static bool HasCopsExtra(bool vanilla) =>
-			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(Technocracy)) ? false :
-			GC.challenges.Contains(nameof(PoliceState)) ? true :
-			vanilla; //* 
-		public static bool HasFireHydrants(bool vanilla) =>
-			GC.challenges.Contains(nameof(AnCapistan)) ? false : vanilla;
-		public static bool HasFlamingBarrels(bool vanilla) =>
-			GC.challenges.Contains(nameof(AnCapistan)) ? true :
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			GC.challenges.Contains(nameof(PoliceState)) ||
-			GC.challenges.Contains(nameof(MACITS)) ? false :
+			GC.challenges.Contains(nameof(Technocracy)) || 
+			vanilla; 
+		public static bool HasCops(bool vanilla) =>
+			!GC.challenges.Contains(nameof(AnCapistan)) &&
+			!GC.challenges.Contains(nameof(Technocracy)) &&
+			GC.challenges.Contains(nameof(MACITS)) ||
+			GC.challenges.Contains(nameof(PoliceState)) ||
+			vanilla;
+		public static bool HasCopsExtra(bool vanilla) =>
+			!GC.challenges.Contains(nameof(AnCapistan)) &&
+			!GC.challenges.Contains(nameof(Technocracy)) &&
+			GC.challenges.Contains(nameof(PoliceState)) ||
+			vanilla; 
+		public static bool HasFireHydrants(bool vanilla) =>
+			!GC.challenges.Contains(nameof(AnCapistan)) && 
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			vanilla;
+		public static bool HasFlamingBarrels(bool vanilla) =>
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
 			vanilla;
 		public static bool HasGangbangers(bool vanilla) =>
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(YoungMenInTheNeighborhood)) ||
-			GC.challenges.Contains(nameof(AnCapistan)) ? true :
-			GC.challenges.Contains(nameof(PoliceState)) ||
-			GC.challenges.Contains(nameof(MACITS)) ? false :
-			vanilla; // *
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			vanilla;
 		public static bool HasLandMines(bool vanilla) =>
-			GC.challenges.Contains(nameof(ThisLandIsMineLand)) ? true :
-			vanilla; // *
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			GC.challenges.Contains(nameof(ThisLandIsMineLand)) ||
+			vanilla;
 		public static bool HasManholesVanilla(bool vanilla) =>
-			//	Underdark Citizen uses a different Manhole algorithm that requires deactivation of vanilla.
-			TraitManager.IsPlayerTraitActive("Underdark Citizen") || GC.challenges.Contains(nameof(AnCapistan)) ? false :
+			!GC.challenges.Contains(nameof(AnCapistan)) &&
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			// UnderdarkCitizen uses a different method, SpawnManholes_Underdark.
+			!TraitManager.IsPlayerTraitActive<UnderdarkCitizen>() &&
 			vanilla;
 		public static bool HasMobsters(bool vanilla) =>
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(MobTown)) ||
-			GC.challenges.Contains(nameof(AnCapistan)) ? true :
-			GC.challenges.Contains(nameof(PoliceState)) ||
-			GC.challenges.Contains(nameof(MACITS)) ? false :
-			vanilla; // *
+			vanilla;
 		public static bool HasPollutionFeatures(bool vanilla) =>
-			GC.challenges.Contains(nameof(ThePollutionSolution)) ? false : vanilla;
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
+			vanilla;
 		public static bool HasPoliceBoxesAndAlarmButtons(bool vanilla) =>
-			GC.challenges.Contains(nameof(PoliceState)) || GC.challenges.Contains(nameof(MACITS)) ? true :
-			GC.challenges.Contains(nameof(AnCapistan)) ? false :
+			!GC.challenges.Contains(nameof(AnCapistan)) &&
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			GC.challenges.Contains(nameof(MACITS)) ||
+			GC.challenges.Contains(nameof(PoliceState)) || 
 			vanilla;
 		public static bool HasPowerBoxes(bool vanilla) =>
-			GC.challenges.Contains(nameof(PowerWhelming)) ? true : vanilla;
-		public static bool HasTrashCans(bool vanilla)
-		{
-			if (GC.challenges.Contains(nameof(AnCapistan)))
-				vanilla = false;
-
-			if (GC.challenges.Contains(nameof(Arcology)) ||
-				GC.challenges.Contains(nameof(PoliceState)) ||
-				GC.challenges.Contains(nameof(MACITS)))
-				vanilla = true;
-
-			return vanilla;
-		}
+			GC.challenges.Contains(nameof(PowerWhelming)) || 
+			GC.challenges.Contains(nameof(Technocracy)) ||
+			vanilla;
+		public static bool HasTrashCans(bool vanilla) =>
+			!GC.challenges.Contains(nameof(AnCapistan)) &&
+			GC.challenges.Contains(nameof(Arcology)) ||
+			GC.challenges.Contains(nameof(MACITS)) ||
+			GC.challenges.Contains(nameof(PoliceState)) ||
+			vanilla;
 		public static bool HasTrees(bool vanilla) =>
-			GC.challenges.Contains(nameof(Arcology)) ? true :
-			GC.challenges.Contains(nameof(AnCapistan)) ? false :
+			!GC.challenges.Contains(nameof(AnCapistan)) &&
+			GC.challenges.Contains(nameof(Arcology)) ||
 			vanilla;
 		public static bool HasVendorCarts(bool vanilla) =>
-			GC.challenges.Contains(nameof(CartOfTheDeal)) ? true : vanilla;
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(CartOfTheDeal)) || 
+			GC.challenges.Contains(nameof(MACITS)) ||
+			vanilla;
 		public static string RoamerAgentType(string vanilla)
 		{
 			// TODO: Adjustments for MACITS, etc.
 
-			if (vanilla == "Thief")
+			if (vanilla == vAgent.Thief)
 			{
-				string generalRoamer = GC.levelTheme == 4 || GC.levelTheme == 5 ? vAgent.UpperCruster : vAgent.SlumDweller;
-
 				int thiefReduction =
 					GC.challenges.Contains(nameof(HordeAlmighty)) ? 50 :
 					GC.challenges.Contains(nameof(LetMeSeeThatThrong)) ? 75 :
-					GC.challenges.Contains(nameof(SwarmWelcome)) ? 88 :
+					GC.challenges.Contains(nameof(SwarmWelcome)) ? 87 :
 					0;
 
 				if (thiefReduction != 0 && GC.percentChance(thiefReduction))
-					vanilla = generalRoamer;
+					vanilla = 
+						GC.levelTheme == 4 || GC.levelTheme == 5
+					? vAgent.UpperCruster
+					: vAgent.SlumDweller;
 			}
 
 			return vanilla;
 		}
-		public static void SetHasLakes(LoadLevel __instance)
-		{
-			if (GC.challenges.Contains(nameof(LakeItOrLeaveIt)))
-				__instance.hasLakes = true;
-		}
-		public static void SetHasFlameGrates(LoadLevel __instance)
-		{
-			return;
-		}
+		public static void SetHasLakes(LoadLevel __instance) =>
+			__instance.hasLakes =
+				GC.challenges.Contains(nameof(Arcology)) ||	
+				GC.challenges.Contains(nameof(LakeItOrLeaveIt)) ||
+				__instance.hasLakes;
+		public static void SetHasFlameGrates(LoadLevel __instance) =>
+			__instance.hasFlameGrates =
+				!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+				GC.challenges.Contains(nameof(ThePollutionSolution)) ||
+				GC.challenges.Contains(nameof(Technocracy)) ||
+				__instance.hasFlameGrates;
 		public static void SetLevelSizeModifier(LoadLevel __instance)
 		{
 			int newVal = __instance.levelSizeMax;
 
-			string active = ChallengeManager.GetActiveChallengeFromList(NameLists.MapSize);
+			string active = ChallengeManager.GetActiveChallengeFromList(MapSize);
 
 			if (active == nameof(Arthropolis))
 				newVal = 4;
@@ -316,9 +330,14 @@ namespace SORCE
 
 			// TODO: Replace litter in Arcology with more leaves
 			if (GC.challenges.Contains(nameof(DirtierDistricts)))
-				SpawnLitter(__instance);
+			{
+				if (GC.challenges.Contains(nameof(Arcology)))
+					SpawnLeafLitter(__instance);
+				else
+					SpawnLitter(__instance);
+			}
 
-			if (TraitManager.IsPlayerTraitActive("UnderdarkCitizen"))
+			if (TraitManager.IsPlayerTraitActive(nameof(UnderdarkCitizen)))
 				SpawnManholes_Underdark(__instance);
 			 
 			if (GC.challenges.Contains(nameof(GrandCityHotel)) ||
@@ -715,6 +734,15 @@ namespace SORCE
 					GC.Choose<string>(vObject.Shelf, vObject.Lamp, vObject.Counter, vObject.VendorCart), false);
 			}
 		}
+		private static void SpawnLeafLitter(LoadLevel __instance)
+		{
+
+		}
+		/// <summary>
+		/// This was intentionally made separate from the vanilla algorithm
+		/// TODO: Identify and comment the differences to verify that it's necessary.
+		/// </summary>
+		/// <param name="__instance"></param>
 		private static void SpawnManholes_Underdark(LoadLevel __instance)
 		{
 			Debug.Log("SORCE: Loading Underdark Manholes");
@@ -730,28 +758,24 @@ namespace SORCE
 					spot = GC.tileInfo.FindRandLocationGeneral(2f);
 
 					for (int j = 0; j < GC.objectRealList.Count; j++)
-						if (GC.objectRealList[j].objectName == vObject.Manhole && Vector2.Distance(GC.objectRealList[j].tr.position, spot) < 14f)
+						if (GC.objectRealList[j].objectName == vObject.Manhole && 
+							Vector2.Distance(GC.objectRealList[j].tr.position, spot) < 14f)
 							spot = Vector2.zero;
 
 					if (spot != Vector2.zero)
 					{
-						if (GC.tileInfo.WaterNearby(spot))
-							spot = Vector2.zero;
-
-						if (GC.tileInfo.IceNearby(spot))
-							spot = Vector2.zero;
-
-						if (GC.tileInfo.BridgeNearby(spot))
+						if (GC.tileInfo.WaterNearby(spot) ||
+							GC.tileInfo.IceNearby(spot) ||
+							GC.tileInfo.BridgeNearby(spot))
 							spot = Vector2.zero;
 					}
 
 					spotsTried++;
-				} while ((spot == Vector2.zero || Vector2.Distance(spot, GC.playerAgent.tr.position) < 5f) && spotsTried < 100);
+				} 
+				while ((spot == Vector2.zero || Vector2.Distance(spot, GC.playerAgent.tr.position) < 5f) && spotsTried < 100);
 
 				if (spot != Vector2.zero && Vector2.Distance(spot, GC.playerAgent.tr.position) >= 5f)
 					GC.spawnerMain.spawnObjectReal(spot, null, vObject.Manhole);
-
-				Random.InitState(__instance.randomSeedNum + i);
 			}
 
 			int numObjects = (int)((float)Random.Range(2, 4) * __instance.levelSizeModifier);
@@ -784,7 +808,8 @@ namespace SORCE
 							}
 
 						attemptsToAddHiddenAgentToManhole++;
-					} while (attemptsToAddHiddenAgentToManhole < 50 && !NoHiddenAgentMatch);
+					} 
+					while (attemptsToAddHiddenAgentToManhole < 50 && !NoHiddenAgentMatch);
 
 					if (NoHiddenAgentMatch)
 					{
@@ -795,8 +820,6 @@ namespace SORCE
 						agent2.statusEffects.BecomeHidden(manhole);
 						agent2.oma.mustBeGuilty = true;
 					}
-
-					Random.InitState(__instance.randomSeedNum + i);
 				}
 		}
 		private static void SpawnRugs()

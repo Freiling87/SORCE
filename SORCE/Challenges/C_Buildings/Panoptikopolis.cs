@@ -10,7 +10,7 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Interiors
+namespace SORCE.Challenges.C_Buildings
 {
 	public class Panoptikopolis
 	{
@@ -21,10 +21,10 @@ namespace SORCE.Challenges.C_Interiors
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Interiors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Buildings.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Interiors - Panoptikopolis"))
+					"Buildings - Panoptikopolis"))
 				.WithDescription(new CustomNameInfo(
 					"Authoritarian surveillance measures mandate that most buildings have to be built with glass walls. If you have nothing to hide, what are you worried about, citizen?\n\n" +
 					"- Most buildings spawn with Glass walls\n" +

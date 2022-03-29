@@ -12,22 +12,21 @@ using System.Linq;
 
 namespace SORCE.Challenges.C_Overhaul
 {
-	public class MACITS
+	public class CanalCity
 	{
 		//[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(MACITS);
+			const string name = nameof(CanalCity);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
 				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
 			})
-				.WithName(new CustomNameInfo(
-					"Overhaul - MACITS"))
+				.WithName(new CustomNameInfo("Overhaul - Canal City"))
 				.WithDescription(new CustomNameInfo(
-					"Mostly Automated Comfortable Inclusive Terrestrial Socialism\n\n" +
-					"- Money is obsolete\n"));
+					"Sure, it's like Venice... Venice this filthy water gonna get cleaned up?\n\n" +
+					"- Public floors are Water"));
 		}
 	}
 }

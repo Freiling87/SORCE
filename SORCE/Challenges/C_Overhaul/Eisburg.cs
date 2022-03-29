@@ -10,24 +10,26 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Exteriors
+namespace SORCE.Challenges.C_Overhaul
 {
-	public class TransitExperiment
+	public class Eisburg
 	{
 		//[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(TransitExperiment);
+			const string name = nameof(Eisburg);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Exteriors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Exteriors - Transit Experiment"))
+					"Overhaul - Eisburg"))
 				.WithDescription(new CustomNameInfo(
-					"DESCRIPTIONS? PSHAW\n\n" +
-					"- Public floors are Ice"));
+					"A quaint little arco, but bring a sweater!\n\n" +
+					"- Public floors are Ice\n" +
+					"- Eliminates all Fire features\n" +
+					"- Some cops are armed with Freeze Rays"));
 		}
 	}
 }

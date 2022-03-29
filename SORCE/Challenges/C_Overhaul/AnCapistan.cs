@@ -21,12 +21,14 @@ namespace SORCE.Challenges.C_Overhaul
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Overhaul.Where(i => i != name).ToList()
+				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Overhaul - AnCapistan"))
 				.WithDescription(new CustomNameInfo(
-					""));
+					"- Profit-making features are more common\n" +
+					"- Public utility features are eliminated\n" +
+					"- Many objects now cost money to use"));
 		}
 	}
 }

@@ -10,24 +10,25 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Exteriors
+namespace SORCE.Challenges.C_Overhaul
 {
-	public class DUMP
+	public class MonkeTown
 	{
 		//[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(DUMP);
+			const string name = nameof(MonkeTown);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Exteriors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Exteriors - DUMP"))
+					"Overhaul - MonkeTown"))
 				.WithDescription(new CustomNameInfo(
-					"Deep\nUnderground\nMetropolitan\nPrincipality\n\n" +
-					"- Exteriors are Cave"));
+					"Daa na-na, won't you take me to\n" +
+					"Daa na-na, Monke Town!\n" +
+					"- Laws enforced by Gorillas\n"));
 		}
 	}
 }

@@ -9,7 +9,7 @@ using System;
 using SORCE.Logging;
 using SORCE.Challenges;
 using SORCE.Localization;
-using SORCE.Challenges.C_Interiors;
+using SORCE.Challenges.C_Buildings;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
@@ -21,7 +21,7 @@ namespace SORCE.Patches
 		public static GameController GC => GameController.gameController;
 
 		/// <summary>
-		///		Floor Interiors
+		///	Building Floors
 		///		TODO: Change this to use a Dictionary instead
 		/// </summary>
 		/// <param name="spawner"></param>
@@ -33,7 +33,7 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(nameof(BasicFloor.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string floorName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (ChallengeManager.IsChallengeFromListActive(NameLists.Interiors))
+			if (ChallengeManager.IsChallengeFromListActive(NameLists.Buildings))
 			{
 				if (vFloor.Natural.Contains(floorName))
 				{

@@ -10,25 +10,28 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Exteriors
+namespace SORCE.Challenges.C_Overhaul
 {
-	public class Skyscraper
+	public class DUMP
 	{
 		//[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(Skyscraper);
+			const string name = nameof(DUMP);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Exteriors.Where(i => i != name).ToList()
+				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Exteriors - Skyscraper"))
+					"Overhaul - DUMP"))
 				.WithDescription(new CustomNameInfo(
-					"Shiny!\n\n" +
-					"- Public floors are _____\n" +
-					"- Border walls are Glass"));
+					"Deep\nUnderground\nMetropolitan\nPrincipality\n\n" +
+					"- Public floors are Cave floors\n" +
+					"- Border walls are Cave walls\n" +
+					"- Geological features spawn in all districts\n" +
+					"- Cannibalism is legal\n" +
+					"- Law enforced by Supercannibals"));
 		}
 	}
 }
