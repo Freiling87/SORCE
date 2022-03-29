@@ -35,7 +35,7 @@ namespace SORCE.Localization
 			nameof(CanalCity),
 			nameof(DUMP),
 			nameof(GrandCityHotel),
-			nameof(TestTubeCity),
+			nameof(Skyscraper),
 			nameof(TransitExperiment),
 		};
 		public static List<string> Interiors = new List<string>()

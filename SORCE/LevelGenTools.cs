@@ -38,7 +38,7 @@ namespace SORCE
 					return wallMaterialType.Steel;
 				case (nameof(GrandCityHotel)):
 					return wallMaterialType.Wood;
-				case (nameof(TestTubeCity)):
+				case (nameof(Skyscraper)):
 					return wallMaterialType.Glass;
 				case (nameof(TransitExperiment)):
 					return wallMaterialType.Border;
@@ -65,7 +65,7 @@ namespace SORCE
 					return vFloor.CaveFloor;
 				case nameof(GrandCityHotel):
 					return RandomRugType();
-				case nameof(TestTubeCity):
+				case nameof(Skyscraper):
 					return vFloor.CleanTiles;
 				case nameof(TransitExperiment):
 					return vFloor.IceRink;
@@ -85,7 +85,7 @@ namespace SORCE
 					return vFloorTileGroup.Industrial;
 				case nameof(GrandCityHotel):
 					return vFloorTileGroup.Rug;
-				case nameof(TestTubeCity):
+				case nameof(Skyscraper):
 					return vFloorTileGroup.Building;
 				case nameof(TransitExperiment):
 					return vFloorTileGroup.Ice;

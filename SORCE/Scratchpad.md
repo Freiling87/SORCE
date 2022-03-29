@@ -11,49 +11,66 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 #	C	Big Multicategory Chungus of fixes
 Most of these are just v96-introduced IL errors.
 
+AlarmButtons
+
+
 	[Info   :   BepInEx] Loading [SORCE 0.1.0]
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_AlarmButtons caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_Boulders caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_FireHydrants caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_FlameGrates caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_FlamingBarrels caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_Manholes caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_OilSpills caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_PoliceBoxes caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_PowerBoxes caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_RoamerAgentNumber caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_SlimeBarrels caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_TrashCans caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_Trees caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Error  :SORCE_P_LoadLevel_SetupMore3_3_Patches] Patching SetupMore3_3_Transpiler_VendorCarts caused error: CodeReplacementPatch has found 0 matches, but expected to find 1! Mod may be outdated!
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.Apply (System.Collections.Generic.List`1[T] instructions) [0x00141] in <693220fe48804439a90bd4a99a2cbf98>:0
 	  at BTHarmonyUtils.TranspilerUtils.CodeReplacementPatch.ApplySafe (System.Collections.Generic.List`1[T] instructions, BepInEx.Logging.ManualLogSource logger) [0x00002] in <693220fe48804439a90bd4a99a2cbf98>:0
+
 	[Message:   BepInEx] Chainloader startup complete
 #	C	Mutators
 ##		C	Ambient Light Color
@@ -76,7 +93,7 @@ Works
 ###			√	New Moon
 This is done hackily, but needs to be modular.
 ##		H	Ambienter Ambience
-Hold for next release
+Only seems to apply Park audio, check BM for others
 ##		CT	Features
 ###			C	Aftermath
 Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.

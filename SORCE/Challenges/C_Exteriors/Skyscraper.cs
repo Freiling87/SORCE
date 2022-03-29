@@ -12,21 +12,21 @@ using System.Linq;
 
 namespace SORCE.Challenges.C_Exteriors
 {
-	public class TestTubeCity
+	public class Skyscraper
 	{
 		//[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(TestTubeCity);
+			const string name = nameof(Skyscraper);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
 				Cancellations = NameLists.Exteriors.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Exteriors - Test Tube City"))
+					"Exteriors - Skyscraper"))
 				.WithDescription(new CustomNameInfo(
-					"Another guinea pig!\n\n" +
+					"Shiny!\n\n" +
 					"- Public floors are _____\n" +
 					"- Border walls are Glass"));
 		}
