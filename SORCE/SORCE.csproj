@@ -101,6 +101,7 @@
     <Compile Include="Challenges\C_Buildings\Panoptikopolis.cs" />
     <Compile Include="Challenges\C_Buildings\ShantyTown.cs" />
     <Compile Include="Challenges\C_Overhaul\LowTechLowLife.cs" />
+    <Compile Include="Challenges\C_Wreckage\BachelorerPads.cs" />
     <Compile Include="Challenges\C_Wreckage\FloralerFlora.cs" />
     <Compile Include="Challenges\C_Wreckage\DirtierDistricts.cs" />
     <Compile Include="Extensions\E_Agent.cs" />

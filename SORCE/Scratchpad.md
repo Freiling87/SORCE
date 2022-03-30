@@ -75,8 +75,43 @@ Complete
 Complete
 ###			√	This Land is Mine Land
 Complete
-##		H	Light Sources
-Hold for next release
+##		CT	Light Sources
+- Content in CCU. Migrate, and put on hold.
+- CameraScript.SetLighting
+  - DW
+- StatusEffects.WerewolfTransform
+- StatusEffects.WerewolfTransformBack
+- LoadLevel.SetNormalLighting 
+- LoadLevel.SetRogueVisionLighting
+###			C	No Agent Lights
+- The most recent attempt didn't make them move feet-first, but they still all have lights.
+- Didn't work, and made the agent move feet-first
+  - Same outcome for both locations of attempt
+- Agent.hasLight
+  - Postfix to false in
+    - Agent.Awake
+      - Attempted
+        - DW
+    - Agent.RecycleAwake
+      - Attempted
+        - DW
+  - Note, there are a total of four attempts at this active so you'll need to pare down once you find a working one.
+- Exclude Ghosts!
+###			C	No Item/Wreckage Lights
+- SpawnerMain.SetLighting2
+  - Tried this another way
+    - DW
+###			T	No Object Glow
+This is the yellow glow for when you have usable items with an object. As you collect more, eventually everything glows.
+- gc.objectGlowDisabled
+- gc.sessionDataBig.objectGlowDisabled
+- Attempted, GC.Awake3 Prefix
+###			C	No Object Lights
+- Works!
+- Need to exclude working machines with lights from this. Maybe jazz up their halos if possible.
+- Fire sources are fine since the particle creates the light anyway.
+###			C	Player Agent Light Size
+New
 ##		√	MapSize
 ###			√	A City For Ants
 ###			√	Claustropolis

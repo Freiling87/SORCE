@@ -23,7 +23,7 @@ namespace SORCE.Challenges.C_Wreckage
 				.WithName(new CustomNameInfo(
 					"Wreckage - Dirtier Districts"))
 				.WithDescription(new CustomNameInfo(
-					"Now you don't just live in a disgusting dump, you play in a virtual one too!\n\n" +
+					"This place is Litter-ally the worst.\n\n" +
 					"- Spawns trash in public areas" +
 					"- Piles of receipts next to ATMs"));
 		}
