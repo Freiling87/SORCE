@@ -67,6 +67,7 @@ namespace SORCE.Patches
 		///		This works in two different places, which work on different districts.
 		///			Like, what the fuck.
 		///	TODO: Transpiler
+		///		There is a particular way to transpile into an IEnumerator, as modeled by SetupMore3_3
 		/// </summary>
 		/// <param name="__instance"></param>
 		/// <param name="__result"></param>
@@ -650,6 +651,36 @@ namespace SORCE.Patches
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Mines(IEnumerable<CodeInstruction> codeInstructions)
+        {
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo levelGenTools_HasLandMines = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasLandMines), new [] { typeof(bool) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					//	if (flag23)
+					//		Debug.Log("Loading Mines");
+
+					new CodeInstruction(OpCodes.Ldloc_S, 17),
+					new CodeInstruction(OpCodes.Brfalse),
+					new CodeInstruction(OpCodes.Ldstr, "Loading Mines"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					//	flag23 = HasLandMines(flag23);
+
+					new CodeInstruction(OpCodes.Ldloc_S, 17), // flag23
+					new CodeInstruction(OpCodes.Call, levelGenTools_HasLandMines), // bool
+					new CodeInstruction(OpCodes.Stloc_S, 17), // Clear
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+        }
 
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_OilSpills(IEnumerable<CodeInstruction> codeInstructions)

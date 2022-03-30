@@ -55,8 +55,6 @@ Stopped working
 Stopped working
 ###			C	The Pollution Solution
 Stopped working
-###			C	This Land is Mine Land
-New
 ###			H	Aftermath
 Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.
 All objects have a chance to be broken at the start.
@@ -70,12 +68,15 @@ Buildings have a chance to start out on fire, or to have every object inside the
 Spawns dead/burned/exploded bodies, blood splatters
 ###			√	Bad Neighborhoods
 Complete
-###			√	Brought Back Fountain
+###			√H	Brought Back Fountain
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain
+####			H	AnCapistan: Poisoned Fountains
 ###			√	Cart of the Deal
 Complete
 ###			√	Skyway District
+Complete
+###			√	This Land is Mine Land
 Complete
 ##		H	Light Sources
 Hold for next release

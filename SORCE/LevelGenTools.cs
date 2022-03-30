@@ -209,7 +209,8 @@ namespace SORCE
 			vanilla;
 		public static bool HasFountains =>
 			GC.challenges.Contains(nameof(BroughtbackFountain)) ||
-			Core.debugMode;
+			GC.challenges.Contains(nameof(MACITS)) ||
+			GC.challenges.Contains(nameof(PoliceState));
 		public static bool HasGangbangers(bool vanilla) =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
@@ -220,7 +221,6 @@ namespace SORCE
 		public static bool HasLandMines(bool vanilla) =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			GC.challenges.Contains(nameof(ThisLandIsMineLand)) ||
-			Core.debugMode ||
 			vanilla;
 		public static bool HasLitter =>
 			GC.challenges.Contains(nameof(Arcology)) || // Turns to leaves
@@ -248,6 +248,7 @@ namespace SORCE
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
+			Core.debugMode ||
 			vanilla;
 		public static bool HasPoliceBoxesAndAlarmButtons(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
@@ -258,6 +259,7 @@ namespace SORCE
 		public static bool HasPowerBoxes(bool vanilla) =>
 			GC.challenges.Contains(nameof(PowerWhelming)) || 
 			GC.challenges.Contains(nameof(Technocracy)) ||
+			Core.debugMode ||
 			vanilla;
 		public static bool HasRugs =>
 			GC.challenges.Contains(nameof(GrandCityHotel)) ||
@@ -267,6 +269,10 @@ namespace SORCE
 			GC.challenges.Contains(nameof(PoliceState)) ||
 			GC.challenges.Contains(nameof(SurveillanceSociety)) ||
 			Core.debugMode;
+		public static bool HasSlimeBarrels(bool vanilla) =>
+			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
+			Core.debugMode ||
+			vanilla;
 		public static bool HasTrashCans(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||

@@ -156,7 +156,9 @@
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\UnderdankCitizen.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Patches\P_MapGen\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="README.md" />
