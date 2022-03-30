@@ -788,7 +788,7 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgentNumber(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentFactor), new[] { typeof(int) });
+			MethodInfo levelGenTools_PopulationMultiplier = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.PopulationMultiplier));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -799,7 +799,7 @@ namespace SORCE.Patches
 					//		int bigTries = (int)((float)Random.Range(16, 20) * this.levelSizeModifier);
 
 					new CodeInstruction(OpCodes.Ldstr, "Loading Slum Dwellers"),
-					new CodeInstruction(OpCodes.Call), 
+					new CodeInstruction(OpCodes.Call),
 					new CodeInstruction(OpCodes.Ldarg_0),
 					new CodeInstruction(OpCodes.Ldc_I4_S, 16),
 					new CodeInstruction(OpCodes.Ldc_I4_S, 20),
@@ -809,23 +809,31 @@ namespace SORCE.Patches
 					new CodeInstruction(OpCodes.Ldfld),
 					new CodeInstruction(OpCodes.Mul),
 					new CodeInstruction(OpCodes.Conv_I4),
-					new CodeInstruction(OpCodes.Stfld),
+					// Store field comes after insertion
 
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
+					//	* PopulationMultiplier;
+
+					new CodeInstruction(OpCodes.Call, levelGenTools_PopulationMultiplier), // int
+					new CodeInstruction(OpCodes.Mul) // clear
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
 
+		/// <summary>
+		/// Reduces excessive thieves in population mods
+		/// </summary>
+		/// <param name="codeInstructions"></param>
+		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgentType(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentType), new[] { typeof(string) });
-			FieldInfo gameController = AccessTools.Field(typeof(LoadLevel), "gc");
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -851,36 +859,6 @@ namespace SORCE.Patches
 					new CodeInstruction(OpCodes.Ldloc_S, 232), // text5
 					new CodeInstruction(OpCodes.Call, RoamerAgentType), // string
 					new CodeInstruction(OpCodes.Stloc_S, 232), // clear
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_SlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo levelGenTools_HasPollutionFeatures = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPollutionFeatures), new[] { typeof(bool) });
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					// Line 403
-					// if (flag2)
-
-					new CodeInstruction(OpCodes.Ldloc_3),
-					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Slime Barrels"),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					// flag2 = HasPollutionFeatures(flag2);
-
-					new CodeInstruction(OpCodes.Ldloc_3), // flag2
-					new CodeInstruction(OpCodes.Call, levelGenTools_HasPollutionFeatures), // bool
-					new CodeInstruction(OpCodes.Stloc_3) // Clear
 				});
 
 			patch.ApplySafe(instructions, logger);

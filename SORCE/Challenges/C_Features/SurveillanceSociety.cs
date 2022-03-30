@@ -14,7 +14,7 @@ namespace SORCE.Challenges.C_Features
 {
 	public class SurveillanceSociety
 	{
-		[RLSetup]
+		//[RLSetup]
 		static void Start()
 		{
 			const string name = nameof(SurveillanceSociety);

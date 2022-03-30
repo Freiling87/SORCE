@@ -45,29 +45,22 @@ No floor type?
 ###			C	Spelunky Dory
 Exterior walls are now wood?? Lol something got messed up, but maybe use it in the other.
 Change rugs back to Grass
-##		CT	Features
+##		√	Features
+###			H	Department of Public Comfiness
+####			C	Recommend for Grand City Hotel
+####			C	Spawn public Armchairs & Fireplaces
+####			C	Spawn public Rugs (overlap with Grand City Hotel)
 ###			H	Lake it or Leave it
 Honestly this one's not interesting enough to bother with yet.
 ####			C	Do not make lakes over Downtown bridges
 LoadLevel.SetupMore3_3, after line 67
 There's a method called TileInfo.IsearBridge or something like that, use it
-###			C	Power Whelming
-Stopped working
-###			C	Surveillance Society
-Stopped working
-###			C	The Pollution Solution
-Stopped working
-###			H	Aftermath
-Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.
-All objects have a chance to be broken at the start.
-All NPCs have a chance to be missing some health.
-Buildings have a chance to start out on fire, or to have every object inside them destroyed and all items stolen. Police stations have a higher chance.
-###			H	Department of Public Comfiness
-####			C	Recommend for Grand City Hotel
-####			C	Spawn public Armchairs & Fireplaces
-####			C	Spawn public Rugs (overlap with Grand City Hotel)
-###			H	Warzone
-Spawns dead/burned/exploded bodies, blood splatters
+###			H	Surveillance Society
+####			C	00 Import SecurityCamera patches
+####			C	Detect Wanted
+###			H	The Pollution Solution
+####			C	Slime Barrels
+SlimeBarrels.Start has a district limitation
 ###			√	Bad Neighborhoods
 Complete
 ###			√H	Brought Back Fountain
@@ -75,6 +68,8 @@ Complete
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
 ###			√	Cart of the Deal
+Complete
+###			√	Power Whelming
 Complete
 ###			√	Skyway District
 Complete
@@ -94,6 +89,12 @@ Scope:
 	Features
 Note:
 	There is overhaul-specific content still in BM. Haven't bothered to migrate it over yet, because this is on hold.
+	
+###			H	Aftermath
+Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.
+All objects have a chance to be broken at the start.
+All NPCs have a chance to be missing some health.
+Buildings have a chance to start out on fire, or to have every object inside them destroyed and all items stolen. Police stations have a higher chance.
 ###			H	AnCapistan
 Newish
 ###			H	Arcology
@@ -149,31 +150,17 @@ Maybe they don't take sides if you're in a fight, and just kill both parties unl
 Telling really bad or really good jokes makes police hostile
 ###			C	Technocracy
 Newish
-##		C	Population
+###			H	Warzone
+Spawns dead/burned/exploded bodies, blood splatters
+##		√	Population
 ###			√	Ghost Town
-###			C	Horde Almighty
-Error:
-
-	[Info   : Unity Log] CREATING INITIAL MAP WITH SEED NUM: -1341233615 - UsedChunks Count: 0
-	[Info   : Unity Log] LEVEL SIZE: 4
-	[Error  : Unity Log] ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
-	Parameter name: index
-	Stack trace:
-	System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
-	System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
-	LoadLevel.CreateInitialMap () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	LoadLevel+<loadStuff2>d__137.MoveNext () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-	LoadLevel:loadStuff()
-	GameController:AwakenObjects()
-	GameController:CreateMultPlayerAgent(GameObject, Int32)
-	<WaitForRealStart>d__480:MoveNext()
-	UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
-###			C	Let Me See That Throng
-No effect
-###			C	Swarm Welcome
-Didn't work
+Complete
+###			√	Horde Almighty
+Complete
+###			√	Let Me See That Throng
+Complete
+###			√	Swarm Welcome
+Complete
 ##		C	Roamers
 None work
 ###			C	HoodlumsWonderland
