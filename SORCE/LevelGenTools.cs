@@ -110,15 +110,6 @@ namespace SORCE
 
 			return null;
 		}
-		public static bool IsNextToLake(Vector2 spot) =>
-			GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).lake ||
-			GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y + 0.64f)).lake ||
-			GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y + 0.64f)).lake ||
-			GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y)).lake ||
-			GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y - 0.64f)).lake ||
-			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
-			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y - 0.64f)).lake ||
-			GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).lake;
 		public static int LevelSizeModifier(int vanilla) =>
 			GC.challenges.Contains(nameof(Arthropolis)) ? 4 :
 			GC.challenges.Contains(nameof(Claustropolis)) ? 12 :
@@ -169,15 +160,26 @@ namespace SORCE
 		public static bool HasBarbecues(bool vanilla) =>
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||
+			Core.debugMode ||
 			vanilla;
 		public static bool HasBoulders(bool vanilla) => 
 			GC.challenges.Contains(nameof(Arcology))  ||
 			GC.challenges.Contains(nameof(DUMP)) ||
 			GC.challenges.Contains(nameof(SpelunkyDory)) ||
+			Core.debugMode ||
 			vanilla;
+		public static bool HasBrokenWindows =>
+			(GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
+			(GC.customLevel && GC.loadLevel.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
+			GC.challenges.Contains(nameof(BadNeighborhoods)) ||
+			Core.debugMode;
 		public static bool HasBushes(bool vanilla) =>
 			GC.challenges.Contains(nameof(Arcology)) ||
+			Core.debugMode ||
 			vanilla;
+		public static bool HasCaveWallOutcroppings =>
+			GC.challenges.Contains(nameof(DUMP)) ||
+			GC.challenges.Contains(nameof(SpelunkyDory));
 		public static bool HasCopBots(bool vanilla) =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			GC.challenges.Contains(nameof(PoliceState)) ||
@@ -196,29 +198,44 @@ namespace SORCE
 			vanilla; 
 		public static bool HasFireHydrants(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) && 
-			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			!GC.challenges.Contains(nameof(LowTechLowLife)) ||
+			Core.debugMode ||
 			vanilla;
 		public static bool HasFlamingBarrels(bool vanilla) =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
+			Core.debugMode ||
 			vanilla;
+		public static bool HasFountains =>
+			GC.challenges.Contains(nameof(BroughtbackFountain)) ||
+			Core.debugMode;
 		public static bool HasGangbangers(bool vanilla) =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(YoungMenInTheNeighborhood)) ||
 			GC.challenges.Contains(nameof(AnCapistan)) ||
+			Core.debugMode ||
 			vanilla;
 		public static bool HasLandMines(bool vanilla) =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			GC.challenges.Contains(nameof(ThisLandIsMineLand)) ||
+			Core.debugMode ||
 			vanilla;
+		public static bool HasLitter =>
+			GC.challenges.Contains(nameof(Arcology)) || // Turns to leaves
+			GC.challenges.Contains(nameof(DirtierDistricts)) ||
+			Core.debugMode;
 		public static bool HasManholesVanilla(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			// UnderdankCitizen uses a different method, SpawnManholes_Underdank.
-			!TraitManager.IsPlayerTraitActive<UnderdankCitizen>() &&
+			!TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
+			Core.debugMode ||
 			vanilla;
+		public static bool HasManholesUnderdank =>
+			TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
+			Core.debugMode;
 		public static bool HasMobsters(bool vanilla) =>
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
@@ -242,20 +259,31 @@ namespace SORCE
 			GC.challenges.Contains(nameof(PowerWhelming)) || 
 			GC.challenges.Contains(nameof(Technocracy)) ||
 			vanilla;
+		public static bool HasRugs =>
+			GC.challenges.Contains(nameof(GrandCityHotel)) ||
+			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
+			Core.debugMode;
+		public static bool HasSecurityCamsAndTurrets =>
+			GC.challenges.Contains(nameof(PoliceState)) ||
+			GC.challenges.Contains(nameof(SurveillanceSociety)) ||
+			Core.debugMode;
 		public static bool HasTrashCans(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(MACITS)) ||
 			GC.challenges.Contains(nameof(PoliceState)) ||
+			Core.debugMode ||
 			vanilla;
 		public static bool HasTrees(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||
+			Core.debugMode ||
 			vanilla;
 		public static bool HasVendorCarts(bool vanilla) =>
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(CartOfTheDeal)) || 
 			GC.challenges.Contains(nameof(MACITS)) ||
+			Core.debugMode ||
 			vanilla;
 		public static string RoamerAgentType(string vanilla)
 		{
@@ -280,16 +308,18 @@ namespace SORCE
 		}
 		public static void SetHasLakes(LoadLevel __instance) =>
 			__instance.hasLakes =
-				GC.challenges.Contains(nameof(Arcology)) ||	
+				GC.challenges.Contains(nameof(Arcology)) ||
 				GC.challenges.Contains(nameof(LakeItOrLeaveIt)) ||
+				Core.debugMode ||
 				__instance.hasLakes;
 		public static void SetHasFlameGrates(LoadLevel __instance) =>
 			__instance.hasFlameGrates =
 				!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 				GC.challenges.Contains(nameof(ThePollutionSolution)) ||
 				GC.challenges.Contains(nameof(Technocracy)) ||
+				Core.debugMode ||
 				__instance.hasFlameGrates;
-		public static void SetLevelSizeModifier(LoadLevel __instance)
+		public static void SetLevelSizeMax(LoadLevel __instance)
 		{
 			int newVal = __instance.levelSizeMax;
 
@@ -308,15 +338,13 @@ namespace SORCE
 		}
 		public static void Spawn_Master(LoadLevel __instance)
 		{
-			if ((GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
-				(GC.customLevel && __instance.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
-				GC.challenges.Contains(nameof(BadNeighborhoods)))
+			if (HasBrokenWindows)
 				BreakWindows();
 
-			if (GC.challenges.Contains(nameof(SpelunkyDory)))
+			if (HasCaveWallOutcroppings)
 				SpawnCaveWallOutcroppings(__instance);
 
-			if (GC.challenges.Contains(nameof(BroughtbackFountain)))
+			if (HasFountains)
 				SpawnFountains();
 
 			if (GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)))
@@ -328,18 +356,16 @@ namespace SORCE
 				SpawnTurntables();
 			}
 
-			if (GC.challenges.Contains(nameof(Arcology)) || // Turns to leaves
-				GC.challenges.Contains(nameof(DirtierDistricts)))
+			if (HasLitter)
 				SpawnLitter(__instance);
 
-			if (TraitManager.IsPlayerTraitActive(nameof(UnderdankCitizen)))
+			if (HasManholesUnderdank)
 				SpawnManholes_Underdank(__instance);
 			 
-			if (GC.challenges.Contains(nameof(GrandCityHotel)) ||
-				GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)))
+			if (HasRugs)
 				SpawnRugs();
 
-			if (GC.challenges.Contains(nameof(PoliceState)) || GC.challenges.Contains(nameof(SurveillanceSociety)))
+			if (HasSecurityCamsAndTurrets)
 				SpawnSecurityCamsAndTurrets(__instance);
 		}
 		private static void BreakWindows()
@@ -354,7 +380,7 @@ namespace SORCE
 		{
 			Debug.Log("SORCE: Loading SpelunkyDory Cave Wall Outcroppings");
 
-			int maxSpawns = (int)((float)Random.Range(48, 64) * __instance.levelSizeModifier);
+			int maxSpawns = (int)((float)Random.Range(48, 64) * LevelSizeRatio());
 			List<int> spawnedCount = new List<int>();
 			int itemCountIterator;
 
@@ -513,7 +539,7 @@ namespace SORCE
 		private static void SpawnFountains()
 		{
 			Debug.Log("SORCE: Loading Fountains");
-			int numObjects = Mathf.Clamp(3 * LevelSizeRatio(), 1, 5);
+			int numObjects = Mathf.Clamp(2 * LevelSizeRatio(), 1, 5);
 			float objectBuffer = 14f;
 
 			for (int i = 0; i < numObjects; i++)
@@ -526,7 +552,7 @@ namespace SORCE
 					location = GC.tileInfo.FindRandLocationGeneral(2f);
 
 					for (int j = 0; j < GC.objectRealList.Count; j++)
-						if (GC.objectRealList[j].objectName == "Fountain" && Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSizeRatio()))
+						if (GC.objectRealList[j].objectName == vObject.Fountain && Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSizeRatio()))
 							location = Vector2.zero;
 
 					attempts++;
@@ -535,7 +561,7 @@ namespace SORCE
 					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) && attempts < 100);
 
 				if (location != Vector2.zero)
-					GC.spawnerMain.spawnObjectReal(location, null, "Fountain");
+					GC.spawnerMain.spawnObjectReal(location, null, vObject.Fountain);
 			}
 		}
 		private static void SpawnArmchairsFireplaces()
@@ -547,7 +573,7 @@ namespace SORCE
 			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
 			{
 				Debug.Log("SORCE: Loading Disco Shit");
-				int maxSpawns = (int)((float)Random.Range(6, 12) * __instance.levelSizeModifier);
+				int maxSpawns = (int)((float)Random.Range(6, 12) * LevelSizeRatio());
 				List<int> spawnedInChunks = new List<int>();
 
 				for (int i = 0; i < maxSpawns; i++)
@@ -735,12 +761,14 @@ namespace SORCE
 		/// <summary>
 		/// This was intentionally made separate from the vanilla algorithm
 		/// TODO: Identify and comment the differences to verify that it's necessary.
+		///		Possibly just a level gate?
 		/// </summary>
 		/// <param name="__instance"></param>
 		private static void SpawnManholes_Underdank(LoadLevel __instance)
 		{
 			Debug.Log("SORCE: Loading Underdank Manholes");
-			int bigTries = (int)((float)Random.Range(8, 12) * __instance.levelSizeModifier);
+			int bigTries = (int)((float)Random.Range(8, 12) * LevelSizeRatio());
+			logger.LogDebug("\t\tSpawn Count: " + bigTries);
 
 			for (int i = 0; i < bigTries; i++)
 			{
@@ -772,7 +800,6 @@ namespace SORCE
 					GC.spawnerMain.spawnObjectReal(spot, null, vObject.Manhole);
 			}
 
-			int numObjects = (int)((float)Random.Range(2, 4) * __instance.levelSizeModifier);
 			List<Manhole> manholeList = new List<Manhole>();
 
 			for (int i = 0; i < GC.objectRealList.Count; i++)
@@ -781,9 +808,10 @@ namespace SORCE
 
 			logger.LogDebug("UDManhole List count: " + manholeList.Count());
 
-			// Hidden Agent Placement
+			int hiddenAgents = (int)((float)Random.Range(2, 4) * LevelSizeRatio());
+			
 			if (manholeList.Count > 0)
-				for (int i = 0; i < numObjects; i++)
+				for (int i = 0; i < hiddenAgents; i++)
 				{
 					int attemptsToAddHiddenAgentToManhole = 0;
 					Manhole manhole;
@@ -825,7 +853,7 @@ namespace SORCE
 		{
 			logger.LogDebug("SORCE: Loading Public Security Cams");
 
-			int bigTries = (int)((float)Random.Range(8, 12) * __instance.levelSizeModifier);
+			int bigTries = (int)((float)Random.Range(8, 12) * LevelSizeRatio());
 			List<int> spawnedInChunks = new List<int>();
 			int num2;
 

@@ -28,7 +28,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueInteractions.CreateProvider<Manhole>(static h =>
+			RogueInteractions.CreateProvider<Manhole>(h =>
 			{
 				if (h.Helper.interactingFar) 
 					return;
@@ -36,7 +36,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 				if (h.Object.opened)
 				{
 					if (h.Agent.HasTrait<UnderdankCitizen>())
-						h.AddButton(cButtonText.FlushYourself, static m =>
+						h.AddButton(vButtonText.FlushYourself, m =>
 						{
 							FlushYourself(m.Agent, m.Object);
 						});
@@ -45,18 +45,18 @@ namespace SORCE.Patches.P_PlayfieldObject
 				{
 					InvItem crowbar = h.Agent.inventory.FindItem(vItem.Crowbar);
 
-					if (crowbar is not null)
+					if (crowbar != null)
 					{
 						string extra = $" ({crowbar.invItemCount} - {crowbarTamperCost})";
 
-						h.AddButton("UseCrowbar", extra, static m =>
+						h.AddButton("UseCrowbar", extra, m =>
 						{
 							m.StartOperating(vItem.Crowbar, 2f, true, "Tampering");
 						});
 					}
 					else
 					{
-						h.SetStopCallback(static m =>
+						h.SetStopCallback(m =>
 						{
 							m.gc.audioHandler.Play(m.Agent, "CantDo");
 							m.Agent.SayDialogue("NeedCrowbar");
@@ -65,10 +65,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 				}
 			});
 
-			RogueLibs.CreateCustomName(cDialogue.FlushYourself, NameTypes.Interface,
-				new CustomNameInfo("Flush Yourself"));
-
-
+			//RogueLibs.CreateCustomName(vButtonText.FlushYourself, NameTypes.Interface,
+			//	new CustomNameInfo("Flush Yourself"));
 		}
 
 		public static void FlushYourself(Agent agent, ObjectReal __instance)
@@ -139,29 +137,31 @@ namespace SORCE.Patches.P_PlayfieldObject
 			}
 		}
 
-		public static void PryOpen(Manhole __instance)
+		public static void PryOpen(Manhole manhole)
 		{
 			if (GC.serverPlayer)
 			{
-				Vector3 position = __instance.tr.position;
-				position = new Vector3(__instance.tr.position.x, __instance.tr.position.y - 0.24f, __instance.tr.position.z);
+				Vector3 position = manhole.tr.position;
+				position = new Vector3(manhole.tr.position.x, manhole.tr.position.y - 0.24f, manhole.tr.position.z);
 
-				__instance.hole = GC.spawnerMain.SpawnHole(__instance, position, new Vector3(1.5f, 1.5f, 1f), Quaternion.identity, false, true);
-				__instance.hole.ObjectHoleAppear(vObject.Manhole);
-				GC.playerAgent.objectMult.ObjectAction(__instance.objectNetID, "HoleAppear");
-				__instance.operatingAgent.inventory.SubtractFromItemCount(__instance.operatingItem, crowbarTamperCost); 
+				manhole.hole = GC.spawnerMain.SpawnHole(manhole, position, new Vector3(1.5f, 1.5f, 1f), Quaternion.identity, false, true);
+				manhole.hole.ObjectHoleAppear(vObject.Manhole);
+				GC.playerAgent.objectMult.ObjectAction(manhole.objectNetID, "HoleAppear");
+				manhole.operatingAgent.inventory.SubtractFromItemCount(manhole.operatingItem, crowbarTamperCost); 
 			}
 
-			__instance.objectSprite.meshRenderer.enabled = false;
-			__instance.opened = true;
-			__instance.SetSDangerousToWalk(true);
-			GC.audioHandler.Play(__instance, "ManholeOpen");
+			manhole.objectSprite.meshRenderer.enabled = false;
+			manhole.opened = true;
+			manhole.SetSDangerousToWalk(true);
+			GC.audioHandler.Play(manhole, "ManholeOpen");
 
 			if (GC.levelFeeling == "WarZone")
 			{
-				__instance.objectRealRealName = GC.nameDB.GetName("Hole", "Object");
-				__instance.normalHole = true;
+				manhole.objectRealRealName = GC.nameDB.GetName("Hole", "Object");
+				manhole.normalHole = true;
 			}
+
+			manhole.StopInteraction();
 		}
 	}
 

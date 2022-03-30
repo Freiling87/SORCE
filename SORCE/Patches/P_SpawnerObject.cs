@@ -21,8 +21,8 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerObject.spawn), argumentTypes: new[] { typeof(string) })]
 		public static bool spawn_Prefix(ref string objectRealName)
 		{
-			logger.LogDebug("SpawnerObject_spawn:");
-			logger.LogDebug("\tobjectRealName = '" + objectRealName + "'");
+			//logger.LogDebug("SpawnerObject_spawn:");
+			//logger.LogDebug("\tobjectRealName = '" + objectRealName + "'");
 
 			if (ChallengeManager.IsChallengeFromListActive(NameLists.BuildingsFlammable) && objectRealName == vObject.FireSpewer)
 				objectRealName = vObject.SecurityCam;

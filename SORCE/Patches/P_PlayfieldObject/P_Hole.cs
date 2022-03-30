@@ -26,7 +26,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		/// <param name="myObject"></param>
 		/// <param name="__instance"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Hole), argumentTypes: new[] { typeof(GameObject) })]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Hole.EnterRange), argumentTypes: new[] { typeof(GameObject) })]
 		public static bool Hole_EnterRange(GameObject myObject, Hole __instance)
 		{
 			if (GC.loadComplete && 

@@ -41,9 +41,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 			{
 				if (__instance is Manhole)
 					P_Manhole.PryOpen((Manhole)__instance);
+				else if (__instance is Fountain)
+					P_Fountain.Loot((Fountain)__instance);
 			}
-
-			__instance.StopInteraction();
 		}
 	}
 }

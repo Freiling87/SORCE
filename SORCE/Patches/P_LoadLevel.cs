@@ -39,7 +39,7 @@ namespace SORCE.Patches
 		{
 			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
 			FieldInfo loadLevel_levelSizeMax = AccessTools.Field(typeof(LoadLevel), nameof(LoadLevel.levelSizeMax));
-			MethodInfo levelGenTools_SetLevelSizeModifier = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.SetLevelSizeModifier), new[] { typeof(LoadLevel) });
+			MethodInfo levelGenTools_SetLevelSizeModifier = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.SetLevelSizeMax), new[] { typeof(LoadLevel) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -471,7 +471,7 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_ExplodingAndSlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo LevelGenTools_HasExplodingAndSlimeBarrels = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPollutionFeatures), new[] { typeof(bool) });
+			MethodInfo LevelGenTools_HasPollutionFeatures = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPollutionFeatures), new[] { typeof(bool) });
 			MethodInfo contains = AccessTools.Method(typeof(List<string>), nameof(List<string>.Contains), new[] { typeof(string) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -491,7 +491,7 @@ namespace SORCE.Patches
 					//	flag15 = LevelGenTools.HasExplodingAndSlimeBarrels(flag15);
 
 					new CodeInstruction(OpCodes.Ldloc_S, 11), // flag15
-					new CodeInstruction(OpCodes.Call, LevelGenTools_HasExplodingAndSlimeBarrels), // bool
+					new CodeInstruction(OpCodes.Call, LevelGenTools_HasPollutionFeatures), // bool
 					new CodeInstruction(OpCodes.Stloc_S, 11), // Clear
 				});
 

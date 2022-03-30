@@ -11,9 +11,9 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |T					|To Test
 
 #	CT	Mutators
-##		T	Ambient Light Color
-###			T	00 Test with Werewolf
-Attempted: StatusEffects.WerewolfTransformBack_Postfix
+##		√	Ambient Light Color
+###			√	00 Test with Werewolf
+Works
 ###			√	Goodsprings
 ###			√	Hellscape	
 ###			√	NuclearWinter
@@ -28,8 +28,8 @@ Works
 ###			H	Evening
 ###			H	FullMoon
 ###			H	HalfMoon
-###			√	New Moon
-This is done hackily, but needs to be modular.
+###			√H	New Moon
+####			H	Now do it modularly
 ##		H	Audio
 ###			C	Ambienter Ambience
 Only seems to apply Park audio, check BM for others
@@ -46,35 +46,37 @@ No floor type?
 Exterior walls are now wood?? Lol something got messed up, but maybe use it in the other.
 Change rugs back to Grass
 ##		CT	Features
-###			C	Aftermath
-Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.
-All objects have a chance to be broken at the start.
-All NPCs have a chance to be missing some health.
-Buildings have a chance to start out on fire, or to have every object inside them destroyed and all items stolen. Police stations have a higher chance.
-###			√	Bad Neighborhoods
-###			C	Brought Back Fountain
-####			C	Spawns in Home Base
-####			C	Add interactions here
-###			√	Cart of the Deal
-###			C	Department of Public Comfiness
-####			C	Recommend for Grand City Hotel
-####			C	Spawn public Armchairs & Fireplaces
-####			C	Spawn public Rugs (overlap with Grand City Hotel)
 ###			C	Lake it or Leave it
 ####			C	Do not make lakes over Downtown bridges
 New
 ###			C	Power Whelming
 Stopped working
-###			√	Skyway District
-Complete
 ###			C	Surveillance Society
 Stopped working
 ###			C	The Pollution Solution
 Stopped working
 ###			C	This Land is Mine Land
 New
-###			C	Warzone
+###			H	Aftermath
+Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.
+All objects have a chance to be broken at the start.
+All NPCs have a chance to be missing some health.
+Buildings have a chance to start out on fire, or to have every object inside them destroyed and all items stolen. Police stations have a higher chance.
+###			H	Department of Public Comfiness
+####			C	Recommend for Grand City Hotel
+####			C	Spawn public Armchairs & Fireplaces
+####			C	Spawn public Rugs (overlap with Grand City Hotel)
+###			H	Warzone
 Spawns dead/burned/exploded bodies, blood splatters
+###			√	Bad Neighborhoods
+Complete
+###			√	Brought Back Fountain
+####			√	Spawns in Home Base
+I don't really gaf unless people complain
+###			√	Cart of the Deal
+Complete
+###			√	Skyway District
+Complete
 ##		H	Light Sources
 Hold for next release
 ##		√	MapSize
@@ -184,6 +186,8 @@ Benefits:
 This only works on procedurally generated objects. Trashcans, boulders, bushes. Not toilets, etc.
 So the goal here is to turn the current postfix method into one accessible by both original methods,
 the current procgen one and whichever spawns hand-placed objects.
+
+*** I think this other method is SpawnerObject.spawn.
 ###			√	Dirtier Districts 
 ###			C	Floraler Flora
 ###			C	Shittier Toilets
@@ -213,3 +217,12 @@ the current procgen one and whichever spawns hand-placed objects.
 #	C	Migrate In
 - Anything from CCU that would be of interest to the non-designer - that includes all Ambience & Litter.
 - Custom object interactions related to city overhauls, e.g. coin-op toilets. They don't all need to be in one mod.
+#	C	Release
+##		C	Disable Core.DebugMode
+##		C	Version number
+1.0.0
+##		C	Documentation
+##		C	Uploads
+###			C	BananaMods
+###			C	Discord
+###			C	NexusMods

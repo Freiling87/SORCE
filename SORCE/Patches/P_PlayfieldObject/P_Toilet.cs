@@ -38,21 +38,21 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[RLSetup]
 		public static void Setup()
 		{
-			RogueInteractions.CreateProvider<Toilet>(static h =>
+			RogueInteractions.CreateProvider<Toilet>(h =>
 			{
 				if (GC.levelType != "HomeBase" &&
 					GC.challenges.Contains(nameof(AnCapistan)))
 				{
 					if (CanAgentFlushSelf(h.Agent))
 					{
-						h.AddButton("FlushYourself", toiletCost, static m =>
+						h.AddButton("FlushYourself", toiletCost, m =>
 						{
 							m.Object.FlushYourself();
 						});
 					}
 					if (h.Object.hasPurgeStatusEffects())
 					{
-						h.AddButton("PurgeStatusEffects", toiletCost, static m =>
+						h.AddButton("PurgeStatusEffects", toiletCost, m =>
 						{
 							m.Object.PurgeStatusEffects();
 						});

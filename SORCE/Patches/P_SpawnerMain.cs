@@ -50,9 +50,10 @@ namespace SORCE.Content.Patches.P_LevelGen
 			__result = lightReal.lightReal2Color;
 			return false;
 
-			#region Vanilla
+            #region Vanilla
 
-			if (lightRealName == "ArenaRingLight")
+			#pragma warning disable CS0162 // Unreachable code detected
+            if (lightRealName == "ArenaRingLight")
 				lightReal.lightReal2Color = vColor.arenaRingColor;
 			else if (lightRealName == "BankLight")
 				lightReal.lightReal2Color = vColor.whiteColor;
@@ -70,7 +71,8 @@ namespace SORCE.Content.Patches.P_LevelGen
 				lightReal.lightReal2Color = vColor.fireStationColor;
 			else if (lightRealName == "GraveyardLight")
 				lightReal.lightReal2Color = vColor.cyanColor;
-			if (lightRealName == "GreenLight")
+			#pragma warning restore CS0162 // Unreachable code detected
+            if (lightRealName == "GreenLight")
 				lightReal.lightReal2Color = vColor.greenColor;
 			else if (lightRealName == "HomeLight")
 			{
@@ -149,11 +151,9 @@ namespace SORCE.Content.Patches.P_LevelGen
 		/// <param name="__instance"></param>
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(SpawnerMain.spawnObjectReal), argumentTypes: new[] 
 			{ typeof(Vector3), typeof(PlayfieldObject), typeof(string), typeof(string), typeof(WorldDataObject), typeof(int) })]
-		public static void SpawnerMain_spawnObjectReal(Vector3 objectPos, PlayfieldObject objectSource, string objectType, string myDir, WorldDataObject worldDataObjects, int worldDataElementPosition, SpawnerMain __instance)
+		public static void SpawnerMain_spawnObjectReal
+			(Vector3 objectPos, PlayfieldObject objectSource, string objectType, string myDir, WorldDataObject worldDataObjects, int worldDataElementPosition, SpawnerMain __instance)
 		{
-			float offsetSize = 9999f;
-			string particleType = null;
-			int iteratorChance = 0;
 			int trashLevelInverse = GC.levelTheme; // 0 = Home Base, 5 = Mayor Village 
 			Vector2 loc = objectPos;
 			int chance = 100;
@@ -186,7 +186,6 @@ namespace SORCE.Content.Patches.P_LevelGen
 						break;
 
 					case vObject.Plant:
-						// TODO: Not working
 						while (GC.percentChance(chance))
 						{
 							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
@@ -280,8 +279,8 @@ namespace SORCE.Content.Patches.P_LevelGen
 						while (GC.percentChance(chance))
 						{
 							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
-								loc.x + Random.Range(-0.06f, 0.06f), 
-								loc.y + Random.Range(-0.08f, 0.00f)), 
+								loc.x + Random.Range(-0.04f, 0.04f), 
+								loc.y + Random.Range(-0.08f, -0.04f)), 
 								vObject.Bush, true);
 							chance -= 50;
 						}
@@ -289,20 +288,18 @@ namespace SORCE.Content.Patches.P_LevelGen
 						break;
 
 					case vObject.Toilet:
-						// TODO: Not working
 						while (GC.percentChance(chance))
 						{
 							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
 								loc.x + Random.Range(-0.14f, 0.14f), 
 								loc.y + Random.Range(-0.24f, 0.24f)),
-								vObject.MovieScreen, false); // Toilet Paperww
+								vObject.MovieScreen, false); // Toilet Paper
 							chance -= 100;
 						}
 
 						break;
 
 					case vObject.TrashCan:
-						// TODO: See if you can just spawn their contents outside, instead
 						while (GC.percentChance(1))
 							GC.spawnerMain.SpawnItem(new Vector2(
 								loc.x + Random.Range(-0.32f, 0.32f), 
@@ -311,7 +308,6 @@ namespace SORCE.Content.Patches.P_LevelGen
 
 						while (GC.percentChance(chance))
 						{
-							// TODO: Find a way to ensure it doesn't pass walls
 							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
 								loc.x + Random.Range(-0.48f, 0.48f), 
 								loc.y + Random.Range(-0.48f, 0.48f)),
@@ -323,6 +319,5 @@ namespace SORCE.Content.Patches.P_LevelGen
 						break;
 				}
 		}
-
 	}
 }
