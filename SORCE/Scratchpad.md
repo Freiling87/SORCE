@@ -183,6 +183,11 @@ the current procgen one and whichever spawns hand-placed objects.
 ###			C	Shittier Toilets
 #	C	Traits
 ##		C	Underdank Citizen
+###			C	Import
+Still not spawning
+Transpiler to remove levelTheme requirement complete
+###			C	Disable Teleport to entry point
+Works, but has a chance of rolling self
 ###			C	Old Notes
 - Take small damage if you walk into manhole instead of activating
   - Attempted

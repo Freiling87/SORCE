@@ -784,7 +784,7 @@ namespace SORCE
 
 					for (int j = 0; j < GC.objectRealList.Count; j++)
 						if (GC.objectRealList[j].objectName == vObject.Manhole && 
-							Vector2.Distance(GC.objectRealList[j].tr.position, spot) < 14f)
+							Vector2.Distance(GC.objectRealList[j].tr.position, spot) < 2f) // Vanilla 14f
 							spot = Vector2.zero;
 
 					if (spot != Vector2.zero)

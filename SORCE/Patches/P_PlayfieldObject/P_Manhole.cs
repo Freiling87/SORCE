@@ -14,6 +14,10 @@ using System.Threading.Tasks;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
+using JetBrains.Annotations;
+using BTHarmonyUtils.TranspilerUtils;
+using System.Reflection.Emit;
+using BTHarmonyUtils;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
@@ -165,9 +169,36 @@ namespace SORCE.Patches.P_PlayfieldObject
 		}
 	}
 
-	public class Manhole_Remora
+    [HarmonyPatch(typeof(Manhole))]
+    [HarmonyPatch("Start")]
+	[HarmonyDebug]
+    static class P_Manhole_Start
 	{
-		public Manhole host;
-		public bool splashed = false;
+		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> Start_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			FieldInfo gc = AccessTools.Field(typeof(PlayfieldObject), "gc");
+			FieldInfo levelTheme = AccessTools.Field(typeof(GameController), "levelTheme");
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				targetInstructionSequence: new List<CodeInstruction>
+				{
+					// __instance.gc.levelTheme != 3
+
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldfld),
+					new CodeInstruction(OpCodes.Ldc_I4_3),
+					new CodeInstruction(OpCodes.Beq_S),
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return codeInstructions;
+		} 
 	}
 }

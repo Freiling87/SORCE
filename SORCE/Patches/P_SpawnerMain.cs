@@ -279,8 +279,8 @@ namespace SORCE.Content.Patches.P_LevelGen
 						while (GC.percentChance(chance))
 						{
 							GC.spawnerMain.SpawnWreckagePileObject(new Vector2(
-								loc.x + Random.Range(-0.04f, 0.04f), 
-								loc.y + Random.Range(-0.08f, -0.04f)), 
+								loc.x, 
+								loc.y -0.04f), 
 								vObject.Bush, true);
 							chance -= 50;
 						}

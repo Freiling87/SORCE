@@ -1940,6 +1940,7 @@ namespace SORCE.Localization
 					Generator = "Generator",
 					Generator2 = "Generator2",
 					Gravestone = "Gravestone",
+					Hole = "Hole",
 					Jukebox = "Jukebox",
 					KillerPlant = "KillerPlant",
 					Lamp = "Lamp",
