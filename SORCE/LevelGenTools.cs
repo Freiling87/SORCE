@@ -171,8 +171,7 @@ namespace SORCE
 		public static bool HasBrokenWindows =>
 			(GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
 			(GC.customLevel && GC.loadLevel.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
-			GC.challenges.Contains(nameof(BadNeighborhoods)) ||
-			Core.debugMode;
+			GC.challenges.Contains(nameof(BadNeighborhoods));
 		public static bool HasBushes(bool vanilla) =>
 			GC.challenges.Contains(nameof(Arcology)) ||
 			Core.debugMode ||
@@ -199,7 +198,6 @@ namespace SORCE
 		public static bool HasFireHydrants(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) && 
 			!GC.challenges.Contains(nameof(LowTechLowLife)) ||
-			Core.debugMode ||
 			vanilla;
 		public static bool HasFlamingBarrels(bool vanilla) =>
 			!GC.challenges.Contains(nameof(MACITS)) &&

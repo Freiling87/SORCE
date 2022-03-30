@@ -46,9 +46,11 @@ No floor type?
 Exterior walls are now wood?? Lol something got messed up, but maybe use it in the other.
 Change rugs back to Grass
 ##		CT	Features
-###			C	Lake it or Leave it
+###			H	Lake it or Leave it
+Honestly this one's not interesting enough to bother with yet.
 ####			C	Do not make lakes over Downtown bridges
-New
+LoadLevel.SetupMore3_3, after line 67
+There's a method called TileInfo.IsearBridge or something like that, use it
 ###			C	Power Whelming
 Stopped working
 ###			C	Surveillance Society

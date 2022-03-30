@@ -14,12 +14,10 @@ namespace SORCE.Challenges.C_Features
 {
 	public class LakeItOrLeaveIt
 	{
-		[RLSetup]
+		//[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(LakeItOrLeaveIt);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(LakeItOrLeaveIt), true)
 			{
 			})
 				.WithName(new CustomNameInfo(
