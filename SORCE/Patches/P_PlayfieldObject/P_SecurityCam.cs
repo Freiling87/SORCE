@@ -437,14 +437,14 @@ namespace SORCE.Patches.P_PlayfieldObject
 		//}
 
 		//public static void SecurityCam_StartLate(SecurityCam __instance) // Postfix
-		{
-			if (__instance.owner == 85)
-			{
-				if (GC.challenges.Contains(cChallenge.PoliceState))
-					__instance.targets = "Guilty";
-				else
-					__instance.targets = "Wanted";
-			}
-		}
+		//{
+		//	if (__instance.owner == 85)
+		//	{
+		//		if (GC.challenges.Contains(cChallenge.PoliceState))
+		//			__instance.targets = "Guilty";
+		//		else
+		//			__instance.targets = "Wanted";
+		//	}
+		//}
 	}
 }
