@@ -6,9 +6,8 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
-using SORCE.Content.Challenges;
-using SORCE.Localization;
 using System.Linq;
+using SORCE.Localization;
 
 namespace SORCE.Challenges.C_AmbientLightLevel
 {

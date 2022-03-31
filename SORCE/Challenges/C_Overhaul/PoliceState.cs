@@ -6,7 +6,6 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
-using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
@@ -22,6 +21,7 @@ namespace SORCE.Challenges.C_Overhaul
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
 				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
+				// AddsCriminals, AddsNonhumans, RemovesLawEnforcement, Zombies, MixedUpLevels
 			})
 				.WithName(new CustomNameInfo(
 					"Overhaul - Police State"))

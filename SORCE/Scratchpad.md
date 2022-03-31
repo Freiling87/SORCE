@@ -112,6 +112,9 @@ This is the yellow glow for when you have usable items with an object. As you co
 - Fire sources are fine since the particle creates the light anyway.
 ###			C	Player Agent Light Size
 New
+This would be a stand-in for the flashlight
+###			C	Flashlight following player reticle
+New
 ##		√	MapSize
 ###			√	A City For Ants
 ###			√	Claustropolis
@@ -124,7 +127,8 @@ Scope:
 	Features
 Note:
 	There is overhaul-specific content still in BM. Haven't bothered to migrate it over yet, because this is on hold.
-	
+###			C	00 Common features
+Second-class citizens are more likely to flee altercations
 ###			H	Aftermath
 Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.
 All objects have a chance to be broken at the start.
@@ -132,9 +136,18 @@ All NPCs have a chance to be missing some health.
 Buildings have a chance to start out on fire, or to have every object inside them destroyed and all items stolen. Police stations have a higher chance.
 ###			H	AnCapistan
 Newish
+####			C	Illegal to scavenge in trash
+"That trash is property of TrashCorp!"
 ###			H	Arcology
 ####			√	Public Floors - Grass
 ####			H	Border Wall - Hedge
+###			C	Battle City
+- More common Arenas
+- More roaming fighters
+- Anyone can Challenge
+- NPCs may challenge you
+  - Onlookers annoyed if you decline
+- No Guns
 ###			H	Canal City
 ####			C	Public Floors - Pool
 ###			C	Disco City Danceoff
@@ -145,6 +158,8 @@ Newish
 ###			H	Eisburg
 ####			H	Public Floors - Skating Rink
 My gotdamn white whale. I just can't get this one to work.
+###			C	Freak City
+Just dial up all the weird, supernatural, and bizarre
 ###			C	Grand City Hotel
 On start:
 
@@ -172,6 +187,11 @@ On start:
 ###			H	Test Tube City
 Glass walls & Glass-y floors
 ####			C	Scientist Cops
+###			C	Tindertown
+Wood buildings, oil spills, flame grates, no fire departments
+Incendiary weapons & tools are contraband
+But cops have flamethrowers
+####			C	Flamethrower Cops
 ###			C	MACITS
 ####			C	No Money
 Everything's free
@@ -185,6 +205,10 @@ Maybe they don't take sides if you're in a fight, and just kill both parties unl
 Telling really bad or really good jokes makes police hostile
 ###			C	Technocracy
 Newish
+###			C	Vampire City (rename)
+Vampires are first-class citizens, everyone else isn't.
+They are free to victimize whoever they like.
+Blood economy should be important 
 ###			H	Warzone
 Spawns dead/burned/exploded bodies, blood splatters
 ##		√	Population
@@ -245,7 +269,6 @@ Works, but has a chance of rolling self
 - Toilet to Manhole
   - Attempted
 #	C	Migrate In
-- Anything from CCU that would be of interest to the non-designer - that includes all Ambience & Litter.
 - Custom object interactions related to city overhauls, e.g. coin-op toilets. They don't all need to be in one mod.
 #	C	Release
 ##		C	Disable Core.DebugMode

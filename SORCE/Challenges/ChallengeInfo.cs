@@ -1,7 +1,6 @@
+using RogueLibsCore;
 using System;
 using System.Collections.Generic;
-using SORCE.Content.Challenges;
-using RogueLibsCore;
 
 namespace SORCE.Challenges
 {

@@ -6,7 +6,6 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
-using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 

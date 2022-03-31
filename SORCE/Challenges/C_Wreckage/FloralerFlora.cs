@@ -6,7 +6,6 @@ using SORCE;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using SORCE.Challenges;
-using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
@@ -25,7 +24,7 @@ namespace SORCE.Challenges.C_Wreckage
 				.WithName(new CustomNameInfo(
 					"Wreckage - Floraler Flora"))
 				.WithDescription(new CustomNameInfo(
-					"Wreckage mutators are visual-only. They add particles to add a degree of realism and variety to the environment.\n\n" +
+					"The #1 most requested mutator ever. An absolute game-changer, practically Streets of Rogue 2!\n\n" +
 					"- Spawns leaves around plants"));
 		}
 	}

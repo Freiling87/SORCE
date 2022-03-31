@@ -17,6 +17,7 @@ using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Roamers;
 using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Wreckage;
+using SORCE.Challenges.C_Population;
 
 namespace SORCE
 {
@@ -129,7 +130,6 @@ namespace SORCE
 			1;
 		public static int PopulationMafia(int vanilla) => 
 			vanilla;
-
 		public static string AmbientAudio(string chunkDescription)
 		{
 			string ambientAudio = "";
@@ -165,12 +165,15 @@ namespace SORCE
 			GC.challenges.Contains(nameof(DUMP)) ||
 			GC.challenges.Contains(nameof(SpelunkyDory)) ||
 			Core.debugMode ||
-			vanilla;
+            vanilla;
 		public static bool HasBrokenWindows =>
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
 			(GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
 			(GC.customLevel && GC.loadLevel.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
+			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(BadNeighborhoods));
-		public static bool HasBushes(bool vanilla) =>
+        public static bool HasBushes(bool vanilla) =>
 			GC.challenges.Contains(nameof(Arcology)) ||
 			Core.debugMode ||
 			vanilla;
@@ -213,11 +216,18 @@ namespace SORCE
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			Core.debugMode ||
 			vanilla;
+		public static bool HasPublicLamps(bool vanilla) =>
+			!GC.challenges.Contains(nameof(AnCapistan)) &&
+			GC.challenges.Contains(nameof(MACITS)) ||
+			vanilla;
 		public static bool HasLandMines(bool vanilla) =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			GC.challenges.Contains(nameof(ThisLandIsMineLand)) ||
 			vanilla;
 		public static bool HasLitter =>
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(Arcology)) || // Turns to leaves
 			GC.challenges.Contains(nameof(DirtierDistricts)) ||
 			Core.debugMode;
@@ -235,7 +245,7 @@ namespace SORCE
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(MobTown)) ||
+			GC.challenges.Contains(nameof(UnionTown)) ||
 			vanilla;
 		public static bool HasPollutionFeatures(bool vanilla) =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
@@ -261,6 +271,7 @@ namespace SORCE
 			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
 			Core.debugMode;
 		public static bool HasSecurityCamsAndTurrets =>
+			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(PoliceState)) ||
 			GC.challenges.Contains(nameof(SurveillanceSociety)) ||
 			Core.debugMode;

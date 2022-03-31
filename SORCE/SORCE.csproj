@@ -136,7 +136,7 @@
     <Compile Include="Challenges\C_Population\LetMeSeeThatThrong.cs" />
     <Compile Include="Challenges\C_Population\SwarmWelcome.cs" />
     <Compile Include="Challenges\C_Population\GhostTown.cs" />
-    <Compile Include="Challenges\C_Roamers\MobTown.cs" />
+    <Compile Include="Challenges\C_Roamers\UnionTown.cs" />
     <Compile Include="Challenges\C_Roamers\YoungMenInTheNeighborhood.cs" />
     <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
     <Compile Include="LevelGenTools.cs" />

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using RogueLibsCore;
+using SORCE.Challenges.C_Population;
 
 namespace SORCE.Localization
 {
@@ -22,7 +23,7 @@ namespace SORCE.Localization
 		public static List<string> AddsCriminals = new List<string>()
 		{
 			nameof(HoodlumsWonderland),
-			nameof(MobTown),
+			nameof(UnionTown),
 			nameof(YoungMenInTheNeighborhood),
 		};
 		public static List<string> AffectsLights = new List<string>()
@@ -52,6 +53,7 @@ namespace SORCE.Localization
 		};
 		public static List<string> Overhauls = new List<string>()
 		{
+			vChallenge.MixedUpLevels,
 			nameof(AnCapistan),
 			nameof(MACITS),
 			nameof(PoliceState)
