@@ -156,10 +156,4 @@ namespace SORCE.Patches.P_PlayfieldObject
 			return true;
 		}
 	}
-
-	public class Toilet_Remora
-	{
-		public Toilet host;
-		public bool splashed = false;
-	}
 }

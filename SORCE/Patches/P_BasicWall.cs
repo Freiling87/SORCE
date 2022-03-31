@@ -13,7 +13,7 @@ using SORCE.Challenges.C_Wreckage;
 using static SORCE.Localization.NameLists;
 using SORCE.Localization;
 
-namespace SORCE.Content.Patches
+namespace SORCE.Patches
 {
 	[HarmonyPatch(declaringType: typeof(BasicWall))]
 	public static class P_BasicWall

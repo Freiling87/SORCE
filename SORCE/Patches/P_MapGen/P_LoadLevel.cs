@@ -367,7 +367,7 @@ namespace SORCE.Patches
 	}
 	
 	[HarmonyPatch]
-	static class P_LoadLevel_SetupMore3_3_Patches
+	static class P_LoadLevel_SetupMore3_3
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;

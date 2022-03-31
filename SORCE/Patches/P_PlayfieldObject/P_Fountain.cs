@@ -30,7 +30,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 				if (h.Helper.interactingFar)
 					return;
 
-				if (!h.Object.GetHook<FountainHook>().HasBeenLooted)
+				if (!h.Object.GetHook<P_Fountain_Hook>().HasBeenLooted)
 					h.AddButton(cButtonText.FountainSteal, m =>
 					{
 						GC.spawnerMain.SpawnExplosion(m.Object, m.Object.curPosition, vExplosion.Water);
@@ -50,8 +50,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Fountain.SetVars), argumentTypes: new Type[0] { })]
 		public static void SetVars_Postfix(Fountain __instance)
         {
-			__instance.AddHook<FountainHook>();
-			__instance.GetHook<FountainHook>().MoneyHeld = Random.Range(1, 20);
+			__instance.AddHook<P_Fountain_Hook>();
+			__instance.GetHook<P_Fountain_Hook>().MoneyHeld = Random.Range(1, 20);
 
 			__instance.damageThreshold = 50;
 			__instance.damageAccumulates = false;
@@ -67,11 +67,11 @@ namespace SORCE.Patches.P_PlayfieldObject
 			InvItem invItem = new InvItem();
 			invItem.invItemName = vItem.Money;
 			invItem.ItemSetup(false);
-			invItem.invItemCount = fountain.GetHook<FountainHook>().MoneyHeld;
+			invItem.invItemCount = fountain.GetHook<P_Fountain_Hook>().MoneyHeld;
 			invItem.ShowPickingUpText(fountain.interactingAgent);
 			fountain.interactingAgent.inventory.AddItem(invItem);
 			fountain.objectInvDatabase.DestroyAllItems();
-			fountain.GetHook<FountainHook>().HasBeenLooted = true;
+			fountain.GetHook<P_Fountain_Hook>().HasBeenLooted = true;
 			fountain.interactable = false;
 			agent.statusEffects.AddStatusEffect(vStatusEffect.FeelingUnlucky, true, true);
 			// TODO: XP penalty for stealing
@@ -119,7 +119,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		}
 	}
 
-	public class FountainHook : HookBase<PlayfieldObject>
+	public class P_Fountain_Hook : HookBase<PlayfieldObject>
     {
 		protected override void Initialize() { }
 

@@ -88,6 +88,11 @@
     <Compile Include="Challenges\C_AmbientLightLevel\NewMoon.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Sepia.cs" />
     <Compile Include="Challenges\C_Audio\AmbienterAmbience.cs" />
+    <Compile Include="Challenges\C_Lighting\NoAgentLights.cs" />
+    <Compile Include="Challenges\C_Lighting\NoItemLights.cs" />
+    <Compile Include="Challenges\C_Lighting\NoObjectGlow.cs" />
+    <Compile Include="Challenges\C_Lighting\NoObjectLights.cs" />
+    <Compile Include="Challenges\C_Overhaul\Tindertown.cs" />
     <Compile Include="Challenges\C_Overhaul\DUMP.cs" />
     <Compile Include="Challenges\C_Overhaul\GrandCityHotel.cs" />
     <Compile Include="Challenges\C_Overhaul\MonkeTown.cs" />

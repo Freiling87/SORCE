@@ -14,7 +14,7 @@ using SORCE.Challenges.C_Buildings;
 using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Wreckage;
 
-namespace SORCE.Content.Patches.P_LevelGen
+namespace SORCE.Patches
 {
 	[HarmonyPatch(declaringType: typeof(SpawnerMain))]
 	public static class P_SpawnerMain

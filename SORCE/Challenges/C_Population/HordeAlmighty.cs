@@ -10,7 +10,7 @@ using SORCE.Content.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Features
+namespace SORCE.Challenges.C_Population
 {
 	public class HordeAlmighty
 	{

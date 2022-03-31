@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RogueLibsCore;
 
-namespace SORCE.Content.Challenges
+namespace SORCE.Challenges
 {
 	public static class ChallengeMenuGroups
 	{
