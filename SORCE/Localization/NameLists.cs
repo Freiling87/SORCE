@@ -1,23 +1,18 @@
-﻿using SORCE.Challenges.C_AmbientLightColor;
+﻿using RogueLibsCore;
+using SORCE.Challenges.C_AmbientLightColor;
 using SORCE.Challenges.C_AmbientLightLevel;
-using SORCE.Challenges.C_Features;
 using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_MapSize;
 using SORCE.Challenges.C_Overhaul;
-using SORCE.Challenges.C_Roamers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using RogueLibsCore;
 using SORCE.Challenges.C_Population;
+using SORCE.Challenges.C_Roamers;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace SORCE.Localization
 {
-	// TODO: Move this out of here
-	public static class NameLists
+    // TODO: Move this out of here
+    public static class NameLists
 	{
 		#region Challenges
 		public static List<string> AddsCriminals = new List<string>()
@@ -127,46 +122,31 @@ namespace SORCE.Localization
 		#region Custom Content
 		public static class cButtonText // Custom Button Text
         {
-			public static void Setup()
-            {
-				string t = vNameType.Interface;
-
-				_ = RogueLibs.CreateCustomName(cButtonText.CamerasCaptureGuilty, t, new CustomNameInfo("Detect Guilty"));
-				_ = RogueLibs.CreateCustomName(cButtonText.CamerasCaptureWanted, t, new CustomNameInfo("Detect Wanted"));
-				_ = RogueLibs.CreateCustomName(cButtonText.FountainSteal, t, new CustomNameInfo("Steal money"));
-				_ = RogueLibs.CreateCustomName(cButtonText.FountainWishFabulousWealth, t, new CustomNameInfo("Wish for fabulous wealth"));
-				_ = RogueLibs.CreateCustomName(cButtonText.FountainWishFameAndGlory, t, new CustomNameInfo("Wish for fame & glory"));
-				_ = RogueLibs.CreateCustomName(cButtonText.FountainWishGoodHealth, t, new CustomNameInfo("Wish for good health"));
-				_ = RogueLibs.CreateCustomName(cButtonText.FountainWishTrueFriendship, t, new CustomNameInfo("Wish for true friendship"));
-				_ = RogueLibs.CreateCustomName(cButtonText.FountainWishWorldPeace, t, new CustomNameInfo("Wish for world peace"));
-			}
-
 			public const string
-				CamerasCaptureWanted = "CamerasCaptureWanted",
-				CamerasCaptureGuilty = "CamerasCaptureGuilty",
+				CameraDetectEnforcer = "CameraDetectEnforcer",
+				CameraDetectGuilty = "CameraDetectGuilty",
+				CameraDetectWanted = "CameraDetectWanted",
+				ElevatorBuy = "ElevatorBuyTicket",
 				FountainSteal = "FountainSteal",
 				FountainWishFabulousWealth = "FountainWishFabulousWealth",
 				FountainWishFameAndGlory = "FountainWishFameAndGlory",
 				FountainWishGoodHealth = "FountainWishGoodHealth",
 				FountainWishTrueFriendship = "FountainWishTrueFriendship",
-				FountainWishWorldPeace = "FountainWishWorldPeace";
+				FountainWishWorldPeace = "FountainWishWorldPeace",
+				FireHydrantBuy = "HydrantBuy"
+				;
 		}
 		public static class cDialogue // Custom Dialogue
 		{
 			public const string
-					CantAffordAlarmButton = "AlarmButtonCantAfford",
-					CantAffordElevator = "CantAffordElevator",
-					CantAffordToilet = "ToiletCantAfford",
-					MachineBusy = "MachineBusy",
-					PurchaseElevator = "PurchaseElevator",
-					SlotMachineJackpot_ = "SlotMachineJackpot_", // For concatenation into following
-					SlotMachineJackpot_1 = "SlotMachineJackpot_1",
-					SlotMachineJackpot_2 = "SlotMachineJackpot_2",
-					SlotMachineJackpot_3 = "SlotMachineJackpot_3",
-					SlotMachineJackpot_4 = "SlotMachineJackpot_4",
-					SlotMachineJackpot_5 = "SlotMachineJackpot_5",
-					VeiledThreatsAnnoyed = "ThreatenAnnoyed",
-					WarlordSubmission = "WarlordSubmission";
+				AlarmButtonBuyFail = "AlarmButtonCantAfford",
+				ElevatorBuyFail = "CantAffordElevator",
+				ElevatorBuySuccess = "PurchaseElevator",
+				FireHydrantBuyFail = "FireHydrantBuyFail",
+				FireHydrantBuySuccess = "FireHydrantBuySuccess",
+				MachineBusy = "MachineBusy",
+				ToiletBuyFail = "ToiletCantAfford"
+				;
 		}
 		public static class cLevelFeature // Custom Level Features
 		{
@@ -196,7 +176,7 @@ namespace SORCE.Localization
 		public static class cOperatingText // Custom Operating Bar Text
         {
 			public const string
-				BeingAPieceOfShit = "BeingAPieceOfShit";
+				FountainStealing = "BeingAPieceOfShit";
         }
 		#endregion
 		#region Vanilla Content
@@ -319,6 +299,11 @@ namespace SORCE.Localization
 					Park = "ParkAmbience",
 					Television = "TVAmbience";
 		}
+		public static class vAnimation
+        {
+			public const string
+				MachineOperate = "MachineOperate";
+        }
 		public static class vAudioClip // Vanilla Audio Clips
 		{
 			public const string
@@ -746,7 +731,10 @@ namespace SORCE.Localization
 		public static class vButtonText // Vanilla Button Text
 		{
 			public const string
+				AlarmButtonAncapistan = "AlarmButtonAncapistan",
+				ElevatorGoUp = "ElevatorGoUp",
 				FlushYourself = "FlushYourself",
+				RefillWaterCannon = "RefillWaterCannon",
 				TossCoin = "TossCoin"
 				;
 		}

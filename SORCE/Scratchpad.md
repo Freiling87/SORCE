@@ -168,6 +168,7 @@ Note:
 	There is overhaul-specific content still in BM. Haven't bothered to migrate it over yet, because this is on hold.
 ###			C	00 Common features
 Second-class citizens are more likely to flee altercations
+A method that determines what social status someone is afforded, based on overhaul & whichever appropriate criteria. It will be used frequently.
 ###			H	Aftermath
 Random destruction, as if a riot just occurred. Sort of easy mode, meant more for ambience.
 All objects have a chance to be broken at the start.
@@ -177,6 +178,7 @@ Buildings have a chance to start out on fire, or to have every object inside the
 Newish
 ####			C	Paid Objects
 Stove, Fire Hydrant, Alarm Button, 
+All of them should have a tiny chance to be really shitty or steal your money
 ####			C	Illegal to scavenge in trash
 "That trash is property of TrashCorp!"
 ###			H	Arcology
@@ -288,8 +290,8 @@ the current procgen one and whichever spawns hand-placed objects.
 ###			C	Shittier Toilets
 #	C	Traits
 ##		C	Underdank Citizen
-###			C	Import
-Still not spawning
+###         C   Spawn issues
+Test on downtown with massive numbers to verify the issue
 Transpiler to remove levelTheme requirement complete
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self

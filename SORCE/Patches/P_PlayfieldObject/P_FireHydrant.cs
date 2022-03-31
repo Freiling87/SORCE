@@ -1,63 +1,66 @@
-﻿using System;
+﻿using BepInEx.Logging;
+using HarmonyLib;
+using RogueLibsCore;
+using SORCE.Challenges.C_Overhaul;
+using SORCE.Logging;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
+    //[HarmonyPatch(declaringType: typeof(FireHydrant))]
     class P_FireHydrant
     {
+        private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+        public static GameController GC => GameController.gameController;
+
+        const int refillPrice = 10;
+
+        [RLSetup]
+        public static void Setup()
+        {
+            string t = vNameType.Dialogue;
+            RogueLibs.CreateCustomName(cDialogue.FireHydrantBuyFail, t, new CustomNameInfo("Insufficient funds to deserve transaction."));
+            RogueLibs.CreateCustomName(cDialogue.FireHydrantBuySuccess, t, new CustomNameInfo("Transaction complete. Thank you for deserving Nastly Water Products, Inc. Have a profitable day."));
+
+            t = vNameType.Interface;
+            RogueLibs.CreateCustomName(cButtonText.FireHydrantBuy, t, new CustomNameInfo("Deserve Water"));
+
+            RogueInteractions.CreateProvider<FireHydrant>(h =>
+            {
+                if (GC.challenges.Contains(nameof(AnCapistan)) &&
+                    h.Agent.statusEffects.hasSpecialAbility(VanillaAbilities.WaterCannon))
+                {
+                    FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
+                    List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
+                    interactions.RemoveAll(i => i.ButtonName is vButtonText.RefillWaterCannon);
+
+                    h.AddButton(cButtonText.FireHydrantBuy, refillPrice, m =>
+                    {
+                        TryRefillWaterCannon(m.Object);
+                    });
+                }
+            });
+        }
+
+        public static void TryRefillWaterCannon(FireHydrant hydrant)
+        {
+            // TODO: Ignore if already full
+
+            if (hydrant.moneySuccess(refillPrice))
+            {
+                hydrant.RefillWaterCannon();
+                GC.audioHandler.Play(hydrant, vAudioClip.ATMDeposit);
+                CoreTools.SayDialogue(hydrant, cDialogue.FireHydrantBuySuccess, vNameType.Dialogue);
+            }
+            else
+            {
+                GC.audioHandler.Play(hydrant, vAudioClip.CantDo);
+                CoreTools.SayDialogue(hydrant, cDialogue.FireHydrantBuyFail, vNameType.Dialogue);
+            }
+
+            hydrant.StopInteraction();
+        }
     }
-
-	//TODO
-    class FireHydrant_Import
-    {
-		//public static bool FireHydrant_DetermineButtons(FireHydrant __instance) // Prefix
-		//{
-		//	if (GC.challenges.Contains(cChallenge.AnCapistan))
-		//	{
-		//		ObjectReal_DetermineButtons_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
-
-		//		if (__instance.interactingAgent.statusEffects.hasSpecialAbility("WaterCannon"))
-		//		{
-		//			__instance.buttons.Add("RefillWaterCannon");
-		//			__instance.buttonPrices.Add(10);
-
-		//			return false;
-		//		}
-
-		//		BMHeaderTools.SayDialogue(__instance.interactingAgent, "CantUseFireHydrant", vNameType.Dialogue);
-
-		//		return false;
-		//	}
-
-		//	return true;
-		//}
-
-		//public static bool FireHydrant_PressedButton(string buttonText, int buttonPrice, FireHydrant __instance) // Prefix
-		//{
-		//	if (GC.challenges.Contains(cChallenge.AnCapistan))
-		//	{
-		//		PlayfieldObject_PressedButton_base.GetMethodWithoutOverrides<Action<string, int>>(__instance).Invoke(buttonText, buttonPrice);
-
-		//		if (buttonText == "RefillWaterCannon")
-		//		{
-		//			if (__instance.moneySuccess(buttonPrice))
-		//			{
-		//				__instance.RefillWaterCannon();
-		//				__instance.StopInteraction();
-		//			}
-
-		//			return false;
-		//		}
-
-		//		__instance.StopInteraction();
-
-		//		return false;
-		//	}
-
-		//	return true;
-		//}
-	}
 }

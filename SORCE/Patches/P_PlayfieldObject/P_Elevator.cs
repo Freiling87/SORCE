@@ -1,107 +1,80 @@
-﻿using System;
+﻿using BepInEx.Logging;
+using HarmonyLib;
+using RogueLibsCore;
+using SORCE.Challenges.C_Overhaul;
+using SORCE.Logging;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
+    // [HarmonyPatch(declaringType: typeof(Elevator))]
     class P_Elevator
     {
+        private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+        public static GameController GC => GameController.gameController;
+
+        [RLSetup]
+        public static void Setup()
+        {
+            string t = vNameType.Dialogue;
+            RogueLibs.CreateCustomName(cDialogue.ElevatorBuyFail, t, new CustomNameInfo("Insufficient funds to deserve transaction."));
+            RogueLibs.CreateCustomName(cDialogue.ElevatorBuySuccess, t, new CustomNameInfo("Transaction complete. Thank you for deserving Evilator, Inc. Have a profitable day."));
+
+            t = vNameType.Interface;
+            RogueLibs.CreateCustomName(cButtonText.ElevatorBuy, t, new CustomNameInfo("Deserve Elevator Ticket"));
+
+            RogueInteractions.CreateProvider<Elevator>(h =>
+            {
+                if (GC.challenges.Contains(nameof(AnCapistan)) &&
+                    !h.Object.GetHook<P_Elevator_Hook>().haveTicket)
+                {
+                    // TODO: Check if this button removal is implemented in RL, Ab says soon
+                    FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
+                    List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
+                    interactions.RemoveAll(i => i.ButtonName is vButtonText.ElevatorGoUp);
+
+                    h.AddButton(cButtonText.ElevatorBuy, 50, m =>
+                    {
+                        TryBuyTicket(m.Object);
+                    });
+                }
+            });
+        }
+
+        public static void TryBuyTicket(Elevator elevator)
+        {
+            /* TODO: Cost
+                No, it doesn't do anything, it just displays the button's cost
+                you'll have to use moneySuccess yourself, in the button's action
+                if the player can't afford it, it will still appear. You'd need to perform checks before calling AddButton for that
+            */
+            // TODO: Different options to purchase one-time or permanent ticket
+
+            if (elevator.moneySuccess(50))
+            {
+                elevator.GetHook<P_Elevator_Hook>().haveTicket = true;
+                GC.audioHandler.Play(elevator, vAudioClip.ATMDeposit);
+                CoreTools.SayDialogue(elevator, cDialogue.ElevatorBuySuccess, vNameType.Dialogue);
+            }
+            else
+            {
+
+                GC.audioHandler.Play(elevator, vAudioClip.CantDo);
+                CoreTools.SayDialogue(elevator, cDialogue.ElevatorBuyFail, vNameType.Dialogue);
+            }
+
+            elevator.PlayAnim(vAnimation.MachineOperate, elevator.interactingAgent);
+            elevator.StopInteraction();
+        }
     }
 
-    //TODO
-    class Elevator_Import
-	{
-		//public static bool Elevator_DetermineButtons(Elevator __instance) // Prefix
-		//{
-		//	if (GC.challenges.Contains(cChallenge.AnCapistan))
-		//	{
-		//		ObjectReal_DetermineButtons_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
+    public class P_Elevator_Hook : HookBase<PlayfieldObject>
+    {
+        protected override void Initialize() { }
 
-		//		if (Elevator_Variables[__instance].ticketPurchased)
-		//			__instance.buttons.Add("ElevatorGoUp");
-		//		else
-		//		{
-		//			__instance.buttons.Add("Elevator_PurchaseTicket");
-		//			__instance.buttonPrices.Add(50);
-		//		}
-
-		//		return false;
-		//	}
-
-		//	return true;
-		//}
-
-		//public static bool Elevator_PressedButton(string buttonText, Elevator __instance, ref bool ___showingSecondButtonSet) // Prefix
-		//{
-		//	if (GC.challenges.Contains(cChallenge.AnCapistan))
-		//	{
-		//		ObjectReal_PressedButton_base.GetMethodWithoutOverrides<Action<string>>(__instance).Invoke(buttonText);
-
-		//		if (buttonText == "StartTutorial")
-		//		{
-		//			GC.challenges.Clear();
-		//			GC.SetDailyRunText();
-		//			GC.sessionDataBig.coopMode = false;
-		//			GC.sessionDataBig.fourPlayerMode = false;
-		//			GC.sessionDataBig.threePlayer = false;
-		//			GC.sessionDataBig.newCharacter = "Hobo";
-		//			GC.loadLevel.RestartGame(101);
-
-		//			return false;
-		//		}
-		//		else if (buttonText == "Elevator_PurchaseTicket")
-		//			Elevator_PurchaseTicket(__instance);
-
-		//		if (!(buttonText == "ElevatorGoUp"))
-		//		{
-		//			__instance.StopInteraction();
-
-		//			return false;
-		//		}
-
-		//		Agent interactingAgent = __instance.interactingAgent;
-
-		//		if (__instance.BigQuestRunning(interactingAgent) && !___showingSecondButtonSet)
-		//		{
-		//			___showingSecondButtonSet = true;
-		//			__instance.RefreshButtons();
-		//			__instance.SetObjectNameDisplay(interactingAgent);
-
-		//			return false;
-		//		}
-
-		//		__instance.StopInteraction();
-		//		GC.exitPoint.TryToExit(interactingAgent);
-		//		interactingAgent.mainGUI.invInterface.justPressedInteract = false;
-
-		//		return false;
-		//	}
-
-		//	return true;
-		//}
-
-		//public static void Elevator_PurchaseTicket(Elevator __instance)
-		//{
-		//	if (__instance.moneySuccess(50))
-		//	{
-		//		Elevator_Variables[__instance].ticketPurchased = true;
-		//		//__instance.PlayAnim("MachineOperate", __instance.interactingAgent);
-		//		GC.audioHandler.Play(__instance.interactingAgent, vAudioClip.ATMDeposit);
-		//		BMHeaderTools.SayDialogue(__instance, cDialogue.PurchaseElevator, vNameType.Dialogue);
-		//	}
-		//	else
-		//	{
-		//		BMHeaderTools.SayDialogue(__instance, cDialogue.CantAffordElevator, vNameType.Dialogue);
-
-		//		PlayfieldObject_StopInteraction_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
-
-		//		return;
-		//	}
-		//}
-
-		//public static Dictionary<Elevator, Elevator_Remora> Elevator_Variables = new Dictionary<Elevator, Elevator_Remora>();
-
-	}
+        public bool haveTicket = false;
+    }
 }

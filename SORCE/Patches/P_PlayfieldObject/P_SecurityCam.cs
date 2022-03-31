@@ -8,6 +8,10 @@ namespace SORCE.Patches.P_PlayfieldObject
 {
     class P_SecurityCam
     {
+
+		//RogueLibs.CreateCustomName(cButtonText.CameraDetectEnforcer, t, new CustomNameInfo("Detect Law Enforcement"));
+		//RogueLibs.CreateCustomName(cButtonText.CameraDetectGuilty, t, new CustomNameInfo("Detect Guilty"));
+		//RogueLibs.CreateCustomName(cButtonText.CameraDetectWanted, t, new CustomNameInfo("Detect Wanted"));
     }
 
     //TODO

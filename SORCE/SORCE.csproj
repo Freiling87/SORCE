@@ -142,7 +142,7 @@
     <Compile Include="LevelGenTools.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
     <Compile Include="Patches\P_Agent.cs" />
-    <Compile Include="Patches\P_ObjectReal.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Elevator.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_FireHydrant.cs" />

@@ -1,23 +1,13 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
+using SORCE.Challenges.C_Lighting;
 using SORCE.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using SORCE.Patches.P_PlayfieldObject;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-using BTHarmonyUtils;
-using BTHarmonyUtils.TranspilerUtils;
-using System.Reflection.Emit;
-using static SORCE.Localization.NameLists;
-using SORCE.Challenges.C_Lighting;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
-	[HarmonyPatch(declaringType: typeof(ObjectReal))]
+    [HarmonyPatch(declaringType: typeof(ObjectReal))]
 	class P_00_ObjectReal
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();

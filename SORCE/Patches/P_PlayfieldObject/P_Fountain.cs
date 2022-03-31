@@ -22,8 +22,16 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[RLSetup]
 		public static void Setup()
         {
-			RogueLibs.CreateCustomName(cButtonText.FountainSteal, NameTypes.Interface, new CustomNameInfo("Loot"));
-			RogueLibs.CreateCustomName(cOperatingText.BeingAPieceOfShit, NameTypes.Interface, new CustomNameInfo("Being a piece of shit"));
+			string t = NameTypes.Interface;
+
+			RogueLibs.CreateCustomName(cButtonText.FountainSteal, t, new CustomNameInfo("Loot"));
+			RogueLibs.CreateCustomName(cButtonText.FountainWishFabulousWealth, t, new CustomNameInfo("Wish for fabulous wealth"));
+			RogueLibs.CreateCustomName(cButtonText.FountainWishFameAndGlory, t, new CustomNameInfo("Wish for fame & glory"));
+			RogueLibs.CreateCustomName(cButtonText.FountainWishGoodHealth, t, new CustomNameInfo("Wish for good health"));
+			RogueLibs.CreateCustomName(cButtonText.FountainWishTrueFriendship, t, new CustomNameInfo("Wish for true friendship"));
+			RogueLibs.CreateCustomName(cButtonText.FountainWishWorldPeace, t, new CustomNameInfo("Wish for world peace"));
+
+			RogueLibs.CreateCustomName(cOperatingText.FountainStealing, t, new CustomNameInfo("Being a piece of shit"));
 
 			RogueInteractions.CreateProvider<Fountain>(h =>
 			{
@@ -42,7 +50,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 							GC.OwnCheck(m.Agent, m.Object.go, "Normal", 2);
 						}
 
-						m.StartOperating(2f, true, cOperatingText.BeingAPieceOfShit);
+						m.StartOperating(2f, true, cOperatingText.FountainStealing);
 					});
 			});
         }
