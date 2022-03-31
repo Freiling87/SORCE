@@ -13,6 +13,7 @@ using SORCE.Localization;
 using SORCE.Challenges.C_Buildings;
 using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Wreckage;
+using SORCE.Challenges.C_Lighting;
 
 namespace SORCE.Patches
 {
@@ -140,6 +141,36 @@ namespace SORCE.Patches
 		}
 
 		/// <summary>
+		/// Light Sources
+		/// </summary>
+		/// <param name="myObject"></param>
+		/// <param name="__instance"></param>
+		/// <returns></returns>
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SetLighting2), argumentTypes: new[] { typeof(PlayfieldObject) })]
+		public static bool SetLighting2_Prefix(PlayfieldObject myObject, SpawnerMain __instance)
+		{
+			if (GC.challenges.Contains(nameof(NoAgentLights)) && myObject.CompareTag("Agent"))
+			{
+				Agent agent = (Agent)myObject;
+				agent.hasLight = false;
+			}
+
+			if (GC.challenges.Contains(nameof(NoItemLights)) && (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage")))
+			{
+				Item item = (Item)myObject;
+				item.hasLightTemp = false;
+			}
+
+			if (GC.challenges.Contains(nameof(NoObjectLights)) && myObject.CompareTag("ObjectReal"))
+			{
+				ObjectReal objectReal = (ObjectReal)myObject;
+				objectReal.noLight = true;
+			}
+
+			return true;
+		}
+
+		/// <summary>
 		/// Wreckage
 		/// </summary>
 		/// <param name="objectPos"></param>
@@ -151,7 +182,7 @@ namespace SORCE.Patches
 		/// <param name="__instance"></param>
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(SpawnerMain.spawnObjectReal), argumentTypes: new[] 
 			{ typeof(Vector3), typeof(PlayfieldObject), typeof(string), typeof(string), typeof(WorldDataObject), typeof(int) })]
-		public static void SpawnerMain_spawnObjectReal
+		public static void spawnObjectReal_Postfix
 			(Vector3 objectPos, PlayfieldObject objectSource, string objectType, string myDir, WorldDataObject worldDataObjects, int worldDataElementPosition, SpawnerMain __instance)
 		{
 			int trashLevelInverse = GC.levelTheme; // 0 = Home Base, 5 = Mayor Village 

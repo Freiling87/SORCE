@@ -141,6 +141,8 @@
     <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
     <Compile Include="LevelGenTools.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
+    <Compile Include="Patches\P_Agent.cs" />
+    <Compile Include="Patches\P_ObjectReal.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Fountain.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Hole.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Manhole.cs" />
