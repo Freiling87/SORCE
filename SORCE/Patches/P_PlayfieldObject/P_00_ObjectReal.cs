@@ -13,6 +13,7 @@ using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using System.Reflection.Emit;
 using static SORCE.Localization.NameLists;
+using SORCE.Challenges.C_Lighting;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
@@ -44,6 +45,18 @@ namespace SORCE.Patches.P_PlayfieldObject
 				else if (__instance is Fountain)
 					P_Fountain.Loot((Fountain)__instance);
 			}
+		}
+
+		[HarmonyPatch(methodName: nameof(ObjectReal.noLight), MethodType.Getter)]
+		public static bool noLight_Prefix(ref bool ___result)
+		{
+			if (GC.challenges.Contains(nameof(NoObjectLights)))
+			{
+				___result = true;
+				return false;
+			}
+
+			return true;
 		}
 	}
 }
