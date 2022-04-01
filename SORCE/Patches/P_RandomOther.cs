@@ -25,7 +25,7 @@ namespace SORCE.Patches
 		/// <param name="___rList"></param>
 		public static void FillOther_Postfix(ref RandomSelection ___component, ref RandomList ___rList)
 		{
-			// Deleted the instruction for this one.
+			// Deleted the Patch instruction for this one.
 			// I think we're better off intercepting this elsewhere, perhaps in the method that makes random selections and passes that extremely unique string as an argument.
 
 			logger.LogDebug("RandomOther_fillOther");

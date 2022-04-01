@@ -171,7 +171,6 @@ namespace SORCE.Patches.P_PlayfieldObject
 
     [HarmonyPatch(typeof(Manhole))]
     [HarmonyPatch("Start")]
-	[HarmonyDebug]
     static class P_Manhole_Start
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();

@@ -26,7 +26,12 @@ namespace SORCE.Patches
 			string wallType = null;
 
 			if (ChallengeManager.IsChallengeFromListActive(Buildings))
-				wallType = LevelGenTools.BuildingWallType();
+			{
+				if (vWall.Fence.Contains(wallType))
+					wallType = LevelGenTools.FenceWallType();
+				else if (vWall.Structural.Contains(wallType))
+					wallType = LevelGenTools.BuildingWallType();
+			}
 
 			if (wallType == null)
 				return true;

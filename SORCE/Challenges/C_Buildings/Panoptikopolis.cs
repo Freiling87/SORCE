@@ -25,7 +25,7 @@ namespace SORCE.Challenges.C_Buildings
 				.WithName(new CustomNameInfo(
 					"Buildings - Panoptikopolis"))
 				.WithDescription(new CustomNameInfo(
-					"Authoritarian surveillance measures mandate that most buildings have to be built with glass walls. If you have nothing to hide, what are you worried about, citizen?\n\n" +
+					"Is the new all-glass building trend just a PsyOp to maximize surveillance? Or is it shiiiny? You decide!\n\n" +
 					"- Most buildings spawn with Glass walls\n" +
 					"- People can see you pooping, but you can see them pooping too, sometimes at the same time. So it's best to avoid eye contact.\n" +
 					"  Unless you're into that sort of thing." ));

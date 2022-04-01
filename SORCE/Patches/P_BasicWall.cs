@@ -32,8 +32,18 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(BasicWall.Spawn), argumentTypes: new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (ChallengeManager.IsChallengeFromListActive(NameLists.Buildings))
-				wallName = LevelGenTools.BuildingWallType();
+			if (wallName == vWall.Border &&
+				ChallengeManager.IsChallengeFromListActive(Overhauls))
+            {
+				wallName = LevelGenTools.BorderWallType();
+            }
+			else if (ChallengeManager.IsChallengeFromListActive(Buildings))
+            {
+				if (vWall.Fence.Contains(wallName))
+					wallName = LevelGenTools.FenceWallType();
+				else if (vWall.Structural.Contains(wallName))
+					wallName = LevelGenTools.BuildingWallType();
+            }
 
 			return true;
 		}

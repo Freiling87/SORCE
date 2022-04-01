@@ -32,20 +32,23 @@ Works
 ####			H	Now do it modularly
 ##		H	Audio
 ###			C	Ambienter Ambience
-Only seems to apply Park audio, check BM for others
+AmbientAudio is not firing.
+I've looked over the patch & CIL a few times and I can't figure out what's wrong.
 ##		C	Buildings
-###			C	00 Move Borders to other mutator set
-Borders should be tied to Public floors
-###			C	00 Hideout Steel Floors not affected
+###		    √	00 Move Borders to Overhaul mutator set
+I think this is done
+###         C   Make fields in Overhaul mutator classes
+It will eliminate some really repetitive series in NameLists, at least
+This goes for most other type-type mutators, like ambient light color
 ###			√	City of Steel
 ###			√	Green Living
 ###			C	Panoptikopolis
 No floor type?
 ###			√	Shanty Town
-###			C	Spelunky Dory
-Exterior walls are now wood?? Lol something got messed up, but maybe use it in the other.
-Change rugs back to Grass
+###			√	Spelunky Dory
 ##		√	Features
+###         C   00 District Object Delimitation
+Some of these are already done in CCU
 ###			H	Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
@@ -166,6 +169,9 @@ Scope:
 	Features
 Note:
 	There is overhaul-specific content still in BM. Haven't bothered to migrate it over yet, because this is on hold.
+###         C   00 Public Floors
+Since shelving these, I've moved this to a Dictionary system. It's not tested yet. Don't expect it to work immediately.
+It needs to be moved to transpilers anyway.
 ###			C	00 Common features
 Second-class citizens are more likely to flee altercations
 A method that determines what social status someone is afforded, based on overhaul & whichever appropriate criteria. It will be used frequently.
@@ -184,6 +190,7 @@ All of them should have a tiny chance to be really shitty or steal your money
 ###			H	Arcology
 ####			√	Public Floors - Grass
 ####			H	Border Wall - Hedge
+####            C   Spawn trashcan next to ATM & omit litter
 ###			C	Battle City
 - More common Arenas
 - More roaming fighters
@@ -204,6 +211,8 @@ Cocaine is FREE, that's right, FREE, that's right, FREE COCAINE, that's right, C
 ###			H	Eisburg
 ####			H	Public Floors - Skating Rink
 My gotdamn white whale. I just can't get this one to work.
+####            C   Ice wreckage
+Check out StatusEffects.IceGib
 ###			C	Freak City
 Just dial up all the weird, supernatural, and bizarre
 ###			C	Grand City Hotel
@@ -230,6 +239,14 @@ On start:
 ####			C	Public Floors - Fancy Wood
 ####			C	Border Wall - Wood
 ####			C	Spawn Rugs in clearings
+###         H   Hell
+Brick borders
+Fire features
+Red camera tint
+Everyone is meaner
+More ghosts, shapeshifters
+Everything costs too much
+More slave shops, no law enforcement or firefighters
 ###			H	Test Tube City
 Glass walls & Glass-y floors
 ####			C	Scientist Cops
@@ -285,14 +302,17 @@ So the goal here is to turn the current postfix method into one accessible by bo
 the current procgen one and whichever spawns hand-placed objects.
 
 *** I think this other method is SpawnerObject.spawn.
-###			√	Dirtier Districts 
+###         C   Flammable Wreckage
+New
+###			C	Dirtier Districts 
+Prefer spots next to walls for random trash. 
 ###			C	Floraler Flora
-###			C	Shittier Toilets
 #	C	Traits
 ##		C	Underdank Citizen
 ###         C   Spawn issues
 Test on downtown with massive numbers to verify the issue
 Transpiler to remove levelTheme requirement complete
+Spawned a Manhole in Home Base (occurred without CCU too)
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self
 ###			C	Old Notes

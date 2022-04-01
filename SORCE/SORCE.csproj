@@ -92,6 +92,7 @@
     <Compile Include="Challenges\C_Lighting\NoItemLights.cs" />
     <Compile Include="Challenges\C_Lighting\NoObjectGlow.cs" />
     <Compile Include="Challenges\C_Lighting\NoObjectLights.cs" />
+    <Compile Include="Challenges\C_Overhaul\Hell.cs" />
     <Compile Include="Challenges\C_Overhaul\Tindertown.cs" />
     <Compile Include="Challenges\C_Overhaul\DUMP.cs" />
     <Compile Include="Challenges\C_Overhaul\GrandCityHotel.cs" />

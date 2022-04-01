@@ -53,7 +53,7 @@ namespace SORCE.Patches
 					else if (GC.challenges.Contains(nameof(Panoptikopolis)))
 						floorName = vFloor.ClearFloor;
 					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
-						floorName = vFloor.DirtFloor;
+						floorName = vFloor.Grass;
 				}
 				else if (vFloor.Constructed.Contains(floorName))
 				{

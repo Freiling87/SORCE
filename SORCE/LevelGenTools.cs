@@ -18,6 +18,8 @@ using SORCE.Challenges.C_Roamers;
 using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Wreckage;
 using SORCE.Challenges.C_Population;
+using HarmonyLib;
+using System.Reflection;
 
 namespace SORCE
 {
@@ -31,19 +33,56 @@ namespace SORCE
 			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
 			{
 				case (nameof(Arcology)):
-					return wallMaterialType.Border;
+					return wallMaterialType.Wood;
 				case (nameof(CanalCity)):
-					return wallMaterialType.Border;
-				case (nameof(DUMP)):
-					return wallMaterialType.Steel;
+					return wallMaterialType.Normal;
+				case (nameof(DiscoCityDanceoff)):
+					return (wallMaterialType.Steel);
+				//case (nameof(DUMP)):
+				//	return wallMaterialType.Cave;
+				// Not in enum
+				case (nameof(Eisburg)):
+					return wallMaterialType.Glass;
 				case (nameof(GrandCityHotel)):
 					return wallMaterialType.Wood;
+				case (nameof(LowTechLowLife)):
+					return wallMaterialType.Normal;
+				case (nameof(Technocracy)):
+					return wallMaterialType.Steel;
 				case (nameof(TestTubeCity)):
 					return wallMaterialType.Glass;
-				case (nameof(Eisburg)):
-					return wallMaterialType.Border;
+				case (nameof(Tindertown)):
+					return wallMaterialType.Wood;
 				default:
 					return wallMaterialType.Border;
+			}
+		}
+		public static string BorderWallType()
+        {
+			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
+			{
+				case (nameof(Arcology)):
+					return vWall.Hedge; // TODO: Could do this one Hedge and the solid blocks of Borderwall as Wood
+				case (nameof(CanalCity)):
+					return vWall.Brick;
+				case (nameof(DiscoCityDanceoff)):
+					return (vWall.Steel);
+				case (nameof(DUMP)):
+					return vWall.Cave;
+				case (nameof(Eisburg)):
+					return vWall.Glass;
+				case (nameof(GrandCityHotel)):
+					return vWall.Wood;
+				case (nameof(LowTechLowLife)):
+					return vWall.Brick;
+				case (nameof(Technocracy)):
+					return vWall.Steel;
+				case (nameof(TestTubeCity)):
+					return vWall.Glass;
+				case (nameof(Tindertown)):
+					return vWall.Wood;
+				default:
+					return vWall.Border;
 			}
 		}
 		public static string RandomRugType()
@@ -93,9 +132,25 @@ namespace SORCE
 					return vFloorTileGroup.Building;
 			}
 		}
-		public static string BuildingWallType()
+		public static string FenceWallType()
 		{
 			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Buildings))
+			{
+				case nameof(CityOfSteel):
+					return vWall.Bars;
+				case nameof(GreenLiving):
+					return vWall.BarbedWire;
+				case nameof(Panoptikopolis):
+					return vWall.Bars;
+				case nameof(ShantyTown):
+					return vWall.BarbedWire;
+				default:
+					return null;
+			}
+		}
+		public static string BuildingWallType()
+		{
+			switch (ChallengeManager.GetActiveChallengeFromList(Buildings))
 			{
 				case nameof(CityOfSteel):
 					return vWall.Steel;
@@ -107,9 +162,9 @@ namespace SORCE
 					return vWall.Wood;
 				case nameof(SpelunkyDory):
 					return vWall.Cave;
+				default:
+					return null;
 			}
-
-			return null;
 		}
 		public static int LevelSizeModifier(int vanilla) =>
 			GC.challenges.Contains(nameof(Arthropolis)) ? 4 :
@@ -130,18 +185,18 @@ namespace SORCE
 			1;
 		public static int PopulationMafia(int vanilla) => 
 			vanilla;
-		public static string AmbientAudio(string chunkDescription)
+		public static string AmbientAudio(string chunkType)
 		{
 			string ambientAudio = "";
 
-			if (chunkDescription == vChunkType.Casino)
+			if (chunkType == vChunkType.Casino)
 				ambientAudio = vAmbience.Casino;
 			else if (
-				chunkDescription != vChunkType.Bathhouse &&
-				chunkDescription != vChunkType.Casino &&
-				chunkDescription != vChunkType.Cave &&
-				chunkDescription != vChunkType.CityPark &&
-				chunkDescription != vChunkType.Graveyard)
+				chunkType != vChunkType.Bathhouse &&
+				chunkType != vChunkType.Casino &&
+				chunkType != vChunkType.Cave &&
+				chunkType != vChunkType.CityPark &&
+				chunkType != vChunkType.Graveyard)
 			{
 				if (GC.challenges.Contains(nameof(Arcology)))
 					ambientAudio = vAmbience.Park;
@@ -228,19 +283,20 @@ namespace SORCE
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(Arcology)) || // Turns to leaves
+			GC.challenges.Contains(nameof(Arcology)) || // Leaves
 			GC.challenges.Contains(nameof(DirtierDistricts)) ||
+			GC.challenges.Contains(nameof(DUMP)) || // Rock Debris (FlamingBarrel)
+			GC.challenges.Contains(nameof(Eisburg)) || // Ice chunks
+			GC.challenges.Contains(nameof(Tindertown)) || // Ashes
 			Core.debugMode;
 		public static bool HasManholesVanilla(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			// UnderdankCitizen uses a different method, SpawnManholes_Underdank.
 			!TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
-			Core.debugMode ||
 			vanilla;
 		public static bool HasManholesUnderdank =>
-			TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
-			Core.debugMode;
+			TraitManager.IsPlayerTraitActive<UnderdankCitizen>();
 		public static bool HasMobsters(bool vanilla) =>
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
@@ -759,18 +815,95 @@ namespace SORCE
 		}
 		private static void SpawnLitter(LoadLevel loadLevel)
 		{
-			int numObjects = (int)((5 - GC.levelTheme) * 20 * LevelSizeRatio());
+			int numObjects = (int)((5 - GC.levelTheme) * 100 * LevelSizeRatio());
 
 			for (int i = 0; i < numObjects; i++)
 			{
-				Vector2 location = GC.tileInfo.FindRandLocationGeneral(0f); // Vanilla 2f
-				
-				GC.spawnerMain.SpawnWreckagePileObject(location, 
-					GC.challenges.Contains(nameof(Arcology)) 
-						? vObject.Bush
-						: GC.Choose<string>(vObject.Shelf, vObject.Lamp, vObject.Counter, vObject.VendorCart), 
-					false);
+				// Vector2 location = GC.tileInfo.FindRandLocationGeneral(0f); // Vanilla 2f
+				Vector2 location = FindRandLocationGeneral_NearWall(GC.tileInfo, 0.2f);
+
+				GC.spawnerMain.SpawnWreckagePileObject(location, OverhaulWreckageType(), false);
 			}
+		}
+		private static string OverhaulWreckageType()
+        {
+			// TODO: Call SpawnWreckagePileObject in here, because you need to determine whether trash is burnt or not
+			if (ChallengeManager.IsChallengeFromListActive(Overhauls))
+            {
+				switch (ChallengeManager.GetActiveChallengeFromList(Overhauls)) 
+				{
+					case nameof(Arcology):
+						return vObject.Bush;
+					case nameof(DUMP): // Rock
+						return vObject.FlamingBarrel;
+					case nameof(Eisburg): // Ice chunks, but see notes to see if ice gibs are preferable
+						return vObject.Refrigerator;
+					case nameof(Hell): // Rock
+						return vObject.FlamingBarrel;
+					case nameof(Tindertown): // Ashes
+						return vObject.Bush;
+				}
+            }
+
+			// Regular trash
+			return GC.Choose(vObject.Shelf, vObject.MovieScreen, vObject.Counter, vObject.VendorCart, vObject.Window);
+		}
+		private static void SpawnWreckagePileObject_Granular()
+        {
+
+        }
+		private static Vector2 FindRandLocationGeneral_NearWall(TileInfo tileInfo, float maxDistanceToWall)
+        {
+			for (int i = 0; i < 200; i++)
+			{
+				float minInclusive = 1.28f;
+				float maxInclusive = GC.loadLevel.levelSizePixels - 1.28f;
+				float minInclusive2 = 1.28f;
+				float maxInclusive2 = GC.loadLevel.levelSizePixels - 1.28f;
+
+				Vector2 vector = new Vector2(
+					(Random.Range(minInclusive, maxInclusive)),
+					(Random.Range(minInclusive2, maxInclusive2)));
+				bool badSpot = false;
+				TileData tileData = tileInfo.GetTileData(vector);
+
+				if (tileData.owner > 0 ||
+					tileData.prison > 0 ||
+					tileData.hole ||
+					tileData.water ||
+					tileData.ice ||
+					tileData.conveyorBelt ||
+					tileData.dangerousToWalk ||
+					//tileData.solidObject ||
+					tileData.wallColliderUnreachable ||
+					!IsCloseToWall(tileInfo, vector, maxDistanceToWall))
+					badSpot = true;
+
+				if (!badSpot)
+					return vector;
+			}
+
+			return Vector2.zero;
+		}
+		private static bool IsCloseToWall(TileInfo tileInfo, Vector2 pos, float circleRadius)
+        {
+			int num;
+			Collider2D[] tileInfo_hitsAlloc = new Collider2D[100];
+
+			if (circleRadius == 0f)
+				num = Physics2D.OverlapPointNonAlloc(pos, tileInfo_hitsAlloc);
+			else
+				num = Physics2D.OverlapCircleNonAlloc(pos, circleRadius, tileInfo_hitsAlloc);
+			
+			for (int i = 0; i < num; i++)
+			{
+				Collider2D collider2D = tileInfo_hitsAlloc[i];
+
+				if (collider2D.CompareTag("Wall"))
+					return true;
+			}
+
+			return false;
 		}
 		/// <summary>
 		/// This was intentionally made separate from the vanilla algorithm

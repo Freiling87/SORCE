@@ -2271,6 +2271,18 @@ namespace SORCE.Localization
 					Null = "",
 					Steel = "Steel",
 					Wood = "Wood";
+
+			public static List<string> Fence = new List<string>()
+			{
+				BarbedWire,
+				Bars
+			};
+			public static List<string> Structural = new List<string>()
+			{
+				Brick,
+				Steel,
+				Wood
+			};
 		}
 		public static class vWallGroup // Vanilla Wall Groups
 		{

@@ -420,7 +420,6 @@ namespace SORCE.Patches
 				prefixInstructionSequence: new List<CodeInstruction>
 				{
 					//	Line 2001
-					//		(If-block's structure is inverted in C#/CIL due to structure. In C# the line is actually 1984.)
 					//	text4 = "ParkAmbience";
 
 					new CodeInstruction(OpCodes.Ldstr, "ParkAmbience"),
