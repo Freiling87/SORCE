@@ -413,23 +413,32 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_AmbientAudio(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo LevelGenTools_AmbientAudio = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.AmbientAudio), new[] { typeof(string) });
+			MethodInfo LevelGenTools_AmbientAudio = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.AmbientAudio), new[] { typeof(string), typeof(string) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
 				prefixInstructionSequence: new List<CodeInstruction>
-				{
+				{ 
 					//	Line 2001
-					//	text4 = "ParkAmbience";
+					//	text4 = "GraveyardAmbience";
+					//		text4 (only added to stack)
 
 					new CodeInstruction(OpCodes.Ldstr, "ParkAmbience"),
-					new CodeInstruction(OpCodes.Stloc_S, 165),
+					new CodeInstruction(OpCodes.Stloc_S, 165),						// clear
+					new CodeInstruction(OpCodes.Ldloc_S, 165),						// text4
+					// Extra code is because insertion needs to be AFTER this major GOTO destination
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					new CodeInstruction(OpCodes.Ldloc_S, 165), // text4
-					new CodeInstruction(OpCodes.Call, LevelGenTools_AmbientAudio), // string
-					new CodeInstruction(OpCodes.Stloc_S, 165), // clear
+					//		text4 = "GraveyardAmbience";
+					// }
+					// text4 = AmbientAudio(text4, description);
+					// if (text4 != "")...
+					
+					new CodeInstruction(OpCodes.Ldloc_S, 166),						// text4, description
+					new CodeInstruction(OpCodes.Call, LevelGenTools_AmbientAudio),	// audio track name
+					new CodeInstruction(OpCodes.Stloc_S, 165),						// clear
+					new CodeInstruction(OpCodes.Ldloc_S, 165),						// text4
 				});
 
 			patch.ApplySafe(instructions, logger);

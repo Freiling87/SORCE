@@ -30,10 +30,9 @@ Works
 ###			H	HalfMoon
 ###			√H	New Moon
 ####			H	Now do it modularly
-##		H	Audio
-###			C	Ambienter Ambience
-AmbientAudio is not firing.
-I've looked over the patch & CIL a few times and I can't figure out what's wrong.
+##		√	Audio
+###			√	Ambienter Ambience
+Complete, until Overhauls are scoped
 ##		C	Buildings
 ###		    √	00 Move Borders to Overhaul mutator set
 I think this is done
@@ -182,6 +181,9 @@ All NPCs have a chance to be missing some health.
 Buildings have a chance to start out on fire, or to have every object inside them destroyed and all items stolen. Police stations have a higher chance.
 ###			H	AnCapistan
 Newish
+####            C   Billboards
+Spawn Movie Screens with lights as billboards in public places
+Add TV ambient audio
 ####			C	Paid Objects
 Stove, Fire Hydrant, Alarm Button, 
 All of them should have a tiny chance to be really shitty or steal your money

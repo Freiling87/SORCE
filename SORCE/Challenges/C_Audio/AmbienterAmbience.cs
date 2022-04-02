@@ -12,7 +12,7 @@ namespace SORCE.Challenges.C_Audio
 {
 	public class AmbienterAmbience
 	{
-		//[RLSetup]
+		[RLSetup]
 		static void Start()
 		{
 			const string name = nameof(AmbienterAmbience);

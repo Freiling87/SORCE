@@ -289,6 +289,7 @@ namespace SORCE.Localization
 					BathHouse = "SpaAmbience",
 					Casino = "CasinoAmbience",
 					Cave = "CavernAmbience",
+					ClubMusic = "ClubMusic", // If this works, try ClubMusic_Long, ClubMusic_Huge
 					Computer = "ComputerAmbience",
 					ConveyorBelt = "EscalatorAmbience",
 					Generator = "GeneratorAmbience",

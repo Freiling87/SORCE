@@ -20,6 +20,7 @@ using SORCE.Challenges.C_Wreckage;
 using SORCE.Challenges.C_Population;
 using HarmonyLib;
 using System.Reflection;
+using SORCE.Challenges.C_Audio;
 
 namespace SORCE
 {
@@ -185,12 +186,17 @@ namespace SORCE
 			1;
 		public static int PopulationMafia(int vanilla) => 
 			vanilla;
-		public static string AmbientAudio(string chunkType)
+		public static string AmbientAudio(string trackname, string chunkType)
 		{
-			string ambientAudio = "";
+			logger.LogDebug("AmbientAudio");
+			logger.LogDebug("trackName: " + trackname);
+			logger.LogDebug("chunkType: " + chunkType);
+
+			if (!Core.debugMode && !GC.challenges.Contains(nameof(AmbienterAmbience)))
+				return trackname;
 
 			if (chunkType == vChunkType.Casino)
-				ambientAudio = vAmbience.Casino;
+				trackname = vAmbience.Casino;
 			else if (
 				chunkType != vChunkType.Bathhouse &&
 				chunkType != vChunkType.Casino &&
@@ -199,16 +205,23 @@ namespace SORCE
 				chunkType != vChunkType.Graveyard)
 			{
 				if (GC.challenges.Contains(nameof(Arcology)))
-					ambientAudio = vAmbience.Park;
-				
-				if (GC.challenges.Contains(nameof(SpelunkyDory)))
-					ambientAudio = vAmbience.Cave;
+					trackname = vAmbience.Park;
 
-				if (GC.challenges.Contains(nameof(GhostTown)))
-					ambientAudio = vAmbience.Graveyard;
+				if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
+					trackname = vAmbience.ClubMusic; // ClubMusic, ClubMusic_Long, ClubMusic_Huge
+				
+				if (GC.challenges.Contains(nameof(DUMP)))
+					trackname = vAmbience.Cave;
+
+				if (GC.challenges.Contains(nameof(Eisburg)) ||
+					GC.challenges.Contains(nameof(GhostTown)) ||
+					GC.challenges.Contains(nameof(Hell)))
+					trackname = vAmbience.Graveyard;
 			}
 
-			return ambientAudio;
+			logger.LogDebug("\tResult: " + trackname);
+
+			return trackname;
 		}
 		public static bool HasBarbecues(bool vanilla) =>
 			!GC.challenges.Contains(nameof(PoliceState)) &&
