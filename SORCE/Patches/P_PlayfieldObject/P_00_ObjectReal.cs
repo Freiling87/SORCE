@@ -36,17 +36,5 @@ namespace SORCE.Patches.P_PlayfieldObject
 					P_Fountain.Loot((Fountain)__instance);
 			}
 		}
-
-		[HarmonyPatch(methodName: nameof(ObjectReal.noLight), MethodType.Getter)]
-		public static bool noLight_Prefix(ref bool ___result)
-		{
-			if (GC.challenges.Contains(nameof(NoObjectLights)))
-			{
-				___result = true;
-				return false;
-			}
-
-			return true;
-		}
 	}
 }

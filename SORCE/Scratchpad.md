@@ -29,7 +29,10 @@ Works
 ###			H	FullMoon
 ###			H	HalfMoon
 ###			√H	New Moon
+####            H   Move from ScrollingMenu
+Maybe postfix the ambient light setter
 ####			H	Now do it modularly
+Currently flips a switch, but it'd be better if we could set percent lighting values.
 ##		√	Audio
 ###			√	Ambienter Ambience
 Complete, until Overhauls are scoped
@@ -117,13 +120,23 @@ Cops will occasionally confiscate contraband
 ###			C	Gun Ban
 All guns are contraband
 ##		CT	Light Sources
-- Content in CCU. Migrate, and put on hold.
 - CameraScript.SetLighting
   - DW
 - StatusEffects.WerewolfTransform
 - StatusEffects.WerewolfTransformBack
 - LoadLevel.SetNormalLighting 
 - LoadLevel.SetRogueVisionLighting
+###         C   All-in-One Attempts
+- SpawnerMain.SetLighting2
+  - Don't give up on this method, try different approaches.
+  - Agents
+    - DW
+  - Objects
+    - DW
+  - Items
+    - DW
+  - NoObjectLights
+    - Works
 ###			C	No Agent Lights
 - The most recent attempt didn't make them move feet-first, but they still all have lights.
 - Didn't work, and made the agent move feet-first
@@ -138,19 +151,20 @@ All guns are contraband
         - DW
   - Note, there are a total of four attempts at this active so you'll need to pare down once you find a working one.
 - Exclude Ghosts!
+- SpawnerMain.SetLighting2
+  - DW, try other ways in same method
 ###			C	No Item/Wreckage Lights
 - SpawnerMain.SetLighting2
-  - Tried this another way
-    - DW
+  - DW, try other ways in same method
 ###			T	No Object Glow
 This is the yellow glow for when you have usable items with an object. As you collect more, eventually everything glows.
 - gc.objectGlowDisabled
 - gc.sessionDataBig.objectGlowDisabled
 - Attempted, GC.Awake3 Prefix
 ###			C	No Object Lights
-- Works!
-- Need to exclude working machines with lights from this. Maybe jazz up their halos if possible.
-- Fire sources are fine since the particle creates the light anyway.
+Works
+####            C   Object type exclusions
+Double check that all active electronics glow
 ###			C	Player Agent Light Size
 New
 This would be a stand-in for the flashlight

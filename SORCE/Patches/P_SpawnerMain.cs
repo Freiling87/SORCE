@@ -35,7 +35,7 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.GetLightColor), argumentTypes: new[] { typeof(string) })]
 		public static bool GetLightColor_Prefix(string lightRealName, ref Color __result)
 		{
-			string challenge = ChallengeManager.GetActiveChallengeFromList(NameLists.AffectsLights);
+			string challenge = ChallengeManager.GetActiveChallengeFromList(AffectsLights);
 
 			LightReal lightReal = new LightReal();
 
@@ -149,25 +149,32 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SetLighting2), argumentTypes: new[] { typeof(PlayfieldObject) })]
 		public static bool SetLighting2_Prefix(PlayfieldObject myObject, SpawnerMain __instance)
 		{
-			if (GC.challenges.Contains(nameof(NoAgentLights)) && myObject.CompareTag("Agent"))
+			// Don't use Debug mode with these, it can mess with it.
+
+			if (myObject.CompareTag("Agent") && 
+				GC.challenges.Contains(nameof(NoAgentLights)))
 			{
 				Agent agent = (Agent)myObject;
 				agent.hasLight = false;
 			}
 
-			if (GC.challenges.Contains(nameof(NoItemLights)) && (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage")))
-			{
-				Item item = (Item)myObject;
-				item.hasLightTemp = false;
-			}
+            // This one doesn't work, but this still might be the right method to patch.
 
-			if (GC.challenges.Contains(nameof(NoObjectLights)) && myObject.CompareTag("ObjectReal"))
-			{
-				ObjectReal objectReal = (ObjectReal)myObject;
-				objectReal.noLight = true;
-			}
+            //if (myObject.CompareTag("Item") &&
+            //	GC.challenges.Contains(nameof(NoItemLights)))
+            //{
+            //	Item item = (Item)myObject;
+            //	item.hasLightTemp = false;
+            //}
 
-			return true;
+            if (myObject.CompareTag("ObjectReal") &&
+                GC.challenges.Contains(nameof(NoObjectLights)))
+            {
+                ObjectReal objectReal = (ObjectReal)myObject;
+                objectReal.noLight = true;
+            }
+
+            return true;
 		}
 
 		/// <summary>

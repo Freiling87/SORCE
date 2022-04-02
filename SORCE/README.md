@@ -39,7 +39,7 @@ All traits in categories marked with an asterisk (*) are mutually exclusive with
 |Shanty Town                    |- All randomized walls will spawn as Wood.
 |Spelunky Dory                  |- All randomized walls will spawn as Cave Wall.<br>- Boulders spawn in all districts.
 
-###			Features
+###			Map Features
 
 |Name                           |Effect |
 |:------------------------------|:------|
@@ -51,6 +51,16 @@ All traits in categories marked with an asterisk (*) are mutually exclusive with
 |Skyway District                |- Canals in Downtown replaced with Holes
 |Surveillance Society           |- Security Cams & Turrets spawn in public
 |The Pollution Solution         |- Pollution features spawn in all levels<br>- Lakes have 80% chance of being poisoned
+
+###			Light Sources
+
+|Name							|Effect	|
+|:------------------------------|:------|
+|No Agent Lights				|- Agents no longer have a halo
+|No Item Lights					|- Items no longer have a halo
+|No Object Glow					|- Objects no longer pulse yellow when you have an item usable with them<br>- This is already in SOR's options, but this allows creators to use the mutator on custom levels
+|No Object Lights				|- Objects no longer have a halo, except when realistic
+
 
 ###			Map Size *
 
