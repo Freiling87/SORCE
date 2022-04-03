@@ -6,7 +6,9 @@ using SORCE.Challenges.C_MapSize;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Population;
 using SORCE.Challenges.C_Roamers;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SORCE.Localization
@@ -26,14 +28,16 @@ namespace SORCE.Localization
 			nameof(DiscoCityDanceoff),
 			nameof(GreenLiving),
 		};
-		public static List<string> Buildings = new List<string>()
+		public static List<Type> BuildingsTypes = new List<Type>()
 		{
-			nameof(CityOfSteel),
-			nameof(GreenLiving),
-			nameof(Panoptikopolis),
-			nameof(ShantyTown),
-			nameof(SpelunkyDory)
+			typeof(CityOfSteel),
+			typeof(GreenLiving),
+			typeof(Panoptikopolis),
+			typeof(ShantyTown),
+			typeof(SpelunkyDory)
 		};
+		public static List<string> BuildingsNames =
+			BuildingsTypes.Select(c => c.Name).ToList(); // nameof(c) would be "c" in Linq
 		public static List<string> BuildingsFlammable = new List<string>()
 		{
 			nameof(GreenLiving),
@@ -1444,20 +1448,13 @@ namespace SORCE.Localization
 					WoodSlats = "WoodSlats";
 
 			public static List<string> Constructed = new List<string>()
-		{
-				ArenaFloor,
+			{
 				ArmoryFloor,
 				BankFloor,
 				Bathhouse,
-				BathroomTile,
-				BrickIndoor,
-				Bridge_Unused,
-				CasinoFloor,
+				// Bridge_Unused, // Omit
 				Checkerboard,
 				Checkerboard2,
-				CleanTiles,
-				DanceFloor,
-				DirtyTiles,
 				DrugDenFloor,
 				ElectronicPlates,
 				Facility,
@@ -1474,28 +1471,24 @@ namespace SORCE.Localization
 				OfficeFloor,
 				PoliceStationFloor,
 				PrisonFloor,
-				SmallTiles,
 				SolidPlates,
 				WoodClean,
 				WoodSlats,
-		};
-
+			};
 			public static List<string> Natural = new List<string>()
-		{
+			{
 				CaveFloor,
 				DirtFloor,
 				Grass,
-		};
-
+			};
 			public static List<string> Raised = new List<string>()
-		{
+			{
 				ArenaFloor,
 				CleanTilesRaised,
 				DanceFloorRaised
-		};
-
+			};
 			public static List<string> Rugs = new List<string>()
-		{
+			{
 				CasinoFloor,
 				Posh,
 				RugBlue,
@@ -1503,7 +1496,16 @@ namespace SORCE.Localization
 				RugGreen,
 				RugPurple,
 				RugRed,
-		};
+			};
+			public static List<string> UnraisedTileTiles = new List<string>()
+			{
+				BathroomTile,
+				BrickIndoor,
+				CleanTiles,
+				DanceFloor,
+				DirtyTiles,
+				SmallTiles,
+			};
 		}
 		public static class vFloorTileGroup // Vanilla Floor Tile Groups
 		{

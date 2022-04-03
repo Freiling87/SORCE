@@ -17,10 +17,10 @@ namespace SORCE.Traits
 		public static GameController GC => GameController.gameController;
 
 		public static bool IsPlayerTraitActive<TraitType>() =>
-			GC.agentList.Any(agent => agent.isPlayer != 0 && agent.HasTrait<TraitType>());
+			GC.agentList.Any(a => a.isPlayer != 0 && a.HasTrait<TraitType>());
 
 		public static bool IsPlayerTraitActive(string traitName) =>
-			GC.agentList.Any(agent => agent.isPlayer != 0 && agent.statusEffects.hasTrait(traitName));
+			GC.agentList.Any(a => a.isPlayer != 0 && a.statusEffects.hasTrait(traitName));
 	}
 }
  

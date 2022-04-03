@@ -37,7 +37,7 @@ namespace SORCE.Patches
             {
 				wallName = LevelGenTools.BorderWallType();
             }
-			else if (ChallengeManager.IsChallengeFromListActive(Buildings))
+			else if (ChallengeManager.IsChallengeFromListActive(BuildingsNames))
             {
 				if (vWall.Fence.Contains(wallName))
 					wallName = LevelGenTools.FenceWallType();

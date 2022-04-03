@@ -135,7 +135,7 @@ namespace SORCE
 		}
 		public static string FenceWallType()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.Buildings))
+			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.BuildingsNames))
 			{
 				case nameof(CityOfSteel):
 					return vWall.Bars;
@@ -151,7 +151,7 @@ namespace SORCE
 		}
 		public static string BuildingWallType()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(Buildings))
+			switch (ChallengeManager.GetActiveChallengeFromList(BuildingsNames))
 			{
 				case nameof(CityOfSteel):
 					return vWall.Steel;
@@ -302,11 +302,10 @@ namespace SORCE
 			GC.challenges.Contains(nameof(Eisburg)) || // Ice chunks
 			GC.challenges.Contains(nameof(Tindertown)) || // Ashes
 			Core.debugMode;
-		public static bool HasManholesVanilla(bool vanilla) =>
+		public static bool HasManholesVanilla(bool vanilla) => 
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			// UnderdankCitizen uses a different method, SpawnManholes_Underdank.
-			!TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
 			vanilla;
 		public static bool HasManholesUnderdank =>
 			TraitManager.IsPlayerTraitActive<UnderdankCitizen>();

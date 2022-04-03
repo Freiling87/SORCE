@@ -10,6 +10,9 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |N					|To be implemented in next release
 |T					|To Test
 
+#   C   General
+##      C   Migrate feature lists to documentation
+Copy the vanilla format of not listing specifics in trait descriptions, e.g.
 #	CT	Mutators
 ##		√	Ambient Light Color
 ###			√	00 Test with Werewolf
@@ -36,12 +39,20 @@ Currently flips a switch, but it'd be better if we could set percent lighting va
 ##		√	Audio
 ###			√	Ambienter Ambience
 Complete, until Overhauls are scoped
+###         C   Footsteps
+New, for stealth
+###         C   Zombies Moan
+New
 ##		C	Buildings
 ###		    √	00 Move Borders to Overhaul mutator set
-I think this is done
-###         C   Make fields in Overhaul mutator classes
+Complete
+###         C   00 Fine-tune raised floors
+I think some tile defaulted to wood with Shanty
+###         C   00 Make fields in Overhaul mutator classes
 It will eliminate some really repetitive series in NameLists, at least
 This goes for most other type-type mutators, like ambient light color
+###         √   00 Possible issue with door orientation
+Confirmed this is Roguelibs
 ###			√	City of Steel
 ###			√	Green Living
 ###			C	Panoptikopolis
@@ -51,6 +62,24 @@ No floor type?
 ##		√	Features
 ###         C   00 District Object Delimitation
 Some of these are already done in CCU
+Create a library! It's time.
+####            C   Billboards
+Spawn Movie Screens with neon lights as billboards in Owner = 0 against walls
+Add TV ambient audio
+Use neons for Cyberpunkish vibe
+Alternate ambient audio: dystopian loudspeaker with different color palette
+    I could see alternates for a few overhauls here, e.g. Disco, hotel
+|Overhaul                       |Palette    |Audio  |
+|:------------------------------|:----------|:------|
+|AnCapistan                     |Neon       |TV noise
+|DiscoCityDanceoff              |Primary    |Disco  
+|GrandCityHotel                 |Blue       |Customer Service Muzak
+|MACITS                         |Red        |Anthem/Propaganda
+|PoliceState                    |?          |Dystopian Loudspeaker
+|Technocracy                    |?          |Beep Boop Bop
+|Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
+|TinderTown                     |Blue       |Ads for water
+
 ###			H	Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
@@ -98,8 +127,9 @@ There's a method called TileInfo.IsearBridge or something like that, use it
 ###			H	The Pollution Solution
 ####			C	Slime Barrels
 SlimeBarrels.Start has a district limitation
-###			√	Bad Neighborhoods
+###			C	Bad Neighborhoods
 Complete
+####            C   Scale chance to district
 ###			√H	Brought Back Fountain
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain
@@ -170,6 +200,7 @@ New
 This would be a stand-in for the flashlight
 ###			C	Flashlight following player reticle
 New
+###         C   Flashlight Gun Mod?
 ##		√	MapSize
 ###			√	A City For Ants
 ###			√	Claustropolis
@@ -195,9 +226,6 @@ All NPCs have a chance to be missing some health.
 Buildings have a chance to start out on fire, or to have every object inside them destroyed and all items stolen. Police stations have a higher chance.
 ###			H	AnCapistan
 Newish
-####            C   Billboards
-Spawn Movie Screens with lights as billboards in public places
-Add TV ambient audio
 ####			C	Paid Objects
 Stove, Fire Hydrant, Alarm Button, 
 All of them should have a tiny chance to be really shitty or steal your money
@@ -263,6 +291,11 @@ Everyone is meaner
 More ghosts, shapeshifters
 Everything costs too much
 More slave shops, no law enforcement or firefighters
+###         C   Low-Tech Low-Life
+####            C   Replace Refrigerator with...?
+####            C   Replace Stove with Barbecue
+####            C   Replace Toilet with Bush
+####            C   Replace TV with...?
 ###			H	Test Tube City
 Glass walls & Glass-y floors
 ####			C	Scientist Cops

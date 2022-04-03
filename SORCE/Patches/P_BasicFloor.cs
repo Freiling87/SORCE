@@ -11,6 +11,7 @@ using SORCE.Challenges;
 using SORCE.Localization;
 using SORCE.Challenges.C_Buildings;
 using static SORCE.Localization.NameLists;
+using System.Linq;
 
 namespace SORCE.Patches
 {
@@ -21,8 +22,7 @@ namespace SORCE.Patches
 		public static GameController GC => GameController.gameController;
 
 		/// <summary>
-		///	Building Floors
-		///		TODO: Change this to use a Dictionary instead
+		///	Building mutators, interior floors
 		/// </summary>
 		/// <param name="spawner"></param>
 		/// <param name="floorName"></param>
@@ -33,58 +33,38 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(nameof(BasicFloor.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string floorName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (ChallengeManager.IsChallengeFromListActive(NameLists.Buildings))
+			logger.LogDebug("Spawn_Prefix: " + ChallengeManager.IsChallengeFromListActive(BuildingsNames));
+
+			if (ChallengeManager.IsChallengeFromListActive(BuildingsNames))
 			{
+				BuildingsChallenge mutator = RogueFramework.Unlocks.OfType<BuildingsChallenge>().FirstOrDefault(m => m.IsEnabled);
+				logger.LogDebug(mutator is null);
+
 				if (vFloor.Natural.Contains(floorName))
 				{
-					if (GC.challenges.Contains(nameof(GreenLiving)))
-						floorName = vFloor.Grass;
-					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
-						floorName = vFloor.CaveFloor;
-				}
-				else if (vFloor.Rugs.Contains(floorName))
-				{
-					//if (GC.challenges.Contains(nameof(DiscoCityDanceoff))) // Overrides some non-exclusive challenges
-					//	floorName = vFloor.CasinoFloor;
-					if (GC.challenges.Contains(nameof(CityOfSteel)))
-						floorName = vFloor.MetalPlates;
-					else if (GC.challenges.Contains(nameof(GreenLiving)))
-						floorName = vFloor.Grass;
-					else if (GC.challenges.Contains(nameof(Panoptikopolis)))
-						floorName = vFloor.ClearFloor;
-					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
-						floorName = vFloor.Grass;
-				}
+					if (!(mutator.NaturalFloorType is null))
+						floorName = mutator.NaturalFloorType;
+                }
 				else if (vFloor.Constructed.Contains(floorName))
 				{
-					//if (GC.challenges.Contains(nameof(DiscoCityDanceoff))) // Overrides some non-exclusive challenges
-					//	floorName = vFloor.BathroomTile;
-					if (GC.challenges.Contains(nameof(CityOfSteel)))
-						floorName = vFloor.MetalFloor;
-					else if (GC.challenges.Contains(nameof(GreenLiving)))
-						floorName = vFloor.DirtFloor;
-					else if (GC.challenges.Contains(nameof(Panoptikopolis)))
-						floorName = vFloor.CleanTiles;
-					else if (GC.challenges.Contains(nameof(ShantyTown)))
-						floorName = vFloor.DrugDenFloor;
-					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
-						floorName = vFloor.CaveFloor;
+					if (!(mutator.ConstructedFloorType is null))
+						floorName = mutator.ConstructedFloorType;
 				}
 				else if (vFloor.Raised.Contains(floorName))
 				{
-					//if (GC.challenges.Contains(nameof(DiscoCityDanceoff))) // Overrides some non-exclusive challenges
-					//	floorName = vFloor.DanceFloorRaised;
-					if (GC.challenges.Contains(nameof(CityOfSteel)))
-						floorName = vFloor.SolidPlates;
-					else if (GC.challenges.Contains(nameof(GreenLiving)))
-						floorName = vFloor.CaveFloor;
-					else if (GC.challenges.Contains(nameof(Panoptikopolis)))
-						floorName = vFloor.CleanTilesRaised;
-					else if (GC.challenges.Contains(nameof(ShantyTown)))
-						floorName = vFloor.DirtyTiles;
-					else if (GC.challenges.Contains(nameof(SpelunkyDory)))
-						floorName = vFloor.Grass;
+					if (!(mutator.RaisedFloorType is null))
+						floorName = mutator.RaisedFloorType;
 				}
+				else if (vFloor.Rugs.Contains(floorName))
+				{
+					if (!(mutator.RugFloorType is null))
+						floorName = mutator.RugFloorType;
+				}
+				else if (vFloor.UnraisedTileTiles.Contains(floorName))
+                {
+					if (!(mutator.UnraisedTileTilesType is null))
+						floorName= mutator.UnraisedTileTilesType;
+                }
 			}
 
 			return true;

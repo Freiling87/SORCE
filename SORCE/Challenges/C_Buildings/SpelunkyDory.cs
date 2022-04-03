@@ -8,11 +8,25 @@ using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Buildings
 {
-	public class SpelunkyDory
+	public class SpelunkyDory : BuildingsChallenge
 	{
+		public SpelunkyDory(string name) : base(name) { }
+
+		public override string ConstructedFloorType =>
+			vFloor.CaveFloor;
+		public override string NaturalFloorType =>
+			vFloor.CaveFloor;
+		public override string RaisedFloorType =>
+			vFloor.Grass;
+		public override string RugFloorType =>
+			vFloor.Grass;
+		public override string UnraisedTileTilesType =>
+			vFloor.DirtFloor;
+
 		[RLSetup]
 		static void Start()
 		{
@@ -20,7 +34,7 @@ namespace SORCE.Challenges.C_Buildings
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Buildings.Where(i => i != name).ToList()
+				Cancellations = BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Buildings - Spelunky Dory"))

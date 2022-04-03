@@ -17,7 +17,7 @@ namespace SORCE
 	[BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
 	public class Core : BaseUnityPlugin
 	{
-		public const bool debugMode = true;
+		public const bool debugMode = false;
 
 		public static ManualLogSource ConsoleMessage;
 		public static BaseUnityPlugin MainInstance;

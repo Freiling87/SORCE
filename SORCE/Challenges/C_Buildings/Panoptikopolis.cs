@@ -8,11 +8,25 @@ using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Buildings
 {
-	public class Panoptikopolis
+	public class Panoptikopolis : BuildingsChallenge
 	{
+		public Panoptikopolis(string name) : base(name) { }
+
+		public override string ConstructedFloorType =>
+			vFloor.SmallTiles; // Parallax assistance
+		public override string NaturalFloorType =>
+			null;
+		public override string RaisedFloorType =>
+			vFloor.CleanTilesRaised;
+		public override string RugFloorType =>
+			vFloor.BathroomTile; // So you can't hide things under it
+		public override string UnraisedTileTilesType =>
+			vFloor.CleanTiles;
+
 		[RLSetup]
 		static void Start()
 		{
@@ -20,7 +34,7 @@ namespace SORCE.Challenges.C_Buildings
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Buildings.Where(i => i != name).ToList()
+				Cancellations = BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Buildings - Panoptikopolis"))

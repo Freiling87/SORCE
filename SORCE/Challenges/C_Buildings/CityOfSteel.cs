@@ -8,11 +8,25 @@ using Object = UnityEngine.Object;
 using SORCE.Challenges;
 using System.Linq;
 using SORCE.Localization;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Buildings
 {
-	public class CityOfSteel
+	public class CityOfSteel : BuildingsChallenge
 	{
+		public CityOfSteel(string name) : base(name) { }
+
+        public override string ConstructedFloorType =>
+			vFloor.MetalFloor;
+		public override string NaturalFloorType =>
+			null;
+        public override string RaisedFloorType =>
+			vFloor.SolidPlates;
+		public override string RugFloorType =>
+			vFloor.MetalPlates;
+		public override string UnraisedTileTilesType =>
+			vFloor.SolidPlates;
+
 		[RLSetup]
 		static void Start()
 		{
@@ -20,7 +34,7 @@ namespace SORCE.Challenges.C_Buildings
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Buildings.Where(i => i != name).ToList()
+				Cancellations = BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Buildings - City of Steel"))
