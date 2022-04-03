@@ -44,6 +44,8 @@ New, for stealth
 ###         C   Zombies Moan
 New
 ##		C	Buildings
+###         C   NullRefError on load level due to refactor
+Not sure yet.
 ###		    √	00 Move Borders to Overhaul mutator set
 Complete
 ###         C   00 Fine-tune raised floors
