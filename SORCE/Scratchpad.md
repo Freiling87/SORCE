@@ -14,58 +14,38 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 ##      C   Migrate feature lists to documentation
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.
 #	CT	Mutators
-##		√	Ambient Light Color
-###			√	00 Test with Werewolf
-Works
-###			√	Goodsprings
-###			√	Hellscape	
-###			√	NuclearWinter
-###			√	Sepia
-###			√	ShadowRealm
-###			√	Shinobi
-##		√H	Ambient Light Level
-###			√	00 Test with Werewolf
-Works
-###			H	Blinding
-###			H	Daytime
-###			H	Evening
-###			H	FullMoon
-###			H	HalfMoon
-###			√H	New Moon
-####            H   Move from ScrollingMenu
-Maybe postfix the ambient light setter
-####			H	Now do it modularly
-Currently flips a switch, but it'd be better if we could set percent lighting values.
-##		√	Audio
-###			√	Ambienter Ambience
-Complete, until Overhauls are scoped
-###         C   Footsteps
-New, for stealth
-###         C   Zombies Moan
-New
 ##		C	Buildings
 ###         C   NullRefError on load level due to refactor
 Not sure yet.
-###		    √	00 Move Borders to Overhaul mutator set
-Complete
-###         C   00 Fine-tune raised floors
+###         T   00 Fine-tune raised floors
 I think some tile defaulted to wood with Shanty
-###         C   00 Make fields in Overhaul mutator classes
+###         T   00 Make fields in Overhaul mutator classes
 It will eliminate some really repetitive series in NameLists, at least
 This goes for most other type-type mutators, like ambient light color
 ###         √   00 Possible issue with door orientation
 Confirmed this is Roguelibs
 ###			√	City of Steel
 ###			√	Green Living
-###			C	Panoptikopolis
-No floor type?
+###			√	Panoptikopolis
 ###			√	Shanty Town
 ###			√	Spelunky Dory
-##		√	Features
-###         C   00 District Object Delimitation
-Some of these are already done in CCU
-Create a library! It's time.
-####            C   Billboards
+##		CT	Features
+###         CT  00 District Object Delimitation
+####            H   00 Export all to Delimitation mod
+Pending test of basic features
+#####               C   00 Add SORCE dependency and test
+New
+####            T   Flame Grate
+Attempted
+####            T   Manhole
+Attempted
+####            T   Pipe
+Attempted
+####            T   SawBlade
+Attempted
+###         T   Bad Neighborhoods
+Scaled to District
+###         H   Billboards
 Spawn Movie Screens with neon lights as billboards in Owner = 0 against walls
 Add TV ambient audio
 Use neons for Cyberpunkish vibe
@@ -81,19 +61,21 @@ Alternate ambient audio: dystopian loudspeaker with different color palette
 |Technocracy                    |?          |Beep Boop Bop
 |Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
 |TinderTown                     |Blue       |Ads for water
-
-###			H	Department of Public Comfiness
+###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
 ####			C	Spawn public Rugs (overlap with Grand City Hotel)
-###			H	Lake it or Leave it
+###         H   Lake it or Leave it
 Honestly this one's not interesting enough to bother with yet.
 ####			C	Do not make lakes over Downtown bridges
 LoadLevel.SetupMore3_3, after line 67
 There's a method called TileInfo.IsearBridge or something like that, use it
-###			H	Surveillance Society
+###         H   Life Downhill
+Spawn Pipes as Trash Chutes in the slums or industrial
+May drop usable items, or live banana peels, etc.
+###         H   Surveillance Society
+On hold until Overhaul update
 ####			C	Old Notes
-## Public Security Cams + Turrets
 - Align with Cops in conflict, regardless of settings
 - Randomize direction for Panoptikopolis if attached to glass wall?
 - Use Alarm Button / Police Box detection/ownership rules to align with police
@@ -126,13 +108,10 @@ There's a method called TileInfo.IsearBridge or something like that, use it
 
 ####			C	00 Import SecurityCamera patches
 ####			C	Detect Wanted
-###			H	The Pollution Solution
+###         H   The Pollution Solution
 ####			C	Slime Barrels
-SlimeBarrels.Start has a district limitation
-###			C	Bad Neighborhoods
-Complete
 ####            C   Scale chance to district
-###			√H	Brought Back Fountain
+###         √H  Brought Back Fountain
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
@@ -144,13 +123,6 @@ Complete
 Complete
 ###			√	This Land is Mine Land
 Complete
-##		H	Laws
-###			C	Legal Drugs
-###			C	Legal Weapons
-###			C	Stop & Frisk
-Cops will occasionally confiscate contraband
-###			C	Gun Ban
-All guns are contraband
 ##		CT	Light Sources
 - CameraScript.SetLighting
   - DW
@@ -203,11 +175,37 @@ This would be a stand-in for the flashlight
 ###			C	Flashlight following player reticle
 New
 ###         C   Flashlight Gun Mod?
-##		√	MapSize
-###			√	A City For Ants
-###			√	Claustropolis
-###			√	Megapolis
-###			√	Ultrapolis
+##		C	Roamers
+All broken for now
+###			C	Always Spawn Arsonists
+New
+###			C	HoodlumsWonderland
+###			C	Mob Town
+###			C	YMITN
+##		C	Wreckage
+###			C	00 Custom Wreckage Method
+Benefits:
+	More control over number of particles
+	Can spread out more than normal
+	Can set a check for Interior/Exterior/Water
+###			C	00 Here's the issue
+This only works on procedurally generated objects. Trashcans, boulders, bushes. Not toilets, etc.
+So the goal here is to turn the current postfix method into one accessible by both original methods,
+the current procgen one and whichever spawns hand-placed objects.
+
+*** I think this other method is SpawnerObject.spawn.
+###         C   Flammable Wreckage
+New
+###			C	Dirtier Districts 
+Prefer spots next to walls for random trash. 
+###			C	Floraler Flora
+##		H	Laws
+###			C	Legal Drugs
+###			C	Legal Weapons
+###			C	Stop & Frisk
+Cops will occasionally confiscate contraband
+###			C	Gun Ban
+All guns are contraband
 ##		H	Overhauls
 Scope:
 	Public Floors
@@ -325,6 +323,40 @@ They are free to victimize whoever they like.
 Blood economy should be important 
 ###			H	Warzone
 Spawns dead/burned/exploded bodies, blood splatters
+##		√H	Ambient Light Level
+###			√	00 Test with Werewolf
+Works
+###			H	Blinding
+###			H	Daytime
+###			H	Evening
+###			H	FullMoon
+###			H	HalfMoon
+###			√H	New Moon
+####            H   Move from ScrollingMenu
+Maybe postfix the ambient light setter
+####			H	Now do it modularly
+Currently flips a switch, but it'd be better if we could set percent lighting values.
+##		√	Ambient Light Color
+###			√	00 Test with Werewolf
+Works
+###			√	Goodsprings
+###			√	Hellscape	
+###			√	NuclearWinter
+###			√	Sepia
+###			√	ShadowRealm
+###			√	Shinobi
+##		√	Audio
+###			√	Ambienter Ambience
+Complete, until Overhauls are scoped
+###         C   Footsteps
+New, for stealth
+###         C   Zombies Moan
+New
+##		√	MapSize
+###			√	A City For Ants
+###			√	Claustropolis
+###			√	Megapolis
+###			√	Ultrapolis
 ##		√	Population
 ###			√	Ghost Town
 Complete
@@ -334,30 +366,6 @@ Complete
 Complete
 ###			√	Swarm Welcome
 Complete
-##		C	Roamers
-All broken for now
-###			C	Always Spawn Arsonists
-New
-###			C	HoodlumsWonderland
-###			C	Mob Town
-###			C	YMITN
-##		C	Wreckage
-###			C	00 Custom Wreckage Method
-Benefits:
-	More control over number of particles
-	Can spread out more than normal
-	Can set a check for Interior/Exterior/Water
-###			C	00 Here's the issue
-This only works on procedurally generated objects. Trashcans, boulders, bushes. Not toilets, etc.
-So the goal here is to turn the current postfix method into one accessible by both original methods,
-the current procgen one and whichever spawns hand-placed objects.
-
-*** I think this other method is SpawnerObject.spawn.
-###         C   Flammable Wreckage
-New
-###			C	Dirtier Districts 
-Prefer spots next to walls for random trash. 
-###			C	Floraler Flora
 #	C	Traits
 ##		C	Underdank Citizen
 ###         C   Spawn issues

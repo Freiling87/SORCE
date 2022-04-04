@@ -180,8 +180,6 @@ namespace SORCE.Patches.P_PlayfieldObject
 		private static IEnumerable<CodeInstruction> Start_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			FieldInfo gc = AccessTools.Field(typeof(PlayfieldObject), "gc");
-			FieldInfo levelTheme = AccessTools.Field(typeof(GameController), "levelTheme");
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -189,11 +187,16 @@ namespace SORCE.Patches.P_PlayfieldObject
 				{
 					// __instance.gc.levelTheme != 3
 
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldfld),
-					new CodeInstruction(OpCodes.Ldfld),
-					new CodeInstruction(OpCodes.Ldc_I4_3),
-					new CodeInstruction(OpCodes.Beq_S),
+					new CodeInstruction(OpCodes.Ldarg_0),	//	this
+					new CodeInstruction(OpCodes.Ldfld),		//	this.gc
+					new CodeInstruction(OpCodes.Ldfld),		//	this.gc.levelTheme
+					new CodeInstruction(OpCodes.Ldc_I4_3),	//	this.gc.levelTheme, 3
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					// This is a silly way to just bypass the if-block
+					new CodeInstruction(OpCodes.Ldc_I4_3),	//	3
+					new CodeInstruction(OpCodes.Ldc_I4_3),	//	3, 3
 				});
 
 			patch.ApplySafe(instructions, logger);

@@ -148,6 +148,7 @@
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Elevator.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_FireHydrant.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_FlameGrate.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Fountain.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Hole.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Lamp.cs" />
@@ -156,7 +157,10 @@
     <Compile Include="Patches\P_BasicWall.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_ObjectReal.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Pipe.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Sawblade.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_SecurityCam.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_SlimeBarrel.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Stove.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Toilet.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Turret.cs" />
