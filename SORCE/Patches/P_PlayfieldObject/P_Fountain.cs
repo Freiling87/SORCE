@@ -24,14 +24,14 @@ namespace SORCE.Patches.P_PlayfieldObject
         {
 			string t = NameTypes.Interface;
 
-			RogueLibs.CreateCustomName(cButtonText.FountainSteal, t, new CustomNameInfo("Loot"));
-			RogueLibs.CreateCustomName(cButtonText.FountainWishFabulousWealth, t, new CustomNameInfo("Wish for fabulous wealth"));
-			RogueLibs.CreateCustomName(cButtonText.FountainWishFameAndGlory, t, new CustomNameInfo("Wish for fame & glory"));
-			RogueLibs.CreateCustomName(cButtonText.FountainWishGoodHealth, t, new CustomNameInfo("Wish for good health"));
-			RogueLibs.CreateCustomName(cButtonText.FountainWishTrueFriendship, t, new CustomNameInfo("Wish for true friendship"));
-			RogueLibs.CreateCustomName(cButtonText.FountainWishWorldPeace, t, new CustomNameInfo("Wish for world peace"));
+			RogueLibs.CreateCustomName(CButtonText.FountainSteal, t, new CustomNameInfo("Loot"));
+			RogueLibs.CreateCustomName(CButtonText.FountainWishFabulousWealth, t, new CustomNameInfo("Wish for fabulous wealth"));
+			RogueLibs.CreateCustomName(CButtonText.FountainWishFameAndGlory, t, new CustomNameInfo("Wish for fame & glory"));
+			RogueLibs.CreateCustomName(CButtonText.FountainWishGoodHealth, t, new CustomNameInfo("Wish for good health"));
+			RogueLibs.CreateCustomName(CButtonText.FountainWishTrueFriendship, t, new CustomNameInfo("Wish for true friendship"));
+			RogueLibs.CreateCustomName(CButtonText.FountainWishWorldPeace, t, new CustomNameInfo("Wish for world peace"));
 
-			RogueLibs.CreateCustomName(cOperatingText.FountainStealing, t, new CustomNameInfo("Being a piece of shit"));
+			RogueLibs.CreateCustomName(COperatingText.FountainStealing, t, new CustomNameInfo("Being a piece of shit"));
 
 			RogueInteractions.CreateProvider<Fountain>(h =>
 			{
@@ -39,18 +39,18 @@ namespace SORCE.Patches.P_PlayfieldObject
 					return;
 
 				if (!h.Object.GetHook<P_Fountain_Hook>().HasBeenLooted)
-					h.AddButton(cButtonText.FountainSteal, m =>
+					h.AddButton(CButtonText.FountainSteal, m =>
 					{
-						GC.spawnerMain.SpawnExplosion(m.Object, m.Object.curPosition, vExplosion.Water);
+						GC.spawnerMain.SpawnExplosion(m.Object, m.Object.curPosition, VExplosion.Water);
 
-						if (!m.Agent.statusEffects.hasTrait(vTrait.SneakyFingers))
+						if (!m.Agent.statusEffects.hasTrait(VTrait.SneakyFingers))
 						{
-							GC.audioHandler.Play(m.Object, vAudioClip.JumpIntoWater);
+							GC.audioHandler.Play(m.Object, VAudioClip.JumpIntoWater);
 							GC.spawnerMain.SpawnNoise(m.Object.tr.position, 0.4f, m.Agent, "Normal", m.Agent);
 							GC.OwnCheck(m.Agent, m.Object.go, "Normal", 2);
 						}
 
-						m.StartOperating(2f, true, cOperatingText.FountainStealing);
+						m.StartOperating(2f, true, COperatingText.FountainStealing);
 					});
 			});
         }
@@ -73,7 +73,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 			Agent agent = fountain.interactingAgent;
 
 			InvItem invItem = new InvItem();
-			invItem.invItemName = vItem.Money;
+			invItem.invItemName = VItem.Money;
 			invItem.ItemSetup(false);
 			invItem.invItemCount = fountain.GetHook<P_Fountain_Hook>().MoneyHeld;
 			invItem.ShowPickingUpText(fountain.interactingAgent);
@@ -81,16 +81,16 @@ namespace SORCE.Patches.P_PlayfieldObject
 			fountain.objectInvDatabase.DestroyAllItems();
 			fountain.GetHook<P_Fountain_Hook>().HasBeenLooted = true;
 			fountain.interactable = false;
-			agent.statusEffects.AddStatusEffect(vStatusEffect.FeelingUnlucky, true, true);
+			agent.statusEffects.AddStatusEffect(VStatusEffect.FeelingUnlucky, true, true);
 			// TODO: XP penalty for stealing
 
-			if (!agent.statusEffects.hasTrait(vTrait.SneakyFingers))
+			if (!agent.statusEffects.hasTrait(VTrait.SneakyFingers))
 			{
-				GC.spawnerMain.SpawnExplosion(fountain, fountain.curPosition, vExplosion.Water);
+				GC.spawnerMain.SpawnExplosion(fountain, fountain.curPosition, VExplosion.Water);
 				AnnoyWitnessesVictimless(agent);
 			}
 			else
-				GC.audioHandler.Play(fountain, vAudioClip.JumpOutWater);
+				GC.audioHandler.Play(fountain, VAudioClip.JumpOutWater);
 
 			fountain.interactable = false;
 			fountain.StopInteraction();

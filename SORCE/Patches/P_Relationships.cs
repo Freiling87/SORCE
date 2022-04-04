@@ -23,7 +23,7 @@ namespace SORCE.Patches
 			{
 				if (__instance.GetRel(criminal) == nameof(relStatus.Hostile))
 				{
-					criminal.statusEffects.AddTrait(vTrait.Wanted);
+					criminal.statusEffects.AddTrait(VTrait.Wanted);
 				}
 			}
 		}

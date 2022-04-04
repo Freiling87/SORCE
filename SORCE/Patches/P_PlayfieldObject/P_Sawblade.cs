@@ -12,7 +12,7 @@ namespace SORCE.Patches.P_PlayfieldObject
     [HarmonyPatch(declaringType: typeof(SawBlade))]
 	class P_SawBlade
 	{
-		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		//private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 	}
 

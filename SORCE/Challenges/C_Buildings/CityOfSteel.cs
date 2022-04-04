@@ -17,15 +17,15 @@ namespace SORCE.Challenges.C_Buildings
 		public CityOfSteel(string name) : base(name) { }
 
         public override string ConstructedFloorType =>
-			vFloor.MetalFloor;
+			VFloor.MetalFloor;
 		public override string NaturalFloorType =>
 			null;
         public override string RaisedFloorType =>
-			vFloor.SolidPlates;
+			VFloor.SolidPlates;
 		public override string RugFloorType =>
-			vFloor.MetalPlates;
+			VFloor.MetalPlates;
 		public override string UnraisedTileTilesType =>
-			vFloor.SolidPlates;
+			VFloor.SolidPlates;
 
 		[RLSetup]
 		static void Start()

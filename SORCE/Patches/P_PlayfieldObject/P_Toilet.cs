@@ -31,9 +31,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 		// TODO: Roguelibs 3.5.0b version
 
 		public static bool CanAgentFlushSelf(Agent agent) =>
-			!agent.statusEffects.hasStatusEffect(vStatusEffect.Giant) &&
-			agent.statusEffects.hasTrait(vTrait.Diminutive) ||
-			agent.statusEffects.hasStatusEffect(vStatusEffect.Shrunk);
+			!agent.statusEffects.hasStatusEffect(VStatusEffect.Giant) &&
+			agent.statusEffects.hasTrait(VTrait.Diminutive) ||
+			agent.statusEffects.hasStatusEffect(VStatusEffect.Shrunk);
 
 		[RLSetup]
 		public static void Setup()
@@ -68,9 +68,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 		{
 			if (__instance.interactingAgent.HasTrait<UnderdankCitizen>())
 			{
-				if (!__instance.interactingAgent.statusEffects.hasStatusEffect(vStatusEffect.Giant) &&
-					(__instance.interactingAgent.statusEffects.hasTrait(vTrait.Diminutive) ||
-					__instance.interactingAgent.statusEffects.hasStatusEffect(vStatusEffect.Shrunk)))
+				if (!__instance.interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.Giant) &&
+					(__instance.interactingAgent.statusEffects.hasTrait(VTrait.Diminutive) ||
+					__instance.interactingAgent.statusEffects.hasStatusEffect(VStatusEffect.Shrunk)))
 					// TODO: Make this conditional into a method, CanFitIntoToilet
 				{
 					List<ObjectReal> exits = new List<ObjectReal>();

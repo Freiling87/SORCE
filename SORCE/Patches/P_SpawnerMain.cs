@@ -190,7 +190,7 @@ namespace SORCE.Patches
 		/// <param name="__instance"></param>
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(SpawnerMain.spawnObjectReal), argumentTypes: new[] 
 			{ typeof(Vector3), typeof(PlayfieldObject), typeof(string), typeof(string), typeof(WorldDataObject), typeof(int) })]
-		public static void spawnObjectReal_Postfix
+		public static void SpawnObjectReal_Postfix
 			(Vector3 objectPos, PlayfieldObject objectSource, string objectType, string myDir, WorldDataObject worldDataObjects, int worldDataElementPosition, SpawnerMain __instance)
 		{
 			int trashLevelInverse = GC.levelTheme; // 0 = Home Base, 5 = Mayor Village 
@@ -200,12 +200,12 @@ namespace SORCE.Patches
 			if (GC.challenges.Contains(nameof(FloralerFlora)) || Core.debugMode)
 				switch (objectType)
 				{
-					case vObject.Bush:
+					case VObject.Bush:
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.Bush, 
+								VObject.Bush, 
 								false,
 								5,
 								0.64f, 0.64f);
@@ -214,12 +214,12 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.KillerPlant:
+					case VObject.KillerPlant:
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.Bush,
+								VObject.Bush,
 								false,
 								5,
 								0.64f, 0.64f);
@@ -228,12 +228,12 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.Plant:
+					case VObject.Plant:
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.Bush,
+								VObject.Bush,
 								false,
 								5,
 								0.32f, 0.16f);
@@ -242,12 +242,12 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.Tree:
+					case VObject.Tree:
 						while (GC.percentChance(chance + 40))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.Bush,
+								VObject.Bush,
 								false,
 								5,
 								0.96f, 0.96f);
@@ -262,12 +262,12 @@ namespace SORCE.Patches
 
 				switch (objectType)
 				{
-					case vObject.ATMMachine:
+					case VObject.ATMMachine:
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.MovieScreen, 
+								VObject.MovieScreen, 
 								false,
 								5,
 								0.80f, 0.80f);
@@ -276,12 +276,12 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.Barbecue:
+					case VObject.Barbecue:
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.Bush,
+								VObject.Bush,
 								true,
 								5,
 								0.32f, 0.16f);
@@ -290,18 +290,18 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.Boulder:
+					case VObject.Boulder:
 						while (GC.percentChance(1))
 							GC.spawnerMain.SpawnItem(new Vector2(
 								loc.x + Random.Range(-0.48f, 0.48f), 
 								loc.y + Random.Range(-0.24f, 0.00f)), 
-								vItem.Rock);
+								VItem.Rock);
 
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y - 0.12f),
-								vObject.FlamingBarrel,
+								VObject.FlamingBarrel,
 								false,
 								5,
 								0.12f, 0.12f);
@@ -310,18 +310,18 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.BoulderSmall:
+					case VObject.BoulderSmall:
 						while (GC.percentChance(1))
 							GC.spawnerMain.SpawnItem(new Vector2(
 								loc.x + Random.Range(-0.16f, 0.16f), 
 								loc.y + Random.Range(-0.16f, 0.00f)), 
-								vItem.Rock);
+								VItem.Rock);
 
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y - 0.12f),
-								vObject.FlamingBarrel,
+								VObject.FlamingBarrel,
 								false,
 								5,
 								0.12f, 0.00f);
@@ -330,12 +330,12 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.Elevator:
+					case VObject.Elevator:
 						if (GC.challenges.Contains(nameof(AnCapistan)))
                         {
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.MovieScreen,
+								VObject.MovieScreen,
 								false,
 								5,
 								0.80f, 0.80f);
@@ -344,12 +344,12 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.FlamingBarrel:
+					case VObject.FlamingBarrel:
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.Bush,
+								VObject.Bush,
 								true,
 								5,
 								0.12f, 0.12f);
@@ -358,12 +358,12 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.Toilet:
+					case VObject.Toilet:
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								vObject.MovieScreen,
+								VObject.MovieScreen,
 								false,
 								5,
 								0.24f, 0.12f);
@@ -372,18 +372,18 @@ namespace SORCE.Patches
 
 						break;
 
-					case vObject.TrashCan:
+					case VObject.TrashCan:
 						while (GC.percentChance(1)) // TODO: Move this part to Trash mod
 							GC.spawnerMain.SpawnItem(new Vector2(
 								loc.x + Random.Range(-0.32f, 0.32f), 
 								loc.y + Random.Range(-0.32f, 0.32f)), 
-								vItem.BananaPeel);
+								VItem.BananaPeel);
 
 						while (GC.percentChance(chance))
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								cObject.WreckageMisc.RandomElement(),
+								CObject.WreckageMisc.RandomElement(),
 								GC.percentChance(25),
 								5,
 								0.48f, 0.48f);

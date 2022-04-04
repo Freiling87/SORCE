@@ -64,6 +64,10 @@ Alternate ambient audio: dystopian loudspeaker with different color palette
 |Technocracy                    |?          |Beep Boop Bop
 |Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
 |TinderTown                     |Blue       |Ads for water
+###         T   The Pollution Solution
+####			T	Slime Barrels
+Depends on Delimitation
+####            C   Scale chance to district
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
@@ -73,9 +77,13 @@ Honestly this one's not interesting enough to bother with yet.
 ####			C	Do not make lakes over Downtown bridges
 LoadLevel.SetupMore3_3, after line 67
 There's a method called TileInfo.IsearBridge or something like that, use it
+####            C   Spawn Water Pumps
 ###         H   Life Downhill
 Spawn Pipes as Trash Chutes in the slums or industrial
 May drop usable items, or live banana peels, etc.
+###         H   Public Pools
+Spawn as square or circle
+Always have water pump
 ###         H   Surveillance Society
 On hold until Overhaul update
 ####			C	Old Notes
@@ -111,9 +119,6 @@ On hold until Overhaul update
 
 ####			C	00 Import SecurityCamera patches
 ####			C	Detect Wanted
-###         H   The Pollution Solution
-####			C	Slime Barrels
-####            C   Scale chance to district
 ###         √H  Brought Back Fountain
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain

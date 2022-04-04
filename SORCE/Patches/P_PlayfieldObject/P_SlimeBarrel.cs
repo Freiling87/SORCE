@@ -14,7 +14,7 @@ namespace SORCE.Patches.P_PlayfieldObject
     [HarmonyPatch(declaringType: typeof(SlimeBarrel))]
 	class P_SlimeBarrel
 	{
-		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		//private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
         public static object CCULogger { get; private set; }

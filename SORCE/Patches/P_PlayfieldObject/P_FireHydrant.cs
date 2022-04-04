@@ -20,12 +20,12 @@ namespace SORCE.Patches.P_PlayfieldObject
         [RLSetup]
         public static void Setup()
         {
-            string t = vNameType.Dialogue;
-            RogueLibs.CreateCustomName(cDialogue.FireHydrantBuyFail, t, new CustomNameInfo("Insufficient funds to deserve transaction."));
-            RogueLibs.CreateCustomName(cDialogue.FireHydrantBuySuccess, t, new CustomNameInfo("Transaction complete. Thank you for deserving Nastly Water Products, Inc. Have a profitable day."));
+            string t = VNameType.Dialogue;
+            RogueLibs.CreateCustomName(CDialogue.FireHydrantBuyFail, t, new CustomNameInfo("Insufficient funds to deserve transaction."));
+            RogueLibs.CreateCustomName(CDialogue.FireHydrantBuySuccess, t, new CustomNameInfo("Transaction complete. Thank you for deserving Nastly Water Products, Inc. Have a profitable day."));
 
-            t = vNameType.Interface;
-            RogueLibs.CreateCustomName(cButtonText.FireHydrantBuy, t, new CustomNameInfo("Deserve Water"));
+            t = VNameType.Interface;
+            RogueLibs.CreateCustomName(CButtonText.FireHydrantBuy, t, new CustomNameInfo("Deserve Water"));
 
             RogueInteractions.CreateProvider<FireHydrant>(h =>
             {
@@ -34,9 +34,9 @@ namespace SORCE.Patches.P_PlayfieldObject
                 {
                     FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
                     List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
-                    interactions.RemoveAll(i => i.ButtonName is vButtonText.RefillWaterCannon);
+                    interactions.RemoveAll(i => i.ButtonName is VButtonText.RefillWaterCannon);
 
-                    h.AddButton(cButtonText.FireHydrantBuy, refillPrice, m =>
+                    h.AddButton(CButtonText.FireHydrantBuy, refillPrice, m =>
                     {
                         TryRefillWaterCannon(m.Object);
                     });
@@ -51,13 +51,13 @@ namespace SORCE.Patches.P_PlayfieldObject
             if (hydrant.moneySuccess(refillPrice))
             {
                 hydrant.RefillWaterCannon();
-                GC.audioHandler.Play(hydrant, vAudioClip.ATMDeposit);
-                CoreTools.SayDialogue(hydrant, cDialogue.FireHydrantBuySuccess, vNameType.Dialogue);
+                GC.audioHandler.Play(hydrant, VAudioClip.ATMDeposit);
+                CoreTools.SayDialogue(hydrant, CDialogue.FireHydrantBuySuccess, VNameType.Dialogue);
             }
             else
             {
-                GC.audioHandler.Play(hydrant, vAudioClip.CantDo);
-                CoreTools.SayDialogue(hydrant, cDialogue.FireHydrantBuyFail, vNameType.Dialogue);
+                GC.audioHandler.Play(hydrant, VAudioClip.CantDo);
+                CoreTools.SayDialogue(hydrant, CDialogue.FireHydrantBuyFail, VNameType.Dialogue);
             }
 
             hydrant.StopInteraction();

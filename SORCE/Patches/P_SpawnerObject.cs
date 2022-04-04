@@ -24,8 +24,8 @@ namespace SORCE.Patches
 			//logger.LogDebug("SpawnerObject_spawn:");
 			//logger.LogDebug("\tobjectRealName = '" + objectRealName + "'");
 
-			if (ChallengeManager.IsChallengeFromListActive(NameLists.BuildingsFlammable) && objectRealName == vObject.FireSpewer)
-				objectRealName = vObject.SecurityCam;
+			if (ChallengeManager.IsChallengeFromListActive(NameLists.BuildingsFlammable) && objectRealName == VObject.FireSpewer)
+				objectRealName = VObject.SecurityCam;
 
 			return true;
 		}

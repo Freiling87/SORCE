@@ -63,52 +63,52 @@ namespace SORCE
 			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
 			{
 				case (nameof(Arcology)):
-					return vWall.Hedge; // TODO: Could do this one Hedge and the solid blocks of Borderwall as Wood
+					return VWall.Hedge; // TODO: Could do this one Hedge and the solid blocks of Borderwall as Wood
 				case (nameof(CanalCity)):
-					return vWall.Brick;
+					return VWall.Brick;
 				case (nameof(DiscoCityDanceoff)):
-					return (vWall.Steel);
+					return (VWall.Steel);
 				case (nameof(DUMP)):
-					return vWall.Cave;
+					return VWall.Cave;
 				case (nameof(Eisburg)):
-					return vWall.Glass;
+					return VWall.Glass;
 				case (nameof(GrandCityHotel)):
-					return vWall.Wood;
+					return VWall.Wood;
 				case (nameof(LowTechLowLife)):
-					return vWall.Brick;
+					return VWall.Brick;
 				case (nameof(Technocracy)):
-					return vWall.Steel;
+					return VWall.Steel;
 				case (nameof(TestTubeCity)):
-					return vWall.Glass;
+					return VWall.Glass;
 				case (nameof(Tindertown)):
-					return vWall.Wood;
+					return VWall.Wood;
 				default:
-					return vWall.Border;
+					return VWall.Border;
 			}
 		}
 		public static string RandomRugType()
 		{
 			var random = new System.Random();
-			int index = random.Next(vFloor.Rugs.Count);
+			int index = random.Next(VFloor.Rugs.Count);
 
-			return vFloor.Rugs[index];
+			return VFloor.Rugs[index];
 		}
 		public static string PublicFloorTile()
 		{
 			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
 			{
 				case nameof(Arcology):
-					return vFloor.Grass;
+					return VFloor.Grass;
 				case nameof(CanalCity):
-					return vFloor.Water;
+					return VFloor.Water;
 				case nameof(DUMP):
-					return vFloor.CaveFloor;
+					return VFloor.CaveFloor;
 				case nameof(GrandCityHotel):
 					return RandomRugType();
 				case nameof(TestTubeCity):
-					return vFloor.CleanTiles;
+					return VFloor.CleanTiles;
 				case nameof(Eisburg):
-					return vFloor.IceRink;
+					return VFloor.IceRink;
 				default:
 					return null; 
 			}
@@ -118,19 +118,19 @@ namespace SORCE
 			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
 			{
 				case nameof(Arcology):
-					return vFloorTileGroup.Park;
+					return VFloorTileGroup.Park;
 				case nameof(CanalCity):
-					return vFloorTileGroup.Water;
+					return VFloorTileGroup.Water;
 				case nameof(DUMP):
-					return vFloorTileGroup.Industrial;
+					return VFloorTileGroup.Industrial;
 				case nameof(GrandCityHotel):
-					return vFloorTileGroup.Rug;
+					return VFloorTileGroup.Rug;
 				case nameof(TestTubeCity):
-					return vFloorTileGroup.Building;
+					return VFloorTileGroup.Building;
 				case nameof(Eisburg):
-					return vFloorTileGroup.Ice;
+					return VFloorTileGroup.Ice;
 				default:
-					return vFloorTileGroup.Building;
+					return VFloorTileGroup.Building;
 			}
 		}
 		public static string FenceWallType()
@@ -138,13 +138,13 @@ namespace SORCE
 			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.BuildingsNames))
 			{
 				case nameof(CityOfSteel):
-					return vWall.Bars;
+					return VWall.Bars;
 				case nameof(GreenLiving):
-					return vWall.BarbedWire;
+					return VWall.BarbedWire;
 				case nameof(Panoptikopolis):
-					return vWall.Bars;
+					return VWall.Bars;
 				case nameof(ShantyTown):
-					return vWall.BarbedWire;
+					return VWall.BarbedWire;
 				default:
 					return null;
 			}
@@ -154,15 +154,15 @@ namespace SORCE
 			switch (ChallengeManager.GetActiveChallengeFromList(BuildingsNames))
 			{
 				case nameof(CityOfSteel):
-					return vWall.Steel;
+					return VWall.Steel;
 				case nameof(GreenLiving):
-					return vWall.Hedge;
+					return VWall.Hedge;
 				case nameof(Panoptikopolis):
-					return vWall.Glass;
+					return VWall.Glass;
 				case nameof(ShantyTown):
-					return vWall.Wood;
+					return VWall.Wood;
 				case nameof(SpelunkyDory):
-					return vWall.Cave;
+					return VWall.Cave;
 				default:
 					return null;
 			}
@@ -195,50 +195,53 @@ namespace SORCE
 			if (!Core.debugMode && !GC.challenges.Contains(nameof(AmbienterAmbience)))
 				return trackname;
 
-			if (chunkType == vChunkType.Casino)
-				trackname = vAmbience.Casino;
+			if (chunkType == VChunkType.Casino)
+				trackname = VAmbience.Casino;
 			else if (
-				chunkType != vChunkType.Bathhouse &&
-				chunkType != vChunkType.Casino &&
-				chunkType != vChunkType.Cave &&
-				chunkType != vChunkType.CityPark &&
-				chunkType != vChunkType.Graveyard)
+				chunkType != VChunkType.Bathhouse &&
+				chunkType != VChunkType.Casino &&
+				chunkType != VChunkType.Cave &&
+				chunkType != VChunkType.CityPark &&
+				chunkType != VChunkType.Graveyard)
 			{
 				if (GC.challenges.Contains(nameof(Arcology)))
-					trackname = vAmbience.Park;
+					trackname = VAmbience.Park;
 
 				if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
-					trackname = vAmbience.ClubMusic; // ClubMusic, ClubMusic_Long, ClubMusic_Huge
+					trackname = VAmbience.ClubMusic; // ClubMusic, ClubMusic_Long, ClubMusic_Huge
 				
 				if (GC.challenges.Contains(nameof(DUMP)))
-					trackname = vAmbience.Cave;
+					trackname = VAmbience.Cave;
 
 				if (GC.challenges.Contains(nameof(Eisburg)) ||
 					GC.challenges.Contains(nameof(GhostTown)) ||
 					GC.challenges.Contains(nameof(Hell)))
-					trackname = vAmbience.Graveyard;
+					trackname = VAmbience.Graveyard;
 			}
 
 			logger.LogDebug("\tResult: " + trackname);
 
 			return trackname;
 		}
+		public static bool HasAssassins(bool vanilla) => // New
+			vanilla;
 		public static bool HasBarbecues(bool vanilla) =>
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||
 			Core.debugMode ||
 			vanilla;
+		public static bool HasBearTraps(bool vanilla) => // New
+			vanilla; 
 		public static bool HasBoulders(bool vanilla) => 
 			GC.challenges.Contains(nameof(Arcology))  ||
 			GC.challenges.Contains(nameof(DUMP)) ||
-			GC.challenges.Contains(nameof(SpelunkyDory)) ||
 			Core.debugMode ||
             vanilla;
 		public static bool HasBrokenWindows =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			(GC.challenges.Contains("MixedUpLevels") && GC.percentChance(33)) ||
-			(GC.customLevel && GC.loadLevel.customLevel.levelFeatures.Contains(cLevelFeature.BrokenWindows)) ||
+			(GC.customLevel && GC.loadLevel.customLevel.levelFeatures.Contains(CLevelFeature.BrokenWindows)) ||
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(BadNeighborhoods));
         public static bool HasBushes(bool vanilla) =>
@@ -263,7 +266,16 @@ namespace SORCE
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(Technocracy)) &&
 			GC.challenges.Contains(nameof(PoliceState)) ||
-			vanilla; 
+			vanilla;
+		public static bool HasExplodingAndSlimeBarrels(bool vanilla) =>
+			!GC.challenges.Contains(nameof(Arcology)) &&
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
+			Core.debugMode ||
+			vanilla;
 		public static bool HasFireHydrants(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) && 
 			!GC.challenges.Contains(nameof(LowTechLowLife)) ||
@@ -317,7 +329,8 @@ namespace SORCE
 			vanilla;
 		public static bool HasOvergrowth() =>
 			Core.debugMode;
-		public static bool HasPollutionFeatures(bool vanilla) =>
+		public static bool HasOilSpills(bool vanilla) =>
+			!GC.challenges.Contains(nameof(Arcology)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
@@ -348,9 +361,13 @@ namespace SORCE
 			GC.challenges.Contains(nameof(PoliceState)) ||
 			GC.challenges.Contains(nameof(SurveillanceSociety)) ||
 			Core.debugMode;
-		public static bool HasSlimeBarrels() =>
-			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
+		public static bool HasSlimeBarrels =>
+			!GC.challenges.Contains(nameof(Arcology)) &&
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
 			Core.debugMode;
 		public static bool HasTrashCans(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
@@ -370,11 +387,11 @@ namespace SORCE
 			GC.challenges.Contains(nameof(MACITS)) ||
 			Core.debugMode ||
 			vanilla;
-		public static string RoamerAgentType(string vanilla)
+		public static string RoamerAgentType(string agentType)
 		{
 			// TODO: Adjustments for MACITS, etc.
 
-			if (vanilla == vAgent.Thief)
+			if (agentType == VAgent.Thief)
 			{
 				int thiefReduction =
 					GC.challenges.Contains(nameof(HordeAlmighty)) ? 50 :
@@ -383,13 +400,13 @@ namespace SORCE
 					0;
 
 				if (thiefReduction != 0 && GC.percentChance(thiefReduction))
-					vanilla = 
+					agentType = 
 						GC.levelTheme == 4 || GC.levelTheme == 5
-					? vAgent.UpperCruster
-					: vAgent.SlumDweller;
+					? VAgent.UpperCruster
+					: VAgent.SlumDweller;
 			}
 
-			return vanilla;
+			return agentType;
 		}
 		public static void SetHasLakes(LoadLevel loadLevel) =>
 			loadLevel.hasLakes =
@@ -428,13 +445,13 @@ namespace SORCE
 		public static void Spawn_Master(LoadLevel loadLevel)
 		{
 			if (HasScreens)
-				SpawnScreens(loadLevel);
+				SpawnScreens();
 
 			if (HasBrokenWindows)
 				BreakWindows();
 
 			if (HasCaveWallOutcroppings)
-				SpawnCaveWallOutcroppings(loadLevel);
+				SpawnCaveWallOutcroppings();
 
 			if (HasFountains)
 				SpawnFountains();
@@ -444,38 +461,34 @@ namespace SORCE
 
 			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
 			{
-				SpawnJukeboxesAndSpeakers(loadLevel); 
+				SpawnJukeboxesAndSpeakers(); 
 				SpawnTurntables();
 			}
 
 			if (HasLitter)
-				SpawnLitter(loadLevel);
+				SpawnLitter();
 
 			if (HasManholesUnderdank)
-				SpawnManholes_Underdank(loadLevel);
+				SpawnManholes_Underdank();
 			 
 			if (HasRugs)
 				SpawnRugs();
 
 			if (HasSecurityCamsAndTurrets)
-				SpawnSecurityCamsAndTurrets(loadLevel);
+				SpawnSecurityCamsAndTurrets();
 
-			if (HasSlimeBarrels())
-				SpawnSlimeBarrels(loadLevel);
+			if (HasSlimeBarrels)
+				SpawnSlimeBarrels();
 		}
-		private static Vector2 RandomSpawnLocation(bool againstWall, bool clearTileRadius)
-        {
-			throw new NotImplementedException();
-        }
 		private static void BreakWindows()
 		{
-			int chanceToBreak = 10 - GC.levelTheme * 2;
+			int chanceToBreak = (int)(SlumminessFactor * 10f);
 
 			foreach (ObjectReal objectReal in GC.objectRealList)
 				if (objectReal is Window window && GC.percentChance(chanceToBreak))
 					window.DamagedObject(window, 0f);
 		}
-		private static void SpawnCaveWallOutcroppings(LoadLevel loadLevel)
+		private static void SpawnCaveWallOutcroppings()
 		{
 			Debug.Log("SORCE: Loading SpelunkyDory Cave Wall Outcroppings");
 
@@ -631,7 +644,6 @@ namespace SORCE
 					}
 				}
 
-				Random.InitState(loadLevel.randomSeedNum + i);
 				itemCountIterator = i;
 			}
 		}
@@ -657,19 +669,19 @@ namespace SORCE
 					location = GC.tileInfo.FindRandLocationGeneral(2f);
 
 					for (int j = 0; j < GC.objectRealList.Count; j++)
-						if (GC.objectRealList[j].objectName == vObject.Fountain && Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSizeRatio()))
+						if (GC.objectRealList[j].objectName == VObject.Fountain && Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSizeRatio()))
 							location = Vector2.zero;
 
 					attempts++;
-				} 
-				while ((location == Vector2.zero || 
+				}
+				while ((location == Vector2.zero ||
 					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) && attempts < 100);
 
-				if (location != Vector2.zero)
-					GC.spawnerMain.spawnObjectReal(location, null, vObject.Fountain);
+					if (location != Vector2.zero)
+					GC.spawnerMain.spawnObjectReal(location, null, VObject.Fountain);
 			}
 		}
-		private static void SpawnJukeboxesAndSpeakers(LoadLevel loadLevel)
+		private static void SpawnJukeboxesAndSpeakers()
 		{
 			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
 			{
@@ -718,7 +730,7 @@ namespace SORCE
 
 					if (location != Vector2.zero)
 					{
-						GC.spawnerMain.spawnObjectReal(location, null, vObject.Speaker).ShiftTowardWalls();
+						GC.spawnerMain.spawnObjectReal(location, null, VObject.Speaker).ShiftTowardWalls();
 
 						TileData tileData5 = GC.tileInfo.GetTileData(location);
 						spawnedInChunks.Add(tileData5.chunkID);
@@ -783,7 +795,7 @@ namespace SORCE
 
 							if (flag9 && zero4 != Vector2.zero)
 							{
-								GC.spawnerMain.spawnObjectReal(zero4, null, vObject.Speaker).ShiftTowardWalls();
+								GC.spawnerMain.spawnObjectReal(zero4, null, VObject.Speaker).ShiftTowardWalls();
 								i++;
 							}
 							else
@@ -833,29 +845,30 @@ namespace SORCE
 
 								if (flag9 && zero5 != Vector2.zero)
 								{
-									GC.spawnerMain.spawnObjectReal(zero5, null, vObject.Jukebox).ShiftTowardWalls();
+									GC.spawnerMain.spawnObjectReal(zero5, null, VObject.Jukebox).ShiftTowardWalls();
 									i++;
 								}
 							}
 						}
 					}
-					Random.InitState(loadLevel.randomSeedNum + i);
 				}
 				spawnedInChunks = null;
 			}
 		}
-		private static void SpawnLitter(LoadLevel loadLevel)
+		private static void SpawnLitter()
 		{
-			int numObjects = (int)((5 - GC.levelTheme) * 100 * LevelSizeRatio());
+			int numObjects = (int)(100 * SlumminessFactor * LevelSizeRatio());
 
 			for (int i = 0; i < numObjects; i++)
 			{
 				// Vector2 location = GC.tileInfo.FindRandLocationGeneral(0f); // Vanilla 2f
-				Vector2 location = FindRandLocationGeneral_NearWall(GC.tileInfo, 0.2f);
+				Vector2 location = RandomSpawnLocation(GC.tileInfo, 0.2f);
 
 				GC.spawnerMain.SpawnWreckagePileObject(location, OverhaulWreckageType(), false);
 			}
 		}
+		private static float SlumminessFactor =>
+			(5 - GC.levelTheme) / 5;
 		private static string OverhaulWreckageType()
         {
 			// TODO: Call SpawnWreckagePileObject in here, because you need to determine whether trash is burnt or not
@@ -864,20 +877,20 @@ namespace SORCE
 				switch (ChallengeManager.GetActiveChallengeFromList(Overhauls)) 
 				{
 					case nameof(Arcology):
-						return vObject.Bush;
+						return VObject.Bush;
 					case nameof(DUMP): // Rock
-						return vObject.FlamingBarrel;
+						return VObject.FlamingBarrel;
 					case nameof(Eisburg): // Ice chunks, but see notes to see if ice gibs are preferable
-						return vObject.Refrigerator;
+						return VObject.Refrigerator;
 					case nameof(Hell): // Rock
-						return vObject.FlamingBarrel;
+						return VObject.FlamingBarrel;
 					case nameof(Tindertown): // Ashes
-						return vObject.Bush;
+						return VObject.Bush;
 				}
             }
 
 			// Regular trash
-			return GC.Choose(vObject.Shelf, vObject.MovieScreen, vObject.Counter, vObject.VendorCart, vObject.Window);
+			return GC.Choose(VObject.Shelf, VObject.MovieScreen, VObject.Counter, VObject.VendorCart, VObject.Window);
 		}
 		public static void SpawnWreckagePileObject_Granular(Vector3 targetLoc, string objectType, bool burnt, int gibs, float radX, float radY)
         {
@@ -890,7 +903,7 @@ namespace SORCE
 				GC.spawnerMain.SpawnWreckage2(targetLoc, wreckageType, burnt);
 			}
 		}
-		private static Vector2 FindRandLocationGeneral_NearWall(TileInfo tileInfo, float maxDistanceToWall)
+		private static Vector2 RandomSpawnLocation(TileInfo tileInfo, float maxDistanceToWall)
         {
 			for (int i = 0; i < 200; i++)
 			{
@@ -914,7 +927,7 @@ namespace SORCE
 					tileData.dangerousToWalk ||
 					//tileData.solidObject ||
 					tileData.wallColliderUnreachable ||
-					!IsCloseToWall(tileInfo, vector, maxDistanceToWall))
+					!IsCloseToWall(vector, maxDistanceToWall))
 					badSpot = true;
 
 				if (!badSpot)
@@ -923,7 +936,7 @@ namespace SORCE
 
 			return Vector2.zero;
 		}
-		private static bool IsCloseToWall(TileInfo tileInfo, Vector2 pos, float circleRadius)
+		private static bool IsCloseToWall(Vector2 pos, float circleRadius)
         {
 			int num;
 			Collider2D[] tileInfo_hitsAlloc = new Collider2D[100];
@@ -949,7 +962,7 @@ namespace SORCE
 		///		Possibly just a level gate?
 		/// </summary>
 		/// <param name="loadLevel"></param>
-		private static void SpawnManholes_Underdank(LoadLevel loadLevel)
+		private static void SpawnManholes_Underdank()
 		{
 			Debug.Log("SORCE: Loading Underdank Manholes");
 			int bigTries = (int)((float)Random.Range(8, 12) * LevelSizeRatio());
@@ -965,7 +978,7 @@ namespace SORCE
 					spot = GC.tileInfo.FindRandLocationGeneral(2f);
 
 					for (int j = 0; j < GC.objectRealList.Count; j++)
-						if (GC.objectRealList[j].objectName == vObject.Manhole && 
+						if (GC.objectRealList[j].objectName == VObject.Manhole && 
 							Vector2.Distance(GC.objectRealList[j].tr.position, spot) < 2f) // Vanilla 14f
 							spot = Vector2.zero;
 
@@ -982,13 +995,13 @@ namespace SORCE
 				while ((spot == Vector2.zero || Vector2.Distance(spot, GC.playerAgent.tr.position) < 5f) && spotsTried < 100);
 
 				if (spot != Vector2.zero && Vector2.Distance(spot, GC.playerAgent.tr.position) >= 5f)
-					GC.spawnerMain.spawnObjectReal(spot, null, vObject.Manhole);
+					GC.spawnerMain.spawnObjectReal(spot, null, VObject.Manhole);
 			}
 
 			List<Manhole> manholeList = new List<Manhole>();
 
 			for (int i = 0; i < GC.objectRealList.Count; i++)
-				if (GC.objectRealList[i].objectName == vObject.Manhole)
+				if (GC.objectRealList[i].objectName == VObject.Manhole)
 					manholeList.Add((Manhole)GC.objectRealList[i]);
 
 			logger.LogDebug("UDManhole List count: " + manholeList.Count());
@@ -1020,7 +1033,7 @@ namespace SORCE
 
 					if (NoHiddenAgentMatch)
 					{
-						string agentType = vAgent.Thief;
+						string agentType = VAgent.Thief;
 
 						Agent agent2 = GC.spawnerMain.SpawnAgent(manhole.tr.position, manhole, agentType);
 						agent2.SetDefaultGoal("Idle");
@@ -1029,7 +1042,7 @@ namespace SORCE
 					}
 				}
 		}
-		private static void SpawnOvergrowth(LoadLevel loadLevel)
+		private static void SpawnOvergrowth()
         {
 			// Lots of bushes, trees, carnivorous plants, hedge walls
 			throw new NotImplementedException();
@@ -1039,7 +1052,7 @@ namespace SORCE
 			// Alternative: replace all public floors with rug, it doesn't matter that much
 
 		}
-		private static void SpawnScreens(LoadLevel loadLevel)
+		private static void SpawnScreens()
         {
 			Debug.Log("SORCE: Loading Public Screens");
 
@@ -1052,43 +1065,44 @@ namespace SORCE
 				Vector2 spot = Vector2.zero;
 				int attempts = 0;
 
-				while (attempts < 100 &&
-					(spot == Vector2.zero || Vector2.Distance(spot, GC.playerAgent.tr.position) < 5f))
+				do
 				{
 					spot = GC.tileInfo.FindRandLocationNearWall(0.64f);
 
 					if (spot != Vector2.zero)
 					{
-						if (GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).owner == 0 && 
-							GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y)).owner == 0 && 
-							GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y - 0.64f)).owner == 0 && 
+						if (GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).owner == 0 &&
+							GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y)).owner == 0 &&
+							GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y - 0.64f)).owner == 0 &&
 							GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).owner == 0)
 							spot = Vector2.zero;
-						
-						if (!GC.tileInfo.IsOverlapping(new Vector2(spot.x, spot.y + 0.64f), "Wall") && 
-							!GC.tileInfo.IsOverlapping(new Vector2(spot.x, spot.y - 0.64f), "Wall") && 
-							!GC.tileInfo.IsOverlapping(new Vector2(spot.x + 0.64f, spot.y), "Wall") && 
+
+						if (!GC.tileInfo.IsOverlapping(new Vector2(spot.x, spot.y + 0.64f), "Wall") &&
+							!GC.tileInfo.IsOverlapping(new Vector2(spot.x, spot.y - 0.64f), "Wall") &&
+							!GC.tileInfo.IsOverlapping(new Vector2(spot.x + 0.64f, spot.y), "Wall") &&
 							!GC.tileInfo.IsOverlapping(new Vector2(spot.x - 0.64f, spot.y), "Wall"))
 							spot = Vector2.zero;
-						
+
 						if (GC.tileInfo.IsOverlapping(spot, "ObjectRealSprite", 0.64f))
 							spot = Vector2.zero;
-						
+
 						if (spawnedInChunks.Contains(GC.tileInfo.GetTileData(spot).chunkID))
 							spot = Vector2.zero;
-						
+
 						if (GC.tileInfo.DestroyIfBetweenWalls(spot))
 							spot = Vector2.zero;
 					}
 
 					attempts++;
 				}
+				while (attempts < 100 &&
+					(spot == Vector2.zero || Vector2.Distance(spot, GC.playerAgent.tr.position) < 5f));
 
 				if (spot != Vector2.zero)
 				{
-					ObjectReal movieScreen = GC.spawnerMain.spawnObjectReal(spot, null, vObject.MovieScreen);
+					ObjectReal movieScreen = GC.spawnerMain.spawnObjectReal(spot, null, VObject.MovieScreen);
 					movieScreen.ShiftTowardWalls();
-					movieScreen.ambientAudio = vAmbience.Casino;
+					movieScreen.ambientAudio = VAmbience.Casino;
 					TileData tileData = GC.tileInfo.GetTileData(spot);
 					spawnedInChunks.Add(tileData.chunkID);
 
@@ -1151,9 +1165,9 @@ namespace SORCE
 						
 						if (spotUsable && neighborCell1 != Vector2.zero)
 						{
-							ObjectReal movieScreen2 = GC.spawnerMain.spawnObjectReal(neighborCell1, null, vObject.MovieScreen); 
+							ObjectReal movieScreen2 = GC.spawnerMain.spawnObjectReal(neighborCell1, null, VObject.MovieScreen); 
 							movieScreen2.ShiftTowardWalls();
-							movieScreen2.ambientAudio = vAmbience.Casino;
+							movieScreen2.ambientAudio = VAmbience.Casino;
 							num2 = numObjects;
 							numObjects = num2 + 1;
 						}
@@ -1187,9 +1201,9 @@ namespace SORCE
 							
 							if (spotUsable && neighborCell2 != Vector2.zero)
 							{
-								ObjectReal movieScreen3 = GC.spawnerMain.spawnObjectReal(neighborCell2, null, vObject.MovieScreen);
+								ObjectReal movieScreen3 = GC.spawnerMain.spawnObjectReal(neighborCell2, null, VObject.MovieScreen);
 								movieScreen3.ShiftTowardWalls();
-								movieScreen3.ambientAudio = vAmbience.Casino;
+								movieScreen3.ambientAudio = VAmbience.Casino;
 								num2 = numObjects;
 								numObjects = num2 + 1;
 							}
@@ -1199,11 +1213,11 @@ namespace SORCE
 				num2 = numObjects;
 			}
 		}
-		private static void SpawnSecurityCamsAndTurrets(LoadLevel loadLevel)
+		private static void SpawnSecurityCamsAndTurrets()
 		{
 			logger.LogDebug("SORCE: Loading Public Security Cams");
 
-			int bigTries = (int)((float)Random.Range(8, 12) * LevelSizeRatio());
+			int bigTries = (int)(Random.Range(8, 12) * LevelSizeRatio() * SlumminessFactor);
 			List<int> spawnedInChunks = new List<int>();
 			int num2;
 
@@ -1247,11 +1261,13 @@ namespace SORCE
 					}
 
 					spotsTried++;
-				} while ((spotCandidate == Vector2.zero || Vector2.Distance(spotCandidate, GC.playerAgent.tr.position) < 5f) && spotsTried < 100);
+				} 
+				while ((spotCandidate == Vector2.zero || Vector2.Distance(spotCandidate, GC.playerAgent.tr.position) < 5f) 
+					&& spotsTried < 100);
 
 				if (spotCandidate != Vector2.zero)
 				{
-					ObjectReal securityCam = GC.spawnerMain.spawnObjectReal(spotCandidate, null, vObject.SecurityCam);
+					ObjectReal securityCam = GC.spawnerMain.spawnObjectReal(spotCandidate, null, VObject.SecurityCam);
 					securityCam.ShiftTowardWalls();
 
 					securityCam.owner = 85;
@@ -1397,7 +1413,7 @@ namespace SORCE
 
 						if (isSpotAcceptable && leftOfSpot != Vector2.zero)
 						{
-							ObjectReal turret1 = GC.spawnerMain.spawnObjectReal(leftOfSpot, null, vObject.Turret);
+							ObjectReal turret1 = GC.spawnerMain.spawnObjectReal(leftOfSpot, null, VObject.Turret);
 							turret1.ShiftTowardWalls();
 
 							turret1.direction = securityCam.direction;
@@ -1459,7 +1475,7 @@ namespace SORCE
 
 							if (isSpotAcceptable && rightOfSpot != Vector2.zero)
 							{
-								ObjectReal turret2 = GC.spawnerMain.spawnObjectReal(rightOfSpot, null, vObject.Turret);
+								ObjectReal turret2 = GC.spawnerMain.spawnObjectReal(rightOfSpot, null, VObject.Turret);
 								turret2.ShiftTowardWalls();
 
 								turret2.direction = securityCam.direction;
@@ -1473,15 +1489,14 @@ namespace SORCE
 					}
 				}
 
-				Random.InitState(loadLevel.randomSeedNum + numObjects);
 				num2 = numObjects;
 			}
 		}
-		private static void SpawnSlimeBarrels(LoadLevel loadLevel)
+		private static void SpawnSlimeBarrels()
         {
 			logger.LogDebug("SORCE: Loading Slime Barrels");
 
-			int numObjects = (int)(Random.Range(11, 16) * LevelSizeRatio());
+			int numObjects = (int)(Random.Range(1, 3) * LevelSizeRatio() * SlumminessFactor);
 
 			for (int i = 0; i < numObjects; i++)
 			{
@@ -1493,10 +1508,12 @@ namespace SORCE
 					location = GC.tileInfo.FindRandLocationGeneral(2f);
 					attempts++;
 				}
-				while ((location == Vector2.zero || Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) && attempts < 100);
+				while ((location == Vector2.zero || Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) 
+					&& attempts < 100);
+
 
 				if (location != Vector2.zero)
-					GC.spawnerMain.spawnObjectReal(location, null, vObject.SlimeBarrel);
+					GC.spawnerMain.spawnObjectReal(location, null, VObject.SlimeBarrel);
 			}
 		}
 		private static void SpawnTurntables()
@@ -1514,7 +1531,7 @@ namespace SORCE
 					location = GC.tileInfo.FindRandLocationGeneral(2f);
 
 					for (int k = 0; k < GC.objectRealList.Count; k++)
-						if (GC.objectRealList[k].objectName == vObject.Turntables &&
+						if (GC.objectRealList[k].objectName == VObject.Turntables &&
 								Vector2.Distance(GC.objectRealList[k].tr.position, location) < distanceBetween)
 							location = Vector2.zero;
 
@@ -1535,10 +1552,10 @@ namespace SORCE
 				while (j < 100 &&
 					(location == Vector2.zero ||
 					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f ||
-					Vector2.Distance(location, GC.elevatorDown.tr.position) < 5f));
+					Vector2.Distance(location, GC.elevatorDown.tr.position) < 5f))
 
-				if (location != Vector2.zero)
-					GC.spawnerMain.spawnObjectReal(location, null, vObject.Turntables);
+					if (location != Vector2.zero)
+					GC.spawnerMain.spawnObjectReal(location, null, VObject.Turntables);
 			}
 		}
 	}

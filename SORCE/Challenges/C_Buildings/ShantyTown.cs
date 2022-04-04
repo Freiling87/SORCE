@@ -17,15 +17,15 @@ namespace SORCE.Challenges.C_Buildings
 		public ShantyTown(string name) : base(name) { }
 
 		public override string ConstructedFloorType =>
-			vFloor.DrugDenFloor;
+			VFloor.DrugDenFloor;
 		public override string NaturalFloorType =>
 			null;
 		public override string RaisedFloorType =>
-			vFloor.DirtyTiles;
+			VFloor.DirtyTiles;
 		public override string RugFloorType =>
 			null; 
 		public override string UnraisedTileTilesType =>
-			vFloor.BrickIndoor;
+			VFloor.BrickIndoor;
 
 		[RLSetup]
 		static void Start()

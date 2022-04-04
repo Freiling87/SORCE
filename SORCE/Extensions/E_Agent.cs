@@ -14,10 +14,10 @@ namespace SORCE.Extensions
 		public static bool IsEnforcer(this Agent agent) =>
 			agent.enforcer ||
 			agent.HasTrait(nameof(StatusEffectNameDB.rowIds.TheLaw)) ||
-			vAgent.LawEnforcement.Contains(agent.agentName);
+			VAgent.LawEnforcement.Contains(agent.agentName);
 
 		public static bool IsCriminal(this Agent agent) =>
 			agent.objectMultAgent.mustBeGuilty || 
-			vAgent.Criminal.Contains(agent.agentName);
+			VAgent.Criminal.Contains(agent.agentName);
 	}
 }

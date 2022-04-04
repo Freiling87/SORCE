@@ -40,27 +40,27 @@ namespace SORCE.Patches
 				BuildingsChallenge mutator = RogueFramework.Unlocks.OfType<BuildingsChallenge>().FirstOrDefault(m => m.IsEnabled);
 				logger.LogDebug(mutator is null);
 
-				if (vFloor.Natural.Contains(floorName))
+				if (VFloor.Natural.Contains(floorName))
 				{
 					if (!(mutator.NaturalFloorType is null))
 						floorName = mutator.NaturalFloorType;
                 }
-				else if (vFloor.Constructed.Contains(floorName))
+				else if (VFloor.Constructed.Contains(floorName))
 				{
 					if (!(mutator.ConstructedFloorType is null))
 						floorName = mutator.ConstructedFloorType;
 				}
-				else if (vFloor.Raised.Contains(floorName))
+				else if (VFloor.Raised.Contains(floorName))
 				{
 					if (!(mutator.RaisedFloorType is null))
 						floorName = mutator.RaisedFloorType;
 				}
-				else if (vFloor.Rugs.Contains(floorName))
+				else if (VFloor.Rugs.Contains(floorName))
 				{
 					if (!(mutator.RugFloorType is null))
 						floorName = mutator.RugFloorType;
 				}
-				else if (vFloor.UnraisedTileTiles.Contains(floorName))
+				else if (VFloor.UnraisedTileTiles.Contains(floorName))
                 {
 					if (!(mutator.UnraisedTileTilesType is null))
 						floorName= mutator.UnraisedTileTilesType;

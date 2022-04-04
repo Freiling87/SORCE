@@ -13,7 +13,7 @@ namespace SORCE.Challenges.C_Features
 {
 	public class LakeItOrLeaveIt
 	{
-		//[RLSetup]
+		[RLSetup]
 		static void Start()
 		{
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(LakeItOrLeaveIt), true)

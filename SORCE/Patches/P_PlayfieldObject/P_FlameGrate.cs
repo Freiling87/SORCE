@@ -12,7 +12,7 @@ namespace SORCE.Patches.P_PlayfieldObject
     [HarmonyPatch(declaringType: typeof(FlameGrate))]
     class P_FlameGrate
     {
-        private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+        //private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
     }
 
@@ -24,8 +24,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> Start_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
-		{
+        private static IEnumerable<CodeInstruction> Start_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+        {
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(

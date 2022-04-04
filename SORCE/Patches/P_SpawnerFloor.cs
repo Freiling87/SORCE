@@ -367,27 +367,27 @@ namespace SORCE.Patches
 						num5 = 536;
 						floorMaterialType = floorMaterialType.PrisonFloor;
 					}
-					else if (floorName == vFloor.RugBlue)
+					else if (floorName == VFloor.RugBlue)
 					{
 						num5 = 252;
 						floorMaterialType = floorMaterialType.BlueRug;
 					}
-					else if (floorName == vFloor.RugDarkBlue)
+					else if (floorName == VFloor.RugDarkBlue)
 					{
 						num5 = 272;
 						floorMaterialType = floorMaterialType.DarkBlueRug;
 					}
-					else if (floorName == vFloor.RugGreen)
+					else if (floorName == VFloor.RugGreen)
 					{
 						num5 = 212;
 						floorMaterialType = floorMaterialType.GreenRug;
 					}
-					else if (floorName == vFloor.RugPurple)
+					else if (floorName == VFloor.RugPurple)
 					{
 						num5 = 556;
 						floorMaterialType = floorMaterialType.PurpleRug;
 					}
-					else if (floorName == vFloor.RugRed)
+					else if (floorName == VFloor.RugRed)
 					{
 						num5 = 232;
 						floorMaterialType = floorMaterialType.RedRug;

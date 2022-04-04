@@ -107,24 +107,24 @@ namespace SORCE.Patches
 							{
 								___tilemapWalls.ClearTile(k, l - 1, 0);
 								__instance.tileInfo.tileArray[k, l - 1].chunkID = __instance.mapChunkArray[i, j].chunkID;
-								string tilemapGroup = vFloorTileGroup.Building;
+								string tilemapGroup = VFloorTileGroup.Building;
 
 								if (ChallengeManager.IsChallengeFromListActive(Overhauls))
 									tilemapGroup = LevelGenTools.PublicFloorTileGroup(); // Works on: Slums,
 								else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 								{
 									if (GC.levelTheme == 0)
-										tilemapGroup = vFloorTileGroup.Slums;
+										tilemapGroup = VFloorTileGroup.Slums;
 									else if (GC.levelTheme == 1)
-										tilemapGroup = vFloorTileGroup.Industrial;
+										tilemapGroup = VFloorTileGroup.Industrial;
 									else if (GC.levelTheme == 2)
-										tilemapGroup = vFloorTileGroup.Park;
+										tilemapGroup = VFloorTileGroup.Park;
 									else if (GC.levelTheme == 3)
-										tilemapGroup = vFloorTileGroup.Downtown;
+										tilemapGroup = VFloorTileGroup.Downtown;
 									else if (GC.levelTheme == 4)
-										tilemapGroup = vFloorTileGroup.Uptown;
+										tilemapGroup = VFloorTileGroup.Uptown;
 									else if (GC.levelTheme == 5)
-										tilemapGroup = vFloorTileGroup.MayorVillage;
+										tilemapGroup = VFloorTileGroup.MayorVillage;
 								}
 
 								int tile = int.Parse(GC.rnd.RandomSelect(tilemapGroup, "RandomFloorsWalls"));
@@ -184,24 +184,24 @@ namespace SORCE.Patches
 									tileData.wallMaterialOffsetTop = wallMaterialOffsetTop;
 									tileData.wallFrontVariation = true;
 									tileData.wallMaterial = wallMaterialType.Border;
-									string tilemapGroup = vFloorTileGroup.Building;
+									string tilemapGroup = VFloorTileGroup.Building;
 
 									if (ChallengeManager.IsChallengeFromListActive(Overhauls))
-										tilemapGroup = vFloorTileGroup.MayorVillage; // Works on: Park, 
+										tilemapGroup = VFloorTileGroup.MayorVillage; // Works on: Park, 
 									else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 									{
 										if (GC.levelTheme == 0)
-											tilemapGroup = vFloorTileGroup.Slums;
+											tilemapGroup = VFloorTileGroup.Slums;
 										else if (GC.levelTheme == 1)
-											tilemapGroup = vFloorTileGroup.Industrial;
+											tilemapGroup = VFloorTileGroup.Industrial;
 										else if (GC.levelTheme == 2)
-											tilemapGroup = vFloorTileGroup.Park;
+											tilemapGroup = VFloorTileGroup.Park;
 										else if (GC.levelTheme == 3)
-											tilemapGroup = vFloorTileGroup.Downtown;
+											tilemapGroup = VFloorTileGroup.Downtown;
 										else if (GC.levelTheme == 4)
-											tilemapGroup = vFloorTileGroup.Uptown;
+											tilemapGroup = VFloorTileGroup.Uptown;
 										else if (GC.levelTheme == 5)
-											tilemapGroup = vFloorTileGroup.MayorVillage;
+											tilemapGroup = VFloorTileGroup.MayorVillage;
 									}
 
 									int tile2 = int.Parse(GC.rnd.RandomSelect(tilemapGroup, "RandomFloorsWalls"));
@@ -372,13 +372,13 @@ namespace SORCE.Patches
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		// One per class
 		[HarmonyTargetMethod, UsedImplicitly]
 		private static MethodInfo Find_MoveNext_MethodInfo() =>
 			PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(LoadLevel), "SetupMore3_3", new Type[] { }));
 
-		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_AlarmButtons(IEnumerable<CodeInstruction> codeInstructions)
+        #region Features
+        [HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> AlarmButtons(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo LevelGenTools_HasPoliceBoxesAndAlarmButtons = 
@@ -410,7 +410,7 @@ namespace SORCE.Patches
 		}
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_AmbientAudio(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> AmbientAudio(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo LevelGenTools_AmbientAudio = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.AmbientAudio), new[] { typeof(string), typeof(string) });
@@ -445,8 +445,14 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
+		// Assassins
+
+		// Barbecues
+
+		// Bear Traps
+
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Boulders(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> Boulders(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo LevelGenTools_HasBoulders = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasBoulders), new[] { typeof(bool) });
@@ -476,11 +482,19 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
+		// Bushes
+
+		// Cops
+
+		// Cops, Extra
+
+		// Cop Bots
+
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_ExplodingAndSlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> ExplodingAndSlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo LevelGenTools_HasPollutionFeatures = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPollutionFeatures), new[] { typeof(bool) });
+			MethodInfo LevelGenTools_HasExplodingAndSlimeBarrels = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasExplodingAndSlimeBarrels), new[] { typeof(bool) });
 			MethodInfo contains = AccessTools.Method(typeof(List<string>), nameof(List<string>.Contains), new[] { typeof(string) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
@@ -500,7 +514,7 @@ namespace SORCE.Patches
 					//	flag15 = LevelGenTools.HasExplodingAndSlimeBarrels(flag15);
 
 					new CodeInstruction(OpCodes.Ldloc_S, 11), // flag15
-					new CodeInstruction(OpCodes.Call, LevelGenTools_HasPollutionFeatures), // bool
+					new CodeInstruction(OpCodes.Call, LevelGenTools_HasExplodingAndSlimeBarrels), // bool
 					new CodeInstruction(OpCodes.Stloc_S, 11), // Clear
 				});
 
@@ -509,7 +523,7 @@ namespace SORCE.Patches
 		}
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_FireHydrants(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> FireHydrants(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo LevelGenTools_HasFireHydrants = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasFireHydrants), new[] { typeof(bool) });
@@ -539,7 +553,7 @@ namespace SORCE.Patches
 		}
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_FlameGrates(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> FlameGrates(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo LevelGenTools_SetHasFlameGrates = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.SetHasFlameGrates), new[] { typeof(LoadLevel) });
@@ -571,7 +585,7 @@ namespace SORCE.Patches
 		}
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_FlamingBarrels(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> FlamingBarrels(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo LevelGenTools_HasFlamingBarrels = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasFlamingBarrels), new[] { typeof(bool) });
@@ -601,8 +615,10 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
+		// Fountains
+
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Lakes(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> Lakes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			FieldInfo loadLevel_hasLakes = AccessTools.Field(typeof(LoadLevel), nameof(LoadLevel.hasLakes));
@@ -629,8 +645,10 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
+		// Lamps
+
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Manholes(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> Manholes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo levelGenTools_HasManholes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasManholesVanilla), new[] { typeof(bool) });
@@ -660,8 +678,12 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
+		// Mafia
+
+		// Musician
+
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Mines(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> Mines(IEnumerable<CodeInstruction> codeInstructions)
         {
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo levelGenTools_HasLandMines = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasLandMines), new [] { typeof(bool) });
@@ -691,10 +713,10 @@ namespace SORCE.Patches
         }
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_OilSpills(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> OilSpills(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo levelGenTools_HasPollutionFeatures = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPollutionFeatures), new[] { typeof(bool) });
+			MethodInfo levelGenTools_HasOilSpills = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasOilSpills), new[] { typeof(bool) });
 			FieldInfo gc = AccessTools.Field(typeof(LoadLevel), "gc"); // private
 			FieldInfo gc_serverPlayer = AccessTools.Field(typeof(GameController), nameof(GameController.serverPlayer));
 
@@ -715,10 +737,10 @@ namespace SORCE.Patches
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					// flag3 = SetupMore3_3_HasPollutionFeatures(flag3);
+					// flag3 = SetupMore3_3_HasOilSpills(flag3);
 
 					new CodeInstruction(OpCodes.Ldloc_S, 4), // flag3
-					new CodeInstruction(OpCodes.Call, levelGenTools_HasPollutionFeatures), // bool
+					new CodeInstruction(OpCodes.Call, levelGenTools_HasOilSpills), // bool
 					new CodeInstruction(OpCodes.Stloc_S, 4) // Clear
 				});
 
@@ -727,7 +749,7 @@ namespace SORCE.Patches
 		}
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_PoliceBoxes(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> PoliceBoxes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			Type enumeratorType = PatcherUtils.FindIEnumeratorMoveNext(AccessTools.Method(typeof(LoadLevel), "SetupMore3_3")).DeclaringType;
@@ -763,7 +785,7 @@ namespace SORCE.Patches
 		}
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_PowerBoxes(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> PowerBoxes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo hasPowerBoxes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasPowerBoxes), new[] { typeof(bool) });
@@ -792,8 +814,139 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
+		// Roving Gangs
+
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgentNumber(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> SlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
+        {
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo levelGenTools_HasSlimeBarrels = AccessTools.Method(type: typeof(LevelGenTools), nameof(LevelGenTools.HasSlimeBarrels), new[] { typeof(bool) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					// Line 13102
+					// if (flag2)
+
+					new CodeInstruction(OpCodes.Ldloc_S, 3),
+					new CodeInstruction(OpCodes.Brfalse),
+					new CodeInstruction(OpCodes.Ldstr, "Loading Slime Barrels"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					// flag2 = HasSlimeBarrels(flag2);
+
+					new CodeInstruction(OpCodes.Ldloc_S, 3), // flag2
+					new CodeInstruction(OpCodes.Call, levelGenTools_HasSlimeBarrels), // bool
+					new CodeInstruction(OpCodes.Stloc_S, 3) // Clear
+
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> TrashCans(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo levelGenTools_HasTrashCans = AccessTools.Method(type: typeof(LevelGenTools), nameof(LevelGenTools.HasTrashCans), new[] { typeof(bool) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					// Line 694
+					// if (flag7)
+
+					new CodeInstruction(OpCodes.Ldloc_S, 6),
+					new CodeInstruction(OpCodes.Brfalse),
+					new CodeInstruction(OpCodes.Ldstr, "Loading Trash Cans"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					// flag7 = HasTrashCans(flag7);
+
+					new CodeInstruction(OpCodes.Ldloc_S, 6), // flag7
+					new CodeInstruction(OpCodes.Call, levelGenTools_HasTrashCans), // bool
+					new CodeInstruction(OpCodes.Stloc_S, 6) // Clear
+
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> Trees(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo levelGenTools_HasTrees = AccessTools.Method(type: typeof(LevelGenTools), nameof(LevelGenTools.HasTrees), new[] { typeof(bool) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					//	Line 1548
+					//	if(flag19)
+
+					new CodeInstruction(OpCodes.Stloc_S, 14),
+					new CodeInstruction(OpCodes.Ldloc_S, 14),
+					new CodeInstruction(OpCodes.Brfalse),
+					new CodeInstruction(OpCodes.Ldstr, "Loading Trees"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					//	flag19 = LevelGenTools.HasTrees(flag19);
+
+					new CodeInstruction(OpCodes.Ldloc_S, 14), // flag19
+					new CodeInstruction(OpCodes.Call, levelGenTools_HasTrees), // bool
+					new CodeInstruction(OpCodes.Stloc_S, 14) // clear
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		// Vending Machines
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> VendorCarts(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo loadLevel_HasVendorCarts = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasVendorCarts), new[] { typeof(bool) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					// Line 838
+					// if (flag10)
+
+					new CodeInstruction(OpCodes.Ldloc_S, 7),
+					new CodeInstruction(OpCodes.Brfalse),
+					new CodeInstruction(OpCodes.Ldstr, "Loading Vendor Carts"),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					// flag10 = HasVendorCarts(flag10);
+
+					new CodeInstruction(OpCodes.Ldloc_S, 7), // flag10
+					new CodeInstruction(OpCodes.Call, loadLevel_HasVendorCarts), // bool
+					new CodeInstruction(OpCodes.Stloc_S, 7), // Clear
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
+
+		// Zombies
+
+		#endregion
+        #region Roamers
+        [HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> RoamerAgentNumber(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo levelGenTools_PopulationMultiplier = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.PopulationMultiplier));
@@ -838,7 +991,7 @@ namespace SORCE.Patches
 		/// <param name="codeInstructions"></param>
 		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_RoamerAgentType(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> RoamerAgentType(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 			MethodInfo RoamerAgentType = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.RoamerAgentType), new[] { typeof(string) });
@@ -872,97 +1025,6 @@ namespace SORCE.Patches
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
-
-		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_TrashCans(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo levelGenTools_HasTrashCans = AccessTools.Method(type: typeof(LevelGenTools), nameof(LevelGenTools.HasTrashCans), new[] { typeof(bool) });
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					// Line 694
-					// if (flag7)
-
-					new CodeInstruction(OpCodes.Ldloc_S, 6),
-					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Trash Cans"),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					// flag7 = HasTrashCans(flag7);
-
-					new CodeInstruction(OpCodes.Ldloc_S, 6), // flag7
-					new CodeInstruction(OpCodes.Call, levelGenTools_HasTrashCans), // bool
-					new CodeInstruction(OpCodes.Stloc_S, 6) // Clear
-
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_Trees(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo levelGenTools_HasTrees = AccessTools.Method(type: typeof(LevelGenTools), nameof(LevelGenTools.HasTrees), new[] { typeof(bool) });
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					//	Line 1548
-					//	if(flag19)
-
-					new CodeInstruction(OpCodes.Stloc_S, 14),
-					new CodeInstruction(OpCodes.Ldloc_S, 14),
-					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Trees"),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					//	flag19 = LevelGenTools.HasTrees(flag19);
-
-					new CodeInstruction(OpCodes.Ldloc_S, 14), // flag19
-					new CodeInstruction(OpCodes.Call, levelGenTools_HasTrees), // bool
-					new CodeInstruction(OpCodes.Stloc_S, 14) // clear
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> SetupMore3_3_Transpiler_VendorCarts(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo loadLevel_HasVendorCarts = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasVendorCarts), new[] { typeof(bool) });
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					// Line 838
-					// if (flag10)
-
-					new CodeInstruction(OpCodes.Ldloc_S, 7),
-					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldstr, "Loading Vendor Carts"),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					// flag10 = HasVendorCarts(flag10);
-
-					new CodeInstruction(OpCodes.Ldloc_S, 7), // flag10
-					new CodeInstruction(OpCodes.Call, loadLevel_HasVendorCarts), // bool
-					new CodeInstruction(OpCodes.Stloc_S, 7), // Clear
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-	}
+        #endregion
+    }
 }

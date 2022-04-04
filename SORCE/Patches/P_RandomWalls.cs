@@ -27,10 +27,10 @@ namespace SORCE.Patches
 
 			if (ChallengeManager.IsChallengeFromListActive(BuildingsNames))
 			{
-				if (vWall.Fence.Contains(wallType))
+				if (VWall.Fence.Contains(wallType))
 					if (!(LevelGenTools.FenceWallType() is null))
 						wallType = LevelGenTools.FenceWallType();
-				else if (vWall.Structural.Contains(wallType))
+				else if (VWall.Structural.Contains(wallType))
 					if (!(LevelGenTools.BuildingWallType() is null))
 						wallType = LevelGenTools.BuildingWallType();
 			}
@@ -42,16 +42,16 @@ namespace SORCE.Patches
 				RandomSelection component = GameObject.Find("ScriptObject").GetComponent<RandomSelection>();
 				RandomList rList;
 
-				rList = component.CreateRandomList(vWallGroup.Normal, "Walls", "Wall");
+				rList = component.CreateRandomList(VWallGroup.Normal, "Walls", "Wall");
 				component.CreateRandomElement(rList, wallType, 3);
 
-				rList = component.CreateRandomList(vWallGroup.Weak, "Walls", "Wall");
+				rList = component.CreateRandomList(VWallGroup.Weak, "Walls", "Wall");
 				component.CreateRandomElement(rList, wallType, 3);
 
-				rList = component.CreateRandomList(vWallGroup.Strong, "Walls", "Wall");
+				rList = component.CreateRandomList(VWallGroup.Strong, "Walls", "Wall");
 				component.CreateRandomElement(rList, wallType, 3);
 
-				rList = component.CreateRandomList(vWallGroup.Hideout, "Walls", "Wall");
+				rList = component.CreateRandomList(VWallGroup.Hideout, "Walls", "Wall");
 				component.CreateRandomElement(rList, wallType, 3);
 			}
 

@@ -14,7 +14,7 @@ using UnityEngine;
 namespace SORCE.Localization
 {
     // TODO: Move this out of here
-    public static class NameLists
+    public static partial class NameLists
 	{
 		#region Challenges
 		public static List<string> AddsCriminals = new List<string>()
@@ -79,13 +79,13 @@ namespace SORCE.Localization
 		};
 		public static Dictionary<string, Color32> AmbientLightColorDict = new Dictionary<string, Color32>()
 		{
-			{ nameof(Goodsprings),		cColors.Goodsprings },
-			{ nameof(Hellscape),		cColors.Hellscape },
-			{ nameof(NuclearWinter),	cColors.NuclearWinter },
-			{ nameof(Reactor),          cColors.Reactor },
-			{ nameof(Sepia),			cColors.Sepia },
-			{ nameof(ShadowRealm),      cColors.ShadowRealm },
-			{ nameof(Shinobi),			cColors.Shinobi },
+			{ nameof(Goodsprings),		CColors.Goodsprings },
+			{ nameof(Hellscape),		CColors.Hellscape },
+			{ nameof(NuclearWinter),	CColors.NuclearWinter },
+			{ nameof(Reactor),          CColors.Reactor },
+			{ nameof(Sepia),			CColors.Sepia },
+			{ nameof(ShadowRealm),      CColors.ShadowRealm },
+			{ nameof(Shinobi),			CColors.Shinobi },
 		};
 		public static List<string> AmbientLightLevel = new List<string>()
 		{
@@ -105,7 +105,7 @@ namespace SORCE.Localization
 			{ nameof(HalfMoon), 50 },
 			{ nameof(NewMoon),	0 },
 		};
-		public static class cColors
+		public static class CColors
 		{
 			public static Color32 Goodsprings = new Color32(200, 125, 25, 190);
 			public static Color32 Hellscape = new Color32(200, 0, 0, 175);
@@ -124,7 +124,7 @@ namespace SORCE.Localization
 		}
 		#endregion
 		#region Custom Content
-		public static class cButtonText // Custom Button Text
+		public static class CButtonText // Custom Button Text
         {
 			public const string
 				CameraDetectEnforcer = "CameraDetectEnforcer",
@@ -140,7 +140,7 @@ namespace SORCE.Localization
 				FireHydrantBuy = "HydrantBuy"
 				;
 		}
-		public static class cDialogue // Custom Dialogue
+		public static class CDialogue // Custom Dialogue
 		{
 			public const string
 				AlarmButtonBuyFail = "AlarmButtonCantAfford",
@@ -152,7 +152,7 @@ namespace SORCE.Localization
 				ToiletBuyFail = "ToiletCantAfford"
 				;
 		}
-		public static class cLevelFeature // Custom Level Features
+		public static class CLevelFeature // Custom Level Features
 		{
 			public const string
 					BrokenWindows = "BrokenWindows",
@@ -160,31 +160,31 @@ namespace SORCE.Localization
 					Litter = "Litter",
 					PublicSecurityCams = "PublicSecurityCams";
 		}
-		public static class cObject
+		public static class CObject
 		{
 			public static List<string> WreckageMisc = new List<string>()
 			{
-					vObject.BarStool,
-					vObject.Lamp,
-					vObject.Shelf,
+					VObject.BarStool,
+					VObject.Lamp,
+					VObject.Shelf,
 			};
 
 			public static List<string> WreckageOrganic = new List<string>() // All should have gibs with visible burn
 			{
-					vObject.Chair,
-					vObject.Shelf,
-					vObject.Table,
-					vObject.TableBig,
+					VObject.Chair,
+					VObject.Shelf,
+					VObject.Table,
+					VObject.TableBig,
 			};
 		}
-		public static class cOperatingText // Custom Operating Bar Text
+		public static class COperatingText // Custom Operating Bar Text
         {
 			public const string
 				FountainStealing = "BeingAPieceOfShit";
         }
 		#endregion
 		#region Vanilla Content
-		public static class vAgent // Vanilla Agent Classes
+		public static class VAgent // Vanilla Agent Classes
 		{
 			public const string
 					Alien = "Alien",
@@ -286,7 +286,7 @@ namespace SORCE.Localization
 				Zombie
 		};
 		}
-		public static class vAmbience // Vanilla Ambient Audio Loops
+		public static class VAmbience // Vanilla Ambient Audio Loops
 		{
 			public const string
 					AirConditioner = "AirFiltrationAmbience",
@@ -304,12 +304,12 @@ namespace SORCE.Localization
 					Park = "ParkAmbience",
 					Television = "TVAmbience";
 		}
-		public static class vAnimation
+		public static class VAnimation
         {
 			public const string
 				MachineOperate = "MachineOperate";
         }
-		public static class vAudioClip // Vanilla Audio Clips
+		public static class VAudioClip // Vanilla Audio Clips
 		{
 			public const string
 					AddTrait = "AddTrait",
@@ -733,7 +733,7 @@ namespace SORCE.Localization
 					ZombieSpitCharge = "ZombieSpitCharge",
 					ZombieSpitFire = "ZombieSpitFire";
 		}
-		public static class vButtonText // Vanilla Button Text
+		public static class VButtonText // Vanilla Button Text
 		{
 			public const string
 				AlarmButtonAncapistan = "AlarmButtonAncapistan",
@@ -743,43 +743,7 @@ namespace SORCE.Localization
 				TossCoin = "TossCoin"
 				;
 		}
-		public static class vChallenge // Vanilla Mutators
-		{
-			public const string
-					AssassinsEveryLevel = "AssassinsEveryLevel",
-					BigKnockback = "BigKnockbackForAll",
-					CoolWithCannibals = "CannibalsDontAttack",
-					DoctorsMoreImportant = "DoctorsMoreImportant",
-					EveryoneHatesYou = "EveryoneHatesYou",
-					ExplodingBodies = "ExplodingBodies",
-					FullHealth = "FullHealth",
-					GorillaTown = "GorillaTown",
-					HalfHealth = "HalfHealth",
-					HighCost = "HighCost",
-					InfiniteAmmo = "InfiniteAmmo",
-					InfiniteAmmoNormalWeapons = "InfiniteAmmoNormalWeapons",
-					InfiniteMeleeDurability = "InfiniteMeleeDurability",
-					LowHealth = "LowHealth",
-					ManyWerewolf = "ManyWerewolf",
-					MixedUpLevels = "MixedUpLevels",
-					MoneyRewards = "MoneyRewards",
-					NoCops = "NoCops",
-					NoCowards = "NoCowards",
-					NoGuns = "NoGuns",
-					NoLimits = "NoLimits",
-					NoMelee = "NoMelee",
-					RocketLaunchers = "RocketLaunchers",
-					RogueVision = "RogueVision",
-					SlowDown = "SlowDown",
-					SpeedUp = "SpeedUp",
-					SupercopLand = "SupercopsReplaceCops",
-					TimeLimit = "TimeLimit",
-					TimeLimit2 = "TimeLimit2",
-					TimeLimitQuestsGiveMoreTime = "TimeLimitQuestsGiveMoreTime",
-					ZombieMutator = "ZombieMutator",
-					ZombiesWelcome = "ZombiesWelcome";
-		}
-		public static class vChunkType // Vanilla Chunks
+		public static class VChunkType // Vanilla Chunks
 		{
 			#region All Chunk Types
 
@@ -1326,51 +1290,7 @@ namespace SORCE.Localization
 
 			#endregion
 		}
-		public static class vColor // Vanilla Colors
-		{
-			// https://colordesigner.io/color-mixer
-			public static Color32 arenaRingColor = new Color32(167, 76, 134, 200);
-			public static Color32 blueColor = new Color32(62, 62, 255, 200);
-			public static Color32 cyanColor = new Color32(0, 113, 159, 200);
-			public static Color32 cyanGreenColor = new Color32(0, 180, 143, 200);
-			public static Color32 defaultColor = new Color32(161, 161, 161, 105);
-			public static Color32 discoBlueColor = new Color32(64, 64, 255, 200);
-			public static Color32 discoGreenColor = new Color32(85, 170, 0, 200);
-			public static Color32 discoOrangeColor = new Color32(255, 188, 64, 200);
-			public static Color32 discoPurpleColor = new Color32(140, 52, 173, 200);
-			public static Color32 discoRedColor = new Color32(255, 85, 85, 200);
-			public static Color32 discoYellowColor = new Color32(255, 255, 85, 200);
-			public static Color32 fireStationColor = new Color32(125, 87, 248, 111);
-			public static Color32 greenColor = new Color32(0, 159, 60, 200);
-			public static Color32 homeColor = new Color32(199, 174, 120, 160);
-			public static Color32 homeColorMayorVillage = new Color32(212, 122, 244, 160);
-			public static Color32 homeColorUptown = new Color32(205, 173, 219, 85);
-			public static Color32 labColor = new Color32(64, 224, 255, 180);
-			public static Color32 lakeColor = new Color32(0, 213, 255, 85);
-			public static Color32 lightBlueColor = new Color32(124, 151, 189, 180);
-			public static Color32 lightBlueColorMayorVillage = new Color32(44, 106, 193, 180);
-			public static Color32 mallColor = new Color32(255, 255, 255, 80);
-			public static Color32 pinkColor = new Color32(159, 0, 148, 200);
-			public static Color32 pinkWhiteColor = new Color32(208, 163, 255, 120);
-			public static Color32 poolColor = new Color32(0, 213, 255, 85);
-			public static Color32 poolColorLighter = new Color32(144, 237, 255, 85);
-			public static Color32 privateClubColor = new Color32(163, 178, 110, 160);
-			public static Color32 purpleColor = new Color32(111, 0, 159, 200);
-			public static Color32 redColor = new Color32(159, 0, 0, 200);
-			public static Color32 whiteColor = new Color32(255, 255, 255, 120);
-			public static Color32 zooColor = new Color32(0, 255, 181, 85);
-
-			public static List<Color32> discoColors = new List<Color32>()
-			{
-				discoBlueColor,
-				discoGreenColor,
-				discoOrangeColor,
-				discoPurpleColor,
-				discoRedColor,
-				discoYellowColor,
-			};
-		}
-		public static class vExplosion // Vanilla Explosion Types
+		public static class VExplosion // Vanilla Explosion Types
 		{
 			public const string
 					Big = "Big",
@@ -1389,7 +1309,7 @@ namespace SORCE.Localization
 					Warp = "Warp",
 					Water = "Water";
 		}
-		public static class vFloor // Vanilla Floor Tiles
+		public static class VFloor // Vanilla Floor Tiles
 		{
 			public const string
 					ArenaFloor = "ArenaFloor",
@@ -1507,7 +1427,7 @@ namespace SORCE.Localization
 				SmallTiles,
 			};
 		}
-		public static class vFloorTileGroup // Vanilla Floor Tile Groups
+		public static class VFloorTileGroup // Vanilla Floor Tile Groups
 		{
 			public const string
 					Building = "FloorTilesBuilding",
@@ -1525,7 +1445,7 @@ namespace SORCE.Localization
 					Wall = "WallTiles",
 					Water = "WaterTiles";
 		}
-		public static class vItem // Vanilla Items
+		public static class VItem // Vanilla Items
 		{
 			public const string
 						AccuracyMod = "AccuracyMod",
@@ -1823,7 +1743,7 @@ namespace SORCE.Localization
 					Wrench,
 			};
 		}
-		public static class vLevelFeature // Vanilla Features
+		public static class VLevelFeature // Vanilla Features
 		{
 			public const string
 					AlarmButton = "AlarmButton",
@@ -1866,7 +1786,7 @@ namespace SORCE.Localization
 					VendingMachine = "VendingMachine",
 					VendorCart = "VendorCart";
 		}
-		public static class vLevelFeeling // Vanilla Disasters
+		public static class VLevelFeeling // Vanilla Disasters
 		{
 			public const string
 					BountyOnYourHead = "Bounty",
@@ -1881,7 +1801,7 @@ namespace SORCE.Localization
 					WarZone = "WarZone",
 					Zombies = "Zombies";
 		}
-		public static class vNameType // Vanilla Name Types
+		public static class VNameType // Vanilla Name Types
 		{
 			public const string
 					Agent = "Agent",
@@ -1893,7 +1813,7 @@ namespace SORCE.Localization
 					StatusEffect = "StatusEffect",
 					Unlock = "Unlock";
 		}
-		public static class vObject // Vanilla Objects
+		public static class VObject // Vanilla Objects
 		{
 			public const string
 					AirConditioner = "AirConditioner",
@@ -1975,7 +1895,7 @@ namespace SORCE.Localization
 					Well = "Well",
 					Window = "Window";
 		}
-		public static class vStatusEffect // Vanilla Status Effects
+		public static class VStatusEffect // Vanilla Status Effects
 		{
 			public const string
 					AbovetheLaw = "AboveTheLaw",
@@ -2048,7 +1968,7 @@ namespace SORCE.Localization
 					Werewolf = "WerewolfEffect",
 					Withdrawal = "Withdrawal";
 		}
-		public static class vTrait // Vanilla Traits
+		public static class VTrait // Vanilla Traits
 		{
 			public const string
 					AbovetheLaw = "AboveTheLaw",
@@ -2261,7 +2181,7 @@ namespace SORCE.Localization
 					WrongBuilding = "OwnersNotHostile",
 					Zombiism = "Zombify";
 		}
-		public static class vWall // Vanilla Walls
+		public static class VWall // Vanilla Walls
 		{
 			public const string
 					BarbedWire = "BarbedWire",
@@ -2287,7 +2207,7 @@ namespace SORCE.Localization
 				Wood
 			};
 		}
-		public static class vWallGroup // Vanilla Wall Groups
+		public static class VWallGroup // Vanilla Wall Groups
 		{
 			public const string
 					Hideout = "WallsHideout",

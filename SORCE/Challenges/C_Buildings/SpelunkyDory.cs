@@ -17,15 +17,15 @@ namespace SORCE.Challenges.C_Buildings
 		public SpelunkyDory(string name) : base(name) { }
 
 		public override string ConstructedFloorType =>
-			vFloor.CaveFloor;
+			VFloor.CaveFloor;
 		public override string NaturalFloorType =>
-			vFloor.CaveFloor;
+			VFloor.CaveFloor;
 		public override string RaisedFloorType =>
-			vFloor.Grass;
+			VFloor.Grass;
 		public override string RugFloorType =>
-			vFloor.Grass;
+			VFloor.Grass;
 		public override string UnraisedTileTilesType =>
-			vFloor.DirtFloor;
+			VFloor.DirtFloor;
 
 		[RLSetup]
 		static void Start()

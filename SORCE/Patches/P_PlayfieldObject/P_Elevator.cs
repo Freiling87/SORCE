@@ -19,12 +19,12 @@ namespace SORCE.Patches.P_PlayfieldObject
         [RLSetup]
         public static void Setup()
         {
-            string t = vNameType.Dialogue;
-            RogueLibs.CreateCustomName(cDialogue.ElevatorBuyFail, t, new CustomNameInfo("Insufficient funds to deserve transaction."));
-            RogueLibs.CreateCustomName(cDialogue.ElevatorBuySuccess, t, new CustomNameInfo("Transaction complete. Thank you for deserving Evilator, Inc. Have a profitable day."));
+            string t = VNameType.Dialogue;
+            RogueLibs.CreateCustomName(CDialogue.ElevatorBuyFail, t, new CustomNameInfo("Insufficient funds to deserve transaction."));
+            RogueLibs.CreateCustomName(CDialogue.ElevatorBuySuccess, t, new CustomNameInfo("Transaction complete. Thank you for deserving Evilator, Inc. Have a profitable day."));
 
-            t = vNameType.Interface;
-            RogueLibs.CreateCustomName(cButtonText.ElevatorBuy, t, new CustomNameInfo("Deserve Elevator Ticket"));
+            t = VNameType.Interface;
+            RogueLibs.CreateCustomName(CButtonText.ElevatorBuy, t, new CustomNameInfo("Deserve Elevator Ticket"));
 
             RogueInteractions.CreateProvider<Elevator>(h =>
             {
@@ -34,9 +34,9 @@ namespace SORCE.Patches.P_PlayfieldObject
                     // TODO: Check if this button removal is implemented in RL, Ab says soon
                     FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
                     List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
-                    interactions.RemoveAll(i => i.ButtonName is vButtonText.ElevatorGoUp);
+                    interactions.RemoveAll(i => i.ButtonName is VButtonText.ElevatorGoUp);
 
-                    h.AddButton(cButtonText.ElevatorBuy, 50, m =>
+                    h.AddButton(CButtonText.ElevatorBuy, 50, m =>
                     {
                         TryBuyTicket(m.Object);
                     });
@@ -56,17 +56,17 @@ namespace SORCE.Patches.P_PlayfieldObject
             if (elevator.moneySuccess(50))
             {
                 elevator.GetHook<P_Elevator_Hook>().haveTicket = true;
-                GC.audioHandler.Play(elevator, vAudioClip.ATMDeposit);
-                CoreTools.SayDialogue(elevator, cDialogue.ElevatorBuySuccess, vNameType.Dialogue);
+                GC.audioHandler.Play(elevator, VAudioClip.ATMDeposit);
+                CoreTools.SayDialogue(elevator, CDialogue.ElevatorBuySuccess, VNameType.Dialogue);
             }
             else
             {
 
-                GC.audioHandler.Play(elevator, vAudioClip.CantDo);
-                CoreTools.SayDialogue(elevator, cDialogue.ElevatorBuyFail, vNameType.Dialogue);
+                GC.audioHandler.Play(elevator, VAudioClip.CantDo);
+                CoreTools.SayDialogue(elevator, CDialogue.ElevatorBuyFail, VNameType.Dialogue);
             }
 
-            elevator.PlayAnim(vAnimation.MachineOperate, elevator.interactingAgent);
+            elevator.PlayAnim(VAnimation.MachineOperate, elevator.interactingAgent);
             elevator.StopInteraction();
         }
     }

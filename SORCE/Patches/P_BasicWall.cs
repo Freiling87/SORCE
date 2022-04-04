@@ -32,16 +32,16 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(BasicWall.Spawn), argumentTypes: new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (wallName == vWall.Border &&
+			if (wallName == VWall.Border &&
 				ChallengeManager.IsChallengeFromListActive(Overhauls))
             {
 				wallName = LevelGenTools.BorderWallType();
             }
 			else if (ChallengeManager.IsChallengeFromListActive(BuildingsNames))
             {
-				if (vWall.Fence.Contains(wallName))
+				if (VWall.Fence.Contains(wallName))
 					wallName = LevelGenTools.FenceWallType();
-				else if (vWall.Structural.Contains(wallName))
+				else if (VWall.Structural.Contains(wallName))
 					wallName = LevelGenTools.BuildingWallType();
             }
 
@@ -66,7 +66,7 @@ namespace SORCE.Patches
 				while (GC.percentChance(chance))
 				{
 					GC.spawnerMain.SpawnWreckagePileObject(new Vector2(myPos.x + Random.Range(-0.48f, 0.48f), myPos.y + Random.Range(-0.48f, 0.48f)),
-							vObject.Bush, false);
+							VObject.Bush, false);
 					chance -= 20;
 				}
 			}

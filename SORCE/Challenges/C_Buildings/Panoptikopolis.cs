@@ -17,15 +17,15 @@ namespace SORCE.Challenges.C_Buildings
 		public Panoptikopolis(string name) : base(name) { }
 
 		public override string ConstructedFloorType =>
-			vFloor.SmallTiles; // Parallax assistance
+			VFloor.SmallTiles; // Parallax assistance
 		public override string NaturalFloorType =>
 			null;
 		public override string RaisedFloorType =>
-			vFloor.CleanTilesRaised;
+			VFloor.CleanTilesRaised;
 		public override string RugFloorType =>
-			vFloor.BathroomTile; // So you can't hide things under it
+			VFloor.BathroomTile; // So you can't hide things under it
 		public override string UnraisedTileTilesType =>
-			vFloor.CleanTiles;
+			VFloor.CleanTiles;
 
 		[RLSetup]
 		static void Start()

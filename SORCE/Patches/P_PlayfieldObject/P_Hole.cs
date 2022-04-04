@@ -31,12 +31,12 @@ namespace SORCE.Patches.P_PlayfieldObject
 		{
 			if (GC.loadComplete && 
 				myObject.CompareTag("Agent") && 
-				__instance.GetComponent<ObjectMultHole>().objectHoleType == vObject.Manhole)
+				__instance.GetComponent<ObjectMultHole>().objectHoleType == VObject.Manhole)
 			{
 				Agent agent = myObject.GetComponent<Agent>();
 
 				if (agent.HasTrait<UnderdankCitizen>() &&
-					!agent.statusEffects.hasStatusEffect(vStatusEffect.Giant))
+					!agent.statusEffects.hasStatusEffect(VStatusEffect.Giant))
 				{
 					P_Manhole.FlushYourself(agent, (Manhole)__instance.GetComponent<ObjectReal>());
 

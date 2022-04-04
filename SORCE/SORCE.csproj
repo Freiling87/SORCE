@@ -142,6 +142,8 @@
     <Compile Include="Challenges\C_Roamers\YoungMenInTheNeighborhood.cs" />
     <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
     <Compile Include="LevelGenTools.cs" />
+    <Compile Include="Localization\vChallenge.cs" />
+    <Compile Include="Localization\vColor.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
     <Compile Include="Patches\P_Agent.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />

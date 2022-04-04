@@ -24,7 +24,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 	[HarmonyPatch(declaringType: typeof(Manhole))]
 	class P_Manhole
 	{
-		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		//private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		private const int crowbarTamperCost = 30;
@@ -40,14 +40,14 @@ namespace SORCE.Patches.P_PlayfieldObject
 				if (h.Object.opened)
 				{
 					if (h.Agent.HasTrait<UnderdankCitizen>())
-						h.AddButton(vButtonText.FlushYourself, m =>
+						h.AddButton(VButtonText.FlushYourself, m =>
 						{
 							FlushYourself(m.Agent, m.Object);
 						});
 				}
 				else
 				{
-					InvItem crowbar = h.Agent.inventory.FindItem(vItem.Crowbar);
+					InvItem crowbar = h.Agent.inventory.FindItem(VItem.Crowbar);
 
 					if (crowbar != null)
 					{
@@ -55,7 +55,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 
 						h.AddButton("UseCrowbar", extra, m =>
 						{
-							m.StartOperating(vItem.Crowbar, 2f, true, "Tampering");
+							m.StartOperating(VItem.Crowbar, 2f, true, "Tampering");
 						});
 					}
 					else
@@ -90,7 +90,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 					if (manhole.opened)
 						exits.Add(objectReal);
 				}
-				else if (objectReal is Toilet && (agent.statusEffects.hasTrait(vTrait.Diminutive) || agent.shrunk))
+				else if (objectReal is Toilet && (agent.statusEffects.hasTrait(VTrait.Diminutive) || agent.shrunk))
 					if (!objectReal.destroyed)
 						exits.Add(objectReal);
 			}
@@ -149,7 +149,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 				position = new Vector3(manhole.tr.position.x, manhole.tr.position.y - 0.24f, manhole.tr.position.z);
 
 				manhole.hole = GC.spawnerMain.SpawnHole(manhole, position, new Vector3(1.5f, 1.5f, 1f), Quaternion.identity, false, true);
-				manhole.hole.ObjectHoleAppear(vObject.Manhole);
+				manhole.hole.ObjectHoleAppear(VObject.Manhole);
 				GC.playerAgent.objectMult.ObjectAction(manhole.objectNetID, "HoleAppear");
 				manhole.operatingAgent.inventory.SubtractFromItemCount(manhole.operatingItem, crowbarTamperCost); 
 			}

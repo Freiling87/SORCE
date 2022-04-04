@@ -17,15 +17,15 @@ namespace SORCE.Challenges.C_Buildings
 		public GreenLiving(string name) : base(name) { }
 
 		public override string ConstructedFloorType =>
-			vFloor.DirtFloor;
+			VFloor.DirtFloor;
 		public override string NaturalFloorType =>
-			vFloor.Grass;
+			VFloor.Grass;
 		public override string RaisedFloorType =>
-			vFloor.CaveFloor;
+			VFloor.CaveFloor;
 		public override string RugFloorType =>
-			vFloor.Grass;
+			VFloor.Grass;
 		public override string UnraisedTileTilesType =>
-			vFloor.CaveFloor;
+			VFloor.CaveFloor;
 
 		[RLSetup]
 		static void Start()

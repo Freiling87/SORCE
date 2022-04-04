@@ -18,7 +18,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-        static int cost = 25;
+        static readonly int cost = 25;
 
         // TODO: Stop Callbacks (see Roguelibs documentation)
         // TODO: Remove vanilla buttons when appropriate
@@ -36,13 +36,13 @@ namespace SORCE.Patches.P_PlayfieldObject
                 {
                     if (h.Object.hacked || 
                         h.Agent.upperCrusty ||
-                        h.Helper.interactingFar && h.Agent.HasTrait(vTrait.TechExpert))
-                        h.AddButton(vButtonText.AlarmButtonAncapistan, m =>
+                        h.Helper.interactingFar && h.Agent.HasTrait(VTrait.TechExpert))
+                        h.AddButton(VButtonText.AlarmButtonAncapistan, m =>
                         {
                             m.Object.ToggleSwitch(m.Object.interactingAgent, null);
                         });
                     else
-                        h.AddButton(vButtonText.AlarmButtonAncapistan, cost, m =>
+                        h.AddButton(VButtonText.AlarmButtonAncapistan, cost, m =>
                         {
                             m.Object.ToggleSwitch(m.Object.interactingAgent, null);
                         });

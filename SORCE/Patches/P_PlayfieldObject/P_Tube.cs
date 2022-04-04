@@ -13,7 +13,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 	[HarmonyPatch(declaringType: typeof(Tube))]
 	class P_Tube
 	{
-		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		//private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 	}
 
