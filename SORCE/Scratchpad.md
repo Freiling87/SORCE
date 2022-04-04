@@ -191,7 +191,7 @@ New
 ###			C	Mob Town
 ###			C	YMITN
 ##		C	Wreckage
-###			C	00 Custom Wreckage Method
+###			T	00 Custom Wreckage Method
 Benefits:
 	More control over number of particles
 	Can spread out more than normal
@@ -201,7 +201,10 @@ This only works on procedurally generated objects. Trashcans, boulders, bushes. 
 So the goal here is to turn the current postfix method into one accessible by both original methods,
 the current procgen one and whichever spawns hand-placed objects.
 
-*** I think this other method is SpawnerObject.spawn.
+SpawnerObject
+    .spawn                          Lacks position, not sure how to access it. Seems too downstream.
+PoolsScene
+    .SpawnObjectReal                Has correct arguments. Give it a shot
 ###         C   Flammable Wreckage
 New
 ###			C	Dirtier Districts 
