@@ -47,7 +47,7 @@ Attempted
 Attempted
 ###         T   Bad Neighborhoods
 Scaled to District
-###         H   Public Screens
+###         T   Public Screens
 Spawn Movie Screens with neon lights as billboards in Owner = 0 against walls
 Add TV ambient audio
     MovieScreen.ambientAudio

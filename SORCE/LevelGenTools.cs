@@ -315,6 +315,8 @@ namespace SORCE
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(UnionTown)) ||
 			vanilla;
+		public static bool HasOvergrowth() =>
+			Core.debugMode;
 		public static bool HasPollutionFeatures(bool vanilla) =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
@@ -418,10 +420,15 @@ namespace SORCE
 
 			loadLevel.levelSizeMax = newVal;
 		}
+		/// <summary>
+		/// All custom feature spawning
+		/// TODO: Refactor copied algorithms
+		/// </summary>
+		/// <param name="loadLevel"></param>
 		public static void Spawn_Master(LoadLevel loadLevel)
 		{
 			if (HasScreens)
-				SpawnPublicScreens(loadLevel);
+				SpawnScreens(loadLevel);
 
 			if (HasBrokenWindows)
 				BreakWindows();
@@ -456,6 +463,10 @@ namespace SORCE
 			if (HasSlimeBarrels())
 				SpawnSlimeBarrels(loadLevel);
 		}
+		private static Vector2 RandomSpawnLocation(bool againstWall, bool clearTileRadius)
+        {
+			throw new NotImplementedException();
+        }
 		private static void BreakWindows()
 		{
 			int chanceToBreak = 10 - GC.levelTheme * 2;
@@ -626,7 +637,9 @@ namespace SORCE
 		}
 		private static void SpawnCoziness()
 		{
-			// TODO: Fireplace in middle, armchairs on sides
+			// Fireplace flanked by Armchairs
+			// Small table in front if there's room
+			// Maybe some plants too?
 		}
 		private static void SpawnFountains()
 		{
@@ -1016,12 +1029,17 @@ namespace SORCE
 					}
 				}
 		}
+		private static void SpawnOvergrowth(LoadLevel loadLevel)
+        {
+			// Lots of bushes, trees, carnivorous plants, hedge walls
+			throw new NotImplementedException();
+        }
 		private static void SpawnRugs()
 		{
 			// Alternative: replace all public floors with rug, it doesn't matter that much
 
 		}
-		private static void SpawnPublicScreens(LoadLevel loadLevel)
+		private static void SpawnScreens(LoadLevel loadLevel)
         {
 			Debug.Log("SORCE: Loading Public Screens");
 
