@@ -338,6 +338,9 @@ namespace SORCE
 			GC.challenges.Contains(nameof(GrandCityHotel)) ||
 			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
 			Core.debugMode;
+		public static bool HasScreens =>
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			Core.debugMode;
 		public static bool HasSecurityCamsAndTurrets =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(PoliceState)) ||
@@ -417,6 +420,9 @@ namespace SORCE
 		}
 		public static void Spawn_Master(LoadLevel loadLevel)
 		{
+			if (HasScreens)
+				SpawnPublicScreens(loadLevel);
+
 			if (HasBrokenWindows)
 				BreakWindows();
 
@@ -1014,6 +1020,166 @@ namespace SORCE
 		{
 			// Alternative: replace all public floors with rug, it doesn't matter that much
 
+		}
+		private static void SpawnPublicScreens(LoadLevel loadLevel)
+        {
+			Debug.Log("SORCE: Loading Public Screens");
+
+			int bigTries = (int)((float)Random.Range(6, 12) * LevelSizeRatio());
+			List<int> spawnedInChunks = new List<int>();
+			int num2;
+
+			for (int numObjects = 0; numObjects < bigTries; numObjects = num2 + 1)
+			{
+				Vector2 spot = Vector2.zero;
+				int attempts = 0;
+
+				while (attempts < 100 &&
+					(spot == Vector2.zero || Vector2.Distance(spot, GC.playerAgent.tr.position) < 5f))
+				{
+					spot = GC.tileInfo.FindRandLocationNearWall(0.64f);
+
+					if (spot != Vector2.zero)
+					{
+						if (GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).owner == 0 && 
+							GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y)).owner == 0 && 
+							GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y - 0.64f)).owner == 0 && 
+							GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).owner == 0)
+							spot = Vector2.zero;
+						
+						if (!GC.tileInfo.IsOverlapping(new Vector2(spot.x, spot.y + 0.64f), "Wall") && 
+							!GC.tileInfo.IsOverlapping(new Vector2(spot.x, spot.y - 0.64f), "Wall") && 
+							!GC.tileInfo.IsOverlapping(new Vector2(spot.x + 0.64f, spot.y), "Wall") && 
+							!GC.tileInfo.IsOverlapping(new Vector2(spot.x - 0.64f, spot.y), "Wall"))
+							spot = Vector2.zero;
+						
+						if (GC.tileInfo.IsOverlapping(spot, "ObjectRealSprite", 0.64f))
+							spot = Vector2.zero;
+						
+						if (spawnedInChunks.Contains(GC.tileInfo.GetTileData(spot).chunkID))
+							spot = Vector2.zero;
+						
+						if (GC.tileInfo.DestroyIfBetweenWalls(spot))
+							spot = Vector2.zero;
+					}
+
+					attempts++;
+				}
+
+				if (spot != Vector2.zero)
+				{
+					ObjectReal movieScreen = GC.spawnerMain.spawnObjectReal(spot, null, vObject.MovieScreen);
+					movieScreen.ShiftTowardWalls();
+					movieScreen.ambientAudio = vAmbience.Casino;
+					TileData tileData = GC.tileInfo.GetTileData(spot);
+					spawnedInChunks.Add(tileData.chunkID);
+
+					if (true)
+					{
+						string direction = "";
+						Vector2 neighborCell1 = Vector2.zero;
+						Vector2 neighborCell2 = Vector2.zero;
+
+						if (GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y + 0.64f)).wallMaterial != wallMaterialType.None)
+						{
+							neighborCell1 = new Vector2(spot.x + 1.28f, spot.y);
+							neighborCell2 = new Vector2(spot.x - 1.28f, spot.y);
+							direction = "N";
+						}
+						else if (GC.tileInfo.GetTileData(new Vector2(spot.x, spot.y - 0.64f)).wallMaterial != wallMaterialType.None)
+						{
+							neighborCell1 = new Vector2(spot.x + 1.28f, spot.y);
+							neighborCell2 = new Vector2(spot.x - 1.28f, spot.y);
+							direction = "S";
+						}
+						else if (GC.tileInfo.GetTileData(new Vector2(spot.x + 0.64f, spot.y)).wallMaterial != wallMaterialType.None)
+						{
+							neighborCell1 = new Vector2(spot.x, spot.y + 1.28f);
+							neighborCell2 = new Vector2(spot.x, spot.y - 1.28f);
+							direction = "E";
+						}
+						else if (GC.tileInfo.GetTileData(new Vector2(spot.x - 0.64f, spot.y)).wallMaterial != wallMaterialType.None)
+						{
+							neighborCell1 = new Vector2(spot.x, spot.y + 1.28f);
+							neighborCell2 = new Vector2(spot.x, spot.y - 1.28f);
+							direction = "W";
+						}
+
+						bool spotUsable = true;
+
+						if ((GC.tileInfo.GetTileData(new Vector2(neighborCell1.x, neighborCell1.y + 0.64f)).wallMaterial == wallMaterialType.None && direction == "N") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x, neighborCell1.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x + 0.64f, neighborCell1.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x - 0.64f, neighborCell1.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x + 0.64f, neighborCell1.y)).wallMaterial == wallMaterialType.None && direction == "E") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x - 0.64f, neighborCell1.y)).wallMaterial != wallMaterialType.None && direction == "E") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x - 0.64f, neighborCell1.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "E") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x - 0.64f, neighborCell1.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "E") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x, neighborCell1.y - 0.64f)).wallMaterial == wallMaterialType.None && direction == "S") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x, neighborCell1.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x + 0.64f, neighborCell1.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x - 0.64f, neighborCell1.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x - 0.64f, neighborCell1.y)).wallMaterial == wallMaterialType.None && direction == "W") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x + 0.64f, neighborCell1.y)).wallMaterial != wallMaterialType.None && direction == "W") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x + 0.64f, neighborCell1.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "W") || 
+							(GC.tileInfo.GetTileData(new Vector2(neighborCell1.x + 0.64f, neighborCell1.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "W"))
+							spotUsable = false;
+						
+						if (GC.tileInfo.IsOverlapping(neighborCell1, "Anything"))
+							spotUsable = false;
+						
+						if (GC.tileInfo.IsOverlapping(neighborCell1, "ObjectRealSprite", 0.64f))
+							spotUsable = false;
+						
+						if (spotUsable && neighborCell1 != Vector2.zero)
+						{
+							ObjectReal movieScreen2 = GC.spawnerMain.spawnObjectReal(neighborCell1, null, vObject.MovieScreen); 
+							movieScreen2.ShiftTowardWalls();
+							movieScreen2.ambientAudio = vAmbience.Casino;
+							num2 = numObjects;
+							numObjects = num2 + 1;
+						}
+						else
+						{
+							spotUsable = true;
+
+							if ((GC.tileInfo.GetTileData(new Vector2(neighborCell2.x, neighborCell2.y + 0.64f)).wallMaterial == wallMaterialType.None && direction == "N") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x, neighborCell2.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x + 0.64f, neighborCell2.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x - 0.64f, neighborCell2.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x + 0.64f, neighborCell2.y)).wallMaterial == wallMaterialType.None && direction == "E") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x - 0.64f, neighborCell2.y)).wallMaterial != wallMaterialType.None && direction == "E") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x - 0.64f, neighborCell2.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "E") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x - 0.64f, neighborCell2.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "E") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x, neighborCell2.y - 0.64f)).wallMaterial == wallMaterialType.None && direction == "S") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x, neighborCell2.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x + 0.64f, neighborCell2.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x - 0.64f, neighborCell2.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x - 0.64f, neighborCell2.y)).wallMaterial == wallMaterialType.None && direction == "W") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x + 0.64f, neighborCell2.y)).wallMaterial != wallMaterialType.None && direction == "W") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x + 0.64f, neighborCell2.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "W") || 
+								(GC.tileInfo.GetTileData(new Vector2(neighborCell2.x + 0.64f, neighborCell2.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "W"))
+								spotUsable = false;
+							
+							if (GC.tileInfo.IsOverlapping(neighborCell2, "Anything"))
+								spotUsable = false;
+							
+							if (GC.tileInfo.IsOverlapping(neighborCell2, "ObjectRealSprite", 0.64f))
+								spotUsable = false;
+							
+							if (spotUsable && neighborCell2 != Vector2.zero)
+							{
+								ObjectReal movieScreen3 = GC.spawnerMain.spawnObjectReal(neighborCell2, null, vObject.MovieScreen);
+								movieScreen3.ShiftTowardWalls();
+								movieScreen3.ambientAudio = vAmbience.Casino;
+								num2 = numObjects;
+								numObjects = num2 + 1;
+							}
+						}
+					}
+				}
+				num2 = numObjects;
+			}
 		}
 		private static void SpawnSecurityCamsAndTurrets(LoadLevel loadLevel)
 		{

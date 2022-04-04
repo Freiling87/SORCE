@@ -30,7 +30,7 @@ Confirmed this is Roguelibs
 ###			√	Shanty Town
 ###			√	Spelunky Dory
 ##		CT	Features
-###         CT  00 District Object Delimitation
+###         T  00 District Object Delimitation
 ####            H   00 Export all to Delimitation mod
 Pending test of basic features
 #####               C   00 Add SORCE dependency and test
@@ -47,9 +47,10 @@ Attempted
 Attempted
 ###         T   Bad Neighborhoods
 Scaled to District
-###         H   Billboards
+###         H   Public Screens
 Spawn Movie Screens with neon lights as billboards in Owner = 0 against walls
 Add TV ambient audio
+    MovieScreen.ambientAudio
 Use neons for Cyberpunkish vibe
 Alternate ambient audio: dystopian loudspeaker with different color palette
     I could see alternates for a few overhauls here, e.g. Disco, hotel
