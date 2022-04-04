@@ -20,7 +20,7 @@ namespace SORCE.Challenges.C_AmbientLightLevel
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.AmbientLightLevel.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightLevel.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Ambient Lighting - Half Moon"))

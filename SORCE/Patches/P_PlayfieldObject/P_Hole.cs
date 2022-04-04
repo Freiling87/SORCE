@@ -40,7 +40,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 				{
 					P_Manhole.FlushYourself(agent, (Manhole)__instance.GetComponent<ObjectReal>());
 
-					if (GC.challenges.Contains(vChallenge.LowHealth))
+					if (GC.challenges.Contains(VChallenge.LowHealth))
 						agent.statusEffects.ChangeHealth(-7f);
 					else
 						agent.statusEffects.ChangeHealth(-15f);

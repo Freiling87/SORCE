@@ -20,7 +20,7 @@ namespace SORCE.Challenges.C_Overhaul
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.Overhauls.Where(i => i != name).ToList()
+				Cancellations = CChallenge.Overhauls.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo("Overhaul - Canal City"))
 				.WithDescription(new CustomNameInfo(

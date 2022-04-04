@@ -32,7 +32,7 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerFloor.spawn), argumentTypes: new[] { typeof(string) })]
 		public static bool Spawn_Prefix(string floorName, SpawnerFloor __instance, ref tk2dTileMap ___tilemapFloors, ref tk2dTileMap ___tilemapFloors3, ref tk2dTileMap ___tilemapFloors4)
 		{
-			if (ChallengeManager.GetActiveChallengeFromList(BuildingsNames) == null)
+			if (ChallengeManager.GetActiveChallengeFromList(CChallenge.BuildingsNames) == null)
 				return true;
 
 			floorName = LevelGenTools.PublicFloorTile();

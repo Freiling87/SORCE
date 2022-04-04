@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using SORCE.Challenges;
+using SORCE.Challenges.C_Wreckage;
 using SORCE.Localization;
 using SORCE.Logging;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
@@ -19,12 +21,12 @@ namespace SORCE.Patches
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerObject.spawn), argumentTypes: new[] { typeof(string) })]
-		public static bool spawn_Prefix(ref string objectRealName)
+		public static bool Spawn_Prefix(ref string objectRealName)
 		{
 			//logger.LogDebug("SpawnerObject_spawn:");
 			//logger.LogDebug("\tobjectRealName = '" + objectRealName + "'");
 
-			if (ChallengeManager.IsChallengeFromListActive(NameLists.BuildingsFlammable) && objectRealName == VObject.FireSpewer)
+			if (ChallengeManager.IsChallengeFromListActive(CChallenge.BuildingsFlammable) && objectRealName == VObject.FireSpewer)
 				objectRealName = VObject.SecurityCam;
 
 			return true;

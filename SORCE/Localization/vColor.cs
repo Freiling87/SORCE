@@ -5,7 +5,7 @@ namespace SORCE.Localization
 {
     public static partial class NameLists
 	{
-        public static class vColor // Vanilla Colors
+        public static class VColor // Vanilla Colors
 		{
 			// https://colordesigner.io/color-mixer
 			public static Color32 arenaRingColor = new Color32(167, 76, 134, 200);
@@ -49,6 +49,5 @@ namespace SORCE.Localization
 				discoYellowColor,
 			};
 		}
-		#endregion
 	}
 }

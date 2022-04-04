@@ -21,7 +21,7 @@ namespace SORCE.Challenges.C_Overhaul
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = Overhauls.Where(i => i != name).ToList()
+				Cancellations = CChallenge.Overhauls.Where(i => i != name).ToList()
 				// MixedUpLevels, NoGuns
 			})
 				.WithName(new CustomNameInfo(

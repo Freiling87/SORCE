@@ -31,7 +31,7 @@ namespace SORCE
 
 		public static wallMaterialType BorderWallMaterial()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
+			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))
 			{
 				case (nameof(Arcology)):
 					return wallMaterialType.Wood;
@@ -60,7 +60,7 @@ namespace SORCE
 		}
 		public static string BorderWallType()
         {
-			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
+			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))
 			{
 				case (nameof(Arcology)):
 					return VWall.Hedge; // TODO: Could do this one Hedge and the solid blocks of Borderwall as Wood
@@ -95,7 +95,7 @@ namespace SORCE
 		}
 		public static string PublicFloorTile()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
+			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))
 			{
 				case nameof(Arcology):
 					return VFloor.Grass;
@@ -115,7 +115,7 @@ namespace SORCE
 		}
 		public static string PublicFloorTileGroup()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(Overhauls))
+			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))
 			{
 				case nameof(Arcology):
 					return VFloorTileGroup.Park;
@@ -135,7 +135,7 @@ namespace SORCE
 		}
 		public static string FenceWallType()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(NameLists.BuildingsNames))
+			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.BuildingsNames))
 			{
 				case nameof(CityOfSteel):
 					return VWall.Bars;
@@ -151,7 +151,7 @@ namespace SORCE
 		}
 		public static string BuildingWallType()
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(BuildingsNames))
+			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.BuildingsNames))
 			{
 				case nameof(CityOfSteel):
 					return VWall.Steel;
@@ -424,7 +424,7 @@ namespace SORCE
 		{
 			int newVal = loadLevel.levelSizeMax;
 
-			string active = ChallengeManager.GetActiveChallengeFromList(MapSize);
+			string active = ChallengeManager.GetActiveChallengeFromList(CChallenge.MapSize);
 
 			if (active == nameof(Arthropolis))
 				newVal = 4;
@@ -872,9 +872,9 @@ namespace SORCE
 		private static string OverhaulWreckageType()
         {
 			// TODO: Call SpawnWreckagePileObject in here, because you need to determine whether trash is burnt or not
-			if (ChallengeManager.IsChallengeFromListActive(Overhauls))
+			if (ChallengeManager.IsChallengeFromListActive(CChallenge.Overhauls))
             {
-				switch (ChallengeManager.GetActiveChallengeFromList(Overhauls)) 
+				switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls)) 
 				{
 					case nameof(Arcology):
 						return VObject.Bush;
@@ -1552,7 +1552,7 @@ namespace SORCE
 				while (j < 100 &&
 					(location == Vector2.zero ||
 					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f ||
-					Vector2.Distance(location, GC.elevatorDown.tr.position) < 5f))
+					Vector2.Distance(location, GC.elevatorDown.tr.position) < 5f));
 
 					if (location != Vector2.zero)
 					GC.spawnerMain.spawnObjectReal(location, null, VObject.Turntables);

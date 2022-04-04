@@ -20,7 +20,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = NameLists.AmbientLightColor.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightColor.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Shinobi"))

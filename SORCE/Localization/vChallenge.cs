@@ -2,7 +2,7 @@
 {
     public static partial class NameLists
 	{
-        public static class vChallenge // Vanilla Mutators
+        public static class VChallenge // Vanilla Mutators
 		{
 			public const string
 					AssassinsEveryLevel = "AssassinsEveryLevel",
@@ -38,6 +38,5 @@
 					ZombieMutator = "ZombieMutator",
 					ZombiesWelcome = "ZombiesWelcome";
 		}
-		#endregion
 	}
 }

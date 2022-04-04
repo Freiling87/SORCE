@@ -34,7 +34,7 @@ namespace SORCE.Challenges.C_Buildings
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = BuildingsNames.Where(i => i != name).ToList()
+				Cancellations = CChallenge.BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Buildings - Green Living"))

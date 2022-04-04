@@ -109,7 +109,7 @@ namespace SORCE.Patches
 								__instance.tileInfo.tileArray[k, l - 1].chunkID = __instance.mapChunkArray[i, j].chunkID;
 								string tilemapGroup = VFloorTileGroup.Building;
 
-								if (ChallengeManager.IsChallengeFromListActive(Overhauls))
+								if (ChallengeManager.IsChallengeFromListActive(CChallenge.Overhauls))
 									tilemapGroup = LevelGenTools.PublicFloorTileGroup(); // Works on: Slums,
 								else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 								{
@@ -186,7 +186,7 @@ namespace SORCE.Patches
 									tileData.wallMaterial = wallMaterialType.Border;
 									string tilemapGroup = VFloorTileGroup.Building;
 
-									if (ChallengeManager.IsChallengeFromListActive(Overhauls))
+									if (ChallengeManager.IsChallengeFromListActive(CChallenge.Overhauls))
 										tilemapGroup = VFloorTileGroup.MayorVillage; // Works on: Park, 
 									else if (GC.levelShape == 0 && GC.levelType != "HomeBase")
 									{
@@ -349,10 +349,10 @@ namespace SORCE.Patches
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LoadLevel.SetNormalLighting), new Type[] {})]
 		public static void SetNormalLighting_Postfix(LoadLevel __instance)
 		{
-			if (ChallengeManager.IsChallengeFromListActive(AmbientLightColor))
+			if (ChallengeManager.IsChallengeFromListActive(CColor.AmbientLightColor))
 			{
-				string challenge = ChallengeManager.GetActiveChallengeFromList(AmbientLightColor);
-				Color32 color = AmbientLightColorDict[challenge];
+				string challenge = ChallengeManager.GetActiveChallengeFromList(CColor.AmbientLightColor);
+				Color32 color = CColor.AmbientLightColorDict[challenge];
 				int objectColorDivisor = 2;
 				Color32 objectColor = new Color32(color.r, color.g, color.b, (byte)(color.a / objectColorDivisor));
 

@@ -33,11 +33,11 @@ namespace SORCE.Patches
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
 			if (wallName == VWall.Border &&
-				ChallengeManager.IsChallengeFromListActive(Overhauls))
+				ChallengeManager.IsChallengeFromListActive(CChallenge.Overhauls))
             {
 				wallName = LevelGenTools.BorderWallType();
             }
-			else if (ChallengeManager.IsChallengeFromListActive(BuildingsNames))
+			else if (ChallengeManager.IsChallengeFromListActive(CChallenge.BuildingsNames))
             {
 				if (VWall.Fence.Contains(wallName))
 					wallName = LevelGenTools.FenceWallType();

@@ -36,7 +36,7 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.GetLightColor), argumentTypes: new[] { typeof(string) })]
 		public static bool GetLightColor_Prefix(string lightRealName, ref Color __result)
 		{
-			string challenge = ChallengeManager.GetActiveChallengeFromList(AffectsLights);
+			string challenge = ChallengeManager.GetActiveChallengeFromList(CChallenge.AffectsLights);
 
 			LightReal lightReal = new LightReal();
 
@@ -45,9 +45,9 @@ namespace SORCE.Patches
 			//else if (challenge == nameof(DiscoCityDanceoff))
 			//	lightReal.lightReal2Color = vColor.discoColors.RandomElement<Color32>();
 			else if (challenge == nameof(GreenLiving))
-				lightReal.lightReal2Color = vColor.homeColor;
+				lightReal.lightReal2Color = VColor.homeColor;
 			else if (challenge == nameof(Panoptikopolis))
-				lightReal.lightReal2Color = vColor.whiteColor;
+				lightReal.lightReal2Color = VColor.whiteColor;
 
 			__result = lightReal.lightReal2Color;
 			return false;
@@ -56,84 +56,84 @@ namespace SORCE.Patches
 
 			#pragma warning disable CS0162 // Unreachable code detected
             if (lightRealName == "ArenaRingLight")
-				lightReal.lightReal2Color = vColor.arenaRingColor;
+				lightReal.lightReal2Color = VColor.arenaRingColor;
 			else if (lightRealName == "BankLight")
-				lightReal.lightReal2Color = vColor.whiteColor;
+				lightReal.lightReal2Color = VColor.whiteColor;
 			else if (lightRealName == "BlueLight")
-				lightReal.lightReal2Color = vColor.blueColor;
+				lightReal.lightReal2Color = VColor.blueColor;
 			else if (lightRealName == "CyanGreenLight")
-				lightReal.lightReal2Color = vColor.cyanGreenColor;
+				lightReal.lightReal2Color = VColor.cyanGreenColor;
 			else if (lightRealName == "CyanLight")
-				lightReal.lightReal2Color = vColor.cyanColor;
+				lightReal.lightReal2Color = VColor.cyanColor;
 			else if (lightRealName == "DefaultLight")
-				lightReal.lightReal2Color = vColor.defaultColor;
+				lightReal.lightReal2Color = VColor.defaultColor;
 			else if (lightRealName == "FarmLight")
-				lightReal.lightReal2Color = vColor.homeColor;
+				lightReal.lightReal2Color = VColor.homeColor;
 			else if (lightRealName == "FireStationLight")
-				lightReal.lightReal2Color = vColor.fireStationColor;
+				lightReal.lightReal2Color = VColor.fireStationColor;
 			else if (lightRealName == "GraveyardLight")
-				lightReal.lightReal2Color = vColor.cyanColor;
+				lightReal.lightReal2Color = VColor.cyanColor;
 			#pragma warning restore CS0162 // Unreachable code detected
             if (lightRealName == "GreenLight")
-				lightReal.lightReal2Color = vColor.greenColor;
+				lightReal.lightReal2Color = VColor.greenColor;
 			else if (lightRealName == "HomeLight")
 			{
 				if (GC.levelTheme == 4)
-					lightReal.lightReal2Color = vColor.homeColorUptown;
+					lightReal.lightReal2Color = VColor.homeColorUptown;
 				else if (GC.levelTheme == 5)
-					lightReal.lightReal2Color = vColor.homeColorMayorVillage;
+					lightReal.lightReal2Color = VColor.homeColorMayorVillage;
 				else
-					lightReal.lightReal2Color = vColor.homeColor;
+					lightReal.lightReal2Color = VColor.homeColor;
 			}
 			else if (lightRealName == "HospitalLight")
 			{
 				if (GC.levelTheme == 5)
-					lightReal.lightReal2Color = vColor.homeColorMayorVillage;
+					lightReal.lightReal2Color = VColor.homeColorMayorVillage;
 				else
-					lightReal.lightReal2Color = vColor.whiteColor;
+					lightReal.lightReal2Color = VColor.whiteColor;
 			}
 			else if (lightRealName == "KitchenLight")
-				lightReal.lightReal2Color = vColor.whiteColor;
+				lightReal.lightReal2Color = VColor.whiteColor;
 			if (lightRealName == "LabLight")
-				lightReal.lightReal2Color = vColor.labColor;
+				lightReal.lightReal2Color = VColor.labColor;
 			else if (lightRealName == "LakeLight")
-				lightReal.lightReal2Color = vColor.lakeColor;
+				lightReal.lightReal2Color = VColor.lakeColor;
 			else if (lightRealName == "LightBlueLight")
 			{
 				if (GC.levelTheme == 5)
-					lightReal.lightReal2Color = vColor.lightBlueColorMayorVillage;
+					lightReal.lightReal2Color = VColor.lightBlueColorMayorVillage;
 				else
-					lightReal.lightReal2Color = vColor.lightBlueColor;
+					lightReal.lightReal2Color = VColor.lightBlueColor;
 			}
 			else if (lightRealName == "MallLight")
-				lightReal.lightReal2Color = vColor.mallColor;
+				lightReal.lightReal2Color = VColor.mallColor;
 			else if (lightRealName == "OfficeLight")
-				lightReal.lightReal2Color = vColor.whiteColor;
+				lightReal.lightReal2Color = VColor.whiteColor;
 			else if (lightRealName == "PinkLight")
-				lightReal.lightReal2Color = vColor.pinkColor;
+				lightReal.lightReal2Color = VColor.pinkColor;
 			if (lightRealName == "PinkWhiteLight")
-				lightReal.lightReal2Color = vColor.pinkWhiteColor;
+				lightReal.lightReal2Color = VColor.pinkWhiteColor;
 			else if (lightRealName == "PoolLight")
 			{
 				if (GC.levelTheme == 5)
-					lightReal.lightReal2Color = vColor.poolColorLighter;
+					lightReal.lightReal2Color = VColor.poolColorLighter;
 				else
-					lightReal.lightReal2Color = vColor.poolColor;
+					lightReal.lightReal2Color = VColor.poolColor;
 			}
 			else if (lightRealName == "PrivateClubLight")
-				lightReal.lightReal2Color = vColor.privateClubColor;
+				lightReal.lightReal2Color = VColor.privateClubColor;
 			else if (lightRealName == "PurpleLight")
-				lightReal.lightReal2Color = vColor.purpleColor;
+				lightReal.lightReal2Color = VColor.purpleColor;
 			if (lightRealName == "RedLight")
-				lightReal.lightReal2Color = vColor.redColor;
+				lightReal.lightReal2Color = VColor.redColor;
 			else if (lightRealName == "TVStationLight")
 			{
-				lightReal.lightReal2Color = vColor.mallColor;
+				lightReal.lightReal2Color = VColor.mallColor;
 			}
 			else if (lightRealName == "WhiteLight")
-				lightReal.lightReal2Color = vColor.whiteColor;
+				lightReal.lightReal2Color = VColor.whiteColor;
 			else if (lightRealName == "ZooLight")
-				lightReal.lightReal2Color = vColor.zooColor;
+				lightReal.lightReal2Color = VColor.zooColor;
 
 			#endregion
 
@@ -258,6 +258,7 @@ namespace SORCE.Patches
 				}
 
 			if (GC.challenges.Contains(nameof(DirtierDistricts)) || Core.debugMode)
+			{
 				chance = 100;
 
 				switch (objectType)
@@ -267,7 +268,7 @@ namespace SORCE.Patches
 						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								VObject.MovieScreen, 
+								VObject.MovieScreen,
 								false,
 								5,
 								0.80f, 0.80f);
@@ -293,8 +294,8 @@ namespace SORCE.Patches
 					case VObject.Boulder:
 						while (GC.percentChance(1))
 							GC.spawnerMain.SpawnItem(new Vector2(
-								loc.x + Random.Range(-0.48f, 0.48f), 
-								loc.y + Random.Range(-0.24f, 0.00f)), 
+								loc.x + Random.Range(-0.48f, 0.48f),
+								loc.y + Random.Range(-0.24f, 0.00f)),
 								VItem.Rock);
 
 						while (GC.percentChance(chance))
@@ -313,8 +314,8 @@ namespace SORCE.Patches
 					case VObject.BoulderSmall:
 						while (GC.percentChance(1))
 							GC.spawnerMain.SpawnItem(new Vector2(
-								loc.x + Random.Range(-0.16f, 0.16f), 
-								loc.y + Random.Range(-0.16f, 0.00f)), 
+								loc.x + Random.Range(-0.16f, 0.16f),
+								loc.y + Random.Range(-0.16f, 0.00f)),
 								VItem.Rock);
 
 						while (GC.percentChance(chance))
@@ -332,7 +333,7 @@ namespace SORCE.Patches
 
 					case VObject.Elevator:
 						if (GC.challenges.Contains(nameof(AnCapistan)))
-                        {
+						{
 							LevelGenTools.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
 								VObject.MovieScreen,
@@ -375,8 +376,8 @@ namespace SORCE.Patches
 					case VObject.TrashCan:
 						while (GC.percentChance(1)) // TODO: Move this part to Trash mod
 							GC.spawnerMain.SpawnItem(new Vector2(
-								loc.x + Random.Range(-0.32f, 0.32f), 
-								loc.y + Random.Range(-0.32f, 0.32f)), 
+								loc.x + Random.Range(-0.32f, 0.32f),
+								loc.y + Random.Range(-0.32f, 0.32f)),
 								VItem.BananaPeel);
 
 						while (GC.percentChance(chance))
@@ -392,6 +393,7 @@ namespace SORCE.Patches
 
 						break;
 				}
+			}
 		}
 	}
 }
