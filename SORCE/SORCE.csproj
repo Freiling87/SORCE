@@ -163,6 +163,7 @@
     <Compile Include="Patches\P_PlayfieldObject\P_SlimeBarrel.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Stove.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Toilet.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Tube.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Turret.cs" />
     <Compile Include="Patches\P_RandomOther.cs" />
     <Compile Include="Patches\P_RandomWalls.cs" />

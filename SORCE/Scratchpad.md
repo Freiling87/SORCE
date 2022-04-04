@@ -40,8 +40,10 @@ Attempted
 ####            T   Manhole
 Attempted
 ####            T   Pipe
-Attempted
+I think this is a vestigial name for Tube.
 ####            T   SawBlade
+Attempted
+####            T   Tube
 Attempted
 ###         T   Bad Neighborhoods
 Scaled to District
@@ -395,13 +397,15 @@ Works, but has a chance of rolling self
   - Attempted
 - Toilet to Manhole
   - Attempted
-#	C	Migrate In
-- Custom object interactions related to city overhauls, e.g. coin-op toilets. They don't all need to be in one mod.
 #	C	Release
 ##		C	Disable Core.DebugMode
 ##		C	Version number
 1.0.0
 ##		C	Documentation
+###         C   ReadMe
+###         C   Feature List
+###         C   Planned Feature List
+###         C   Thanks
 ##		C	Uploads
 ###			C	BananaMods
 ###			C	Discord
@@ -421,7 +425,7 @@ Works, but has a chance of rolling self
 - Upper Crusters 
   - Roam with bodyguards
   - Fewer in number
-  - All aligned to each other
+  - All aligned to each other (might work with Class Solidarity)
 #### Object Interactions
 - Alarm Buttons 
   - Attempted
