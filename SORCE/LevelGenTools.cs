@@ -427,7 +427,7 @@ namespace SORCE
 				SpawnFountains();
 
 			if (GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)))
-				SpawnArmchairsFireplaces();
+				SpawnCoziness();
 
 			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
 			{
@@ -452,10 +452,10 @@ namespace SORCE
 		}
 		private static void BreakWindows()
 		{
-			logger.LogDebug("Breaking Windows");
+			int chanceToBreak = 10 - GC.levelTheme * 2;
 
 			foreach (ObjectReal objectReal in GC.objectRealList)
-				if (objectReal is Window window && GC.percentChance(4))
+				if (objectReal is Window window && GC.percentChance(chanceToBreak))
 					window.DamagedObject(window, 0f);
 		}
 		private static void SpawnCaveWallOutcroppings(LoadLevel loadLevel)
@@ -618,6 +618,10 @@ namespace SORCE
 				itemCountIterator = i;
 			}
 		}
+		private static void SpawnCoziness()
+		{
+			// TODO: Fireplace in middle, armchairs on sides
+		}
 		private static void SpawnFountains()
 		{
 			Debug.Log("SORCE: Loading Fountains");
@@ -645,10 +649,6 @@ namespace SORCE
 				if (location != Vector2.zero)
 					GC.spawnerMain.spawnObjectReal(location, null, vObject.Fountain);
 			}
-		}
-		private static void SpawnArmchairsFireplaces()
-		{
-			// TODO: Fireplace in middle, armchairs on sides
 		}
 		private static void SpawnJukeboxesAndSpeakers(LoadLevel loadLevel)
 		{
@@ -860,10 +860,17 @@ namespace SORCE
 			// Regular trash
 			return GC.Choose(vObject.Shelf, vObject.MovieScreen, vObject.Counter, vObject.VendorCart, vObject.Window);
 		}
-		private static void SpawnWreckagePileObject_Granular()
+		public static void SpawnWreckagePileObject_Granular(Vector3 targetLoc, string objectType, bool burnt, int gibs, float radX, float radY)
         {
-
-        }
+			for (int i = 0; i < gibs; i++)
+			{
+				string wreckageType = objectType + "Wreckage" + (Random.Range(1, 5)).ToString();
+				targetLoc = new Vector3(
+					targetLoc.x + Random.Range(radX * -1, radX), 
+					targetLoc.y + Random.Range(radY * -1, radY), 0f);
+				GC.spawnerMain.SpawnWreckage2(targetLoc, wreckageType, burnt);
+			}
+		}
 		private static Vector2 FindRandLocationGeneral_NearWall(TileInfo tileInfo, float maxDistanceToWall)
         {
 			for (int i = 0; i < 200; i++)
