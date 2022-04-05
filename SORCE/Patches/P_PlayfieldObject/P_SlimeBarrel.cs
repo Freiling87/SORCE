@@ -18,19 +18,6 @@ namespace SORCE.Patches.P_PlayfieldObject
 		public static GameController GC => GameController.gameController;
 
         public static object CCULogger { get; private set; }
-
-		// TODO: Transpilerize
-        [HarmonyPrefix, HarmonyPatch(methodName: "Start")]
-        public static bool Start(SlimeBarrel __instance)
-		{
-			MethodInfo start_base = AccessTools.DeclaredMethod(typeof(SlimeBarrel).BaseType, "Start");
-			start_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
-
-			MethodInfo waitToStart_base = AccessTools.DeclaredMethod(typeof(SlimeBarrel).BaseType, "WaitToStart");
-			waitToStart_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
-
-			return false;
-		}
 	}
 
 	[HarmonyPatch(typeof(SlimeBarrel))]
