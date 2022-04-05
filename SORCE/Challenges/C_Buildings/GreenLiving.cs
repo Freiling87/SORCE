@@ -16,15 +16,22 @@ namespace SORCE.Challenges.C_Buildings
 	{
 		public GreenLiving(string name) : base(name) { }
 
-		public override string ConstructedFloorType =>
+		public override string WallFence =>
+			null;
+		public override string WallStructural =>
+			VWall.Hedge;
+		public override bool WallsFlammable =>
+			true;
+
+		public override string FloorConstructed =>
 			VFloor.DirtFloor;
-		public override string NaturalFloorType =>
+		public override string FloorNatural =>
 			VFloor.Grass;
-		public override string RaisedFloorType =>
+		public override string FloorRaised =>
 			VFloor.CaveFloor;
-		public override string RugFloorType =>
+		public override string FloorRug =>
 			VFloor.Grass;
-		public override string UnraisedTileTilesType =>
+		public override string FloorUnraisedTile =>
 			VFloor.CaveFloor;
 
 		[RLSetup]
@@ -32,15 +39,14 @@ namespace SORCE.Challenges.C_Buildings
 		{
 			const string name = nameof(GreenLiving);
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new GreenLiving(name)
 			{
 				Cancellations = CChallenge.BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Buildings - Green Living"))
 				.WithDescription(new CustomNameInfo(
-					"The Mayor has retrofitted most buildings to eco-friendly plant-based construction. The air is mighty fresh... except near the compost-burning stoves.\n\n" +
-					"- Most buildings spawn with Hedge walls"));
+					"The Mayor has retrofitted most buildings to eco-friendly plant-based construction. The air is mighty fresh... except near the compost-burning stoves."));
 		}
 	}
 }

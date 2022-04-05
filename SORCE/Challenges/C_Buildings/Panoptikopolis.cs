@@ -16,15 +16,22 @@ namespace SORCE.Challenges.C_Buildings
 	{
 		public Panoptikopolis(string name) : base(name) { }
 
-		public override string ConstructedFloorType =>
+		public override string WallFence =>
+			VWall.Bars;
+		public override string WallStructural =>
+			VWall.Glass;
+		public override bool WallsFlammable =>
+			false;
+
+		public override string FloorConstructed =>
 			VFloor.SmallTiles; // Parallax assistance
-		public override string NaturalFloorType =>
+		public override string FloorNatural =>
 			null;
-		public override string RaisedFloorType =>
+		public override string FloorRaised =>
 			VFloor.CleanTilesRaised;
-		public override string RugFloorType =>
+		public override string FloorRug =>
 			VFloor.BathroomTile; // So you can't hide things under it
-		public override string UnraisedTileTilesType =>
+		public override string FloorUnraisedTile =>
 			VFloor.CleanTiles;
 
 		[RLSetup]
@@ -32,17 +39,14 @@ namespace SORCE.Challenges.C_Buildings
 		{
 			const string name = nameof(Panoptikopolis);
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new Panoptikopolis(name)
 			{
 				Cancellations = CChallenge.BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Buildings - Panoptikopolis"))
 				.WithDescription(new CustomNameInfo(
-					"Is the new all-glass building trend just a PsyOp to maximize surveillance? Or is it shiiiny? You decide!\n\n" +
-					"- Most buildings spawn with Glass walls\n" +
-					"- People can see you pooping, but you can see them pooping too, sometimes at the same time. So it's best to avoid eye contact.\n" +
-					"  Unless you're into that sort of thing." ));
+					"Is the new all-glass building trend just a PsyOp to maximize surveillance? Or is it shiiiny? You decide!"));
 		}
 	}
 }

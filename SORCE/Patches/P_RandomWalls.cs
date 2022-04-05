@@ -11,6 +11,8 @@ using SORCE.Challenges;
 using SORCE.Logging;
 using SORCE.Localization;
 using static SORCE.Localization.NameLists;
+using System.Linq;
+using SORCE.Challenges.C_Buildings;
 
 namespace SORCE.Patches
 {
@@ -25,14 +27,12 @@ namespace SORCE.Patches
 		{
 			string wallType = null;
 
-			if (ChallengeManager.IsChallengeFromListActive(CChallenge.BuildingsNames))
+			if (RogueFramework.Unlocks.OfType<BuildingsChallenge>().Any(i => i.IsEnabled))
 			{
 				if (VWall.Fence.Contains(wallType))
-					if (!(LevelGenTools.FenceWallType() is null))
-						wallType = LevelGenTools.FenceWallType();
+					wallType = LevelGenTools.FenceWallType(wallType);
 				else if (VWall.Structural.Contains(wallType))
-					if (!(LevelGenTools.BuildingWallType() is null))
-						wallType = LevelGenTools.BuildingWallType();
+					wallType = LevelGenTools.BuildingWallType(wallType);
 			}
 
 			if (wallType == null)

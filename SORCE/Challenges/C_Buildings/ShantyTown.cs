@@ -16,15 +16,22 @@ namespace SORCE.Challenges.C_Buildings
 	{
 		public ShantyTown(string name) : base(name) { }
 
-		public override string ConstructedFloorType =>
+		public override string WallFence =>
+			VWall.BarbedWire;
+		public override string WallStructural =>
+			VWall.Wood;
+		public override bool WallsFlammable =>
+			true;
+
+		public override string FloorConstructed =>
 			VFloor.DrugDenFloor;
-		public override string NaturalFloorType =>
+		public override string FloorNatural =>
 			null;
-		public override string RaisedFloorType =>
+		public override string FloorRaised =>
 			VFloor.DirtyTiles;
-		public override string RugFloorType =>
+		public override string FloorRug =>
 			null; 
-		public override string UnraisedTileTilesType =>
+		public override string FloorUnraisedTile =>
 			VFloor.BrickIndoor;
 
 		[RLSetup]
@@ -32,15 +39,14 @@ namespace SORCE.Challenges.C_Buildings
 		{
 			const string name = nameof(ShantyTown);
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new ShantyTown(name)
 			{
 				Cancellations = CChallenge.BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Buildings - Shanty Town"))
 				.WithDescription(new CustomNameInfo(
-					"A whole city made with cheap wooden construction: A tinderbox on cinder blocks. Hard mode for Firefighters, easy mode for arsonists. Fun mode for psychopaths.\n\n" +
-					"- Most buildings spawn with Wood walls"));
+					"A tinderbox on cinder blocks. Hard mode for Firefighters, easy mode for arsonists. Fun mode for psychopaths."));
 		}
 	}
 }

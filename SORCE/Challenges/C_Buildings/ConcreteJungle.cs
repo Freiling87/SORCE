@@ -12,41 +12,41 @@ using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Buildings
 {
-	public class CityOfSteel : BuildingsChallenge
+	public class ConcreteJungle : BuildingsChallenge
 	{
-		public CityOfSteel(string name) : base(name) { }
+		public ConcreteJungle(string name) : base(name) { }
 
 		public override string WallFence =>
-			VWall.Bars;
+			null;
 		public override string WallStructural =>
-			VWall.Brick;
+			VWall.Border;
 		public override bool WallsFlammable =>
 			false;
 
 		public override string FloorConstructed =>
-			VFloor.MetalFloor;
+			VFloor.Facility;
 		public override string FloorNatural =>
 			null;
         public override string FloorRaised =>
-			VFloor.SolidPlates;
+			VFloor.DirtyTiles;
 		public override string FloorRug =>
-			VFloor.MetalPlates;
+			null;
 		public override string FloorUnraisedTile =>
-			VFloor.SolidPlates;
+			VFloor.Facility;
 
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(CityOfSteel);
+			const string name = nameof(ConcreteJungle);
 
-			RogueLibs.CreateCustomUnlock(new CityOfSteel(name)
+			RogueLibs.CreateCustomUnlock(new ConcreteJungle(name)
 			{
 				Cancellations = CChallenge.BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Buildings - City of Steel"))
+					"Buildings - Concrete Jungle"))
 				.WithDescription(new CustomNameInfo(
-					"A gleaming city of steel! The world of the future, today. Mankind's dream in... Wow, it *really* smells like steel cleaner. Like, it fucking stinks."));
+					"Don't focus so much on the negatives. The best things about concrete are that it's grey. Those are all of the upsides."));
 		}
 	}
 }

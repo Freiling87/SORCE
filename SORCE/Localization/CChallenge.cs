@@ -25,9 +25,14 @@ namespace SORCE.Localization
 			nameof(DiscoCityDanceoff),
 			nameof(GreenLiving),
 		};
+		// TODO: Eliminate almost all of these. I can't eliminate the Cancellation lists yet because 
+		// The MutatorUnlock type adds its Cancellations during creation, meaning 
+		// The cancelled types don't even exist yet.
 		public static List<Type> BuildingsTypes = new List<Type>()
 		{
+			typeof(Brixton),
 			typeof(CityOfSteel),
+			typeof(ConcreteJungle),
 			typeof(GreenLiving),
 			typeof(Panoptikopolis),
 			typeof(ShantyTown),
@@ -35,11 +40,6 @@ namespace SORCE.Localization
 		};
 		public static List<string> BuildingsNames =
 			BuildingsTypes.Select(c => c.Name).ToList(); // nameof(c) would be "c" in Linq
-		public static List<string> BuildingsFlammable = new List<string>()
-		{
-			nameof(GreenLiving),
-			nameof(ShantyTown)
-		};
 		public static List<string> MapSize = new List<string>()
 		{
 			nameof(Arthropolis),

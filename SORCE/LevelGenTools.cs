@@ -21,6 +21,7 @@ using SORCE.Challenges.C_Population;
 using HarmonyLib;
 using System.Reflection;
 using SORCE.Challenges.C_Audio;
+using RogueLibsCore;
 
 namespace SORCE
 {
@@ -31,6 +32,8 @@ namespace SORCE
 
 		public static wallMaterialType BorderWallMaterial()
 		{
+			// TODO: When overhauls are scoped, model this after P_BasicFloor.Spawn_Prefix
+
 			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))
 			{
 				case (nameof(Arcology)):
@@ -60,6 +63,8 @@ namespace SORCE
 		}
 		public static string BorderWallType()
         {
+			// TODO: When overhauls are scoped, model this after P_BasicFloor.Spawn_Prefix
+
 			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))
 			{
 				case (nameof(Arcology)):
@@ -95,6 +100,8 @@ namespace SORCE
 		}
 		public static string PublicFloorTile()
 		{
+			// TODO: When overhauls are scoped, model this after P_BasicFloor.Spawn_Prefix
+
 			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))
 			{
 				case nameof(Arcology):
@@ -115,6 +122,8 @@ namespace SORCE
 		}
 		public static string PublicFloorTileGroup()
 		{
+			// TODO: When overhauls are scoped, model this after P_BasicFloor.Spawn_Prefix
+
 			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))
 			{
 				case nameof(Arcology):
@@ -133,43 +142,28 @@ namespace SORCE
 					return VFloorTileGroup.Building;
 			}
 		}
-		public static string FenceWallType()
+		public static string FenceWallType(string vanilla)
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.BuildingsNames))
-			{
-				case nameof(CityOfSteel):
-					return VWall.Bars;
-				case nameof(GreenLiving):
-					return VWall.BarbedWire;
-				case nameof(Panoptikopolis):
-					return VWall.Bars;
-				case nameof(ShantyTown):
-					return VWall.BarbedWire;
-				default:
-					return null;
-			}
+			BuildingsChallenge mutator = (BuildingsChallenge)RogueFramework.Unlocks.OfType<MutatorUnlock>().FirstOrDefault(m => m is BuildingsChallenge && m.IsEnabled);
+
+			if (!(mutator is null) && !(mutator.WallFence is null))
+				return mutator.WallFence;
+
+			return vanilla;
 		}
-		public static string BuildingWallType()
+		public static string BuildingWallType(string vanilla)
 		{
-			switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.BuildingsNames))
-			{
-				case nameof(CityOfSteel):
-					return VWall.Steel;
-				case nameof(GreenLiving):
-					return VWall.Hedge;
-				case nameof(Panoptikopolis):
-					return VWall.Glass;
-				case nameof(ShantyTown):
-					return VWall.Wood;
-				case nameof(SpelunkyDory):
-					return VWall.Cave;
-				default:
-					return null;
-			}
+
+			BuildingsChallenge mutator = (BuildingsChallenge)RogueFramework.Unlocks.OfType<MutatorUnlock>().FirstOrDefault(m => m is BuildingsChallenge && m.IsEnabled);
+
+			if (!(mutator is null) && !(mutator.WallStructural is null))
+				return mutator.WallStructural;
+
+			return vanilla;
 		}
 		public static int LevelSizeModifier(int vanilla) =>
 			GC.challenges.Contains(nameof(Arthropolis)) ? 4 :
-			GC.challenges.Contains(nameof(Claustropolis)) ? 12 :
+			GC.challenges.Contains(nameof(Claustropolis)) ? 12 : 
 			GC.challenges.Contains(nameof(Megapolis)) ? 48 :
 			GC.challenges.Contains(nameof(Ultrapolis)) ? 64 : 
 			vanilla;
@@ -188,10 +182,6 @@ namespace SORCE
 			vanilla;
 		public static string AmbientAudio(string trackname, string chunkType)
 		{
-			logger.LogDebug("AmbientAudio");
-			logger.LogDebug("trackName: " + trackname);
-			logger.LogDebug("chunkType: " + chunkType);
-
 			if (!Core.debugMode && !GC.challenges.Contains(nameof(AmbienterAmbience)))
 				return trackname;
 
@@ -218,8 +208,6 @@ namespace SORCE
 					GC.challenges.Contains(nameof(Hell)))
 					trackname = VAmbience.Graveyard;
 			}
-
-			logger.LogDebug("\tResult: " + trackname);
 
 			return trackname;
 		}
@@ -361,7 +349,7 @@ namespace SORCE
 			GC.challenges.Contains(nameof(PoliceState)) ||
 			GC.challenges.Contains(nameof(SurveillanceSociety)) ||
 			Core.debugMode;
-		public static bool HasSlimeBarrels =>
+		public static bool HasSlimeBarrels() =>
 			!GC.challenges.Contains(nameof(Arcology)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
@@ -450,8 +438,8 @@ namespace SORCE
 			if (HasBrokenWindows)
 				BreakWindows();
 
-			if (HasCaveWallOutcroppings)
-				SpawnCaveWallOutcroppings();
+			//if (HasCaveWallOutcroppings)
+			//	SpawnCaveWallOutcroppings();
 
 			if (HasFountains)
 				SpawnFountains();
@@ -477,12 +465,12 @@ namespace SORCE
 			if (HasSecurityCamsAndTurrets)
 				SpawnSecurityCamsAndTurrets();
 
-			if (HasSlimeBarrels)
+			if (HasSlimeBarrels())
 				SpawnSlimeBarrels();
 		}
 		private static void BreakWindows()
 		{
-			int chanceToBreak = (int)(SlumminessFactor * 10f);
+			int chanceToBreak = (int)(SlumminessFactor * 8f);
 
 			foreach (ObjectReal objectReal in GC.objectRealList)
 				if (objectReal is Window window && GC.percentChance(chanceToBreak))
@@ -857,7 +845,7 @@ namespace SORCE
 		}
 		private static void SpawnLitter()
 		{
-			int numObjects = (int)(100 * SlumminessFactor * LevelSizeRatio());
+			int numObjects = (int)(125 * SlumminessFactor * LevelSizeRatio());
 
 			for (int i = 0; i < numObjects; i++)
 			{
@@ -867,7 +855,7 @@ namespace SORCE
 				GC.spawnerMain.SpawnWreckagePileObject(location, OverhaulWreckageType(), false);
 			}
 		}
-		private static float SlumminessFactor =>
+		public static float SlumminessFactor =>
 			(5 - GC.levelTheme) / 5;
 		private static string OverhaulWreckageType()
         {
@@ -881,7 +869,7 @@ namespace SORCE
 					case nameof(DUMP): // Rock
 						return VObject.FlamingBarrel;
 					case nameof(Eisburg): // Ice chunks, but see notes to see if ice gibs are preferable
-						return VObject.Refrigerator;
+						return VObject.Toilet;
 					case nameof(Hell): // Rock
 						return VObject.FlamingBarrel;
 					case nameof(Tindertown): // Ashes

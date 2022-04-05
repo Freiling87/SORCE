@@ -12,6 +12,8 @@ using SORCE.Logging;
 using SORCE.Challenges;
 using SORCE.Localization;
 using static SORCE.Localization.NameLists;
+using SORCE.Challenges.C_Buildings;
+using System.Linq;
 
 namespace SORCE.Patches
 {
@@ -32,7 +34,7 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerFloor.spawn), argumentTypes: new[] { typeof(string) })]
 		public static bool Spawn_Prefix(string floorName, SpawnerFloor __instance, ref tk2dTileMap ___tilemapFloors, ref tk2dTileMap ___tilemapFloors3, ref tk2dTileMap ___tilemapFloors4)
 		{
-			if (ChallengeManager.GetActiveChallengeFromList(CChallenge.BuildingsNames) == null)
+			if (!RogueFramework.Unlocks.OfType<BuildingsChallenge>().Any(i => i.IsEnabled))
 				return true;
 
 			floorName = LevelGenTools.PublicFloorTile();

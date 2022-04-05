@@ -1,6 +1,8 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
+using RogueLibsCore;
 using SORCE.Challenges;
+using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Wreckage;
 using SORCE.Localization;
 using SORCE.Logging;
@@ -26,7 +28,8 @@ namespace SORCE.Patches
 			//logger.LogDebug("SpawnerObject_spawn:");
 			//logger.LogDebug("\tobjectRealName = '" + objectRealName + "'");
 
-			if (ChallengeManager.IsChallengeFromListActive(CChallenge.BuildingsFlammable) && objectRealName == VObject.FireSpewer)
+			if (RogueFramework.Unlocks.OfType<BuildingsChallenge>().Where(i => i.IsEnabled).Any(i => i.WallsFlammable) 
+				&& objectRealName == VObject.FireSpewer)
 				objectRealName = VObject.SecurityCam;
 
 			return true;

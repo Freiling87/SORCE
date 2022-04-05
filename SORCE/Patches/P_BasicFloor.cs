@@ -33,38 +33,35 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(nameof(BasicFloor.Spawn), new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string floorName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			logger.LogDebug("Spawn_Prefix: " + ChallengeManager.IsChallengeFromListActive(CChallenge.BuildingsNames));
+			BuildingsChallenge mutator = (RogueFramework.Unlocks.OfType<BuildingsChallenge>().FirstOrDefault(m => m.IsEnabled));
 
-			if (ChallengeManager.IsChallengeFromListActive(CChallenge.BuildingsNames))
+			if (!(mutator is null))
 			{
-				BuildingsChallenge mutator = RogueFramework.Unlocks.OfType<BuildingsChallenge>().FirstOrDefault(m => m.IsEnabled);
-				logger.LogDebug(mutator is null);
-
 				if (VFloor.Natural.Contains(floorName))
 				{
-					if (!(mutator.NaturalFloorType is null))
-						floorName = mutator.NaturalFloorType;
-                }
+					if (!(mutator.FloorNatural is null))
+						floorName = mutator.FloorNatural;
+				}
 				else if (VFloor.Constructed.Contains(floorName))
 				{
-					if (!(mutator.ConstructedFloorType is null))
-						floorName = mutator.ConstructedFloorType;
+					if (!(mutator.FloorConstructed is null))
+						floorName = mutator.FloorConstructed;
 				}
 				else if (VFloor.Raised.Contains(floorName))
 				{
-					if (!(mutator.RaisedFloorType is null))
-						floorName = mutator.RaisedFloorType;
+					if (!(mutator.FloorRaised is null))
+						floorName = mutator.FloorRaised;
 				}
 				else if (VFloor.Rugs.Contains(floorName))
 				{
-					if (!(mutator.RugFloorType is null))
-						floorName = mutator.RugFloorType;
+					if (!(mutator.FloorRug is null))
+						floorName = mutator.FloorRug;
 				}
 				else if (VFloor.UnraisedTileTiles.Contains(floorName))
-                {
-					if (!(mutator.UnraisedTileTilesType is null))
-						floorName= mutator.UnraisedTileTilesType;
-                }
+				{
+					if (!(mutator.FloorUnraisedTile is null))
+						floorName = mutator.FloorUnraisedTile;
+				}
 			}
 
 			return true;

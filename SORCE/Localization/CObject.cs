@@ -9,7 +9,7 @@ namespace SORCE.Localization
 			public static List<string> WreckageMisc = new List<string>()
 			{
 					VObject.BarStool,
-					VObject.Lamp,
+					VObject.MovieScreen,
 					VObject.Shelf,
 			};
 

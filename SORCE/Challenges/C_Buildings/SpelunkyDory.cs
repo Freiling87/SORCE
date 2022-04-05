@@ -16,15 +16,22 @@ namespace SORCE.Challenges.C_Buildings
 	{
 		public SpelunkyDory(string name) : base(name) { }
 
-		public override string ConstructedFloorType =>
+		public override string WallFence =>
+			null;
+		public override string WallStructural =>
+			VWall.Cave;
+		public override bool WallsFlammable =>
+			false;
+
+		public override string FloorConstructed =>
 			VFloor.CaveFloor;
-		public override string NaturalFloorType =>
+		public override string FloorNatural =>
 			VFloor.CaveFloor;
-		public override string RaisedFloorType =>
+		public override string FloorRaised =>
 			VFloor.Grass;
-		public override string RugFloorType =>
+		public override string FloorRug =>
 			VFloor.Grass;
-		public override string UnraisedTileTilesType =>
+		public override string FloorUnraisedTile =>
 			VFloor.DirtFloor;
 
 		[RLSetup]
@@ -32,15 +39,14 @@ namespace SORCE.Challenges.C_Buildings
 		{
 			const string name = nameof(SpelunkyDory);
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new SpelunkyDory(name)
 			{
 				Cancellations = CChallenge.BuildingsNames.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Buildings - Spelunky Dory"))
 				.WithDescription(new CustomNameInfo(
-					"You and your fellow citizens live in a disgusting cave complex. As the mayor says, \"Don't be a CAN'Tibal, be a CANnibal!\" Man, fuck the Mayor.\n\n" +
-					"- Most buildings spawn with Cave walls"));
+					"You and your fellow citizens live in a disgusting cave complex. As the mayor says, \"Don't be a CAN'Tibal, be a CANnibal!\" Man, fuck the Mayor."));
 		}
 	}
 }

@@ -9,26 +9,13 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
-
+#   C   Priority Bugs
+##      C   FlameSpewer spawns with flammable building mods
+New
 #   C   General
 ##      C   Migrate feature lists to documentation
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.
-#	CT	Mutators
-##		C	Buildings
-###         C   NullRefError on load level due to refactor
-Not sure yet.
-###         T   00 Fine-tune raised floors
-I think some tile defaulted to wood with Shanty
-###         T   00 Make fields in Overhaul mutator classes
-It will eliminate some really repetitive series in NameLists, at least
-This goes for most other type-type mutators, like ambient light color
-###         √   00 Possible issue with door orientation
-Confirmed this is Roguelibs
-###			√	City of Steel
-###			√	Green Living
-###			√	Panoptikopolis
-###			√	Shanty Town
-###			√	Spelunky Dory
+#	T	Mutators
 ##		CT	Features
 ###         T  00 District Object Delimitation
 ####            H   00 Export all to Delimitation mod
@@ -45,15 +32,12 @@ I think this is a vestigial name for Tube.
 Attempted
 ####            T   Tube
 Attempted
+####            √   SlimeBarrel
 ###         T   Bad Neighborhoods
-Scaled to District
-###         T   Public Screens
-Spawn Movie Screens with neon lights as billboards in Owner = 0 against walls
-Add TV ambient audio
-    MovieScreen.ambientAudio
-Use neons for Cyberpunkish vibe
-Alternate ambient audio: dystopian loudspeaker with different color palette
-    I could see alternates for a few overhauls here, e.g. Disco, hotel
+####            T   Scaled to District
+I know it works, but make sure proportions are right
+###         C   Public Screens
+####            H   Content
 |Overhaul                       |Palette    |Audio  |
 |:------------------------------|:----------|:------|
 |AnCapistan                     |Neon       |TV noise
@@ -64,10 +48,12 @@ Alternate ambient audio: dystopian loudspeaker with different color palette
 |Technocracy                    |?          |Beep Boop Bop
 |Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
 |TinderTown                     |Blue       |Ads for water
+####            C   1 blank tile in between
+####            C   Spawns Safe sprite
+####            C   Only saw it on East or West facing walls
 ###         T   The Pollution Solution
-####			T	Slime Barrels
-Depends on Delimitation
 ####            C   Scale chance to district
+I know it works, but make sure proportions are right
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
@@ -85,7 +71,8 @@ May drop usable items, or live banana peels, etc.
 Spawn as square or circle
 Always have water pump
 ###         H   Surveillance Society
-On hold until Overhaul update
+On hold until Overhaul update 
+Require owned wall, as spawning on junk walls doesn't make sense
 ####			C	Old Notes
 - Align with Cops in conflict, regardless of settings
 - Randomize direction for Panoptikopolis if attached to glass wall?
@@ -119,7 +106,8 @@ On hold until Overhaul update
 
 ####			C	00 Import SecurityCamera patches
 ####			C	Detect Wanted
-###         √H  Brought Back Fountain
+###         C   Brought Back Fountain
+####            C   Show (Empty) when looted
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
@@ -131,6 +119,9 @@ Complete
 Complete
 ###			√	This Land is Mine Land
 Complete
+###         C   Transit Experiment
+Change canals to Ice Rink
+Fuck public floors
 ##		CT	Light Sources
 - CameraScript.SetLighting
   - DW
@@ -188,28 +179,25 @@ All broken for now
 ###			C	Always Spawn Arsonists
 New
 ###			C	HoodlumsWonderland
+Newish
 ###			C	Mob Town
+Newish
 ###			C	YMITN
+Newish
 ##		C	Wreckage
-###			T	00 Custom Wreckage Method
-Benefits:
-	More control over number of particles
-	Can spread out more than normal
-	Can set a check for Interior/Exterior/Water
-###			C	00 Here's the issue
-This only works on procedurally generated objects. Trashcans, boulders, bushes. Not toilets, etc.
-So the goal here is to turn the current postfix method into one accessible by both original methods,
-the current procgen one and whichever spawns hand-placed objects.
-
-SpawnerObject
-    .spawn                          Lacks position, not sure how to access it. Seems too downstream.
-PoolsScene
-    .SpawnObjectReal                Has correct arguments. Give it a shot
-###         C   Flammable Wreckage
+###         H   Flammable Wreckage
 New
-###			C	Dirtier Districts 
-Prefer spots next to walls for random trash. 
-###			C	Floraler Flora
+###			C	Dirtier Districts
+PoolsScene.SpawnObjectReal
+####            C   Check for Indoors when spawning particle
+####            H   Spawn receipt when using machines
+More trash!
+####            H   Spawn very specific trash particles when consuming objects
+More trash! 
+Custom sprites, or smaller/slightly darker/on side
+###         C   Shell Casings
+###			√	Floraler Flora
+PoolsScene.SpawnObjectReal
 ##		H	Laws
 ###			C	Legal Drugs
 ###			C	Legal Weapons
@@ -363,6 +351,14 @@ Complete, until Overhauls are scoped
 New, for stealth
 ###         C   Zombies Moan
 New
+##		√	Buildings
+###         √   Brixton
+###			√	City of Steel
+###         √   Concrete Jungle
+###			√	Green Living
+###			√	Panoptikopolis
+###			√	Shanty Town
+###			√	Spelunky Dory
 ##		√	MapSize
 ###			√	A City For Ants
 ###			√	Claustropolis
@@ -381,7 +377,6 @@ Complete
 ##		C	Underdank Citizen
 ###         C   Spawn issues
 Test on downtown with massive numbers to verify the issue
-Transpiler to remove levelTheme requirement complete
 Spawned a Manhole in Home Base (occurred without CCU too)
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self

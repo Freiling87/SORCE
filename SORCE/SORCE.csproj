@@ -89,6 +89,8 @@
     <Compile Include="Challenges\C_AmbientLightColor\Sepia.cs" />
     <Compile Include="Challenges\C_Audio\AmbienterAmbience.cs" />
     <Compile Include="Challenges\C_Buildings\BuildingsChallenge.cs" />
+    <Compile Include="Challenges\C_Buildings\Brixton.cs" />
+    <Compile Include="Challenges\C_Buildings\ConcreteJungle.cs" />
     <Compile Include="Challenges\C_Lighting\NoAgentLights.cs" />
     <Compile Include="Challenges\C_Lighting\NoItemLights.cs" />
     <Compile Include="Challenges\C_Lighting\NoObjectGlow.cs" />
