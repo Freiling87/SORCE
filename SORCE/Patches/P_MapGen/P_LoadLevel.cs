@@ -820,7 +820,7 @@ namespace SORCE.Patches
 		private static IEnumerable<CodeInstruction> SlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
         {
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo levelGenTools_HasSlimeBarrels = AccessTools.Method(type: typeof(LevelGenTools), nameof(LevelGenTools.HasSlimeBarrels), new[] { typeof(bool) });
+			MethodInfo levelGenTools_HasSlimeBarrels = AccessTools.Method(type: typeof(LevelGenTools), nameof(LevelGenTools.HasSlimeBarrels), new Type[] { });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -835,10 +835,9 @@ namespace SORCE.Patches
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					// flag2 = HasSlimeBarrels(flag2);
+					// flag2 = HasSlimeBarrels();
 
-					new CodeInstruction(OpCodes.Ldloc_S, 3), // flag2
-					new CodeInstruction(OpCodes.Call, levelGenTools_HasSlimeBarrels), // bool
+					new CodeInstruction(OpCodes.Call, levelGenTools_HasSlimeBarrels), // bool 
 					new CodeInstruction(OpCodes.Stloc_S, 3) // Clear
 
 				});
