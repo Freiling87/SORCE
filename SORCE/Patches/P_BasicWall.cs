@@ -12,6 +12,7 @@ using SORCE.Logging;
 using SORCE.Challenges.C_Wreckage;
 using static SORCE.Localization.NameLists;
 using SORCE.Localization;
+using SORCE.MapGenUtilities;
 
 namespace SORCE.Patches
 {
@@ -33,11 +34,11 @@ namespace SORCE.Patches
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
 			if (wallName == VWall.Border)
-				wallName = LevelGenTools.BorderWallType();
+				wallName = Structures.BorderWallType();
 			else if (VWall.Fence.Contains(wallName))
-				wallName = LevelGenTools.FenceWallType(wallName);
+				wallName = Structures.FenceWallType(wallName);
 			else if (VWall.Structural.Contains(wallName))
-				wallName = LevelGenTools.BuildingWallType(wallName);
+				wallName = Structures.BuildingWallType(wallName);
 
 			return true;
 		}

@@ -17,26 +17,28 @@ New
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.
 #	T	Mutators
 ##		CT	Features
-###         T  00 District Object Delimitation
+###         T   00 District Object Delimitation
 ####            H   00 Export all to Delimitation mod
 Pending test of basic features
 #####               C   00 Add SORCE dependency and test
 New
 ####            T   Flame Grate
 Attempted
-####            T   Manhole
-Attempted
+####            √   Manhole
+Complete
 ####            T   Pipe
 I think this is a vestigial name for Tube.
 ####            T   SawBlade
 Attempted
 ####            T   Tube
 Attempted
-####            √   SlimeBarrel
+####            T   SlimeBarrel
+Attempted
 ###         T   Bad Neighborhoods
 ####            T   Scaled to District
 I know it works, but make sure proportions are right
 ###         C   Public Screens
+####            C   1 blank tile in between
 ####            H   Content
 |Overhaul                       |Palette    |Audio  |
 |:------------------------------|:----------|:------|
@@ -48,11 +50,11 @@ I know it works, but make sure proportions are right
 |Technocracy                    |?          |Beep Boop Bop
 |Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
 |TinderTown                     |Blue       |Ads for water
-####            C   1 blank tile in between
 ####            C   Spawns Safe sprite
-####            C   Only saw it on East or West facing walls
-###         T   The Pollution Solution
-####            C   Scale chance to district
+Resolve gap issue first
+###         CT   The Pollution Solution
+####            C   Raise chance of poisoned lakes
+####            T   Scale chance to district
 I know it works, but make sure proportions are right
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
@@ -111,6 +113,10 @@ Require owned wall, as spawning on junk walls doesn't make sense
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
+###         T   Verdant Vistas
+Killer Plants worked
+####            H   Exclude Bush Cannibals in certain circumstances
+Arcology overhaul is only one so far
 ###			√	Cart of the Deal
 Complete
 ###			√	Power Whelming
@@ -375,9 +381,6 @@ Complete
 Complete
 #	C	Traits
 ##		C	Underdank Citizen
-###         C   Spawn issues
-Test on downtown with massive numbers to verify the issue
-Spawned a Manhole in Home Base (occurred without CCU too)
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self
 ###			C	Old Notes

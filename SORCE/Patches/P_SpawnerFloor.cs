@@ -14,6 +14,7 @@ using SORCE.Localization;
 using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Buildings;
 using System.Linq;
+using SORCE.MapGenUtilities;
 
 namespace SORCE.Patches
 {
@@ -37,7 +38,7 @@ namespace SORCE.Patches
 			if (!RogueFramework.Unlocks.OfType<BuildingsChallenge>().Any(i => i.IsEnabled))
 				return true;
 
-			floorName = LevelGenTools.PublicFloorTile();
+			floorName = Structures.PublicFloorTile();
 
 			if (GC.levelTheme == 2 && floorName == "FlamePit")
 				floorName = "Hole";

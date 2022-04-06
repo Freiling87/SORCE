@@ -13,6 +13,7 @@ using SORCE.Localization;
 using static SORCE.Localization.NameLists;
 using System.Linq;
 using SORCE.Challenges.C_Buildings;
+using SORCE.MapGenUtilities;
 
 namespace SORCE.Patches
 {
@@ -30,9 +31,9 @@ namespace SORCE.Patches
 			if (RogueFramework.Unlocks.OfType<BuildingsChallenge>().Any(i => i.IsEnabled))
 			{
 				if (VWall.Fence.Contains(wallType))
-					wallType = LevelGenTools.FenceWallType(wallType);
+					wallType = Structures.FenceWallType(wallType);
 				else if (VWall.Structural.Contains(wallType))
-					wallType = LevelGenTools.BuildingWallType(wallType);
+					wallType = Structures.BuildingWallType(wallType);
 			}
 
 			if (wallType == null)
