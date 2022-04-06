@@ -25,9 +25,7 @@ namespace SORCE.Challenges.C_MapSize
 				.WithName(new CustomNameInfo(
 					"Map Size - Claustropolis"))
 				.WithDescription(new CustomNameInfo(
-					"Damn, this city is cramped! Who's Claus, anyway?\n\n" +
-					" - Map size set to ~53%\n" +
-					"   (Average 16 chunks per level)"));
+					"Damn, this city is cramped! Who's this Claus guy, anyway?"));
 		}
 	}
 }

@@ -24,8 +24,7 @@ namespace SORCE.Challenges.C_Roamers
 				.WithName(new CustomNameInfo(
 					"Roamers - Hoodlum's Wonderland"))
 				.WithDescription(new CustomNameInfo(
-					"The annual charity drive for the Blahds and Crepes happened to overlap this year. They're in tough competition to sell the most cookies... by any means necessary!\n\n" +
-					"- Roaming gang spawns are increased. By a lot."));
+					"The annual charity drive for the Blahds and Crepes happened to overlap this year. They're in tough competition to sell the most cookies... by any means necessary!"));
 		}
 	}
 }

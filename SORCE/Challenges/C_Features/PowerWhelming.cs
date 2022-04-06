@@ -24,9 +24,8 @@ namespace SORCE.Challenges.C_Features
 				.WithName(new CustomNameInfo(
 					"Features - Power Whelming"))
 				.WithDescription(new CustomNameInfo(
-					"Look, you're not gonna be blown away by this. You might want to sit down before reading on, but there'd be no point.\n\n" +
-					"- Power Boxes spawn in all districts\n" +
-					"- Are you whelmed yet??"));
+					"Look, you're not gonna be blown away by this. You might not want to sit down.\n\n" +
+					"Power boxes spawn in every district. Are you whelmed yet?"));
 		}
 	}
 }

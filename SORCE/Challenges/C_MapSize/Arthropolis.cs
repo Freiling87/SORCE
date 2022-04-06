@@ -26,9 +26,7 @@ namespace SORCE.Challenges.C_MapSize
 					"Map Size - Arthropolis"))
 				.WithDescription(new CustomNameInfo(
 					"\"The Streets of Rogue City Building For Slum Dwellers Who Can't Be Rich Good\"\n\n" +
-					"    - Inscription over the entrance to the Slums, District 420, Floor 69\n\n" + 
-					" - Map size set to 12.5%\n" +
-					"   (Average 4 chunks per level)"));
+					"    - Inscription over the entrance to the Slums, District 420, Floor 69"));
 		}
 	}
 }

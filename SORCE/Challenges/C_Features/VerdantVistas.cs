@@ -9,23 +9,22 @@ using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Population
+namespace SORCE.Challenges.C_Features
 {
-	public class HordeAlmighty
+	public class VerdantVistas
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(HordeAlmighty);
+			const string name = nameof(VerdantVistas);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
-				Cancellations = CChallenge.Population.Where(i => i != name).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Population - Horde Almighty"))
+					"Features - Verdant Vistas"))
 				.WithDescription(new CustomNameInfo(
-					"The City administration is trying out a contraception ban to combat the high death rate. Hope it works, because they didn't think of a \"Plan B!\" Get it? I'm here all week, folks."));
+					"Greening up the place, one plant at a time."));
 		}
 	}
 }

@@ -45,7 +45,7 @@ namespace SORCE.Challenges.C_Buildings
 				.WithName(new CustomNameInfo(
 					"Buildings - Brixton"))
 				.WithDescription(new CustomNameInfo(
-					"Right, then. All these buildings is like made of bricks, I'm well chuffed! But like, not proper good bricks. Ravver dodgy, y'knowa'amean, love? "));
+					"Right, then, I'm well chuffed! All these buildings is made of bricks, like. But like, not proper good bricks. Ravver dodgy, innit, love?"));
 		}
 	}
 }

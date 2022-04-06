@@ -28,7 +28,7 @@ namespace SORCE.Challenges.C_Features
 					"    1. We just made a ton of money.\n" +
 					"    2. Downtown smells better.\n" +
 					"    3. The view is... uh, bottomless. But Chasm-side apartments are going up in value!\n\n" +
-					"You might also plummet to your death, but that makes you the egg in the delicious omelet of massive profits!"));
+					"You might also plummet to your death, but that makes you the a broken egg that helped make the delicious omelet of massive profits!"));
 		}
 	}
 }

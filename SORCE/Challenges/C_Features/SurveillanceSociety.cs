@@ -26,8 +26,7 @@ namespace SORCE.Challenges.C_Features
 				.WithDescription(new CustomNameInfo(
 					"Those cameras? For your safety.\n" +
 					"Oh, the turrets? For the cameras' safety.\n" +
-					"The midnight raids and disappearances? Hm... what's your name, citizen?\n\n" +
-					"- Spawns Security Cams & Turrets in public, aligned with The Law."));
+					"The midnight raids and disappearances? Hm... what's your name, citizen?"));
 		}
 	}
 }

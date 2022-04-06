@@ -25,9 +25,7 @@ namespace SORCE.Challenges.C_Population
 				.WithName(new CustomNameInfo(
 					"Population - Swarm Welcome"))
 				.WithDescription(new CustomNameInfo(
-					"This whole city feels like a crowded subway. Pickpocketing is bad enough, but the frottage is out of control!\n\n" +
-					"- Roaming population set to 800%\n" +
-					"- You might get pregnant"));
+					"This whole city feels like a crowded subway. Pickpocketing is bad enough, but the frottage is out of control!"));
 		}
 	}
 }

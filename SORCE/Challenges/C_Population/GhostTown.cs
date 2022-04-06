@@ -26,8 +26,7 @@ namespace SORCE.Challenges.C_Population
 					"Population - Ghost Town"))
 				.WithDescription(new CustomNameInfo(
 					"No one walks the streets in this city... something horrible must have happened here to make everyone hide indoors!\n\n" +
-					"Don't act all innocent, I know what you do to people in this game!\n\n" +
-					"- Roaming population set to 0%"));
+					"Don't act all innocent, I know what you do to people in this game!"));
 		}
 	}
 }

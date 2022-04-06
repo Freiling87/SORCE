@@ -25,7 +25,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Nuclear Winter"))
 				.WithDescription(new CustomNameInfo(
-					"Kinda makes you wish for a scorched wasteland.\n\n"));
+					"Kinda makes you wish for a scorched wasteland."));
 		}
 	}
 }

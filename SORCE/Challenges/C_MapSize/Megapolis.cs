@@ -25,9 +25,7 @@ namespace SORCE.Challenges.C_MapSize
 				.WithName(new CustomNameInfo(
 					"Map Size - Megapolis"))
 				.WithDescription(new CustomNameInfo(
-					"This town has so gotten big. You remember when it was just a local Mega-Arcology. Now it's a Mega-Mega-Arcology.\n\n" +
-					" - Map size set to 150%\n" +
-					"   (Average 45 chunks per level)"));
+					"This town has so gotten big. You remember when it was just a local Mega-Arcology. Now it's a Mega-Mega-Arcology."));
 		}
 	}
 }

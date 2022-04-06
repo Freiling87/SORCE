@@ -22,10 +22,9 @@ namespace SORCE.Challenges.C_Features
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Features - Bad Neighborhood"))
+					"Features - Bad Neighborhoods"))
 				.WithDescription(new CustomNameInfo(
-					"This place sure has gone to shit, hasn't it?\n\n" +
-					"- Small chance for any given window to start out broken"));
+					"This place sure has gone to shit, hasn't it?"));
 		}
 	}
 }

@@ -23,9 +23,7 @@ namespace SORCE.Challenges.C_Features
 				.WithName(new CustomNameInfo(
 					"Features - Broughtback Fountain"))
 				.WithDescription(new CustomNameInfo(
-					"\"He could smell Jack - the intensely familiar odor of cigarettes, musky sweat, and a faint sweetness like grass, and with it the rushing cold of the fountain.\"\n\n" +
-					"- Fountains spawn in all districts\n" +
-					"- Doesn't make you gay"));
+					"\"He could smell Jack - the intensely familiar odor of cigarettes, musky sweat, and a faint sweetness like grass, and with it the rushing cold of the fountain."));
 		}
 	}
 }

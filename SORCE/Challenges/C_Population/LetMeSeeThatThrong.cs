@@ -25,11 +25,10 @@ namespace SORCE.Challenges.C_Population
 				.WithName(new CustomNameInfo(
 					"Population - Let Me See That Throng"))
 				.WithDescription(new CustomNameInfo(
-				"Ooh that City so scandalous\n" +
-				"and you know another player couldn't handle it,\n" +
-				"see you playing that thing like \"Who's the ish?\"\n" +
-				"with a look in your eye so devilish, uh!\n\n" +
-				"- Roaming population set to 400%"));
+					"Ooh that City so scandalous\n" +
+					"and you know another player couldn't handle it,\n" +
+					"see you playing that thing like \"Who's the ish?\"\n" +
+					"with a look in your eye so devilish, uh!"));
 		}
 	}
 }

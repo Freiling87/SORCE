@@ -24,8 +24,7 @@ namespace SORCE.Challenges.C_Features
 				.WithName(new CustomNameInfo(
 					"Features - This Land is Mine Land"))
 				.WithDescription(new CustomNameInfo(
-					"This hand was maimed for you and me!\n\n" +
-					"- Land mines spawn in all districts"));
+					"This hand was maimed for you and me!"));
 		}
 	}
 }

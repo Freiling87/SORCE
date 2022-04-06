@@ -25,7 +25,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Shadow Realm"))
 				.WithDescription(new CustomNameInfo(
-					"Kinda makes you wish for some fuckin' light."));
+					"Kinda makes you wish for a fuckin' flashlight."));
 		}
 	}
 }

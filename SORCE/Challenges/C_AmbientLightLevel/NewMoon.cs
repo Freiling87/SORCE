@@ -25,8 +25,7 @@ namespace SORCE.Challenges.C_AmbientLightLevel
 				.WithName(new CustomNameInfo(
 					"Ambient Lighting - New Moon"))
 				.WithDescription(new CustomNameInfo(
-					"Brand new moon, and it don't light up one bit!\n\n" +
-					"- Removes ambient lighting. Darkness is pitch black.\n"));
+					"Moon must be busted. Brand new, and it's completely dark!"));
 		}
 	}
 }

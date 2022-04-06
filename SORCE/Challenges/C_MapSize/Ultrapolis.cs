@@ -26,9 +26,7 @@ namespace SORCE.Challenges.C_MapSize
 					"Map Size - Ultrapolis"))
 				.WithDescription(new CustomNameInfo(
 					"Many citizens do not know there is a world outside the city, and even insist that nothing else exists.\n\n" +
-					"Buncha dipshits.\n\n" +
-					" - Map size set to 200%\n" +
-					"   (Average 60 chunks per level)"));
+					"Buncha morons."));
 		}
 	}
 }

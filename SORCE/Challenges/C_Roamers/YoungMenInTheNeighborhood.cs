@@ -24,9 +24,8 @@ namespace SORCE.Challenges.C_Roamers
 				.WithName(new CustomNameInfo(
 					"Roamers - Young Men in the Neighborhood"))
 				.WithDescription(new CustomNameInfo(
-				"Because the young gentlemen in the hood are always polite;" +
-				"If you start acting rude, we'll set you right!" +
-				"- Friendly local Gangbangers now roam every district"));
+					"Because the young gentlemen in the hood are always polite;\n" +
+					"If you start acting rude, we'll set you right!"));
 		}
 	}
 }

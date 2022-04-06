@@ -23,8 +23,7 @@ namespace SORCE.Challenges.C_Audio
 				.WithName(new CustomNameInfo(
 					"Audio - Ambienter Ambience"))
 				.WithDescription(new CustomNameInfo(
-					"- Restores ambient audio for Casino chunks\n" +
-					"- Applies general ambient audio depending on other mutators"));
+					"Restores ambient audio for Casino chunks"));
 		}
 	}
 }

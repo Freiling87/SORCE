@@ -24,9 +24,7 @@ namespace SORCE.Challenges.C_Features
 				.WithName(new CustomNameInfo(
 					"Features - The Pollution Solution"))
 				.WithDescription(new CustomNameInfo(
-					"We've finally solved pollution! Make more, dump it everywhere, and then ignore it. It will become so ubiquitous you won't even notice it anymore. Problem solved!\n\n" +
-					"- Pollution features spawn in all districts\n" +
-					"- Lakes have 80% chance of being poisoned"));
+					"We've finally solved pollution! Make more, dump it everywhere, and then ignore it. It will become so ubiquitous you won't even notice it anymore. Problem solved!"));
 		}
 	}
 }

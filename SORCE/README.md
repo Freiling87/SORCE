@@ -9,48 +9,56 @@ Streets of Rogue Civil Engineering
 
 All traits in categories marked with an asterisk (*) are mutually exclusive with the other traits *within* that category.
 
-###			Ambient Audio
+
+###			Ambient Light Color *
+These have no effect on gameplay, and are intended mainly for campaign ambience.
+
+|Name							|Effect	|
+|:------------------------------|:------|
+|Goodsprings					|Orange filter
+|Hellscape						|Red filter
+|Nuclear Winter					|White filter
+|Reactor						|Green filter
+|Sepia							|Yellow filter
+|Shadow Realm					|Black filter
+|Shinobi						|Dark Blue filter
+
+###			Ambient Light Level *
+These have no effect on gameplay, and are intended mainly for campaign ambience.
+
+|Name							|Effect	|
+|:------------------------------|:------|
+|New Moon						|Makes it *really* dark. 
+
+###			Audio
 
 |Name							|Effect	|
 |:------------------------------|:------|
 |Ambienter Ambience				|Restores ambient audio to Casino and Graveyard chunks.
 
-###			Ambient Light *
-
-|Name							|Effect	|
-|:------------------------------|:------|
-|Black & White					|Monochrome filter
-|Goodsprings					|Orange filter
-|Hellscape						|Red filter
-|New Moon						|Removes ambient light entirely
-|Nuclear Winter					|White filter
-|Sepia							|Yellow filter
-|Shinobi						|Dark Blue filter
-
 ###			Buildings *
-
-*N.B.: If a chunk uses non-randomized walls, they will not be affected by these mutators.*
 
 |Name                           |Effect|
 |:------------------------------|:-----|
-|City of Steel                  |- All randomized walls will spawn as Steel.
-|Green Living                   |- All randomized walls will spawn as Hedge.
-|Panoptikopolis                 |- All randomized walls will spawn as Glass.
-|Shanty Town                    |- All randomized walls will spawn as Wood.
-|Spelunky Dory                  |- All randomized walls will spawn as Cave Wall.<br>- Boulders spawn in all districts.
+|Brixton						|- Buildings are made of brick
+|City of Steel                  |- Buildings are made of steel
+|Green Living                   |- Buildings are made of hedges and dirt
+|Panoptikopolis                 |- Buildings are made of glass
+|Shanty Town                    |- Buildings are made of wood
+|Spelunky Dory                  |- Buildings are caves
 
 ###			Map Features
 
 |Name                           |Effect |
 |:------------------------------|:------|
 |Bad Neighborhoods              |- Small chance for any window to start out broken
-|Brought Back Fountain          |- Yep, it's a Fountain. Doesn't do anything yet.
-|Cart of the Deal               |- Vendor Carts spawn in all districts
-|Lake it or Leave it            |- Lakes spawn in all districts
-|Power Whelming                 |- Power Boxes spawn in all districts
+|Brought Back Fountain          |- Spawns fountains<br>- Loot them for cash, bad luck, and public scorn
+|Cart of the Deal               |- Spawns Vendor Carts
+|Lake it or Leave it            |- Spawns Lakes
+|Power Whelming                 |- Spawns Power Boxes
 |Skyway District                |- Canals in Downtown replaced with Holes
-|Surveillance Society           |- Security Cams & Turrets spawn in public
-|The Pollution Solution         |- Pollution features spawn in all levels<br>- Lakes have 80% chance of being poisoned
+|The Pollution Solution         |- Spawns Pollution features<br>- Lakes have a high chance of being poisoned
+|This Land is Mine Land			|- Spawns landmines
 
 ###			Light Sources
 
@@ -58,9 +66,8 @@ All traits in categories marked with an asterisk (*) are mutually exclusive with
 |:------------------------------|:------|
 |No Agent Lights				|- Agents no longer have a halo
 |No Item Lights					|- Items no longer have a halo
-|No Object Glow					|- Objects no longer pulse yellow when you have an item usable with them<br>- This is already in SOR's options, but this allows creators to use the mutator on custom levels
+|No Object Glow					|- Objects no longer pulse yellow when you have an item usable with them<br>- This is already in SOR's options, but this allows creators to use the mutator on custom levels.
 |No Object Lights				|- Objects no longer have a halo, except when realistic
-
 
 ###			Map Size *
 
@@ -86,7 +93,7 @@ All traits in categories marked with an asterisk (*) are mutually exclusive with
 |Name                           |Effect|
 |:------------------------------|:-----|
 |Hoodlum's Wonderland           |- Roaming Gang numbers increased (12 gangs for standard floor size)
-|Mob Town                       |- Mafia Spawn in all Districts
+|Union Town                     |- Mafia Spawn in all Districts
 |Young Men in the Neighborhood  |- Roaming Gangs spawn in all Districts
 
 ###			Wreckage
@@ -95,8 +102,9 @@ In these mutators, they're used simply to add a degree of setting immersion and 
 
 |Name                           |Effect |
 |:------------------------------|:------|
-|Dirtier Districts				|- Trash, beautiful trash, everywhere!<br>- May cause performance issues for slower machines
-|Floraler Flora					|- Leaves are scattered around plants and hedges.<br>- May cause performance issues for slower machines
+|Bachelorer Pads				|- Spawns trash indoors
+|Dirtier Districts				|- Spawns trash in public
+|Floraler Flora					|- Leaves are scattered around plant objects
 
 ##		Traits
 

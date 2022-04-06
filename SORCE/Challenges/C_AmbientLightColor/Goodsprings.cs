@@ -25,7 +25,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Goodsprings"))
 				.WithDescription(new CustomNameInfo(
-					"Kinda makes you wish for a nuclear winter.\n\n"));
+					"Kinda makes you wish for a nuclear winter."));
 		}
 	}
 }

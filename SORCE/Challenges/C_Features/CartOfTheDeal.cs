@@ -24,9 +24,7 @@ namespace SORCE.Challenges.C_Features
 				.WithName(new CustomNameInfo(
 					"Features - Cart of the Deal"))
 				.WithDescription(new CustomNameInfo(
-					"A lot of people - very important people - are saying the City has the best Vendor Carts. The best folks, just tremendous! Don't we love our Vendor Carts?\n\n" +
-					"- Vendor carts spawn in all districts\n" +
-					"- It's gonna be yuge"));
+					"A lot of people - very important people - are saying the City has the best Vendor Carts. The best folks, just tremendous! Don't we love our Vendor Carts? Absolutely tremendous."));
 		}
 	}
 }

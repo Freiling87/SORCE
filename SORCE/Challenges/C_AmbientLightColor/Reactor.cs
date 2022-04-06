@@ -25,7 +25,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Reactor"))
 				.WithDescription(new CustomNameInfo(
-					"Kinda makes you wish for a hazmat suit, or at least some fun drugs.\n\n"));
+					"Kinda makes you wish for a hazmat suit, or at least some fun drugs."));
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Sepia"))
 				.WithDescription(new CustomNameInfo(
-					"Kinda makes you wish for a good old-fashioned rowdy-dowd.\n\n"));
+					"Kinda makes you wish for a good old-fashioned rowdy-dowd."));
 		}
 	}
 }

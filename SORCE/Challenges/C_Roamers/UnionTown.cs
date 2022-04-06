@@ -24,9 +24,7 @@ namespace SORCE.Challenges.C_Roamers
 				.WithName(new CustomNameInfo(
 					"Roamers - Mob Town"))
 				.WithDescription(new CustomNameInfo(
-					"We run dis town. Enable dis mutatah, or else. Stugots!\n\n" +
-					"- The Mob spawns in every district" +
-					"- You gotta problem? I'd hate if we had a problem."));
+					"We run dis town. Enable dis mutatah, or else. Stugots!"));
 		}
 	}
 }

@@ -17,11 +17,7 @@ namespace SORCE.Traits
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = 
-                        "The Underdank is a vast subterranean network of caverns & tunnels, stretching between entire continents. It also smells like SHIT, because of our sewer system. The upside is that you might get to meet Pizzt Do'Turden, the Dank Smellf of legend!\n\n" +
-                        "- Manholes spawn in all Districts\n" + 
-                        "- Thieves and Cannibals hiding in Manholes no longer target you\n" + 
-                        "- Activate or Fall in Open Manhole: Teleport to another Underdank entrypoint\n" + 
-                        "- Diminutive: Toilets are part of the Underdank network",
+                        "The Underdank is a vast subterranean network of caverns & tunnels, stretching between entire continents. It also smells like SHIT, because of our sewer system. The upside is that you might get to meet Pizzt Do'Turden, the Dank Smellf of legend!",
                     [LanguageCode.Russian] = "Вы с лёгкостью оринтируетесь в канализации. Жители этих мест не считают вас лёгкой целью",
                 })
                 .WithName(new CustomNameInfo

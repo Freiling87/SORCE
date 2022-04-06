@@ -22,9 +22,7 @@ namespace SORCE.Challenges.C_Features
 				.WithName(new CustomNameInfo(
 					"Features - Lake it or Leave it"))
 				.WithDescription(new CustomNameInfo(
-					"Don't like large inland bodies of water? Too fuckin' bad, buddy!\n\n" +
-					"- Lakes spawn in all districts\n" +
-					"- Pond scum costs extra"));
+					"Don't like large inland bodies of fresh or salt water set apart from other draining water features? Too fuckin' bad, buddy!"));
 		}
 	}
 }
