@@ -39,10 +39,13 @@ namespace SORCE.Traits
 
         public static void Handle_StatusEffects_BecomeHidden(StatusEffects instance, ObjectReal hiddenInObject)
         {
-            if (hiddenInObject.objectName == nameof(VanillaObjects.Manhole) &&
+            if (hiddenInObject is Manhole &&
                 TraitManager.IsPlayerTraitActive<UnderdankCitizen>() &&
                 instance.agent.isPlayer == 0)
-                    instance.BecomeNotHidden();
+            {
+                instance.BecomeNotHidden();
+                // TODO: Set relationship to neutral or Friendly
+            }
         }
     }
 }

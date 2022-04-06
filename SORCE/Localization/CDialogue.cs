@@ -5,13 +5,14 @@
         public static class CDialogue // Custom Dialogue
 		{
 			public const string
-				AlarmButtonBuyFail = "AlarmButtonCantAfford",
-				ElevatorBuyFail = "CantAffordElevator",
-				ElevatorBuySuccess = "PurchaseElevator",
+				AlarmButtonBuyFail = "AlarmButtonBuyFail",
+				ElevatorBuyFail = "ElevatorBuyFail",
+				ElevatorBuySuccess = "ElevatorBuySuccess",
 				FireHydrantBuyFail = "FireHydrantBuyFail",
 				FireHydrantBuySuccess = "FireHydrantBuySuccess",
 				MachineBusy = "MachineBusy",
-				ToiletBuyFail = "ToiletCantAfford"
+				NeedCrowbar = "NeedCrowbar",
+				ToiletBuyFail = "ToiletBuyFail"
 				;
 		}
 	}

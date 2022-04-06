@@ -9,7 +9,8 @@
 				ElevatorGoUp = "ElevatorGoUp",
 				FlushYourself = "FlushYourself",
 				RefillWaterCannon = "RefillWaterCannon",
-				TossCoin = "TossCoin"
+				TossCoin = "TossCoin",
+				UseCrowbar = "UseCrowbar"
 				;
 		}
 	}

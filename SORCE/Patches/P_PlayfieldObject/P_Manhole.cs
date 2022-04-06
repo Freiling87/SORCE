@@ -1,27 +1,20 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
-using SORCE.Extensions;
+using JetBrains.Annotations;
+using RogueLibsCore;
 using SORCE.Logging;
 using SORCE.Traits;
-using RogueLibsCore;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection.Emit;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
-using JetBrains.Annotations;
-using BTHarmonyUtils.TranspilerUtils;
-using System.Reflection.Emit;
-using BTHarmonyUtils;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
-	[HarmonyPatch(declaringType: typeof(Manhole))]
+    [HarmonyPatch(declaringType: typeof(Manhole))]
 	class P_Manhole
 	{
 		//private static readonly ManualLogSource logger = SORCELogger.GetLogger();
@@ -32,6 +25,10 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[RLSetup]
 		public static void Setup()
 		{
+			string t = 
+				VNameType.Dialogue;
+			RogueLibs.CreateCustomName(CDialogue.NeedCrowbar, t, new CustomNameInfo("I need a crowbar. I could break a nail!"));
+
 			RogueInteractions.CreateProvider<Manhole>(h =>
 			{
 				if (h.Helper.interactingFar) 
@@ -53,7 +50,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 					{
 						string extra = $" ({crowbar.invItemCount} - {crowbarTamperCost})";
 
-						h.AddButton("UseCrowbar", extra, m =>
+						h.AddButton(VButtonText.UseCrowbar, extra, m =>
 						{
 							m.StartOperating(VItem.Crowbar, 2f, true, "Tampering");
 						});
@@ -62,40 +59,28 @@ namespace SORCE.Patches.P_PlayfieldObject
 					{
 						h.SetStopCallback(m =>
 						{
-							m.gc.audioHandler.Play(m.Agent, "CantDo");
-							m.Agent.SayDialogue("NeedCrowbar");
+							m.gc.audioHandler.Play(m.Agent, VDialogue.CantDo);
+							m.Agent.SayDialogue(CDialogue.NeedCrowbar);
 						});
 					}
 				}
 			});
-
-			//RogueLibs.CreateCustomName(vButtonText.FlushYourself, NameTypes.Interface,
-			//	new CustomNameInfo("Flush Yourself"));
 		}
 
-		public static void FlushYourself(Agent agent, ObjectReal __instance)
+		public static void FlushYourself(Agent agent, ObjectReal entryObject)
 		{
 			List<ObjectReal> exits = new List<ObjectReal>();
 
-			for (int i = 0; i < GC.objectRealList.Count; i++)
-			{
-				ObjectReal objectReal = GC.objectRealList[i];
+			foreach (ObjectReal objectReal in GC.objectRealList)
+            {
+				if ((objectReal is Manhole manhole && manhole.opened)
+						|| (objectReal is Toilet toilet && !toilet.destroyed
+						&& (agent.statusEffects.hasTrait(VTrait.Diminutive) || agent.shrunk)))
+					exits.Add(objectReal);
+            }
 
-				if (objectReal == __instance)
-					continue;
-				else if (objectReal is Manhole)
-				{
-					Manhole manhole = (Manhole)objectReal;
-
-					if (manhole.opened)
-						exits.Add(objectReal);
-				}
-				else if (objectReal is Toilet && (agent.statusEffects.hasTrait(VTrait.Diminutive) || agent.shrunk))
-					if (!objectReal.destroyed)
-						exits.Add(objectReal);
-			}
-
-			ObjectReal exit = __instance;
+			exits.Remove(entryObject);
+			ObjectReal exit = entryObject; // default
 
 			if (exits.Count > 0)
 				exit = exits[Random.Range(0, exits.Count - 1)];
@@ -106,7 +91,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 			{
 				exitSpot = exit.curPosition;
 				agent.Teleport((Vector2)exitSpot + Random.insideUnitCircle.normalized, true, true);
-				GC.spawnerMain.SpawnExplosion((PlayfieldObject)exit, exitSpot, "Water", false, -1, false, exit.FindMustSpawnExplosionOnClients(agent));
+				GC.spawnerMain.SpawnExplosion(exit, exitSpot, VExplosion.Water, false, -1, false, 
+					exit.FindMustSpawnExplosionOnClients(agent));
 			}
 			else if (exit is Toilet)
 			{
@@ -135,9 +121,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 						break;
 				}
 
-				__instance.interactingAgent.Teleport(exitSpot, false, true);
-				GC.spawnerMain.SpawnExplosion(__instance.interactingAgent, exit.tr.position, "Water", false, -1, false,
-						__instance.FindMustSpawnExplosionOnClients(__instance.interactingAgent));
+				agent.Teleport(exitSpot, false, true);
+				GC.spawnerMain.SpawnExplosion(exit, exit.tr.position, "Water", false, -1, false,
+						exit.FindMustSpawnExplosionOnClients(agent));
 			}
 		}
 
