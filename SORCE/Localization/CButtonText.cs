@@ -15,7 +15,8 @@
 				FountainWishGoodHealth = "FountainWishGoodHealth",
 				FountainWishTrueFriendship = "FountainWishTrueFriendship",
 				FountainWishWorldPeace = "FountainWishWorldPeace",
-				FireHydrantBuy = "HydrantBuy"
+				FireHydrantBuy = "HydrantBuy",
+				TakeHugeShit = "TakeHugeShit"
 				;
 		}
 	}

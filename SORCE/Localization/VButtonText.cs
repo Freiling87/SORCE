@@ -8,6 +8,7 @@
 				AlarmButtonAncapistan = "AlarmButtonAncapistan",
 				ElevatorGoUp = "ElevatorGoUp",
 				FlushYourself = "FlushYourself",
+				PurgeStatusEffects = "PurgeStatusEffects",
 				RefillWaterCannon = "RefillWaterCannon",
 				TossCoin = "TossCoin",
 				UseCrowbar = "UseCrowbar"
