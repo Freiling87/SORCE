@@ -1,12 +1,15 @@
 ﻿using BepInEx.Logging;
+using BTHarmonyUtils;
 using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
 using JetBrains.Annotations;
 using RogueLibsCore;
 using SORCE.Logging;
 using SORCE.Traits;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
@@ -17,7 +20,7 @@ namespace SORCE.Patches.P_PlayfieldObject
     [HarmonyPatch(declaringType: typeof(Manhole))]
 	class P_Manhole
 	{
-		//private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		private const int crowbarTamperCost = 30;
@@ -153,17 +156,55 @@ namespace SORCE.Patches.P_PlayfieldObject
 
 			manhole.StopInteraction();
 		}
+
+		// WARNING: 
+		// This is an example method from BM when manholes last spawned correctly. 
+		// It's not currently set to run as a patch.
+		// I've tested it and it does fix the spawn issue, but seems to break AI.
+		//[HarmonyPrefix, HarmonyPatch(declaringType:typeof(Manhole), methodName: "Start")]
+		public static bool Manhole_Start(Manhole __instance)
+		{
+			MethodInfo start_base = AccessTools.DeclaredMethod(typeof(ObjectReal), "Start", new Type[0] { });
+			start_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
+
+			if (GC.levelTheme != 3 && !GC.challenges.Contains(VChallenge.MixedUpLevels) && GC.levelFeeling != VLevelFeeling.WarZone && !TraitManager.IsPlayerTraitActive<UnderdankCitizen>() && GC.serverPlayer)
+			{
+				__instance.objectName = "Manhole";
+				__instance.RemoveMe();
+
+				return false;
+			}
+
+			if (__instance.opened)
+				__instance.objectSprite.meshRenderer.enabled = false;
+
+			//if (GC.lightingType != "None")
+			//	__instance.StartCoroutine(Manhole_SetLightingLater(__instance));
+
+			GC.tileInfo.GetTileData(__instance.tr.position).futureHole = true;
+
+			//if (GC.serverPlayer && GC.levelFeeling == "WarZone")
+			//{
+			//	__instance.StartCoroutine(Manhole_HoleAppearAfterLoad(__instance));
+
+			//	return false;
+			//}
+			 
+			if (!GC.serverPlayer && __instance.normalHole)
+				__instance.objectRealRealName = GC.nameDB.GetName("Hole", "Object");
+
+			return false;
+		}
 	}
 
-    [HarmonyPatch(typeof(Manhole))]
-    [HarmonyPatch("Start")]
-    static class P_Manhole_Start
+	[HarmonyPatch(declaringType: typeof(Manhole), methodName: "Start")]
+	static class P_Manhole_Start
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> Start_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+		private static IEnumerable<CodeInstruction> RemoveDistrictLimitation(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
 
@@ -171,7 +212,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 				expectedMatches: 1,
 				targetInstructionSequence: new List<CodeInstruction>
 				{
-					// __instance.gc.levelTheme != 3
+					// if (this.gc.levelTheme != 3 && ...
 
 					new CodeInstruction(OpCodes.Ldarg_0),	//	this
 					new CodeInstruction(OpCodes.Ldfld),		//	this.gc
@@ -180,13 +221,14 @@ namespace SORCE.Patches.P_PlayfieldObject
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					// This is a silly way to just bypass the if-block
+					// if (3 != 3 && ...
 					new CodeInstruction(OpCodes.Ldc_I4_3),	//	3
 					new CodeInstruction(OpCodes.Ldc_I4_3),	//	3, 3
 				});
 
 			patch.ApplySafe(instructions, logger);
-			return codeInstructions;
-		} 
+			return instructions;
+		}
 	}
 }
+ 
