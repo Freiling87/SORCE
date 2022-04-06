@@ -3,6 +3,7 @@ using HarmonyLib;
 using RogueLibsCore;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Logging;
+using SORCE.MapGenUtilities;
 using SORCE.Traits;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,10 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[RLSetup]
 		public static void Setup()
 		{
+			string t =
+				VNameType.Interface;
+			RogueLibs.CreateCustomName(CButtonText.TakeHugeShit, t, new CustomNameInfo("Take a huge shit"));
+
 			RogueInteractions.CreateProvider<Toilet>(h =>
 			{
 				if (GC.levelType != "HomeBase" &&
@@ -45,19 +50,26 @@ namespace SORCE.Patches.P_PlayfieldObject
 				{
 					if (CanAgentFlushSelf(h.Agent))
 					{
-						h.AddButton("FlushYourself", toiletCost, m =>
+						h.AddButton(VButtonText.FlushYourself, toiletCost, m =>
 						{
 							m.Object.FlushYourself();
 						});
 					}
+
 					if (h.Object.hasPurgeStatusEffects())
 					{
-						h.AddButton("PurgeStatusEffects", toiletCost, m =>
+						h.AddButton(VButtonText.PurgeStatusEffects, toiletCost, m =>
 						{
 							m.Object.PurgeStatusEffects();
 						});
 					}
 				}
+
+				if (Core.debugMode)
+					h.AddButton(CButtonText.TakeHugeShit, m =>
+					{
+						TakeHugeShit(m.Agent, m.Object);
+					});
 			});
 		}
 
@@ -79,15 +91,13 @@ namespace SORCE.Patches.P_PlayfieldObject
 					{
 						ObjectReal exitCandidate = GC.objectRealList[i];
 
-						if (exitCandidate != __instance && !exitCandidate.destroyed && exitCandidate.startingChunk != __instance.startingChunk)
+						if (exitCandidate != __instance && 
+							!exitCandidate.destroyed && 
+							exitCandidate.startingChunk != __instance.startingChunk)
 						{
-							if (exitCandidate is Manhole)
-							{
-								Manhole manhole = (Manhole)exitCandidate;
-
-								if (manhole.opened)
-									exits.Add(exitCandidate);
-							}
+							if (exitCandidate is Manhole manhole
+								&& manhole.opened)
+								exits.Add(exitCandidate);
 							else if (exitCandidate is Toilet)
 								exits.Add(exitCandidate);
 						}
@@ -154,6 +164,21 @@ namespace SORCE.Patches.P_PlayfieldObject
 			}
 
 			return true;
+		}
+
+		private static void TakeHugeShit(Agent agent, Toilet toilet)
+        {
+			Vector2 loc = toilet.tr.position;
+
+			Wreckage.SpawnWreckagePileObject_Granular(
+				new Vector2(loc.x, loc.y),
+				VObject.FlamingBarrel,
+				false,
+				3,
+				0.64f, 0.64f);
+
+			GC.spawnerMain.SpawnExplosion(agent, loc, VExplosion.Water);
+			P_00_ObjectReal.AnnoyWitnessesVictimless(agent);
 		}
 	}
 }

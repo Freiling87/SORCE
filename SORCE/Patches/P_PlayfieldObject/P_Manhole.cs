@@ -156,45 +156,6 @@ namespace SORCE.Patches.P_PlayfieldObject
 
 			manhole.StopInteraction();
 		}
-
-		// WARNING: 
-		// This is an example method from BM when manholes last spawned correctly. 
-		// It's not currently set to run as a patch.
-		// I've tested it and it does fix the spawn issue, but seems to break AI.
-		//[HarmonyPrefix, HarmonyPatch(declaringType:typeof(Manhole), methodName: "Start")]
-		public static bool Manhole_Start(Manhole __instance)
-		{
-			MethodInfo start_base = AccessTools.DeclaredMethod(typeof(ObjectReal), "Start", new Type[0] { });
-			start_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
-
-			if (GC.levelTheme != 3 && !GC.challenges.Contains(VChallenge.MixedUpLevels) && GC.levelFeeling != VLevelFeeling.WarZone && !TraitManager.IsPlayerTraitActive<UnderdankCitizen>() && GC.serverPlayer)
-			{
-				__instance.objectName = "Manhole";
-				__instance.RemoveMe();
-
-				return false;
-			}
-
-			if (__instance.opened)
-				__instance.objectSprite.meshRenderer.enabled = false;
-
-			//if (GC.lightingType != "None")
-			//	__instance.StartCoroutine(Manhole_SetLightingLater(__instance));
-
-			GC.tileInfo.GetTileData(__instance.tr.position).futureHole = true;
-
-			//if (GC.serverPlayer && GC.levelFeeling == "WarZone")
-			//{
-			//	__instance.StartCoroutine(Manhole_HoleAppearAfterLoad(__instance));
-
-			//	return false;
-			//}
-			 
-			if (!GC.serverPlayer && __instance.normalHole)
-				__instance.objectRealRealName = GC.nameDB.GetName("Hole", "Object");
-
-			return false;
-		}
 	}
 
 	[HarmonyPatch(declaringType: typeof(Manhole), methodName: "Start")]

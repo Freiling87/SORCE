@@ -110,6 +110,8 @@ Require owned wall, as spawning on junk walls doesn't make sense
 ####			C	Detect Wanted
 ###         C   Brought Back Fountain
 ####            C   Show (Empty) when looted
+####            C   Sometimes does not Annoy witnesses
+Unsure of pattern
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
@@ -383,6 +385,10 @@ Complete
 ##		C	Underdank Citizen
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self
+###         C   Flushing to Manhole doesn't work
+Technically works, but they fall right back in and trigger the flush method again.
+Find BM's old jump method of exiting.
+###         C   Patch Toilet FlushYourself
 ###			C	Old Notes
 - Take small damage if you walk into manhole instead of activating
   - Attempted

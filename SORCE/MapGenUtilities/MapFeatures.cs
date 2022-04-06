@@ -45,7 +45,6 @@ namespace SORCE.MapGenUtilities
 		public static bool HasBushes(bool vanilla) =>
 			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(VerdantVistas)) ||
-			Core.debugMode ||
 			vanilla;
 		public static bool HasBushCannibals =>
 			!GC.challenges.Contains(nameof(Arcology)) &&
@@ -115,7 +114,6 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
-			Core.debugMode ||
 			vanilla;
 		public static bool HasRoamingGangbangers(bool vanilla) =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
@@ -166,8 +164,7 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
-			Core.debugMode;
+			GC.challenges.Contains(nameof(ThePollutionSolution));
 		public static bool HasTrashCans(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||
@@ -186,7 +183,6 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(CartOfTheDeal)) ||
 			GC.challenges.Contains(nameof(MACITS)) ||
 			vanilla;
-
 		public static void SetHasLakes(LoadLevel loadLevel) =>
 			loadLevel.hasLakes =
 				GC.challenges.Contains(nameof(Arcology)) ||
@@ -196,7 +192,6 @@ namespace SORCE.MapGenUtilities
 			loadLevel.hasFlameGrates =
 				!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 				GC.challenges.Contains(nameof(Technocracy)) ||
-				Core.debugMode ||
 				loadLevel.hasFlameGrates;
 	}
 }

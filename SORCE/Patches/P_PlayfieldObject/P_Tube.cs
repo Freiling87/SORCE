@@ -49,7 +49,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 				});
 
 			patch.ApplySafe(instructions, logger);
-			return codeInstructions;
+			return instructions;
 		}
 	}
 }

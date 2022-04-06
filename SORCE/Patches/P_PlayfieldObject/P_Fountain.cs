@@ -87,43 +87,13 @@ namespace SORCE.Patches.P_PlayfieldObject
 			if (!agent.statusEffects.hasTrait(VTrait.SneakyFingers))
 			{
 				GC.spawnerMain.SpawnExplosion(fountain, fountain.curPosition, VExplosion.Water);
-				AnnoyWitnessesVictimless(agent);
+				P_00_ObjectReal.AnnoyWitnessesVictimless(agent);
 			}
 			else
 				GC.audioHandler.Play(fountain, VAudioClip.JumpOutWater);
 
 			fountain.interactable = false;
 			fountain.StopInteraction();
-		}
-
-		public static void AnnoyWitnessesVictimless(Agent perp)
-		{
-			foreach (Agent bystander in GC.agentList)
-			{
-				if (Vector2.Distance(bystander.tr.position, perp.tr.position) < bystander.LOSRange / perp.hardToSeeFromDistance &&
-					bystander != perp && !bystander.zombified && !bystander.ghost && !bystander.oma.hidden &&
-					(!perp.aboveTheLaw || !bystander.enforcer) &&
-					perp.prisoner == bystander.prisoner && !perp.invisible)
-				{
-					string perpRel = bystander.relationships.GetRel(perp);
-
-					if (perpRel == nameof(relStatus.Neutral) || perpRel == nameof(relStatus.Friendly))
-					{
-						if (bystander.relationships.GetRelationship(perp).hasLOS)
-						{
-							relStatus perpRel2 = bystander.relationships.GetRelCode(perp);
-
-							// TODO something isn't right here, condition always evaluates to true
-							if (perpRel2 != relStatus.Aligned || perpRel2 != relStatus.Loyal)
-								bystander.relationships.SetStrikes(perp, 2);
-						}
-					}
-					else if (perpRel == nameof(relStatus.Annoyed) && bystander.relationships.GetRelationship(perp).hasLOS)
-					{
-						bystander.relationships.SetRelHate(perp, 5);
-					}
-				}
-			}
 		}
 	}
 
