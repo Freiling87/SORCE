@@ -482,7 +482,31 @@ namespace SORCE.Patches
 			return instructions;
 		}
 
-		// Bushes
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> Bushes(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo LevelGenTools_HasBushes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasBushes), new[] { typeof(bool) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				postfixInstructionSequence: new List<CodeInstruction>
+				{
+					new CodeInstruction(OpCodes.Ldloc_S, 16),
+					new CodeInstruction(OpCodes.Brfalse),
+					},
+				insertInstructionSequence: new List<CodeInstruction>
+				{
+					//	flag16 = LevelGenTools.HasBushes(flag21);
+					
+					new CodeInstruction(OpCodes.Ldloc_S, 16), // flag21
+					new CodeInstruction(OpCodes.Call, LevelGenTools_HasBushes), // bool
+					new CodeInstruction(OpCodes.Stloc_S, 16), // Clear
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
+		}
 
 		// Cops
 
@@ -647,11 +671,12 @@ namespace SORCE.Patches
 
 		// Lamps
 
-		[HarmonyTranspiler, UsedImplicitly]
+		//[HarmonyTranspiler, UsedImplicitly]
+		// DISABLED: TESTING CUSTOM METHOD INSTEAD
 		private static IEnumerable<CodeInstruction> Manholes(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo levelGenTools_HasManholes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasManholesVanilla), new[] { typeof(bool) });
+			MethodInfo levelGenTools_HasManholes = AccessTools.Method(typeof(LevelGenTools), nameof(LevelGenTools.HasManholes), new[] { typeof(bool) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
