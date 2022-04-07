@@ -9,9 +9,9 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
-#   C   Priority Bugs
-##      C   FlameSpewer spawns with flammable building mods
-New
+#   CT   Priority Bugs
+##      T   FlameSpewer spawns with flammable building mods
+Test
 #   C   General
 ##      C   Migrate feature lists to documentation
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.

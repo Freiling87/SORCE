@@ -1,11 +1,14 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using Light2D;
+using RogueLibsCore;
+using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Wreckage;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
 using System;
+using System.Linq;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
@@ -19,12 +22,29 @@ namespace SORCE.Patches
         public static GameController GC => GameController.gameController;
 
 		/// <summary>
+		/// Flammable Buildings precautions
+		/// </summary>
+		/// <param name="objectRealName"></param>
+		/// <param name="objectRealPrefab"></param>
+		/// <param name="spawnPosition"></param>
+		/// <returns></returns>
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(PoolsScene.SpawnObjectReal), argumentTypes: new Type[] { typeof(string), typeof(GameObject), typeof(Vector3) })]
+		public static bool Spawn_Prefix(string objectRealName, GameObject objectRealPrefab, Vector3 spawnPosition)
+        {
+			if (objectRealName == VObject.FireSpewer &&
+				RogueFramework.Unlocks.OfType<BuildingsChallenge>().Where(i => i.IsEnabled).Any(i => i.WallsFlammable))
+				objectRealName = VObject.SecurityCam;
+
+			return true;
+		}
+
+		/// <summary>
 		/// Wreckage
 		/// </summary>
 		/// <param name="objectRealName"></param>
 		/// <param name="objectRealPrefab"></param>
 		/// <param name="spawnPosition"></param>
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(PoolsScene.SpawnObjectReal), argumentTypes: new Type[] {typeof(string), typeof(GameObject), typeof(Vector3)} )]
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(PoolsScene.SpawnObjectReal), argumentTypes: new Type[] {typeof(string), typeof(GameObject), typeof(Vector3)} )]
         public static void SpawnObjectReal_Postfix(string objectRealName, GameObject objectRealPrefab, Vector3 spawnPosition)
         {
 			int trashLevelInverse = GC.levelTheme; // 0 = Home Base, 5 = Mayor Village 
