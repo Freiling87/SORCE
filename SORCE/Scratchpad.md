@@ -9,9 +9,9 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
-#   C   Priority Bugs
-##      C   FlameSpewer spawns with flammable building mods
-New
+#   T   Priority Bugs
+##      T   FlameSpewer spawns with flammable building mods
+Test
 #   C   General
 ##      C   Migrate feature lists to documentation
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.
@@ -37,7 +37,24 @@ Attempted
 ###         T   Bad Neighborhoods
 ####            T   Scaled to District
 I know it works, but make sure proportions are right
-###         C   Public Screens
+###         C   Brought Back Fountain
+####            C   Show (Empty) when looted
+####            C   Sometimes does not Annoy witnesses
+Unsure of pattern
+####			√	Spawns in Home Base
+I don't really gaf unless people complain
+####			H	AnCapistan: Poisoned Fountains
+###         C   Lake it or Leave it
+####			C	Do not make lakes over Downtown bridges
+LoadLevel.SetupMore3_3, after line 67
+There's a method called TileInfo.BridgeNearby
+####            T   Spawn Water Pumps
+I think these are automatic
+###         CT  Pollution Solution
+####            C   Raise chance of poisoned lakes
+####            T   Scale chance to district
+I know it works, but make sure proportions are right
+###         C   Screens
 ####            C   1 blank tile in between
 ####            H   Content
 |Overhaul                       |Palette    |Audio  |
@@ -52,20 +69,16 @@ I know it works, but make sure proportions are right
 |TinderTown                     |Blue       |Ads for water
 ####            C   Spawns Safe sprite
 Resolve gap issue first
-###         CT   The Pollution Solution
-####            C   Raise chance of poisoned lakes
-####            T   Scale chance to district
-I know it works, but make sure proportions are right
+###         T   Verdant Vistas
+Killer Plants worked
+####            H   Exclude Bush Cannibals in certain circumstances
+Arcology overhaul is only one so far
+###         T   Welcome Mats
+Bear Traps
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
 ####			C	Spawn public Rugs (overlap with Grand City Hotel)
-###         H   Lake it or Leave it
-Honestly this one's not interesting enough to bother with yet.
-####			C	Do not make lakes over Downtown bridges
-LoadLevel.SetupMore3_3, after line 67
-There's a method called TileInfo.IsearBridge or something like that, use it
-####            C   Spawn Water Pumps
 ###         H   Life Downhill
 Spawn Pipes as Trash Chutes in the slums or industrial
 May drop usable items, or live banana peels, etc.
@@ -108,28 +121,17 @@ Require owned wall, as spawning on junk walls doesn't make sense
 
 ####			C	00 Import SecurityCamera patches
 ####			C	Detect Wanted
-###         C   Brought Back Fountain
-####            C   Show (Empty) when looted
-####            C   Sometimes does not Annoy witnesses
-Unsure of pattern
-####			√	Spawns in Home Base
-I don't really gaf unless people complain
-####			H	AnCapistan: Poisoned Fountains
-###         T   Verdant Vistas
-Killer Plants worked
-####            H   Exclude Bush Cannibals in certain circumstances
-Arcology overhaul is only one so far
-###			√	Cart of the Deal
-Complete
-###			√	Power Whelming
-Complete
-###			√	Skyway District
-Complete
-###			√	This Land is Mine Land
-Complete
-###         C   Transit Experiment
+###         H   Transit Experiment
 Change canals to Ice Rink
 Fuck public floors
+###         √   Cart of the Deal
+Complete
+###         √   Power Whelming
+Complete
+###         √   Skyway District
+Complete
+###         √   This Land is Mine Land
+Complete
 ##		CT	Light Sources
 - CameraScript.SetLighting
   - DW
@@ -186,12 +188,14 @@ New
 All broken for now
 ###			C	Always Spawn Arsonists
 New
-###			C	HoodlumsWonderland
-Newish
-###			C	Mob Town
-Newish
-###			C	YMITN
-Newish
+###         C   Roaming Cannibal Gangs
+New
+###			T	Hoodlums Wonderland
+Attempted
+###			T   Union Town
+Attempted
+###			T	YMITN
+Attempted
 ##		C	Wreckage
 ###         C   Bachelorer Pads
 5% chance to spawn 1-3 paper under desk, use moviescreen or Lamp parts
@@ -391,7 +395,12 @@ Complete
 Complete
 #	C	Traits
 ##		C	Underdank Citizen
-###         C   Deals damage
+###         C   New features
+Make sure you meet these
+|Name                           |Value  |Effect|
+|:------------------------------|------:|:-----|
+|Underdank Citizen              |5      |- Manholes spawn in all districts<br>- Manhole thieves are Friendly<br>- Manhole cannibals are Neutral<br>- Activate open manhole: Teleport to another Underdank entrance<br>- Fall in open manhole: Take damage & teleport
+|Underdank VIP					|10     |- You can open manholes with your bare hands<br>- Manhole thieves are Loyal<br>- Manhole cannibals are Friendly
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self
 ###         C   Flushing to Manhole doesn't work

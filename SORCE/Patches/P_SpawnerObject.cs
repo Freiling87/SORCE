@@ -22,7 +22,8 @@ namespace SORCE.Patches
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerObject.spawn), argumentTypes: new[] { typeof(string) })]
+		// TODO: Eliminate if P_PoolsScene.SpawnObjectReal_Prefix works 
+		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerObject.spawn), argumentTypes: new[] { typeof(string) })]
 		public static bool Spawn_Prefix(ref string objectRealName)
 		{
 			//logger.LogDebug("SpawnerObject_spawn:");

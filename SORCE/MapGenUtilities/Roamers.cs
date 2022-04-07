@@ -1,4 +1,5 @@
 ﻿using BepInEx.Logging;
+using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Population;
 using SORCE.Challenges.C_Roamers;
 using SORCE.Logging;
@@ -10,6 +11,21 @@ namespace SORCE.MapGenUtilities
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
+
+		public static bool HasRoamingGangbangers(bool vanilla) =>
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(YoungMenInTheNeighborhood)) ||
+			Core.debugMode ||
+			vanilla;
+		public static bool HasRoamingMafia(bool vanilla) =>
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(UnionTown)) ||
+			Core.debugMode ||
+			vanilla;
 
 		public static int PopulationGang(int vanilla) =>
 			GC.challenges.Contains(nameof(HoodlumsWonderland)) ? 12 :
@@ -25,7 +41,7 @@ namespace SORCE.MapGenUtilities
 
 		public static string RoamerAgentType(string agentType)
 		{
-			// TODO: Adjustments for MACITS, etc.
+			// TODO: Adjustments for overhauls, etc.
 
 			if (agentType == VAgent.Thief)
 			{
@@ -36,10 +52,9 @@ namespace SORCE.MapGenUtilities
 					0;
 
 				if (thiefReduction != 0 && GC.percentChance(thiefReduction))
-					agentType =
-						GC.levelTheme == 4 || GC.levelTheme == 5
-					? VAgent.UpperCruster
-					: VAgent.SlumDweller;
+					agentType = GC.levelTheme == 4 || GC.levelTheme == 5
+						? VAgent.UpperCruster
+						: VAgent.SlumDweller;
 			}
 
 			return agentType;
