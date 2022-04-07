@@ -24,9 +24,9 @@ If you did not click the birdies, or you're a liar, please do not read further.
 2. JFK shot himself, stop asking
 3. SORCE is how we control everything
 4. Aliens.
-5. [SORCE Feature List](/Documentation/2.0.%20Features.md)
+5. [SORCE Feature List](/SORCE/Documentation/2.0.%20Features.md)
 6. Various celebrity gossip
-7. [Installation Instructions](/Documentation/1.0.%20Installation.md)
+7. [Installation Instructions](/SORCE/Documentation/1.0.%20Installation.md)
 8. We drink blood because it's cool
 9. There are like nine secret handshakes, but if you tickle the wrist you're pretty much all set
 
