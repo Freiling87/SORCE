@@ -26,47 +26,26 @@ namespace SORCE.MapGenUtilities
 		/// <param name="loadLevel"></param>
 		public static void Spawn_Master(LoadLevel loadLevel)
 		{
-			if (MapFeatures.HasScreens)
-				SpawnScreens();
+			BreakWindows();
+			//SpawnCaveWallOutcroppings();
+			SpawnCoziness();
+			SpawnFountains();
+			SpawnJukeboxesAndSpeakers();
+			SpawnKillerPlants();
+			SpawnManholes();
+			SpawnRugs();
+			SpawnScreens();
+			SpawnSecurityCamsAndTurrets();
+			SpawnSlimeBarrels();
+			SpawnTurntablesAndSpeakers();
 
-			if (MapFeatures.HasBrokenWindows)
-				BreakWindows();
-
-			//if (HasCaveWallOutcroppings)
-			//	SpawnCaveWallOutcroppings();
-
-			if (MapFeatures.HasKillerPlants)
-				SpawnKillerPlants();
-
-			if (MapFeatures.HasFountains)
-				SpawnFountains();
-
-			if (GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)))
-				SpawnCoziness();
-
-			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
-			{
-				SpawnJukeboxesAndSpeakers();
-				SpawnTurntables();
-			}
-
-			if (MapFeatures.HasLitter)
-				Wreckage.SpawnLitter();
-
-			if (TraitManager.IsPlayerTraitActive<UnderdankCitizen>())
-				SpawnManholes();
-
-			if (MapFeatures.HasRugs)
-				SpawnRugs();
-
-			if (MapFeatures.HasSecurityCamsAndTurrets)
-				SpawnSecurityCamsAndTurrets();
-
-			if (MapFeatures.HasSlimeBarrels())
-				SpawnSlimeBarrels();
+			Wreckage.SpawnLitter();
 		}
 		private static void BreakWindows()
 		{
+			if (!MapFeatures.HasBrokenWindows)
+				return;
+
 			int chanceToBreak = (int)(LevelGenTools.SlumminessFactor * 8f);
 
 			foreach (ObjectReal objectReal in GC.objectRealList)
@@ -75,7 +54,9 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void SpawnKillerPlants()
 		{
-			Debug.Log("SORCE: Loading Killer Plants");
+			if (!MapFeatures.HasKillerPlants)
+				return;
+
 			int numObjects = (int)(Random.Range(6, 12) * LevelSize.LevelSizeRatio());
 			float objectBuffer = .64f;
 
@@ -104,9 +85,10 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void SpawnCaveWallOutcroppings()
 		{
-			Debug.Log("SORCE: Loading SpelunkyDory Cave Wall Outcroppings");
+			if (!MapFeatures.HasCaveWallOutcroppings)
+				return;
 
-			int maxSpawns = (int)((float)Random.Range(48, 64) * LevelSize.LevelSizeRatio());
+			int maxSpawns = (int)(Random.Range(48, 64) * LevelSize.LevelSizeRatio());
 			List<int> spawnedCount = new List<int>();
 			int itemCountIterator;
 
@@ -263,13 +245,17 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void SpawnCoziness()
 		{
+			if (!MapFeatures.HasCoziness)
+				return;
 			// Fireplace flanked by Armchairs
 			// Small table in front if there's room
 			// Maybe some plants too?
 		}
 		private static void SpawnFountains()
 		{
-			Debug.Log("SORCE: Loading Fountains");
+			if (!MapFeatures.HasFountains)
+				return;
+
 			int numObjects = (int)Mathf.Clamp(2f * LevelSize.LevelSizeRatio(), 1, 5);
 			float objectBuffer = 14f;
 
@@ -297,183 +283,184 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void SpawnJukeboxesAndSpeakers()
 		{
-			if (GC.challenges.Contains(nameof(DiscoCityDanceoff)))
+			if (!GC.challenges.Contains(nameof(DiscoCityDanceoff)))
+				return;
+
+			Debug.Log("SORCE: Loading Disco Shit");
+			int maxSpawns = (int)(Random.Range(6, 12) * LevelSize.LevelSizeRatio());
+			List<int> spawnedInChunks = new List<int>();
+
+			for (int i = 0; i < maxSpawns; i++)
 			{
-				Debug.Log("SORCE: Loading Disco Shit");
-				int maxSpawns = (int)(Random.Range(6, 12) * LevelSize.LevelSizeRatio());
-				List<int> spawnedInChunks = new List<int>();
+				Vector2 location = Vector2.zero;
+				int attempts = 0;
 
-				for (int i = 0; i < maxSpawns; i++)
+				do
 				{
-					Vector2 location = Vector2.zero;
-					int attempts = 0;
-
-					do
-					{
-						location = GC.tileInfo.FindRandLocationNearWall(0.64f);
-
-						if (location != Vector2.zero)
-						{
-							TileData tileData4 = GC.tileInfo.GetTileData(location);
-
-							if (GC.tileInfo.GetTileData(new Vector2(location.x, location.y + 0.64f)).owner == 0 &&
-									GC.tileInfo.GetTileData(new Vector2(location.x + 0.64f, location.y)).owner == 0 &&
-									GC.tileInfo.GetTileData(new Vector2(location.x, location.y - 0.64f)).owner == 0 &&
-									GC.tileInfo.GetTileData(new Vector2(location.x - 0.64f, location.y)).owner == 0)
-								location = Vector2.zero;
-
-							if (!GC.tileInfo.IsOverlapping(new Vector2(location.x, location.y + 0.64f), "Wall") &&
-									!GC.tileInfo.IsOverlapping(new Vector2(location.x, location.y - 0.64f), "Wall") &&
-									!GC.tileInfo.IsOverlapping(new Vector2(location.x + 0.64f, location.y), "Wall") &&
-									!GC.tileInfo.IsOverlapping(new Vector2(location.x - 0.64f, location.y), "Wall"))
-								location = Vector2.zero;
-
-							if (GC.tileInfo.IsOverlapping(location, "ObjectRealSprite", 0.64f))
-								location = Vector2.zero;
-
-							if (spawnedInChunks.Contains(tileData4.chunkID))
-								location = Vector2.zero;
-
-							if (GC.tileInfo.DestroyIfBetweenWalls(location))
-								location = Vector2.zero;
-						}
-
-						attempts++;
-					}
-					while ((location == Vector2.zero || Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) && attempts < 100);
+					location = GC.tileInfo.FindRandLocationNearWall(0.64f);
 
 					if (location != Vector2.zero)
 					{
-						GC.spawnerMain.spawnObjectReal(location, null, VObject.Speaker).ShiftTowardWalls();
+						TileData tileData4 = GC.tileInfo.GetTileData(location);
 
-						TileData tileData5 = GC.tileInfo.GetTileData(location);
-						spawnedInChunks.Add(tileData5.chunkID);
+						if (GC.tileInfo.GetTileData(new Vector2(location.x, location.y + 0.64f)).owner == 0 &&
+								GC.tileInfo.GetTileData(new Vector2(location.x + 0.64f, location.y)).owner == 0 &&
+								GC.tileInfo.GetTileData(new Vector2(location.x, location.y - 0.64f)).owner == 0 &&
+								GC.tileInfo.GetTileData(new Vector2(location.x - 0.64f, location.y)).owner == 0)
+							location = Vector2.zero;
 
-						if (i < maxSpawns - 1 && GC.percentChance(25))
+						if (!GC.tileInfo.IsOverlapping(new Vector2(location.x, location.y + 0.64f), "Wall") &&
+								!GC.tileInfo.IsOverlapping(new Vector2(location.x, location.y - 0.64f), "Wall") &&
+								!GC.tileInfo.IsOverlapping(new Vector2(location.x + 0.64f, location.y), "Wall") &&
+								!GC.tileInfo.IsOverlapping(new Vector2(location.x - 0.64f, location.y), "Wall"))
+							location = Vector2.zero;
+
+						if (GC.tileInfo.IsOverlapping(location, "ObjectRealSprite", 0.64f))
+							location = Vector2.zero;
+
+						if (spawnedInChunks.Contains(tileData4.chunkID))
+							location = Vector2.zero;
+
+						if (GC.tileInfo.DestroyIfBetweenWalls(location))
+							location = Vector2.zero;
+					}
+
+					attempts++;
+				}
+				while ((location == Vector2.zero || Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) && attempts < 100);
+
+				if (location != Vector2.zero)
+				{
+					GC.spawnerMain.spawnObjectReal(location, null, VObject.Speaker).ShiftTowardWalls();
+
+					TileData tileData5 = GC.tileInfo.GetTileData(location);
+					spawnedInChunks.Add(tileData5.chunkID);
+
+					if (i < maxSpawns - 1 && GC.percentChance(25))
+					{
+						string direction = "";
+						Vector2 zero4 = Vector2.zero;
+						Vector2 zero5 = Vector2.zero;
+
+						if (GC.tileInfo.GetTileData(new Vector2(location.x, location.y + 0.64f)).wallMaterial != wallMaterialType.None)
 						{
-							string direction = "";
-							Vector2 zero4 = Vector2.zero;
-							Vector2 zero5 = Vector2.zero;
+							zero4 = new Vector2(location.x + 1.28f, location.y);
+							zero5 = new Vector2(location.x - 1.28f, location.y);
+							direction = "N";
+						}
+						else if (GC.tileInfo.GetTileData(new Vector2(location.x, location.y - 0.64f)).wallMaterial != wallMaterialType.None)
+						{
+							zero4 = new Vector2(location.x + 1.28f, location.y);
+							zero5 = new Vector2(location.x - 1.28f, location.y);
+							direction = "S";
+						}
+						else if (GC.tileInfo.GetTileData(new Vector2(location.x + 0.64f, location.y)).wallMaterial != wallMaterialType.None)
+						{
+							zero4 = new Vector2(location.x, location.y + 1.28f);
+							zero5 = new Vector2(location.x, location.y - 1.28f);
+							direction = "E";
+						}
+						else if (GC.tileInfo.GetTileData(new Vector2(location.x - 0.64f, location.y)).wallMaterial != wallMaterialType.None)
+						{
+							zero4 = new Vector2(location.x, location.y + 1.28f);
+							zero5 = new Vector2(location.x, location.y - 1.28f);
+							direction = "W";
+						}
 
-							if (GC.tileInfo.GetTileData(new Vector2(location.x, location.y + 0.64f)).wallMaterial != wallMaterialType.None)
-							{
-								zero4 = new Vector2(location.x + 1.28f, location.y);
-								zero5 = new Vector2(location.x - 1.28f, location.y);
-								direction = "N";
-							}
-							else if (GC.tileInfo.GetTileData(new Vector2(location.x, location.y - 0.64f)).wallMaterial != wallMaterialType.None)
-							{
-								zero4 = new Vector2(location.x + 1.28f, location.y);
-								zero5 = new Vector2(location.x - 1.28f, location.y);
-								direction = "S";
-							}
-							else if (GC.tileInfo.GetTileData(new Vector2(location.x + 0.64f, location.y)).wallMaterial != wallMaterialType.None)
-							{
-								zero4 = new Vector2(location.x, location.y + 1.28f);
-								zero5 = new Vector2(location.x, location.y - 1.28f);
-								direction = "E";
-							}
-							else if (GC.tileInfo.GetTileData(new Vector2(location.x - 0.64f, location.y)).wallMaterial != wallMaterialType.None)
-							{
-								zero4 = new Vector2(location.x, location.y + 1.28f);
-								zero5 = new Vector2(location.x, location.y - 1.28f);
-								direction = "W";
-							}
+						GC.tileInfo.GetTileData(zero4);
+						bool flag9 = true;
 
-							GC.tileInfo.GetTileData(zero4);
-							bool flag9 = true;
+						if ((GC.tileInfo.GetTileData(new Vector2(zero4.x, zero4.y + 0.64f)).wallMaterial == wallMaterialType.None && direction == "N") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y)).wallMaterial == wallMaterialType.None && direction == "E") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y)).wallMaterial != wallMaterialType.None && direction == "E") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "E") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "E") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x, zero4.y - 0.64f)).wallMaterial == wallMaterialType.None && direction == "S") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y)).wallMaterial == wallMaterialType.None && direction == "W") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y)).wallMaterial != wallMaterialType.None && direction == "W") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "W") ||
+							(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "W"))
+							flag9 = false;
 
-							if ((GC.tileInfo.GetTileData(new Vector2(zero4.x, zero4.y + 0.64f)).wallMaterial == wallMaterialType.None && direction == "N") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "N") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y)).wallMaterial == wallMaterialType.None && direction == "E") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y)).wallMaterial != wallMaterialType.None && direction == "E") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "E") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "E") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x, zero4.y - 0.64f)).wallMaterial == wallMaterialType.None && direction == "S") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "S") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x - 0.64f, zero4.y)).wallMaterial == wallMaterialType.None && direction == "W") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y)).wallMaterial != wallMaterialType.None && direction == "W") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y + 0.64f)).wallMaterial != wallMaterialType.None && direction == "W") ||
-								(GC.tileInfo.GetTileData(new Vector2(zero4.x + 0.64f, zero4.y - 0.64f)).wallMaterial != wallMaterialType.None && direction == "W"))
+						if (GC.tileInfo.IsOverlapping(zero4, "Anything"))
+							flag9 = false;
+
+						if (GC.tileInfo.IsOverlapping(zero4, "ObjectRealSprite", 0.64f))
+							flag9 = false;
+
+						if (flag9 && zero4 != Vector2.zero)
+						{
+							GC.spawnerMain.spawnObjectReal(zero4, null, VObject.Speaker).ShiftTowardWalls();
+							i++;
+						}
+						else
+						{
+							GC.tileInfo.GetTileData(zero5);
+							flag9 = true;
+
+							if ((GC.tileInfo.GetTileData(new Vector2(zero5.x, zero5.y + 0.64f)).wallMaterial == wallMaterialType.None &&
+										direction == "N") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "N") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "N") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "N") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y)).wallMaterial == wallMaterialType.None &&
+										direction == "E") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y)).wallMaterial != wallMaterialType.None &&
+										direction == "E") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "E") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "E") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x, zero5.y - 0.64f)).wallMaterial == wallMaterialType.None &&
+										direction == "S") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "S") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "S") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "S") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y)).wallMaterial == wallMaterialType.None &&
+										direction == "W") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y)).wallMaterial != wallMaterialType.None &&
+										direction == "W") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "W") ||
+								(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
+										direction == "W"))
 								flag9 = false;
 
-							if (GC.tileInfo.IsOverlapping(zero4, "Anything"))
+							if (GC.tileInfo.IsOverlapping(zero5, "Anything"))
 								flag9 = false;
 
-							if (GC.tileInfo.IsOverlapping(zero4, "ObjectRealSprite", 0.64f))
+							if (GC.tileInfo.IsOverlapping(zero5, "ObjectRealSprite", 0.64f))
 								flag9 = false;
 
-							if (flag9 && zero4 != Vector2.zero)
+							if (flag9 && zero5 != Vector2.zero)
 							{
-								GC.spawnerMain.spawnObjectReal(zero4, null, VObject.Speaker).ShiftTowardWalls();
+								GC.spawnerMain.spawnObjectReal(zero5, null, VObject.Jukebox).ShiftTowardWalls();
 								i++;
-							}
-							else
-							{
-								GC.tileInfo.GetTileData(zero5);
-								flag9 = true;
-
-								if ((GC.tileInfo.GetTileData(new Vector2(zero5.x, zero5.y + 0.64f)).wallMaterial == wallMaterialType.None &&
-											direction == "N") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "N") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "N") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "N") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y)).wallMaterial == wallMaterialType.None &&
-											direction == "E") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y)).wallMaterial != wallMaterialType.None &&
-											direction == "E") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "E") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "E") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x, zero5.y - 0.64f)).wallMaterial == wallMaterialType.None &&
-											direction == "S") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "S") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "S") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "S") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x - 0.64f, zero5.y)).wallMaterial == wallMaterialType.None &&
-											direction == "W") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y)).wallMaterial != wallMaterialType.None &&
-											direction == "W") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y + 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "W") ||
-									(GC.tileInfo.GetTileData(new Vector2(zero5.x + 0.64f, zero5.y - 0.64f)).wallMaterial != wallMaterialType.None &&
-											direction == "W"))
-									flag9 = false;
-
-								if (GC.tileInfo.IsOverlapping(zero5, "Anything"))
-									flag9 = false;
-
-								if (GC.tileInfo.IsOverlapping(zero5, "ObjectRealSprite", 0.64f))
-									flag9 = false;
-
-								if (flag9 && zero5 != Vector2.zero)
-								{
-									GC.spawnerMain.spawnObjectReal(zero5, null, VObject.Jukebox).ShiftTowardWalls();
-									i++;
-								}
 							}
 						}
 					}
 				}
-				spawnedInChunks = null;
 			}
+			spawnedInChunks = null;
 		}
 		private static void SpawnManholes()
 		{
-			logger.LogDebug("Loading Underdark Manholes");
+			if (!MapFeatures.HasManholes_Underdank)
+				return;
 
-			int maxSpawns = 30; //(int)(Random.Range(8, 12) * GC.loadLevel.levelSizeModifier); // Vanilla 8, 12
+			int maxSpawns = (int)(Random.Range(8, 12) * LevelSize.LevelSizeRatio()); 
 			Manhole placedManhole;
 			List<Manhole> manholeList = new List<Manhole>();
 
@@ -485,7 +472,6 @@ namespace SORCE.MapGenUtilities
 				while (spotCandidate == Vector2.zero
 					&& attempts < 50)
 				{
-					logger.LogDebug("Attempting SpotFind: " + i);
 					spotCandidate = GC.tileInfo.FindRandLocationGeneral(1.28f);
 
 					if (GC.objectRealList.OfType<Manhole>().Any(m => Vector2.Distance(m.tr.position, spotCandidate) < 14f)
@@ -500,10 +486,8 @@ namespace SORCE.MapGenUtilities
 				if (attempts == 50 && spotCandidate == Vector2.zero)
 					break;
 
-				logger.LogDebug("Found spot");
 				placedManhole = (Manhole)GC.spawnerMain.spawnObjectReal(spotCandidate, null, VObject.Manhole);
 				manholeList.Add(placedManhole);
-				logger.LogDebug("List count: " + manholeList.Count);
 			}
 
 			for (int i = 0; i < manholeList.Count / 3; i++)
@@ -520,19 +504,20 @@ namespace SORCE.MapGenUtilities
 				//(agentType != VAgent.Thief || !GC.challenges.Contains("ThiefNoSteal"))
 				//	&& (agentType != VAgent.Cannibal || !GC.challenges.Contains(VanillaMutators.CoolWithCannibals)
 			}
-
-			logger.LogDebug("Manholes placed: " + manholeList.Count);
 		}
 		private static void SpawnRugs()
 		{
-			// Alternative: replace all public floors with rug, it doesn't matter that much
+			if (!MapFeatures.HasRugs)
+				return;
+
 
 		}
 		private static void SpawnScreens()
 		{
-			Debug.Log("SORCE: Loading Public Screens");
+			if (!MapFeatures.HasScreens)
+				return;
 
-			int bigTries = (int)((float)Random.Range(6, 12) * LevelSize.LevelSizeRatio());
+			int bigTries = (int)(Random.Range(6, 12) * LevelSize.LevelSizeRatio());
 			List<int> spawnedInChunks = new List<int>();
 			int num2;
 
@@ -694,6 +679,9 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void SpawnSecurityCamsAndTurrets()
 		{
+			if (!MapFeatures.HasSecurityCamsAndTurrets)
+				return;
+
 			logger.LogDebug("SORCE: Loading Public Security Cams");
 
 			int bigTries = (int)(Random.Range(8, 12) * LevelSize.LevelSizeRatio() * LevelGenTools.SlumminessFactor);
@@ -973,7 +961,8 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void SpawnSlimeBarrels()
 		{
-			logger.LogDebug("SORCE: Loading Slime Barrels");
+			if (!MapFeatures.HasSlimeBarrels())
+				return;
 
 			int numObjects = (int)(Random.Range(1, 3) * LevelSize.LevelSizeRatio() * LevelGenTools.SlumminessFactor);
 
@@ -982,21 +971,22 @@ namespace SORCE.MapGenUtilities
 				Vector2 location = Vector2.zero;
 				int attempts = 0;
 
-				do
+				while ((location == Vector2.zero || Vector2.Distance(location, GC.playerAgent.tr.position) < 5f)
+					&& attempts < 100)
 				{
 					location = GC.tileInfo.FindRandLocationGeneral(2f);
 					attempts++;
 				}
-				while ((location == Vector2.zero || Vector2.Distance(location, GC.playerAgent.tr.position) < 5f)
-					&& attempts < 100);
-
 
 				if (location != Vector2.zero)
 					GC.spawnerMain.spawnObjectReal(location, null, VObject.SlimeBarrel);
 			}
 		}
-		private static void SpawnTurntables()
+		private static void SpawnTurntablesAndSpeakers()
 		{
+			if (!MapFeatures.HasTurntablesAndSpeakers)
+				return;
+
 			int maximumLocations = 6;
 			float distanceBetween = 28f;
 
@@ -1005,7 +995,10 @@ namespace SORCE.MapGenUtilities
 				Vector2 location = Vector2.zero;
 				int j = 0;
 
-				do
+				while (j < 100 &&
+					(location == Vector2.zero ||
+					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f ||
+					Vector2.Distance(location, GC.elevatorDown.tr.position) < 5f))
 				{
 					location = GC.tileInfo.FindRandLocationGeneral(2f);
 
@@ -1028,10 +1021,6 @@ namespace SORCE.MapGenUtilities
 
 					j++;
 				}
-				while (j < 100 &&
-					(location == Vector2.zero ||
-					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f ||
-					Vector2.Distance(location, GC.elevatorDown.tr.position) < 5f));
 
 				if (location != Vector2.zero)
 					GC.spawnerMain.spawnObjectReal(location, null, VObject.Turntables);
