@@ -8,8 +8,8 @@ But first, you require more knowledge. Inside these secret documents are many...
 #	Before proceeding, please complete the following CRAPTCHA. 
 Click on the birdies.
 
-||||||
-|:---:|:---:|:---:|
+|       |      |      |
+|:----:|:----:|:-----:|
 |  🐦  |  🐖  |  🦉  |
 |  🐄  |  🐊  |  🦚  |
 |  🐇  |  🐧  |  🐟  |
