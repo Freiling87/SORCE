@@ -226,7 +226,6 @@
     <None Include="Documentation\2.0. Features.md" />
     <None Include="Documentation\1.0. Installation.md" />
     <None Include="packages.config" />
-    <None Include="README.md" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
