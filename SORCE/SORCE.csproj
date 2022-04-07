@@ -91,6 +91,8 @@
     <Compile Include="Challenges\C_Buildings\BuildingsChallenge.cs" />
     <Compile Include="Challenges\C_Buildings\Brixton.cs" />
     <Compile Include="Challenges\C_Buildings\ConcreteJungle.cs" />
+    <Compile Include="Challenges\C_Features\FireGrates.cs" />
+    <Compile Include="Challenges\C_Features\WelcomeMats.cs" />
     <Compile Include="Challenges\C_Features\VerdantVistas.cs" />
     <Compile Include="Challenges\C_Lighting\NoAgentLights.cs" />
     <Compile Include="Challenges\C_Lighting\NoItemLights.cs" />
@@ -238,6 +240,7 @@ copy /y "SORCE.dll" %25modDir%25
 copy /y "BTHarmonyUtils.dll" %25modDir%25
 copy /y "RogueLibsCore.dll" %25modDir%25 
 
-Start "" "C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"</PostBuildEvent>
+set exe="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"
+if exist exe (Start "" exe)</PostBuildEvent>
   </PropertyGroup>
 </Project>
