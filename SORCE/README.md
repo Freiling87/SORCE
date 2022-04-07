@@ -1,113 +1,36 @@
-#	SORCE
-Streets of Rogue Civil Engineering
+﻿#	SORCE - Streets of Rogue Civil Engineering
+Greetings, potential Initiate to the Order of Freemasons, Illuminati, and/or THEY.
 
-##		Installation
+For generations, we have designed your society from the shadows. Every major city standing today bears our mark. But honestly, it's a lot of work, so if you're not doing anything...?
 
+But first, you require more knowledge. Inside these secret documents are many... secrets. By reading these secrets, you vow to keep them... secret. Dammit, I should have rehearsed this.
 
+#	Before proceeding, please complete the following CRAPTCHA. 
+Click on the birdies.
 
-##		Mutators
+|:---:|:---:|:---:|
+|  🐦  |  🐖  |  🦉  |
+|  🐄  |  🐊  |  🦚  |
+|  🐇  |  🐧  |  🐟  |
 
-All traits in categories marked with an asterisk (*) are mutually exclusive with the other traits *within* that category.
+Did you click on the birdies? Be honest. 
 
+If you did not click the birdies, or you're a liar, please do not read further.
 
-###			Ambient Light Color *
-These have no effect on gameplay, and are intended mainly for campaign ambience.
+#	Ok, here are all the secrets
 
-|Name							|Effect	|
-|:------------------------------|:------|
-|Goodsprings					|Orange filter
-|Hellscape						|Red filter
-|Nuclear Winter					|White filter
-|Reactor						|Green filter
-|Sepia							|Yellow filter
-|Shadow Realm					|Black filter
-|Shinobi						|Dark Blue filter
+1. We run the world
+2. JFK shot himself, stop asking
+3. SORCE is how we control everything
+4. Aliens.
+5. [SORCE Feature List](/MD/2.0.%20Features.md)
+6. Various celebrity gossip
+7. [Installation Instructions](/MD/1.0.%20Installation.md)
+8. We drink blood because it's cool
+9. There are like nine secret handshakes, but if you tickle the wrist you're pretty much all set
 
-###			Ambient Light Level *
-These have no effect on gameplay, and are intended mainly for campaign ambience.
+Welp, those are all our secrets! Thanks for coming.
 
-|Name							|Effect	|
-|:------------------------------|:------|
-|New Moon						|Makes it *really* dark. 
+___
 
-###			Audio
-
-|Name							|Effect	|
-|:------------------------------|:------|
-|Ambienter Ambience				|Restores ambient audio to Casino and Graveyard chunks.
-
-###			Buildings *
-
-|Name                           |Effect|
-|:------------------------------|:-----|
-|Brixton						|- Buildings are made of brick
-|City of Steel                  |- Buildings are made of steel
-|Green Living                   |- Buildings are made of hedges and dirt
-|Panoptikopolis                 |- Buildings are made of glass
-|Shanty Town                    |- Buildings are made of wood
-|Spelunky Dory                  |- Buildings are caves
-
-###			Map Features
-
-|Name                           |Effect |
-|:------------------------------|:------|
-|Bad Neighborhoods              |- Small chance for any window to start out broken
-|Brought Back Fountain          |- Spawns fountains<br>- Loot them for cash, bad luck, and public scorn
-|Cart of the Deal               |- Spawns Vendor Carts
-|Lake it or Leave it            |- Spawns Lakes
-|Power Whelming                 |- Spawns Power Boxes
-|Skyway District                |- Canals in Downtown replaced with Holes
-|The Pollution Solution         |- Spawns Pollution features<br>- Lakes have a high chance of being poisoned
-|This Land is Mine Land			|- Spawns landmines
-
-###			Light Sources
-
-|Name							|Effect	|
-|:------------------------------|:------|
-|No Agent Lights				|- Agents no longer have a halo
-|No Item Lights					|- Items no longer have a halo
-|No Object Glow					|- Objects no longer pulse yellow when you have an item usable with them<br>- This is already in SOR's options, but this allows creators to use the mutator on custom levels.
-|No Object Lights				|- Objects no longer have a halo, except when realistic
-
-###			Map Size *
-
-|Name                           |Chunks Per Map, est.   |Percent of Vanilla size    |
-|:------------------------------|----------------------:|--------------------------:|
-|Arthropolis	                |4                      |12.50 %                    |
-|Claustropolis                  |12                     |37.50 %                    |
-|Vanilla (for comparison)       |32                     |100.00 %                   |
-|Megapolis                      |48                     |150.00 %                   |
-|Ultrapolis                     |64                     |200.00 %                   |
-
-###			Population *
-
-|Name                           |Wandering NPC Multiplier   |
-|:------------------------------|--------------------------:|
-|Ghost Town                     | 0 %
-|Horde Almighty                 | 200 %
-|Let Me See That Throng         | 400 %
-|Swarm Welcome                  | 800 %
-
-###			Roamers
-
-|Name                           |Effect|
-|:------------------------------|:-----|
-|Hoodlum's Wonderland           |- Roaming Gang numbers increased (12 gangs for standard floor size)
-|Union Town                     |- Mafia Spawn in all Districts
-|Young Men in the Neighborhood  |- Roaming Gangs spawn in all Districts
-
-###			Wreckage
-This is the in-game term for the little fragments that show up when you destroy things. 
-In these mutators, they're used simply to add a degree of setting immersion and visual variety.
-
-|Name                           |Effect |
-|:------------------------------|:------|
-|Bachelorer Pads				|- Spawns trash indoors
-|Dirtier Districts				|- Spawns trash in public
-|Floraler Flora					|- Leaves are scattered around plant objects
-
-##		Traits
-
-|Name                           |Value  |Effect|
-|:------------------------------|------:|:-----|
-|Underdank Citizen              |4      |- Manholes spawn in all Districts<br>- Thieves and Cannibals hiding in Manholes no longer target you<br>- Activate or Fall in Open Manhole: Take no damage and teleport to another entry to the Underdank<br>- Diminutive: Toilets are part of the Underdank network
+CRAPTCHA© 2022 ASE Web Technologies
