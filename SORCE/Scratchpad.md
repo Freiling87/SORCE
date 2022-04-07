@@ -193,6 +193,8 @@ Newish
 ###			C	YMITN
 Newish
 ##		C	Wreckage
+###         C   Bachelorer Pads
+5% chance to spawn 1-3 paper under desk, use moviescreen or Lamp parts
 ###         H   Flammable Wreckage
 New
 ###			C	Dirtier Districts
@@ -204,6 +206,10 @@ More trash!
 More trash! 
 Custom sprites, or smaller/slightly darker/on side
 ###         C   Shell Casings
+Generate a sprite with SpawnerMain.Spawn, or whatever's used in wreckage spawner
+Use jump script from exiting water for particle spawned
+Will need a custom sprite
+    Customize for each weapon
 ###			√	Floraler Flora
 PoolsScene.SpawnObjectReal
 ##		H	Laws
@@ -359,14 +365,16 @@ Complete, until Overhauls are scoped
 New, for stealth
 ###         C   Zombies Moan
 New
-##		√	Buildings
+##		C	Buildings
 ###         √   Brixton
 ###			√	City of Steel
 ###         √   Concrete Jungle
 ###			√	Green Living
 ###			√	Panoptikopolis
-###			√	Shanty Town
-###			√	Spelunky Dory
+###			C	Shanty Town
+A few different possibly-tile floors spawned as wood. 
+Just double check those categories.
+###     √	Spelunky Dory
 ##		√	MapSize
 ###			√	A City For Ants
 ###			√	Claustropolis
@@ -383,6 +391,7 @@ Complete
 Complete
 #	C	Traits
 ##		C	Underdank Citizen
+###         C   Deals damage
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self
 ###         C   Flushing to Manhole doesn't work
