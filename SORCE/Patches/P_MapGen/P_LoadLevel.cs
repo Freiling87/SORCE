@@ -241,8 +241,6 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2), new Type[] { })]
 		public static bool LoadStuff2_Prefix()
 		{
-			logger.LogDebug("LoadLevel_loadStuff2_Prefix");
-
 			if (GC.challenges.Contains(nameof(SkywayDistrict)))
 				GC.canalHoles = true;
 			else
