@@ -25,7 +25,7 @@ namespace SORCE.MapGenUtilities
 		public static GameController GC => GameController.gameController;
 
 		public static float SlumminessFactor =>
-			(5 - GC.levelTheme) / 5;
+			(5f - GC.levelTheme) / 5f;
 
 		private static bool IsCloseToWall(Vector2 pos, float circleRadius)
 		{
