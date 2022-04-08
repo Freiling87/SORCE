@@ -10,12 +10,13 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |N					|To be implemented in next release
 |T					|To Test
 #   T   Priority Bugs
-##      T   FlameSpewer spawns with flammable building mods
-Test
+##      C   FlameSpewer spawns with flammable building mods
+DW
+##      C   Lake spawned nearly overlapping manhole & oil spill
 #   C   General
 ##      C   Migrate feature lists to documentation
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.
-#	T	Mutators
+#	CT	Mutators
 ##		CT	Features
 ###         T   00 District Object Delimitation
 ####            H   00 Export all to Delimitation mod
@@ -24,23 +25,23 @@ Pending test of basic features
 New
 ####            T   Flame Grate
 Attempted
-####            √   Manhole
-Complete
-####            T   Pipe
-I think this is a vestigial name for Tube.
 ####            T   SawBlade
 Attempted
-####            T   Tube
-Attempted
-####            T   SlimeBarrel
-Attempted
-###         T   Bad Neighborhoods
-####            T   Scaled to District
-I know it works, but make sure proportions are right
+####            √   Manhole
+Complete
+####            √   Tube
+Complete
+####            √   SlimeBarrel
+Complete
+###         C   Bad Neighborhoods
+####            C   Scaled to District
+Nonexistent, raised base value. 
 ###         C   Brought Back Fountain
 ####            C   Show (Empty) when looted
+New
 ####            C   Sometimes does not Annoy witnesses
 Unsure of pattern
+There might just be a % chance in there
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
@@ -48,14 +49,18 @@ I don't really gaf unless people complain
 ####			C	Do not make lakes over Downtown bridges
 LoadLevel.SetupMore3_3, after line 67
 There's a method called TileInfo.BridgeNearby
-####            T   Spawn Water Pumps
-I think these are automatic
-###         CT  Pollution Solution
+####            H   Prohibit Water Pumps
+Certain overhauls
+###         C   Pollution Solution
+####            C   Still not seeing slimebarrels in public, other than homebase
+I think they did show up from ExplodingBarrelsAndSlime or whatever from vanilla, but not TPS
 ####            C   Raise chance of poisoned lakes
-####            T   Scale chance to district
+####            H   Scale chance to district
 I know it works, but make sure proportions are right
+Pending previous issues
 ###         C   Screens
 ####            C   1 blank tile in between
+Resolving this in the level editor went from current to desired behavior, so hopefully this is an easy fix.
 ####            H   Content
 |Overhaul                       |Palette    |Audio  |
 |:------------------------------|:----------|:------|
@@ -69,12 +74,11 @@ I know it works, but make sure proportions are right
 |TinderTown                     |Blue       |Ads for water
 ####            C   Spawns Safe sprite
 Resolve gap issue first
-###         T   Verdant Vistas
-Killer Plants worked
+###         C   Verdant Vistas
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
-###         T   Welcome Mats
-Bear Traps
+###         √   Welcome Mats
+Complete
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
@@ -132,7 +136,7 @@ Complete
 Complete
 ###         √   This Land is Mine Land
 Complete
-##		CT	Light Sources
+##		C	Light Sources
 - CameraScript.SetLighting
   - DW
 - StatusEffects.WerewolfTransform
@@ -169,11 +173,8 @@ Complete
 ###			C	No Item/Wreckage Lights
 - SpawnerMain.SetLighting2
   - DW, try other ways in same method
-###			T	No Object Glow
-This is the yellow glow for when you have usable items with an object. As you collect more, eventually everything glows.
-- gc.objectGlowDisabled
-- gc.sessionDataBig.objectGlowDisabled
-- Attempted, GC.Awake3 Prefix
+###			√	No Object Glow
+Complete
 ###			C	No Object Lights
 Works
 ####            C   Object type exclusions
@@ -183,7 +184,8 @@ New
 This would be a stand-in for the flashlight
 ###			C	Flashlight following player reticle
 New
-###         C   Flashlight Gun Mod?
+###             H   Flashlight Gun Mod?
+Someday
 ##		C	Roamers
 All broken for now
 ###			C	Always Spawn Arsonists
@@ -197,6 +199,7 @@ Attempted
 ###			T	YMITN
 Attempted
 ##		C	Wreckage
+Raise it! And check for borders, that's a good idea
 ###         C   Bachelorer Pads
 5% chance to spawn 1-3 paper under desk, use moviescreen or Lamp parts
 ###         H   Flammable Wreckage
@@ -369,13 +372,13 @@ Complete, until Overhauls are scoped
 New, for stealth
 ###         C   Zombies Moan
 New
-##		C	Buildings
+##		T	Buildings
 ###         √   Brixton
 ###			√	City of Steel
 ###         √   Concrete Jungle
 ###			√	Green Living
 ###			√	Panoptikopolis
-###			C	Shanty Town
+###			T	Shanty Town
 A few different possibly-tile floors spawned as wood. 
 Just double check those categories.
 ###     √	Spelunky Dory
@@ -440,7 +443,7 @@ Find BM's old jump method of exiting.
 ##		C	Uploads
 ###			C	BananaMods
 ###			C	Discord
-###			C	NexusMods
+###			C	NexusModsw
 
 #   OLD NOTES
 ## Overhauls

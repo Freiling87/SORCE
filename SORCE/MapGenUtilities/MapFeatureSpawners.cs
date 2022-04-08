@@ -46,7 +46,7 @@ namespace SORCE.MapGenUtilities
 			if (!MapFeatures.HasBrokenWindows)
 				return;
 
-			int chanceToBreak = (int)(LevelGenTools.SlumminessFactor * 8f);
+			int chanceToBreak = (int)(LevelGenTools.SlumminessFactor * 15f);
 
 			foreach (ObjectReal objectReal in GC.objectRealList)
 				if (objectReal is Window window && GC.percentChance(chanceToBreak))

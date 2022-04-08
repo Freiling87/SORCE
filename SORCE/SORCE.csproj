@@ -241,6 +241,6 @@ copy /y "BTHarmonyUtils.dll" %25modDir%25
 copy /y "RogueLibsCore.dll" %25modDir%25 
 
 set exe="C:\Program Files (x86)\Steam\steamapps\common\Streets of Rogue\StreetsOfRogue.exe"
-if exist exe (Start "" exe)</PostBuildEvent>
+if exist %25exe%25 (Start "" %25exe%25)</PostBuildEvent>
   </PropertyGroup>
 </Project>
