@@ -562,40 +562,45 @@ namespace SORCE.MapGenUtilities
 					movieScreen1.ambientAudio = VAmbience.Casino;
 					TileData tileData = GC.tileInfo.GetTileData(spot);
 					spawnedInChunks.Add(tileData.chunkID);
-					// Where is																		   lightReal2Prefab set?
-					GameObject gameObject2 = UnityEngine.Object.Instantiate(GC.spawnerMain.lightReal2Prefab, movieScreen1.tr.position, Quaternion.Euler(0f, 0f, 0f));
-					LightReal component3 = gameObject2.GetComponent<LightReal>();
-					GC.spawnerMain.SetLightRealDetails(component3, gameObject2, movieScreen1.startingChunk, movieScreen1.tr.GetComponent<Chunk>(), 5, 5, 5, "PurpleLight");
 
 					// Determine Direction
 					string wallDirection = "";
 					Vector2 neighborCell1 = Vector2.zero;
 					Vector2 neighborCell2 = Vector2.zero;
+					Vector2 lightPosition = Vector2.zero;
 
-					if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.SouthOf(spot, 0.64f))))
+					if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.SouthOf(spot))))
 					{
-						neighborCell1 = E_TileInfo.EastOf(spot, 0.64f);
-						neighborCell2 = E_TileInfo.WestOf(spot, 0.64f);
+						neighborCell1 = E_TileInfo.EastOf(spot);
+						neighborCell2 = E_TileInfo.WestOf(spot);
+						lightPosition = E_TileInfo.NorthOf(spot);
 						wallDirection = "S";
 					}
-					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.EastOf(spot, 0.64f))))
+					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.EastOf(spot))))
 					{
-						neighborCell1 = E_TileInfo.NorthOf(spot, 0.64f);
-						neighborCell2 = E_TileInfo.SouthOf(spot, 0.64f);
+						neighborCell1 = E_TileInfo.NorthOf(spot);
+						neighborCell2 = E_TileInfo.SouthOf(spot);
+						lightPosition = E_TileInfo.WestOf(spot);
 						wallDirection = "E";
 					}
-					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.WestOf(spot, 0.64f))))
+					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.WestOf(spot))))
 					{
-						neighborCell1 = E_TileInfo.NorthOf(spot, 0.64f);
-						neighborCell2 = E_TileInfo.SouthOf(spot, 0.64f);
+						neighborCell1 = E_TileInfo.NorthOf(spot);
+						neighborCell2 = E_TileInfo.SouthOf(spot);
+						lightPosition = E_TileInfo.EastOf(spot);
 						wallDirection = "W";
 					}
-					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.NorthOf(spot, 0.64f)))) // North is last, to hide that screens are blank
+					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.NorthOf(spot)))) // North is last, to hide that screens are blank
 					{
-						neighborCell1 = E_TileInfo.EastOf(spot, 0.64f);
-						neighborCell2 = E_TileInfo.WestOf(spot, 0.64f);
+						neighborCell1 = E_TileInfo.EastOf(spot);
+						neighborCell2 = E_TileInfo.WestOf(spot);
+						lightPosition = E_TileInfo.SouthOf(spot);
 						wallDirection = "N";
 					}
+					
+					GameObject gameObject2 = UnityEngine.Object.Instantiate(GC.spawnerMain.lightReal2Prefab, lightPosition, Quaternion.Euler(0f, 0f, 0f));
+					LightReal component3 = gameObject2.GetComponent<LightReal>();
+					GC.spawnerMain.SetLightRealDetails(component3, gameObject2, movieScreen1.startingChunk, movieScreen1.tr.GetComponent<Chunk>(), 5, 5, 5, "PurpleLight");
 
 					// Place sides
 					// I think these always fire, because I never see only one.
