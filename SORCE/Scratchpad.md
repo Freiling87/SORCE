@@ -9,9 +9,7 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
-#   T   Priority Bugs
-##      C   FlameSpewer spawns with flammable building mods
-DW
+#   C   Priority Bugs
 ##      C   Lake spawned nearly overlapping manhole & oil spill
 #   C   General
 ##      C   Migrate feature lists to documentation
@@ -217,6 +215,8 @@ Generate a sprite with SpawnerMain.Spawn, or whatever's used in wreckage spawner
 Use jump script from exiting water for particle spawned
 Will need a custom sprite
     Customize for each weapon
+###         C   Goodie Dispenser
+Add Vendor Cart parts
 ###			√	Floraler Flora
 PoolsScene.SpawnObjectReal
 ##		H	Laws
@@ -233,10 +233,61 @@ Scope:
 	Features
 Note:
 	There is overhaul-specific content still in BM. Haven't bothered to migrate it over yet, because this is on hold.
+- Will need to make use of LoadLevel.CanUseChunk. Verified that it works before, but shelved.
+- LoadLevel.SetupBasicLevel manages SOME Border Walls 
 ###         C   00 Public Floors
 Since shelving these, I've moved this to a Dictionary system. It's not tested yet. Don't expect it to work immediately.
 It needs to be moved to transpilers anyway.
-###			C	00 Common features
+###         C   Old notes: FloorMod Exteriors
+- Check out the Lake generator in LevelGen, it might have what you need to finally figure this out.
+- BasicFloor
+  - SetExtraFloorParams
+    - Attempted: Water
+      - WORKS: Interior floors only, and only seems to make stuff float if set to water. No appearance or other behaviors. Maybe upstream this?
+  - Spawn
+    - WORKS: Interior floors
+- BasicSpawn
+  - Spawn
+    - This one calls BasicFloor.Spawn
+- LoadLevel
+  - FillFloors
+    - Does not seem to have an effect. Left as Industrial to keep an eye out.
+  - FillMapChunks
+    - WORKS: Exterior floors, split by level
+  - LoadStuff2
+- ObjectMult
+  - LoadChunkWorldDataFloor
+- RandomFloorsWalls
+- ReadChunks
+  - ReadChild
+- SpawnerFloor
+  - SetExtraFloorParams
+    - WORKS: Affects only certain portions of Home Base
+  - spawn
+    - WORKS: Affects Home Base only
+- TileInfo
+  - BuildFloorTileAtPosition
+  - setFloor *
+    - Attempted
+      - I think this ended up turning the whole homebase into water. SunkenCity had just been on and no effect was observed on the game itself.
+  - SetupFloorTile
+  - SetupFloorTiles
+
+
+			CustomMutator SunkenCity = RogueLibs.CreateCustomMutator(cChallenge.SunkenCity, true,
+				new CustomNameInfo("Floor Exteriors: Sunken City"),
+				new CustomNameInfo("More like \"Stinkin' Shitty!\" No, but seriously, that's all sewage."));
+			SunkenCity.Available = true;
+			SunkenCity.Conflicting.AddRange(cChallenge.AffectsFloors);
+			SunkenCity.IsActive = false;
+
+			CustomMutator TransitExperiment = RogueLibs.CreateCustomMutator(cChallenge.TransitExperiment, true,
+				new CustomNameInfo("Floor Exteriors: Transit Experiment"),
+				new CustomNameInfo("The City's authorities considered making all the public streets into conveyor belts, but that was too hard to mod into the game... er, I mean construct. Yeah."));
+			TransitExperiment.Available = true;
+			TransitExperiment.Conflicting.AddRange(cChallenge.AffectsFloors);
+			TransitExperiment.IsActive = false;
+###         C   00 Common features
 Second-class citizens are more likely to flee altercations
 A method that determines what social status someone is afforded, based on overhaul & whichever appropriate criteria. It will be used frequently.
 ###			H	Aftermath
@@ -251,6 +302,31 @@ Stove, Fire Hydrant, Alarm Button,
 All of them should have a tiny chance to be really shitty or steal your money
 ####			C	Illegal to scavenge in trash
 "That trash is property of TrashCorp!"
+####            C   NPCs
+- Firefighters
+  - Only respond to fires in certain chunk types
+  - Can pay them to put out fires if you want
+- More Thieves
+- More Drug Dealers
+- More Slum Dwellers
+- No Police, Cop Bots, or SuperCops
+- Upper Crusters 
+  - Roam with bodyguards
+  - Fewer in number
+  - All aligned to each other (might work with Class Solidarity)
+####            C   Object Interactions
+- Computer
+  - Purchase admin access
+  - Hack free Elevator ticket?
+- Toilets 
+  - Pay to use
+- Elevators 
+  - Pay to use
+  - Hack option
+- Bathtubs 
+  - Pay to use
+- Fire Hydrants 
+  - Test
 ###			H	Arcology
 ####			√	Public Floors - Grass
 ####			H	Border Wall - Hedge
@@ -269,234 +345,6 @@ Gangbangers get Above the Law, enforce laws
 ###			C	Disco City Danceoff
 Newish
 Cocaine is FREE, that's right, FREE, that's right, FREE COCAINE, that's right, COCAINE is FOR FREE now
-###			H	DUMP
-####			C	Public Floors - Cave
-####			C	Border Wall - Cave
-###			H	Eisburg
-####			H	Public Floors - Skating Rink
-My gotdamn white whale. I just can't get this one to work.
-####            C   Ice wreckage
-Check out StatusEffects.IceGib
-###			C	Freak City
-Just dial up all the weird, supernatural, and bizarre
-###			C	Grand City Hotel
-On start:
-
-	[Info   : Unity Log] LEVEL SIZE: 20
-	[Info   : Unity Log] Random Number After CreateInitialMap: 653
-	[Error  : Unity Log] FormatException: Input string was not in a correct format.
-	Stack trace:
-	System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
-	System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
-	System.Int32.Parse (System.String s) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
-	SORCE.Patches.P_LoadLevel+<FillMapChunks_Replacement>d__5.MoveNext () (at <9d9121f757474c8c99743a650d130089>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-	<loadStuff2>d__137:MoveNext()
-	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
-	LoadLevel:loadStuff()
-	GameController:AwakenObjects()
-	GameController:CreateMultPlayerAgent(GameObject, Int32)
-	<WaitForRealStart>d__480:MoveNext()
-	UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
-
-####			C	Public Floors - Fancy Wood
-####			C	Border Wall - Wood
-####			C	Spawn Rugs in clearings
-###         H   Hell
-Brick borders
-Fire features
-Red camera tint
-Everyone is meaner
-More ghosts, shapeshifters
-Everything costs too much
-More slave shops, no law enforcement or firefighters
-###         C   Low-Tech Low-Life
-####            C   Replace Refrigerator with...?
-####            C   Replace Stove with Barbecue
-####            C   Replace Toilet with Bush
-####            C   Replace TV with...?
-###			H	Test Tube City
-Glass walls & Glass-y floors
-####			C	Scientist Cops
-###			C	Tindertown
-Wood buildings, oil spills, flame grates, no fire departments
-Incendiary weapons & tools are contraband
-But cops have flamethrowers
-####			C	Flamethrower Cops
-###			C	MACITS
-####			C	No Money
-Everything's free
-Obviously would be easy-mode, so I wonder if there's a way to add a twist to this
-####		C	Martial Law
-Soldiers spawn instead of Police, now enforce the law. 
-They skip the Annoyed relationship and go straight to Hostile for the smallest infraction.
-Maybe they don't take sides if you're in a fight, and just kill both parties unless one is fleeing.
-###			C	Police State
-####			C	Speech laws
-Telling really bad or really good jokes makes police hostile
-###			C	Technocracy
-Newish
-###			C	Vampire City (rename)
-Vampires are first-class citizens, everyone else isn't.
-They are free to victimize whoever they like.
-Blood economy should be important 
-###			H	Warzone
-Spawns dead/burned/exploded bodies, blood splatters
-##		√H	Ambient Light Level
-###			√	00 Test with Werewolf
-Works
-###			H	Blinding
-###			H	Daytime
-###			H	Evening
-###			H	FullMoon
-###			H	HalfMoon
-###			√H	New Moon
-####            H   Move from ScrollingMenu
-Maybe postfix the ambient light setter
-####			H	Now do it modularly
-Currently flips a switch, but it'd be better if we could set percent lighting values.
-##		√	Ambient Light Color
-###			√	00 Test with Werewolf
-Works
-###			√	Goodsprings
-###			√	Hellscape	
-###			√	NuclearWinter
-###			√	Sepia
-###			√	ShadowRealm
-###			√	Shinobi
-##		√	Audio
-###			√	Ambienter Ambience
-Complete, until Overhauls are scoped
-###         C   Footsteps
-New, for stealth
-###         C   Zombies Moan
-New
-##		T	Buildings
-###         √   Brixton
-###			√	City of Steel
-###         √   Concrete Jungle
-###			√	Green Living
-###			√	Panoptikopolis
-###			T	Shanty Town
-A few different possibly-tile floors spawned as wood. 
-Just double check those categories.
-###     √	Spelunky Dory
-##		√	MapSize
-###			√	A City For Ants
-###			√	Claustropolis
-###			√	Megapolis
-###			√	Ultrapolis
-##		√	Population
-###			√	Ghost Town
-Complete
-###			√	Horde Almighty
-Complete
-###			√	Let Me See That Throng
-Complete
-###			√	Swarm Welcome
-Complete
-#	C	Traits
-##		C	Underdank Citizen
-###         C   New features
-Make sure you meet these
-|Name                           |Value  |Effect|
-|:------------------------------|------:|:-----|
-|Underdank Citizen              |5      |- Manholes spawn in all districts<br>- Manhole thieves are Friendly<br>- Manhole cannibals are Neutral<br>- Activate open manhole: Teleport to another Underdank entrance<br>- Fall in open manhole: Take damage & teleport
-|Underdank VIP					|10     |- You can open manholes with your bare hands<br>- Manhole thieves are Loyal<br>- Manhole cannibals are Friendly
-###			C	Disable Teleport to entry point
-Works, but has a chance of rolling self
-###         C   Flushing to Manhole doesn't work
-Technically works, but they fall right back in and trigger the flush method again.
-Find BM's old jump method of exiting.
-###         C   Patch Toilet FlushYourself
-###			C	Old Notes
-- Take small damage if you walk into manhole instead of activating
-  - Attempted
-- Walkover version of flushyourself:
-    [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-    Stack trace:
-    BunnyMod.Content.BMObjects.Manhole_FlushYourself (Agent agent, ObjectReal __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
-    BunnyMod.Content.BMObjects.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
-    Hole.EnterRange (UnityEngine.GameObject myObject) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-    Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-    - This only occurred when no other manholes were open. There were active toilets.
-    - Walkover version also only sends to self.
-    - One manhole keeps getting excluded. Check that the random selection from lists isn't excluding anything from the running.
-- Water splash
-  - Needs a delay. It's appearing before the player is.
-    - Attempted Immediate teleportation
-  - No longer working
-- Manhole to Toilet
-  - Attempted
-- Toilet to Manhole
-  - Attempted
-#	C	Release
-##		C	Disable Core.DebugMode
-##		C	Version number
-1.0.0
-##		C	Documentation
-###         C   ReadMe
-###         C   Feature List
-###         C   Planned Feature List
-###         C   Thanks
-##		C	Uploads
-###			C	BananaMods
-###			C	Discord
-###			C	NexusModsw
-
-#   OLD NOTES
-## Overhauls
-- Will need to make use of LoadLevel.CanUseChunk. Verified that it works before, but shelved.
-#### NPCs
-- Firefighters
-  - Only respond to fires in certain chunk types
-  - Can pay them to put out fires if you want
-- More Thieves
-- More Drug Dealers
-- More Slum Dwellers
-- No Police, Cop Bots, or SuperCops
-- Upper Crusters 
-  - Roam with bodyguards
-  - Fewer in number
-  - All aligned to each other (might work with Class Solidarity)
-#### Object Interactions
-- Alarm Buttons 
-  - Attempted
-            ```
-            [Message: Bunny Mod] ObjectReal_Interact: AlarmButton (1664)
-            [Message: Bunny Mod] AlarmButton_DetermineButtons
-            [Warning:  HarmonyX] AccessTools.DeclaredMethod: Could not find method for type ObjectReal and name Interact and parameters ()
-            [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-            Stack trace:
-            BunnyMod.Content.BunnyHeaderTools.GetMethodWithoutOverrides[T] (System.Reflection.MethodInfo method, System.Object callFrom) (at <6db2a189c9f94358a13f920d7777c3e6>:0)
-            BunnyMod.Content.BMObjects.AlarmButton_DetermineButtons (AlarmButton __instance) (at <6db2a189c9f94358a13f920d7777c3e6>:0)
-            AlarmButton.DetermineButtons () (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-            PlayfieldObject.Interact (Agent agent) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-            BunnyMod.Content.BMObjects.ObjectReal_Interact (Agent agent, ObjectReal __instance) (at <6db2a189c9f94358a13f920d7777c3e6>:0)
-            ObjectReal.Interact (Agent agent) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-            AlarmButton.Interact (Agent agent) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-            InteractionHelper.UpdateInteractionHelper () (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-            Updater.UpdateInterface () (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-            Updater.Update () (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-            ```
-- Computer
-  - Purchase admin access
-  - Hack free Elevator ticket?
-- Toilets 
-  - Pay to use
-- Elevators 
-  - Pay to use
-- Bathtubs 
-  - Pay to use
-- Fire Hydrants 
-  - Pay to use
-    - No effect, but didn't have firefighter
-            ```
-            [Message: Bunny Mod] ObjectReal_Interact: FireHydrant (1679)
-            [Info   : Unity Log] Window Lose Focus
-            ```
-### Disco City Danceoff
 - Songs
   - How to play
     - Hack or operate various machines
@@ -570,9 +418,49 @@ Find BM's old jump method of exiting.
 - Trait: Movebuster
   - Anyone who sees you dance will start dancing
 - Trait: Movebuster +
-  - Your dance is shorter, allows you to keep moving while they're busy
-### Literally Hell
+  - Your dance is shorter, allows you to keep moving while they're bus
+###			H	DUMP
+####			C	Public Floors - Cave
+####			C	Border Wall - Cave
+###			H	Eisburg
+####			H	Public Floors - Skating Rink
+My gotdamn white whale. I just can't get this one to work.
+####            C   Ice wreckage
+Check out StatusEffects.IceGib
+###			C	Freak City
+Just dial up all the weird, supernatural, and bizarre
+###			C	Grand City Hotel
+On start:
 
+	[Info   : Unity Log] LEVEL SIZE: 20
+	[Info   : Unity Log] Random Number After CreateInitialMap: 653
+	[Error  : Unity Log] FormatException: Input string was not in a correct format.
+	Stack trace:
+	System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
+	System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
+	System.Int32.Parse (System.String s) (at <a1e9f114a6e64f4eacb529fc802ec93d>:0)
+	SORCE.Patches.P_LoadLevel+<FillMapChunks_Replacement>d__5.MoveNext () (at <9d9121f757474c8c99743a650d130089>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
+	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+	<loadStuff2>d__137:MoveNext()
+	UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+	LoadLevel:loadStuff()
+	GameController:AwakenObjects()
+	GameController:CreateMultPlayerAgent(GameObject, Int32)
+	<WaitForRealStart>d__480:MoveNext()
+	UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+
+####			C	Public Floors - Fancy Wood
+####			C	Border Wall - Wood
+####			C	Spawn Rugs in clearings
+###         H   Hell
+Brick borders
+Fire features
+Red camera tint
+Everyone is meaner
+More ghosts, shapeshifters
+Everything costs too much
+More slave shops, no law enforcement or firefighters
 #### Levels
 - All Cave walls & floors
 - Fire Grates & oil slicks spawn
@@ -582,11 +470,17 @@ Find BM's old jump method of exiting.
 - Everyone has infinite resurrection 
 #### Objects
 - Machines tend to backfire or explode
-### Post-Apocalypse
-Radiation plays a big role
-### MACITS
+###         C   Low-Tech Low-Life
+####            C   Replace Refrigerator with...?
+####            C   Replace Stove with Barbecue
+####            C   Replace Toilet with Bush
+####            C   Replace TV with...?
+###			C	MACITS
+####			C	No Money
 - Eliminate money entirely
   - Force voucher rewards maybe?
+  - All machines accept vouchers
+- How to adjust for that this is basically easy mode?
 #### Chunks
 - More happy/nature chunks
   - Greenhouse
@@ -617,11 +511,16 @@ Radiation plays a big role
   - Replaced with Worker
 #### Object Interactions
 - Vending machines all free
-### Police State
-- Bribery disabled
-
-#### Chunks
-  - Enable/disable, list already created
+###		C	Martial Law
+Soldiers spawn instead of Police, now enforce the law. 
+They skip the Annoyed relationship and go straight to Hostile for the smallest infraction.
+Maybe they don't take sides if you're in a fight, and just kill both parties unless one is fleeing.
+No Bribery
+###			C	Police State
+####			C	Speech laws
+Telling really bad or really good jokes makes police hostile
+####            C   Bribery
+Bribery would be either completely eliminated, or rampant. Which way?
 #### NPCs
 - Cop warnings
   - Littering
@@ -688,96 +587,127 @@ Radiation plays a big role
   - Applied automatically to all NPCs with Guilty
     - Exempt if Chunk Owner?
     - Types
-
-## Litter & Leaves
-- Overflow indoors
-  - Check for wall and don't go past it
-- Add Butler Bots to Uptown & MV
-  - They generated at the entrance, but stayed put.
-- Main generator should not avoid confined spaces, since it can't block anything. I.e., why is it not spawning in alleys?
-  - Attempted: modified argument to FindRandLocationGeneral
-- Specific executions:
-  - ATM
-  - Barbecue
-    - Bring in slightly and slightly reduce quantity
-      - Attempted
-  - Boulder (large)
-    - Bring in & reduce quantity slightly
-      - Attempted
-  - BoulderSmall
-    - Ok?
-  - Bush
-    - Ok?
-  - Flaming Barrels
-    - These are still *really* spread out. Is there a built-in spread?
-  - Goodie Dispenser
-    - Add Vendor Cart parts
-  - Hedge Walls
-    - Attempted, BasicWall.Spawn
-  - Killer Plant
-    - Ok?
-  - Tree
-    - Ok?
-
-## Wall Mods
-- Non-Randomized Walls
-- BasicWall.Spawn
-- Leave Bars & Barbed Wire alone. An Uptown House has itself encircled by bars, so it merges into the main walls.
-
-## Wall Mods - Border Walls
-- LoadLevel.SetupBasicLevel?
-  - Accepted. Omits some borders but it works.
-## FloorMod Exteriors
-### Scratchpad notes
-- Check out the Lake generator in LevelGen, it might have what you need to finally figure this out.
-- BasicFloor
-  - SetExtraFloorParams
-    - Attempted: Water
-      - WORKS: Interior floors only, and only seems to make stuff float if set to water. No appearance or other behaviors. Maybe upstream this?
-  - Spawn
-    - WORKS: Interior floors
-- BasicSpawn
-  - Spawn
-    - This one calls BasicFloor.Spawn
-- LoadLevel
-  - FillFloors
-    - Does not seem to have an effect. Left as Industrial to keep an eye out.
-  - FillMapChunks
-    - WORKS: Exterior floors, split by level
-  - LoadStuff2
-- ObjectMult
-  - LoadChunkWorldDataFloor
-- RandomFloorsWalls
-- ReadChunks
-  - ReadChild
-- SpawnerFloor
-  - SetExtraFloorParams
-    - WORKS: Affects only certain portions of Home Base
-  - spawn
-    - WORKS: Affects Home Base only
-- TileInfo
-  - BuildFloorTileAtPosition
-  - setFloor *
-    - Attempted
-      - I think this ended up turning the whole homebase into water. SunkenCity had just been on and no effect was observed on the game itself.
-  - SetupFloorTile
-  - SetupFloorTiles
-
-
-			CustomMutator SunkenCity = RogueLibs.CreateCustomMutator(cChallenge.SunkenCity, true,
-				new CustomNameInfo("Floor Exteriors: Sunken City"),
-				new CustomNameInfo("More like \"Stinkin' Shitty!\" No, but seriously, that's all sewage."));
-			SunkenCity.Available = true;
-			SunkenCity.Conflicting.AddRange(cChallenge.AffectsFloors);
-			SunkenCity.IsActive = false;
-
-			CustomMutator TransitExperiment = RogueLibs.CreateCustomMutator(cChallenge.TransitExperiment, true,
-				new CustomNameInfo("Floor Exteriors: Transit Experiment"),
-				new CustomNameInfo("The City's authorities considered making all the public streets into conveyor belts, but that was too hard to mod into the game... er, I mean construct. Yeah."));
-			TransitExperiment.Available = true;
-			TransitExperiment.Conflicting.AddRange(cChallenge.AffectsFloors);
-			TransitExperiment.IsActive = false;
-#   BunnyMod Shelved Release notes
+###			C	Technocracy
+Newish
+###			H	Test Tube City
+Glass walls & Glass-y floors
+####			C	Scientist Cops
+###			C	Tindertown
+Wood buildings, oil spills, flame grates, no fire departments
+Incendiary weapons & tools are contraband
+But cops have flamethrowers
+####			C	Flamethrower Cops
+###			C	Vampire City (rename)
+Vampires are first-class citizens, everyone else isn't.
+They are free to victimize whoever they like.
+Blood economy should be important 
+###			H	Warzone
+Spawns dead/burned/exploded bodies, blood splatters
+##		√H	Ambient Light Level
+###			√	00 Test with Werewolf
+Works
+###			H	Blinding
+###			H	Daytime
+###			H	Evening
+###			H	FullMoon
+###			H	HalfMoon
+###			√H	New Moon
+####            H   Move from ScrollingMenu
+Maybe postfix the ambient light setter
+####			H	Now do it modularly
+Currently flips a switch, but it'd be better if we could set percent lighting values.
+##		√	Ambient Light Color
+###			√	00 Test with Werewolf
+Works
+###			√	Goodsprings
+###			√	Hellscape	
+###			√	NuclearWinter
+###			√	Sepia
+###			√	ShadowRealm
+###			√	Shinobi
+##		√	Audio
+###			√	Ambienter Ambience
+Complete, until Overhauls are scoped
+###         C   Footsteps
+New, for stealth
+###         C   Zombies Moan
+New
+##		T	Buildings
+###         √   00 Flammable buildings don't spawn Fire Spewers
+P_RandomSelection.RandomSelect
+###         √   Brixton
+###			√	City of Steel
+###         √   Concrete Jungle
+###			√	Green Living
+###			√	Panoptikopolis
+###			T	Shanty Town
+A few different possibly-tile floors spawned as wood. 
+Just double check those categories.
+###     √	Spelunky Dory
+##		√	MapSize
+###			√	A City For Ants
+###			√	Claustropolis
+###			√	Megapolis
+###			√	Ultrapolis
+##		√	Population
+###			√	Ghost Town
+Complete
+###			√	Horde Almighty
+Complete
+###			√	Let Me See That Throng
+Complete
+###			√	Swarm Welcome
+Complete
+#	C	Traits
+##		C	Underdank Citizen
+###         C   New features
+Make sure you meet these
+|Name                           |Value  |Effect|
+|:------------------------------|------:|:-----|
+|Underdank Citizen              |5      |- Manholes spawn in all districts<br>- Manhole thieves are Friendly<br>- Manhole cannibals are Neutral<br>- Activate open manhole: Teleport to another Underdank entrance<br>- Fall in open manhole: Take damage & teleport
+|Underdank VIP					|10     |- You can open manholes with your bare hands<br>- Manhole thieves are Loyal<br>- Manhole cannibals are Friendly
+###			C	Disable Teleport to entry point
+Works, but has a chance of rolling self
+###         C   Flushing to Manhole doesn't work
+Technically works, but they fall right back in and trigger the flush method again.
+Find BM's old jump method of exiting.
+###         C   Patch Toilet FlushYourself
+###			C	Old Notes
+- Take small damage if you walk into manhole instead of activating
+  - Attempted
+- Walkover version of flushyourself:
+    [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+    Stack trace:
+    BunnyMod.Content.BMObjects.Manhole_FlushYourself (Agent agent, ObjectReal __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
+    BunnyMod.Content.BMObjects.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
+    Hole.EnterRange (UnityEngine.GameObject myObject) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
+    Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
+    - This only occurred when no other manholes were open. There were active toilets.
+    - Walkover version also only sends to self.
+    - One manhole keeps getting excluded. Check that the random selection from lists isn't excluding anything from the running.
+- Water splash
+  - Needs a delay. It's appearing before the player is.
+    - Attempted Immediate teleportation
+  - No longer working
+- Manhole to Toilet
+  - Attempted
+- Toilet to Manhole
+  - Attempted
+#	C	Release
+##		C	Disable Core.DebugMode
+##		C	Version number
+1.0.0
+##		C	Documentation
+###         C   ReadMe
+###         C   Feature List
+###         C   Planned Feature List
+###         C   Thanks
+##		C	Uploads
+###			C	BananaMods
+###			C	Discord
+###			C	NexusModsw
+#      H   Shelved Release notes
+Overhauls are shelved for now, but I think this will be the right format. They might even need a page to each.
 
 ## Overhauls
 
@@ -809,6 +739,7 @@ This just makes the game act like normal life in America. By the way, it's polit
 |Toilet                 |- Now costs money
 
 ### Disco City Dance-off
+Notes
 
 ### Mostly Automated Comfortable Inclusive Terrestrial Socialism
 A post-scarcity mode. It's a lot easier and friendlier, if you're into that kind of thing. Turns out you thrive on conflict!
