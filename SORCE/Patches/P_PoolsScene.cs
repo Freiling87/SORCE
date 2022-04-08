@@ -22,23 +22,6 @@ namespace SORCE.Patches
         public static GameController GC => GameController.gameController;
 
 		/// <summary>
-		/// Flammable Buildings precautions
-		/// </summary>
-		/// <param name="objectRealName"></param>
-		/// <param name="objectRealPrefab"></param>
-		/// <param name="spawnPosition"></param>
-		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(PoolsScene.SpawnObjectReal), argumentTypes: new Type[] { typeof(string), typeof(GameObject), typeof(Vector3) })]
-		public static bool Spawn_Prefix(string objectRealName, GameObject objectRealPrefab, Vector3 spawnPosition)
-        {
-			if (objectRealName == VObject.FireSpewer &&
-				RogueFramework.Unlocks.OfType<BuildingsChallenge>().Where(i => i.IsEnabled).Any(i => i.WallsFlammable))
-				objectRealName = VObject.SecurityCam;
-
-			return true;
-		}
-
-		/// <summary>
 		/// Wreckage
 		/// </summary>
 		/// <param name="objectRealName"></param>

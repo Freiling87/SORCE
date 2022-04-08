@@ -83,7 +83,6 @@ namespace SORCE.MapGenUtilities
 			vanilla;
 		public static bool HasBearTraps(bool vanilla) =>
 			GC.challenges.Contains(nameof(WelcomeMats)) ||
-			Core.debugMode ||
 			vanilla;
 		public static bool HasBoulders(bool vanilla) =>
 			GC.challenges.Contains(nameof(Arcology)) ||

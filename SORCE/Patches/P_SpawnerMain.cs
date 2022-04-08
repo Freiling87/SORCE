@@ -15,6 +15,7 @@ using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Wreckage;
 using SORCE.Challenges.C_Lighting;
 using SORCE.Challenges.C_Overhaul;
+using System.Linq;
 
 namespace SORCE.Patches
 {

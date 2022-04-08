@@ -194,8 +194,8 @@ New
 New
 ###			T	Hoodlums Wonderland
 Attempted
-###			T   Union Town
-Attempted
+###			√   Union Town
+Complete
 ###			T	YMITN
 Attempted
 ##		C	Wreckage

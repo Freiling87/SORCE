@@ -24,7 +24,6 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(UnionTown)) ||
-			Core.debugMode ||
 			vanilla;
 
 		public static int PopulationGang(int vanilla) =>
