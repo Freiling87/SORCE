@@ -21,44 +21,63 @@ Copy the vanilla format of not listing specifics in trait descriptions, e.g.
 Pending test of basic features
 #####               C   00 Add SORCE dependency and test
 New
-####            T   Flame Grate
-Attempted
 ####            T   SawBlade
 Attempted
+####            √   Flame Grate
+Complete
 ####            √   Manhole
 Complete
 ####            √   Tube
 Complete
 ####            √   SlimeBarrel
 Complete
-###         C   Bad Neighborhoods
-####            C   Scaled to District
-Nonexistent, raised base value. 
-###         C   Brought Back Fountain
-####            C   Show (Empty) when looted
-New
-####            C   Sometimes does not Annoy witnesses
-Unsure of pattern
-There might just be a % chance in there
+###         CT   Brought Back Fountain
+####            T   Show (Empty) when looted
+Fountain.MakeChestNonInteractable()
+####            T   Sometimes does not Annoy witnesses
+I took off enforcer block
 ####			√	Spawns in Home Base
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
-###         C   Lake it or Leave it
-####			C	Do not make lakes over Downtown bridges
-LoadLevel.SetupMore3_3, after line 67
-There's a method called TileInfo.BridgeNearby
-####            H   Prohibit Water Pumps
-Certain overhauls
+New
 ###         C   Pollution Solution
+####            C   Smoke particles from poisoned lakessssssssd
 ####            C   Still not seeing slimebarrels in public, other than homebase
 I think they did show up from ExplodingBarrelsAndSlime or whatever from vanilla, but not TPS
 ####            C   Raise chance of poisoned lakes
+LoadLevel.SetupMore3_3 
+    calls SpreadPoisonWait & SpreadPoisonStart
+    water.SpreadPoisonWait(this.gc.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
+Iterate through lakeList after all lakes are placed and call the above
 ####            H   Scale chance to district
 I know it works, but make sure proportions are right
 Pending previous issues
-###         C   Screens
-####            C   1 blank tile in between
-Resolving this in the level editor went from current to desired behavior, so hopefully this is an easy fix.
+###         H   Department of Public Comfiness
+####			C	Recommend for Grand City Hotel
+####			C	Spawn public Armchairs & Fireplaces
+####			C	Spawn public Rugs (overlap with Grand City Hotel)
+###         H   Life Downhill
+Spawn Pipes as Trash Chutes in the slums or industrial
+May drop usable items, or live banana peels, etc.
+###         H   Lockdown Walls
+New
+###         H   Public Pools
+Spawn as square or circle
+Always have water pump
+###         H   Screens
+####            C   Might not be compatible with building mods?
+Are concrete walls set to wallMaterial.None?
+####            C   Did not spawn in Downtown
+####            C   Exclude Interiors
+####            C   Light spawns without screen 
+(or screen invisible?)
+####            C   Offset light placement to prevent bleed through walls
+Light is being spawned from placed screen, which might have moved from the original tile it was placed in.
+####            C   Disable vanilla screen light to improve saturation of selected color
+Might be in GetComponent if we want to be lazy.
+####            C   Specific placement
+Commercial chunks
+Avoid alleys if possible
 ####            H   Content
 |Overhaul                       |Palette    |Audio  |
 |:------------------------------|:----------|:------|
@@ -70,23 +89,18 @@ Resolving this in the level editor went from current to desired behavior, so hop
 |Technocracy                    |?          |Beep Boop Bop
 |Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
 |TinderTown                     |Blue       |Ads for water
-####            C   Spawns Safe sprite
-Resolve gap issue first
-###         C   Verdant Vistas
-####            H   Exclude Bush Cannibals in certain circumstances
-Arcology overhaul is only one so far
-###         √   Welcome Mats
-Complete
-###         H   Department of Public Comfiness
-####			C	Recommend for Grand City Hotel
-####			C	Spawn public Armchairs & Fireplaces
-####			C	Spawn public Rugs (overlap with Grand City Hotel)
-###         H   Life Downhill
-Spawn Pipes as Trash Chutes in the slums or industrial
-May drop usable items, or live banana peels, etc.
-###         H   Public Pools
-Spawn as square or circle
-Always have water pump
+###         H   Signs
+Generate signs with premade text near business entrances
+Vary sprite
+    Slums:      A-Frame 
+    Industrial: Futuristic, Cautiony
+    Park: 
+    Downtown:   Fancy wrought iron
+    Uptown:     Floating hologram thing
+Use wall-attached sprite if generated next to a wall, or free-standing sprite if not
+Show their text on hover/Space, with color added
+Make this data-driven so people can add content?
+    If so, divide them by chunk type
 ###         H   Surveillance Society
 On hold until Overhaul update 
 Require owned wall, as spawning on junk walls doesn't make sense
@@ -123,9 +137,26 @@ Require owned wall, as spawning on junk walls doesn't make sense
 
 ####			C	00 Import SecurityCamera patches
 ####			C	Detect Wanted
+###         H   Traintracks
+New
 ###         H   Transit Experiment
 Change canals to Ice Rink
-Fuck public floors
+Search (if floorName == "Canal") in SpawnerFloor.spawn & BasicFloor.Spawn
+###         √H  Bad Neighborhoods
+Complete
+####            C   Darkness
+Select N% windows with the least-well lit tiles, and prefer those. 
+This will prefer dark alleys, etc.
+####            √   Scaled to District
+###         √H  Lake it or Leave it
+####			H	Do not make lakes over Downtown bridges
+This is low-priority. I've just excluded Downtown for the time being.
+mapChunk.Special = "Canal" in LoadLevel
+####            H   Prohibit Water Pumps
+Certain overhauls
+###         √H  Verdant Vistas
+####            H   Exclude Bush Cannibals in certain circumstances
+Arcology overhaul is only one so far
 ###         √   Cart of the Deal
 Complete
 ###         √   Power Whelming
@@ -133,6 +164,8 @@ Complete
 ###         √   Skyway District
 Complete
 ###         √   This Land is Mine Land
+Complete
+###         √   Welcome Mats
 Complete
 ##		C	Light Sources
 - CameraScript.SetLighting
@@ -417,8 +450,9 @@ Cocaine is FREE, that's right, FREE, that's right, FREE COCAINE, that's right, C
 #### Traits
 - Trait: Movebuster
   - Anyone who sees you dance will start dancing
+  - Your dance is shorter, allows you to keep moving while they're busy
 - Trait: Movebuster +
-  - Your dance is shorter, allows you to keep moving while they're bus
+  - Your dance is super short, theirs is longer
 ###			H	DUMP
 ####			C	Public Floors - Cave
 ####			C	Border Wall - Cave
@@ -455,12 +489,31 @@ On start:
 ####			C	Spawn Rugs in clearings
 ###         H   Hell
 Brick borders
-Fire features
-Red camera tint
-Everyone is meaner
-More ghosts, shapeshifters
+Floors can resemble dungeon, wasteland, cave, idk
+Features
+    Lakes
+        poison
+        blood
+            ObjectMult.ChangeLakeColor
+            Heal vampires
+        magma
+            Too hot to touch, bounce you out
+            Smoke particles?
+    Flame spewers where public cameras would be
+    Flame grates throughout
+    Oil spills
+Red ambient light
+Agents
+    Everyone is meaner
+    More ghosts & shapeshifters
+    Doctors are Lepers, no one can go near them
+    Slavers are slaves to demons
+        Obviously still wearing the mask
+    Cops are helpless babies who cry all the time
+        In the mod, I mean
+    Firefighters shoot oil at fire and explode
 Everything costs too much
-More slave shops, no law enforcement or firefighters
+
 #### Levels
 - All Cave walls & floors
 - Fire Grates & oil slicks spawn
@@ -468,8 +521,10 @@ More slave shops, no law enforcement or firefighters
 #### NPCs
 - Demons roam the level, killing anyone they see
 - Everyone has infinite resurrection 
+- Some demons jump out of holes in the ground
+  - similar to manhole but use the warzone cannibal sprite
 #### Objects
-- Machines tend to backfire or explode
+- Machines tend to backfire or cost impossible amounts
 ###         C   Low-Tech Low-Life
 ####            C   Replace Refrigerator with...?
 ####            C   Replace Stove with Barbecue

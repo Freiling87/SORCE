@@ -43,8 +43,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 			foreach (Agent bystander in GC.agentList)
 			{
 				if (Vector2.Distance(bystander.tr.position, perp.tr.position) < bystander.LOSRange / perp.hardToSeeFromDistance &&
-					bystander != perp && !bystander.zombified && !bystander.ghost && !bystander.oma.hidden &&
-					(!perp.aboveTheLaw || !bystander.enforcer) &&
+					bystander != perp && !bystander.zombified && !bystander.oma.hidden &&
+					!(bystander.enforcer && !perp.aboveTheLaw) &&
 					perp.prisoner == bystander.prisoner && !perp.invisible)
 				{
 					string perpRel = bystander.relationships.GetRel(perp);
@@ -55,8 +55,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 						{
 							relStatus perpRel2 = bystander.relationships.GetRelCode(perp);
 
-							// TODO something isn't right here, condition always evaluates to true
-							if (perpRel2 != relStatus.Aligned || perpRel2 != relStatus.Loyal)
+							if (perpRel2 != relStatus.Aligned && 
+								perpRel2 != relStatus.Loyal)
 								bystander.relationships.SetStrikes(perp, 2);
 						}
 					}

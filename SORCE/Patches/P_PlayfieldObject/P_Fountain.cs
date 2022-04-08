@@ -92,7 +92,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 			else
 				GC.audioHandler.Play(fountain, VAudioClip.JumpOutWater);
 
-			fountain.interactable = false;
+			//fountain.interactable = false;
+			fountain.MakeChestNonInteractable();
 			fountain.StopInteraction();
 		}
 	}

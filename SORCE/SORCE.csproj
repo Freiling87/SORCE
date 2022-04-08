@@ -119,6 +119,7 @@
     <Compile Include="Extensions\E_Agent.cs" />
     <Compile Include="Extensions\E_Enum.cs" />
     <Compile Include="Extensions\E_PlayfieldObject.cs" />
+    <Compile Include="Extensions\E_TileInfo.cs" />
     <Compile Include="Localization\CButtonText.cs" />
     <Compile Include="Localization\CChallenge.cs" />
     <Compile Include="Localization\CColor.cs" />
