@@ -25,7 +25,7 @@ namespace SORCE.MapGenUtilities
 		/// TODO: Refactor copied algorithms
 		/// </summary>
 		/// <param name="loadLevel"></param>
-		public static void Spawn_Master(LoadLevel loadLevel)
+		public static void Spawn_Master()
 		{
 			BreakWindows();
 			//SpawnCaveWallOutcroppings();.
