@@ -216,6 +216,7 @@ New
 ###             H   Flashlight Gun Mod?
 Someday
 ##		C	Roamers
+Split Crepe & Blahd mutators
 ###			T	Arsonist
 Attempted
 ###         C   Roaming Cannibal Gangs

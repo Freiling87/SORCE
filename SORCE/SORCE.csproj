@@ -154,6 +154,8 @@
     <Compile Include="Challenges\C_Roamers\YoungMenInTheNeighborhood.cs" />
     <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
     <Compile Include="Localization\VParticleEffect.cs" />
+    <Compile Include="Localization\VAgentGoal.cs" />
+    <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="MapGenUtilities\AmbientAudio.cs" />
     <Compile Include="MapGenUtilities\LevelGenTools.cs" />
     <Compile Include="Localization\VAgent.cs" />

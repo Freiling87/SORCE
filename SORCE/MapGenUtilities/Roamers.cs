@@ -1,7 +1,9 @@
 ﻿using BepInEx.Logging;
+using RogueLibsCore;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Population;
 using SORCE.Challenges.C_Roamers;
+using SORCE.Challenges.C_Wreckage;
 using SORCE.Logging;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,21 +16,54 @@ namespace SORCE.MapGenUtilities
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public static int GangTotalCount =>
+			Random.Range(5, 15);
+		public static int GangSize =>
+			Random.Range(3, 5);
+
 		public static bool HasArsonists =>
 			Core.debugMode;
-		public static bool HasRoamingGangbangers(bool vanilla) =>
+		public static bool HasButlerBot =>
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			GC.challenges.Contains(nameof(DirtierDistricts)) ||
+			GC.challenges.Contains(nameof(FloralerFlora)) ||
+			Core.debugMode;
+
+		public static bool HasBlahdGangs =>
+			Core.debugMode;
+		public static bool HasCannibalGangs =>
+			Core.debugMode;
+		public static bool HasCrepeGangs =>
+			Core.debugMode;
+		public static bool HasDrugDealerGangs =>
+			Core.debugMode;
+		public static bool HasFirefighterGangs =>
+			Core.debugMode;
+		public static bool HasGangbangerGangs(bool vanilla) =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(YoungMenInTheNeighborhood)) ||
 			Core.debugMode ||
 			vanilla;
-		public static bool HasRoamingMafia(bool vanilla) =>
+		public static bool HasMafiaGangs(bool vanilla) =>
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(UnionTown)) ||
 			vanilla;
+		public static bool HasSlaverGangs =>
+			Core.debugMode;
+		public static bool HasSoldierGangs =>
+			Core.debugMode;
+		public static bool HasSupercopGangs =>
+			Core.debugMode;
+		public static bool HasThiefGangs =>
+			Core.debugMode;
+		public static bool HasVampireGangs =>
+			Core.debugMode;
+		public static bool HasWerewolfGangs =>
+			Core.debugMode;
 
 		public static int PopulationGang(int vanilla) =>
 			GC.challenges.Contains(nameof(HoodlumsWonderland)) ? 12 :
@@ -66,6 +101,41 @@ namespace SORCE.MapGenUtilities
 		public static void Spawner_Main()
         {
 			SpawnArsonist();
+			SpawnButlerBot();
+
+			if (HasBlahdGangs)
+				SpawnRoamerSquad(VAgent.Blahd, VAgent.Blahd);
+			
+			if (HasCannibalGangs)
+				SpawnRoamerSquad(VAgent.Cannibal, VAgent.Cannibal);
+			
+			if (HasCrepeGangs)
+				SpawnRoamerSquad(VAgent.Crepe, VAgent.Crepe);
+
+			if (HasDrugDealerGangs)
+				SpawnRoamerSquad(VAgent.DrugDealer, VAgent.Goon);
+
+			if (HasFirefighterGangs)
+				SpawnRoamerSquad(VAgent.Doctor, VAgent.Firefighter); // Squad has an EMT
+
+			// TODO: This will need special attention
+			if (HasSlaverGangs)
+				SpawnRoamerSquad(VAgent.Slavemaster, VAgent.Slave);
+
+			if (HasSoldierGangs)
+				SpawnRoamerSquad(VAgent.Soldier, VAgent.Soldier);
+
+			if (HasSupercopGangs)
+				SpawnRoamerSquad(VAgent.SuperCop, VAgent.SuperCop);
+
+			if (HasThiefGangs)
+				SpawnRoamerSquad(VAgent.Thief, VAgent.Thief);
+
+			if (HasVampireGangs)
+				SpawnRoamerSquad(VAgent.Vampire, VAgent.Werewolf);
+
+			if (HasWerewolfGangs)
+				SpawnRoamerSquad(VAgent.Werewolf, VAgent.Werewolf);
         }
 
 		public static void SpawnArsonist()
@@ -102,6 +172,96 @@ namespace SORCE.MapGenUtilities
 				invItem.SetupDetails(false);
 				invItem.invItemCount = 3;
 				agent2.inventory.AddItem(invItem);
+			}
+		}
+		public static void SpawnButlerBot()
+        {
+			int level = Mathf.Clamp(GC.sessionDataBig.curLevel - 11, 0, 15);
+
+			for (int i = 0; i <= level; i++)
+				GC.spawnerMain.SpawnButlerBot();
+		}
+
+		public static void SpawnRoamerSquad(string leaderType, string bodyguardType, int totalSpawns = 0, int gangSize = 0, string relationship = VRelationship.Neutral, bool alwaysRun = false, bool mustBeGuilty = true)
+		{
+			logger.LogDebug("Spawn Roamer Squad");
+
+			if (totalSpawns == 0)
+				totalSpawns = GangTotalCount;
+			if (gangSize == 0)
+				gangSize = GangSize;
+
+			List<Agent> spawnedAgentList = new List<Agent>();
+			Agent playerAgent = GC.playerAgent;
+			LoadLevel loadLevel = GC.loadLevel;
+			//playerAgent.gangStalking = Agent.gangCount;
+			Vector2 pos = Vector2.zero;
+			totalSpawns = (int)(totalSpawns * loadLevel.levelSizeModifier);
+
+			for (int i = 0; i < totalSpawns; i++)
+			{
+				Vector2 vector = Vector2.zero;
+				int attempts = 0;
+
+				if (i % gangSize == 0)
+				{
+					while ((vector == Vector2.zero || Vector2.Distance(vector, GC.playerAgent.tr.position) < 20f) && attempts < 300)
+					{
+						vector = GC.tileInfo.FindRandLocationGeneral(0.32f);
+						Agent.gangCount++; // Splits into groups
+						attempts++;
+					}
+
+					pos = vector;
+				}
+				else
+					vector = GC.tileInfo.FindLocationNearLocation(pos, null, 0.32f, 1.28f, true, true);
+
+				if (vector != Vector2.zero)
+				{
+					string agentType =
+						i % gangSize == 0
+						? leaderType
+						: bodyguardType;
+					Agent agent = GC.spawnerMain.SpawnAgent(vector, null, agentType);
+					agent.movement.RotateToAngleTransform((float)Random.Range(0, 360));
+					agent.gang = Agent.gangCount;
+					agent.modLeashes = 0;
+
+					if (alwaysRun)
+						agent.alwaysRun = true;
+
+					agent.wontFlee = true;
+					agent.agentActive = true;
+					//agent.statusEffects.AddStatusEffect("InvisiblePermanent");
+					agent.oma.mustBeGuilty = mustBeGuilty;
+					spawnedAgentList.Add(agent);
+
+					if (spawnedAgentList.Count > 1)
+						for (int j = 0; j < spawnedAgentList.Count; j++)
+							if (spawnedAgentList[j] != agent)
+							{
+								agent.relationships.SetRelInitial(spawnedAgentList[j], nameof(relStatus.Aligned));
+								spawnedAgentList[j].relationships.SetRelInitial(agent, nameof(relStatus.Aligned));
+							}
+
+					agent.relationships.SetRel(playerAgent, relationship);
+					playerAgent.relationships.SetRel(agent, relationship);
+
+					switch (relationship.ToString())
+					{
+						case nameof(relStatus.Annoyed):
+							agent.relationships.SetRelHate(playerAgent, 1);
+							playerAgent.relationships.SetRelHate(agent, 1);
+							break;
+						case nameof(relStatus.Hostile):
+							agent.relationships.SetRelHate(playerAgent, 5);
+							playerAgent.relationships.SetRelHate(agent, 5);
+							break;
+					}
+
+					agent.SetDefaultGoal(VAgentGoal.WanderLevel);
+				}
 			}
 		}
 	}
