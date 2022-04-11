@@ -41,7 +41,8 @@ I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
 New
 ###         C   Pollution Solution
-####            C   Smoke particles from poisoned lakessssssssd
+####            T   Smoke particles from poisoned lakes
+Attempted, Water.SpreadPoisonStart postfix
 ####            C   Still not seeing slimebarrels in public, other than homebase
 I think they did show up from ExplodingBarrelsAndSlime or whatever from vanilla, but not TPS
 ####            C   Raise chance of poisoned lakes
