@@ -31,18 +31,12 @@ Complete
 Complete
 ####            √   SlimeBarrel
 Complete
-###         CT   Brought Back Fountain
-####            T   Show (Empty) when looted
-Fountain.MakeChestNonInteractable()
-####            T   Sometimes does not Annoy witnesses
-I took off enforcer block
-####			√	Spawns in Home Base
-I don't really gaf unless people complain
+###         √H   Brought Back Fountain
 ####			H	AnCapistan: Poisoned Fountains
 New
-###         C   Lake Coloration test
+###         T   Lake Coloration test
 If doesn't work after first attempt, put on hold for overhauls since it's otherwise irrelevant for now.
-###         C   Pollution Solution
+###         T   Pollution Solution
 ####            T   Smoke particles from poisoned lakes
 Attempted, Water.SpreadPoisonStart postfix
 ####            T   Still not seeing slimebarrels in public, other than homebase
@@ -222,9 +216,8 @@ New
 ###             H   Flashlight Gun Mod?
 Someday
 ##		C	Roamers
-All broken for now
-###			C	Always Spawn Arsonists
-New
+###			T	Arsonist
+Attempted
 ###         C   Roaming Cannibal Gangs
 New
 ###			T	Hoodlums Wonderland
