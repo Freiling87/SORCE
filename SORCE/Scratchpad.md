@@ -40,12 +40,15 @@ I took off enforcer block
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
 New
+###         C   Lake Coloration test
+If doesn't work after first attempt, put on hold for overhauls since it's otherwise irrelevant for now.
 ###         C   Pollution Solution
 ####            T   Smoke particles from poisoned lakes
 Attempted, Water.SpreadPoisonStart postfix
-####            C   Still not seeing slimebarrels in public, other than homebase
+####            T   Still not seeing slimebarrels in public, other than homebase
 I think they did show up from ExplodingBarrelsAndSlime or whatever from vanilla, but not TPS
-####            C   Raise chance of poisoned lakes
+Test this further, need more info
+####            T   Raise chance of poisoned lakes
 LoadLevel.SetupMore3_3 
     calls SpreadPoisonWait & SpreadPoisonStart
     water.SpreadPoisonWait(this.gc.playerAgent.statusEffects.ChooseRandomStatusEffectLake());

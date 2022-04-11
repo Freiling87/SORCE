@@ -9,7 +9,7 @@
 				Fire = "Fire",
 				Smoke = "Smoke", 
 				SmokePuffs = "SmokePuffs",
-				WaterExplosion = "WaterExplosion",;
+				WaterExplosion = "WaterExplosion";
 		}
 	}
 }

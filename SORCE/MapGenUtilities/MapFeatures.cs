@@ -22,7 +22,6 @@ namespace SORCE.MapGenUtilities
 		public static GameController GC => GameController.gameController;
 
 		#region Custom
-
 		public static bool HasBrokenWindows =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
@@ -59,6 +58,12 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			TraitManager.IsPlayerTraitActive<UnderdankCitizen>();
+		public static bool HasPoisonedLakes =>
+			!GC.challenges.Contains(nameof(Arcology)) &&
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
+			Core.debugMode;
 		public static bool HasRugs =>
 			GC.challenges.Contains(nameof(GrandCityHotel)) ||
 			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
@@ -73,6 +78,11 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(SurveillanceSociety));
 		public static bool HasTurntablesAndSpeakers =>
 			GC.challenges.Contains(nameof(DiscoCityDanceoff));
+		public static string LakeColor()
+        {
+			return "Green";
+			// TODO
+        }
 		#endregion
 		#region Vanilla
 		public static bool HasAssassins(bool vanilla) => // New
