@@ -34,7 +34,7 @@ namespace SORCE.Patches
 		{
 			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
 			FieldInfo loadLevel_levelSizeMax = AccessTools.Field(typeof(LoadLevel), nameof(LoadLevel.levelSizeMax));
-			MethodInfo levelGenTools_SetLevelSizeModifier = AccessTools.Method(typeof(LevelSize), nameof(LevelSize.SetLevelSizeMax), new[] { typeof(LoadLevel) });
+			MethodInfo levelGenTools_SetLevelSizeModifier = AccessTools.Method(typeof(LevelSize), nameof(LevelSize.SetChunkCount), new[] { typeof(LoadLevel) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,

@@ -151,8 +151,8 @@
     <Compile Include="Challenges\C_Population\SwarmWelcome.cs" />
     <Compile Include="Challenges\C_Population\GhostTown.cs" />
     <Compile Include="Challenges\C_Roamers\UnionTown.cs" />
-    <Compile Include="Challenges\C_Roamers\YoungMenInTheNeighborhood.cs" />
-    <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
+    <Compile Include="Challenges\C_Roamers\RollingDeep.cs" />
+    <Compile Include="Challenges\C_Roamers\TurfWar.cs" />
     <Compile Include="MapGenUtilities\AmbientAudio.cs" />
     <Compile Include="MapGenUtilities\LevelGenTools.cs" />
     <Compile Include="Localization\VAgent.cs" />

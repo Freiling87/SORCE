@@ -34,7 +34,7 @@ namespace SORCE.Patches
 			Vector2 loc = spawnPosition;
 			int chance = 100;
 
-			if (GC.challenges.Contains(nameof(FloralerFlora)))
+			if (Wreckage.HasLeaves)
 				switch (objectRealName)
 				{
 					case VObject.Bush:
@@ -70,12 +70,20 @@ namespace SORCE.Patches
 						{
 							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(loc.x, loc.y),
-								VObject.Bush,
+								VObject.Plant,
 								false,
-								3,
-								0.08f, 0.16f);
+								12,
+								//0.08f, 0.16f, // On hold for visibility
+								0.64f, 0.64f,
+								1);
+							//	Particle
+							//		1
+							//		2
+							//		3
+							//		4
+							//		5
 							chance -= 66;
-						}
+						} // (Random.Range(1, 5)).ToString() whenever you need it, or GC.Choose(1, 4, 5) or whatever
 
 						break;
 
@@ -94,7 +102,12 @@ namespace SORCE.Patches
 						break;
 				}
 
-			if (GC.challenges.Contains(nameof(DirtierDistricts)))
+			if (Wreckage.HasPrivateLitter)
+            {
+
+            }
+
+			if (Wreckage.HasPublicLitter)
 			{
 				chance = 100;
 

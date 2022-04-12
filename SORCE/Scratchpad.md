@@ -1,4 +1,4 @@
-﻿#	√	Insane Markdown note format
+﻿#	 	Insane Markdown note format
 This file is meant to be viewed in raw format. I just use markdown because its collapsible headers are really useful.
 
 |Tag				|Meaning	|
@@ -9,14 +9,17 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
-#   C   Priority Bugs
-##      C   Lake spawned nearly overlapping manhole & oil spill
-#   C   General
+#       General
 ##      C   Migrate feature lists to documentation
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.
 #	CT	Mutators
-##		CT	Features
+##      CT	Features
 ###         T   00 District Object Delimitation
+####            C   00 Tube and fire grate spawn in hideouts
+Firegrates are fine, since they're on a mutator.
+Just do the same for Pipe or Tube or whatever. 
+    "Meats of Rogue"
+Since these are based on Start() transpilers, you'll need to make a custom method that returns magic numbers to meet the inequality check in the original method.
 ####            H   00 Export all to Delimitation mod
 Pending test of basic features
 #####               C   00 Add SORCE dependency and test
@@ -31,15 +34,6 @@ Complete
 Complete
 ####            √   SlimeBarrel
 Complete
-###         CT   Brought Back Fountain
-####            T   Show (Empty) when looted
-Fountain.MakeChestNonInteractable()
-####            T   Sometimes does not Annoy witnesses
-I took off enforcer block
-####			√	Spawns in Home Base
-I don't really gaf unless people complain
-####			H	AnCapistan: Poisoned Fountains
-New
 ###         C   Pollution Solution
 ####            C   Smoke particles from poisoned lakessssssssd
 ####            C   Still not seeing slimebarrels in public, other than homebase
@@ -66,18 +60,18 @@ Spawn as square or circle
 Always have water pump
 ###         H   Screens
 ####            C   Might not be compatible with building mods?
-Are concrete walls set to wallMaterial.None?
+Specifically seems to not work on Concrete walls. Hopefully there's another way to check and allow those.
 ####            C   Did not spawn in Downtown
+Might have been wallmod
 ####            C   Exclude Interiors
+not 100% they actually spawn indoors
 ####            C   Light spawns without screen 
 (or screen invisible?)
-####            C   Offset light placement to prevent bleed through walls
-Light is being spawned from placed screen, which might have moved from the original tile it was placed in.
 ####            C   Disable vanilla screen light to improve saturation of selected color
 Might be in GetComponent if we want to be lazy.
 ####            C   Specific placement
 Commercial chunks
-Avoid alleys if possible
+Avoid alleys if possible, signs need vantage
 ####            H   Content
 |Overhaul                       |Palette    |Audio  |
 |:------------------------------|:----------|:------|
@@ -101,6 +95,8 @@ Use wall-attached sprite if generated next to a wall, or free-standing sprite if
 Show their text on hover/Space, with color added
 Make this data-driven so people can add content?
     If so, divide them by chunk type
+###         H   Super-Turrets
+All turrets are Super
 ###         H   Surveillance Society
 On hold until Overhaul update 
 Require owned wall, as spawning on junk walls doesn't make sense
@@ -142,6 +138,8 @@ New
 ###         H   Transit Experiment
 Change canals to Ice Rink
 Search (if floorName == "Canal") in SpawnerFloor.spawn & BasicFloor.Spawn
+###         H   Ultra-Turrets
+All turrets are Ultra, meaning don't fuck with them
 ###         √H  Bad Neighborhoods
 Complete
 ####            C   Darkness
@@ -157,6 +155,8 @@ Certain overhauls
 ###         √H  Verdant Vistas
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
+##      √   Features - Archive
+For totally complete features
 ###         √   Cart of the Deal
 Complete
 ###         √   Power Whelming
@@ -223,20 +223,50 @@ All broken for now
 New
 ###         C   Roaming Cannibal Gangs
 New
-###			T	Hoodlums Wonderland
-Attempted
+###			T	Turf War
+DW
+###			H	Rolling Deep
+Pending resolution of TW
+###         H   Other Roamers
+Cannibal, Soldier
+Cop, Supercop
+Vampire, Werewolf
+Thief
+Arsonist
+###         H   
 ###			√   Union Town
 Complete
-###			T	YMITN
-Attempted
 ##		C	Wreckage
 Raise it! And check for borders, that's a good idea
 ###         C   Bachelorer Pads
-5% chance to spawn 1-3 paper under desk, use moviescreen or Lamp parts
+####            C   Scale litter to chunk type & Slumminess
+House: scale to chance. Some people are slobs, some aren't.
+Some are also slobs in different ways. The main 
+####            C   Bathtub
+Pre-splashed water around tub
+####            C   Bed
+Crumpled up tissues, make it look like they're under the bed
+####            C   Desk
+Paper waste
+####            C   Refrigerator
+Food waste
+####            C   Stove
+Food waste
+####            C   Table (Big)
+Food OR paper waste
+####            C   Table (Small)
+Food OR paper waste
+####            C   Toilet
+Move it here
+Highest chances in public toilets
+####            C   Trashcan
+Differentiate indoor/outdoor
 ###         H   Flammable Wreckage
 New
 ###			C	Dirtier Districts
 PoolsScene.SpawnObjectReal
+####            C   Plant - Use leaf
+You can specify a wreckage type, so use the right kind of leaves. One or two of them look good.
 ####            C   Check for Indoors when spawning particle
 ####            H   Spawn receipt when using machines
 More trash!
@@ -671,6 +701,13 @@ Works
 Maybe postfix the ambient light setter
 ####			H	Now do it modularly
 Currently flips a switch, but it'd be better if we could set percent lighting values.
+###         √H  Brought Back Fountain
+####            √   Show (Empty) when looted
+Fountain.MakeChestNonInteractable()
+####			√	Spawns in Home Base
+I don't really gaf unless people complain
+####			H	AnCapistan: Poisoned Fountains
+New
 ##		√	Ambient Light Color
 ###			√	00 Test with Werewolf
 Works
@@ -699,28 +736,10 @@ P_RandomSelection.RandomSelect
 A few different possibly-tile floors spawned as wood. 
 Just double check those categories.
 ###     √	Spelunky Dory
-##		√	MapSize
-###			√	A City For Ants
-###			√	Claustropolis
-###			√	Megapolis
-###			√	Ultrapolis
-##		√	Population
-###			√	Ghost Town
-Complete
-###			√	Horde Almighty
-Complete
-###			√	Let Me See That Throng
-Complete
-###			√	Swarm Welcome
-Complete
 #	C	Traits
 ##		C	Underdank Citizen
 ###         C   New features
-Make sure you meet these
-|Name                           |Value  |Effect|
-|:------------------------------|------:|:-----|
-|Underdank Citizen              |5      |- Manholes spawn in all districts<br>- Manhole thieves are Friendly<br>- Manhole cannibals are Neutral<br>- Activate open manhole: Teleport to another Underdank entrance<br>- Fall in open manhole: Take damage & teleport
-|Underdank VIP					|10     |- You can open manholes with your bare hands<br>- Manhole thieves are Loyal<br>- Manhole cannibals are Friendly
+CHECK FEATURE LIST
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self
 ###         C   Flushing to Manhole doesn't work

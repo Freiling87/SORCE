@@ -31,8 +31,7 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(BadNeighborhoods));
 		public static bool HasBushCannibals =>
-			!GC.challenges.Contains(nameof(Arcology)) &&
-			!Core.debugMode;
+			!GC.challenges.Contains(nameof(Arcology));
 		public static bool HasCaveWallOutcroppings =>
 			GC.challenges.Contains(nameof(DUMP)) ||
 			GC.challenges.Contains(nameof(SpelunkyDory));
@@ -46,15 +45,6 @@ namespace SORCE.MapGenUtilities
 		public static bool HasKillerPlants =>
 			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(VerdantVistas));
-		public static bool HasLitter =>
-			!GC.challenges.Contains(nameof(MACITS)) &&
-			!GC.challenges.Contains(nameof(PoliceState)) &&
-			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(Arcology)) || // Leaves
-			GC.challenges.Contains(nameof(DirtierDistricts)) ||
-			GC.challenges.Contains(nameof(DUMP)) || // Rock Debris (FlamingBarrel)
-			GC.challenges.Contains(nameof(Eisburg)) || // Ice chunks
-			GC.challenges.Contains(nameof(Tindertown)); // Ashes
 		public static bool HasManholes_Underdank =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
@@ -64,7 +54,6 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
 			Core.debugMode;
 		public static bool HasScreens =>
-			Core.debugMode ||
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			GC.challenges.Contains(nameof(Technocracy));
 		public static bool HasSecurityCamsAndTurrets =>
@@ -124,7 +113,7 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(LowTechLowLife)) ||
 			vanilla;
 		public static bool HasFlameGrates(bool vanilla) =>
-			Core.debugMode;
+			GC.challenges.Contains(nameof(FireGrates));
 		public static bool HasFlamingBarrels(bool vanilla) =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
@@ -168,7 +157,6 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(MACITS)) ||
 			GC.challenges.Contains(nameof(PoliceState)) ||
-			Core.debugMode ||
 			vanilla;
 		public static bool HasTrees(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&

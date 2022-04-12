@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using SORCE.Challenges;
 using SORCE.Challenges.C_Overhaul;
+using SORCE.Challenges.C_Wreckage;
 using SORCE.Localization;
 using SORCE.Logging;
 using UnityEngine;
@@ -14,9 +15,29 @@ namespace SORCE.MapGenUtilities
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		internal static void SpawnLitter()
+		public static bool HasLeaves =>
+			Core.debugMode ||
+			GC.challenges.Contains(nameof(Arcology)) || // Leaves
+			GC.challenges.Contains(nameof(FloralerFlora));
+		public static bool HasPrivateLitter =>
+			GC.challenges.Contains(nameof(BachelorerPads));
+		public static bool HasPublicLitter =>
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			Core.debugMode ||
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(Arcology)) || // Leaves
+			GC.challenges.Contains(nameof(DirtierDistricts)) ||
+			GC.challenges.Contains(nameof(DUMP)) || // Rock Debris (FlamingBarrel)
+			GC.challenges.Contains(nameof(Eisburg)) || // Ice chunks
+			GC.challenges.Contains(nameof(Tindertown)) /*Ash*/;
+
+		internal static void SpawnPublicLitter()
 		{
-			int numObjects = (int)(125 * LevelGenTools.SlumminessFactor * LevelSize.LevelSizeRatio());
+			if (!HasPublicLitter)
+				return;
+
+			int numObjects = (int)(125 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio());
 
 			for (int i = 0; i < numObjects; i++)
 			{
@@ -26,20 +47,28 @@ namespace SORCE.MapGenUtilities
 				GC.spawnerMain.SpawnWreckagePileObject(location, OverhaulWreckageType(), false);
 			}
 		}
-		public static void SpawnWreckagePileObject_Granular(Vector3 targetLoc, string objectType, bool burnt, int gibs, float radX, float radY)
+
+		// TODO: This belongs in the library
+		public static void SpawnWreckagePileObject_Granular(Vector3 targetLoc, string objectType, bool burnt, int gibs, float radX, float radY, int particleID = 0)
 		{
 			for (int i = 0; i < gibs; i++)
 			{
-				string wreckageType = objectType + "Wreckage" + (Random.Range(1, 5)).ToString();
+				string wreckageType = objectType + "Wreckage" +
+					(particleID != 0
+					? particleID.ToString()
+					: (Random.Range(1, 5)).ToString());
+					
 				targetLoc = new Vector3(
 					targetLoc.x + Random.Range(radX * -1, radX),
 					targetLoc.y + Random.Range(radY * -1, radY), 0f);
 				GC.spawnerMain.SpawnWreckage2(targetLoc, wreckageType, burnt);
 			}
 		}
+
 		private static string OverhaulWreckageType()
 		{
-			// TODO: Call SpawnWreckagePileObject in here, because you need to determine whether trash is burnt or not
+			// TODO: Call SpawnWreckagePileObject in here instead of in SpawnLitter
+			// because you need to determine whether trash is burnt or not
 			if (ChallengeManager.IsChallengeFromListActive(CChallenge.Overhauls))
 			{
 				switch (ChallengeManager.GetActiveChallengeFromList(CChallenge.Overhauls))

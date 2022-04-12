@@ -11,15 +11,15 @@ namespace SORCE.MapGenUtilities
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static int LevelSizeModifier =>
+		public static int ChunkCount =>
 			GC.challenges.Contains(nameof(Arthropolis)) ? 4 :
 			GC.challenges.Contains(nameof(Claustropolis)) ? 12 :
 			GC.challenges.Contains(nameof(Megapolis)) ? 48 :
 			GC.challenges.Contains(nameof(Ultrapolis)) ? 64 :
 			30;
-		public static float LevelSizeRatio() =>
-			LevelSizeModifier / 30;
-		public static void SetLevelSizeMax(LoadLevel loadLevel)
+		public static float ChunkCountRatio() =>
+			ChunkCount / 30;
+		public static void SetChunkCount(LoadLevel loadLevel)
 		{
 			int newVal = loadLevel.levelSizeMax;
 

@@ -24,8 +24,10 @@ namespace SORCE.MapGenUtilities
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		public static float BougienessFactor =>
+			GC.levelTheme / 5f;
 		public static float SlumminessFactor =>
-			(5f - GC.levelTheme) / 5f;
+			1f - (GC.levelTheme / 5f);
 
 		private static bool IsCloseToWall(Vector2 pos, float circleRadius)
 		{
