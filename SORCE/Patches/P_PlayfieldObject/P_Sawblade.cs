@@ -16,9 +16,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 		public static GameController GC => GameController.gameController;
 	}
 
-	[HarmonyPatch(typeof(SawBlade))]
-	[HarmonyPatch("Start")]
-	static class P_SawBlade_Start
+    [HarmonyPatch(typeof(SawBlade))]
+    [HarmonyPatch("Start")]
+    static class P_SawBlade_Start
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
