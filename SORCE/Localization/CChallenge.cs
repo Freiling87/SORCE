@@ -16,9 +16,9 @@ namespace SORCE.Localization
     {
 		public static List<string> AddsCriminals = new List<string>()
 		{
-			nameof(HoodlumsWonderland),
+			nameof(TurfWar),
 			nameof(UnionTown),
-			nameof(YoungMenInTheNeighborhood),
+			nameof(RollingDeep),
 		};
 		public static List<string> AffectsLights = new List<string>()
 		{

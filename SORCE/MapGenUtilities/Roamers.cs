@@ -16,7 +16,7 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(YoungMenInTheNeighborhood)) ||
+			GC.challenges.Contains(nameof(RollingDeep)) ||
 			Core.debugMode ||
 			vanilla;
 		public static bool HasRoamingMafia(bool vanilla) =>
@@ -27,7 +27,7 @@ namespace SORCE.MapGenUtilities
 			vanilla;
 
 		public static int PopulationGang(int vanilla) =>
-			GC.challenges.Contains(nameof(HoodlumsWonderland)) ? 12 :
+			GC.challenges.Contains(nameof(TurfWar)) ? 12 :
 			vanilla;
 		public static int PopulationMultiplier() =>
 			GC.challenges.Contains(nameof(GhostTown)) ? 0 :

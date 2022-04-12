@@ -11,21 +11,20 @@ using System.Linq;
 
 namespace SORCE.Challenges.C_Roamers
 {
-	public class YoungMenInTheNeighborhood
+	public class TurfWar
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(YoungMenInTheNeighborhood);
+			const string name = nameof(TurfWar);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Roamers - Young Men in the Neighborhood"))
+					"Roamers - Turf War"))
 				.WithDescription(new CustomNameInfo(
-					"Because the young gentlemen in the hood are always polite;\n" +
-					"If you start acting rude, we'll set you right!"));
+					"The annual charity drive for the Blahds and Crepes happened to overlap this year. They're in tough competition to sell the most cookies... by any means necessary!"));
 		}
 	}
 }
