@@ -34,11 +34,18 @@ Complete
 Complete
 ####            √   SlimeBarrel
 Complete
-###         C   Pollution Solution
-####            C   Smoke particles from poisoned lakessssssssd
-####            C   Still not seeing slimebarrels in public, other than homebase
+###         √H   Brought Back Fountain
+####			H	AnCapistan: Poisoned Fountains
+New
+###         T   Lake Coloration test
+If doesn't work after first attempt, put on hold for overhauls since it's otherwise irrelevant for now.
+###         T   Pollution Solution
+####            T   Smoke particles from poisoned lakes
+Attempted, Water.SpreadPoisonStart postfix
+####            T   Still not seeing slimebarrels in public, other than homebase
 I think they did show up from ExplodingBarrelsAndSlime or whatever from vanilla, but not TPS
-####            C   Raise chance of poisoned lakes
+Test this further, need more info
+####            T   Raise chance of poisoned lakes
 LoadLevel.SetupMore3_3 
     calls SpreadPoisonWait & SpreadPoisonStart
     water.SpreadPoisonWait(this.gc.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
@@ -218,9 +225,9 @@ New
 ###             H   Flashlight Gun Mod?
 Someday
 ##		C	Roamers
-All broken for now
-###			C	Always Spawn Arsonists
-New
+Split Crepe & Blahd mutators
+###			T	Arsonist
+Attempted
 ###         C   Roaming Cannibal Gangs
 New
 ###			T	Turf War

@@ -25,10 +25,11 @@ namespace SORCE.MapGenUtilities
 		/// TODO: Refactor copied algorithms
 		/// </summary>
 		/// <param name="loadLevel"></param>
-		public static void Spawn_Master(LoadLevel loadLevel)
+		public static void Spawn_Master()
 		{
 			BreakWindows();
-			//SpawnCaveWallOutcroppings();
+			//SpawnCaveWallOutcroppings();.
+			PoisonLakes();
 			SpawnCoziness();
 			SpawnFountains();
 			SpawnJukeboxesAndSpeakers();
@@ -54,6 +55,30 @@ namespace SORCE.MapGenUtilities
 					&& GC.percentChance(chanceToBreak))
 					window.DamagedObject(window, 0f);
 		}
+		private static void ColorLakes()
+		{
+			// TODO: Gate behind poisoning if not automatic
+			// TODO: Gate behind mutators
+			// TODO: Mutator interface for lake color
+
+			foreach (Water body in GC.watersList)
+			{
+				Vector2[] array = new Vector2[body.waterTiles.Count];
+
+				for (int i = 0; i < body.waterTiles.Count; i++)
+					array[i] = body.waterTiles[i];
+
+				string lakeColor = MapFeatures.LakeColor();
+
+				body.objectMult.CallRpcChangeLakeColor(array, lakeColor);
+			}
+		}
+		private static void PoisonLakes()
+        {
+			if (MapFeatures.HasPoisonedLakes)
+				foreach (Water body in GC.watersList)
+					body.SpreadPoisonWait(GC.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
+        }
 		private static void SpawnKillerPlants()
 		{
 			if (!MapFeatures.HasKillerPlants)

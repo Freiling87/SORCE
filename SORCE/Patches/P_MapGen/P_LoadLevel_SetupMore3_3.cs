@@ -353,7 +353,7 @@ namespace SORCE.Patches.P_MapGen
 		private static IEnumerable<CodeInstruction> Mafia(IEnumerable<CodeInstruction> codeInstructions)
         {
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo HasMafia = AccessTools.Method(typeof(Roamers), nameof(Roamers.HasRoamingMafia), new[] { typeof(bool) });
+			MethodInfo HasMafia = AccessTools.Method(typeof(Roamers), nameof(Roamers.HasMafiaGangs), new[] { typeof(bool) });
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -515,7 +515,7 @@ namespace SORCE.Patches.P_MapGen
 		private static IEnumerable<CodeInstruction> RoamingGangs(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo HasGangs = AccessTools.Method(typeof(Roamers), nameof(Roamers.HasRoamingGangbangers), new[] { typeof(bool) });
+			MethodInfo HasGangs = AccessTools.Method(typeof(Roamers), nameof(Roamers.HasGangbangerGangs), new[] { typeof(bool) });
 			
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,

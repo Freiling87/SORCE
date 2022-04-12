@@ -330,9 +330,10 @@ namespace SORCE.Patches
 		}
 
 		[HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3", new Type[] { })]
-		public static void SetupMore3_3_Postfix(LoadLevel __instance)
+		public static void SetupMore3_3_Postfix()
 		{
-			MapFeatureSpawners.Spawn_Master(__instance);
+			MapFeatureSpawners.Spawn_Master();
+			Roamers.Spawner_Main();
 		}
 
 		/// <summary>

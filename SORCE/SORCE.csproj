@@ -153,6 +153,11 @@
     <Compile Include="Challenges\C_Roamers\UnionTown.cs" />
     <Compile Include="Challenges\C_Roamers\RollingDeep.cs" />
     <Compile Include="Challenges\C_Roamers\TurfWar.cs" />
+    <Compile Include="Challenges\C_Roamers\YoungMenInTheNeighborhood.cs" />
+    <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
+    <Compile Include="Localization\VParticleEffect.cs" />
+    <Compile Include="Localization\VAgentGoal.cs" />
+    <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="MapGenUtilities\AmbientAudio.cs" />
     <Compile Include="MapGenUtilities\LevelGenTools.cs" />
     <Compile Include="Localization\VAgent.cs" />
@@ -206,6 +211,7 @@
     <Compile Include="Patches\P_PlayfieldObject\P_Toilet.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Tube.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Turret.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Water.cs" />
     <Compile Include="Patches\P_PoolsScene.cs" />
     <Compile Include="Patches\P_RandomSelection.cs" />
     <Compile Include="Patches\P_RandomWalls.cs" />
