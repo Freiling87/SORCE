@@ -25,10 +25,7 @@ namespace SORCE.MapGenUtilities
 			Core.debugMode;
 		public static bool HasButlerBot =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
-			GC.challenges.Contains(nameof(DirtierDistricts)) ||
-			GC.challenges.Contains(nameof(FloralerFlora)) ||
-			Core.debugMode;
-
+			GC.challenges.Contains(nameof(Technocracy)); // Human butler?
 		public static bool HasBlahdGangs =>
 			Core.debugMode;
 		public static bool HasCannibalGangs =>
@@ -176,6 +173,9 @@ namespace SORCE.MapGenUtilities
 		}
 		public static void SpawnButlerBot()
         {
+			if (!HasButlerBot)
+				return;
+
 			int level = Mathf.Clamp(GC.sessionDataBig.curLevel - 11, 0, 15);
 
 			for (int i = 0; i <= level; i++)

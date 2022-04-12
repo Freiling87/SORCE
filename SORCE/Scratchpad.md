@@ -14,8 +14,6 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.
 #	CT	Mutators
 ##      CT	Features
-###         C   Slumminess
-Tie this to leveltheme, not level
 ###         T   00 District Object Delimitation
 ####            C   00 Tube and fire grate spawn in hideouts
 Firegrates are fine, since they're on a mutator.
@@ -26,15 +24,15 @@ Since these are based on Start() transpilers, you'll need to make a custom metho
 Pending test of basic features
 #####               C   00 Add SORCE dependency and test
 New
-####            T   SawBlade
-Attempted
 ####            √   Flame Grate
 Complete
 ####            √   Manhole
 Complete
-####            √   Tube
+####            √   SawBlade
 Complete
 ####            √   SlimeBarrel
+Complete
+####            √   Tube
 Complete
 ###         T   Pollution Solution
 ####            C   Smoke particles from poisoned lakes
@@ -250,6 +248,8 @@ Arsonist
 Complete
 ##		C	Wreckage
 Raise it! And check for borders, that's a good idea
+###         C   00 Spawns litter on level editor
+New
 ###         C   Bachelorer Pads
 ####            C   Scale litter to chunk type & Slumminess
 House: scale to chance. Some people are slobs, some aren't.

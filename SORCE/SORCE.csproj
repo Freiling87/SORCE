@@ -205,6 +205,7 @@
     <Compile Include="Patches\P_PlayfieldObject\P_SecurityCam.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_SlimeBarrel.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Stove.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_SwitchFloor.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Toilet.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Tube.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Turret.cs" />

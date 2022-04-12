@@ -116,6 +116,7 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
+			Core.debugMode ||
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
 			vanilla;
