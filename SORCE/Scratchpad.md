@@ -14,6 +14,8 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 Copy the vanilla format of not listing specifics in trait descriptions, e.g.
 #	CT	Mutators
 ##      CT	Features
+###         C   Slumminess
+Tie this to leveltheme, not level
 ###         T   00 District Object Delimitation
 ####            C   00 Tube and fire grate spawn in hideouts
 Firegrates are fine, since they're on a mutator.
@@ -34,29 +36,27 @@ Complete
 Complete
 ####            √   SlimeBarrel
 Complete
-###         √H   Brought Back Fountain
-####			H	AnCapistan: Poisoned Fountains
-New
-###         T   Lake Coloration test
-If doesn't work after first attempt, put on hold for overhauls since it's otherwise irrelevant for now.
 ###         T   Pollution Solution
-####            T   Smoke particles from poisoned lakes
-Attempted, Water.SpreadPoisonStart postfix
-####            T   Still not seeing slimebarrels in public, other than homebase
-I think they did show up from ExplodingBarrelsAndSlime or whatever from vanilla, but not TPS
-Test this further, need more info
-####            T   Raise chance of poisoned lakes
+####            C   Smoke particles from poisoned lakes
+Water.SpreadPoisonStart postfix
+    Worked, but had a bad offset
+####            C   Slime Barrels
+HasSlimeBarrels works, but not HasSlime&Exploding
+Also need to split off exploding anyway
+####            C   Raise chance of poisoned lakes
 LoadLevel.SetupMore3_3 
     calls SpreadPoisonWait & SpreadPoisonStart
     water.SpreadPoisonWait(this.gc.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
-Iterate through lakeList after all lakes are placed and call the above
+Didn't work
 ####            H   Scale chance to district
-I know it works, but make sure proportions are right
+Tie pollution amount to Slumminess
 Pending previous issues
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
 ####			C	Spawn public Rugs (overlap with Grand City Hotel)
+###         H   Lake Coloration test
+If doesn't work after first attempt, put on hold for overhauls since it's otherwise irrelevant for now.
 ###         H   Life Downhill
 Spawn Pipes as Trash Chutes in the slums or industrial
 May drop usable items, or live banana peels, etc.
@@ -153,6 +153,9 @@ Complete
 Select N% windows with the least-well lit tiles, and prefer those. 
 This will prefer dark alleys, etc.
 ####            √   Scaled to District
+###         √H   Brought Back Fountain
+####			H	AnCapistan: Poisoned Fountains
+New
 ###         √H  Lake it or Leave it
 ####			H	Do not make lakes over Downtown bridges
 This is low-priority. I've just excluded Downtown for the time being.
@@ -163,7 +166,6 @@ Certain overhauls
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
 ##      √   Features - Archive
-For totally complete features
 ###         √   Cart of the Deal
 Complete
 ###         √   Power Whelming
@@ -192,7 +194,7 @@ Complete
     - DW
   - NoObjectLights
     - Works
-###			C	No Agent Lights
+###         C   No Agent Lights
 - The most recent attempt didn't make them move feet-first, but they still all have lights.
 - Didn't work, and made the agent move feet-first
   - Same outcome for both locations of attempt
@@ -208,26 +210,29 @@ Complete
 - Exclude Ghosts!
 - SpawnerMain.SetLighting2
   - DW, try other ways in same method
-###			C	No Item/Wreckage Lights
+###         C   No Item/Wreckage Lights
 - SpawnerMain.SetLighting2
   - DW, try other ways in same method
-###			√	No Object Glow
-Complete
-###			C	No Object Lights
+###         C   No Object Lights
 Works
 ####            C   Object type exclusions
 Double check that all active electronics glow
-###			C	Player Agent Light Size
+###         C   Player Agent Light Size
 New
 This would be a stand-in for the flashlight
-###			C	Flashlight following player reticle
+###         C   Flashlight following player reticle
 New
-###             H   Flashlight Gun Mod?
+###         √   No Object Glow
+Complete
+###         H   Flashlight Gun Mod?
 Someday
 ##		C	Roamers
 Split Crepe & Blahd mutators
-###			T	Arsonist
-Attempted
+###         C   Arsonist
+DW
+###         C   Butler Bot
+Spawned, but only cleans bodies & not wreckage
+How to exclude private areas?s
 ###         C   Roaming Cannibal Gangs
 New
 ###			T	Turf War
@@ -747,6 +752,7 @@ Just double check those categories.
 ##		C	Underdank Citizen
 ###         C   New features
 CHECK FEATURE LIST
+Poison resistance with + version
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self
 ###         C   Flushing to Manhole doesn't work

@@ -28,8 +28,10 @@ namespace SORCE.MapGenUtilities
 		public static void Spawn_Master()
 		{
 			BreakWindows();
-			//SpawnCaveWallOutcroppings();.
+			// ColorLakes();
 			PoisonLakes();
+
+			//SpawnWallOutcroppings();.
 			SpawnCoziness();
 			SpawnFountains();
 			SpawnJukeboxesAndSpeakers();
@@ -110,9 +112,9 @@ namespace SORCE.MapGenUtilities
 					GC.spawnerMain.spawnObjectReal(location, null, VObject.KillerPlant);
 			}
 		}
-		private static void SpawnCaveWallOutcroppings()
+		private static void SpawnWallOutcroppings()
 		{
-			if (!MapFeatures.HasCaveWallOutcroppings)
+			if (!MapFeatures.HasWallOutcroppings)
 				return;
 
 			int maxSpawns = (int)(Random.Range(48, 64) * LevelSize.ChunkCountRatio());

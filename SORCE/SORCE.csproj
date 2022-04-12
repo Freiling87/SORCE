@@ -125,7 +125,6 @@
     <Compile Include="Localization\CColor.cs" />
     <Compile Include="Localization\CDialogue.cs" />
     <Compile Include="Localization\CLevelFeature.cs" />
-    <Compile Include="Localization\CObject.cs" />
     <Compile Include="Localization\COperatingText.cs" />
     <Compile Include="Challenges\C_Overhaul\Arcology.cs" />
     <Compile Include="Challenges\C_Features\BroughtbackFountain.cs" />
@@ -153,8 +152,6 @@
     <Compile Include="Challenges\C_Roamers\UnionTown.cs" />
     <Compile Include="Challenges\C_Roamers\RollingDeep.cs" />
     <Compile Include="Challenges\C_Roamers\TurfWar.cs" />
-    <Compile Include="Challenges\C_Roamers\YoungMenInTheNeighborhood.cs" />
-    <Compile Include="Challenges\C_Roamers\HoodlumsWonderland.cs" />
     <Compile Include="Localization\VParticleEffect.cs" />
     <Compile Include="Localization\VAgentGoal.cs" />
     <Compile Include="Localization\VRelationship.cs" />

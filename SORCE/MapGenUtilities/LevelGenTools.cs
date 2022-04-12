@@ -49,39 +49,40 @@ namespace SORCE.MapGenUtilities
 
 			return false;
 		}
-		internal static Vector2 RandomSpawnLocation(TileInfo tileInfo, float maxDistanceToWall)
+		internal static Vector2 RandomSpawnLocation(TileInfo tileInfo, float maxDistanceToWall, bool publicOnly = false, bool privateOnly = false)
 		{
+			float minInclusive = 1.28f;
+			float maxInclusive = GC.loadLevel.levelSizePixels - 1.28f;
+			float minInclusive2 = 1.28f;
+			float maxInclusive2 = GC.loadLevel.levelSizePixels - 1.28f;
+
 			for (int i = 0; i < 200; i++)
 			{
-				float minInclusive = 1.28f;
-				float maxInclusive = GC.loadLevel.levelSizePixels - 1.28f;
-				float minInclusive2 = 1.28f;
-				float maxInclusive2 = GC.loadLevel.levelSizePixels - 1.28f;
-
 				Vector2 vector = new Vector2(
 					(Random.Range(minInclusive, maxInclusive)),
 					(Random.Range(minInclusive2, maxInclusive2)));
-				bool badSpot = false;
+
 				TileData tileData = tileInfo.GetTileData(vector);
+				bool isPublic = tileData.owner == 0;
 
-				if (tileData.owner > 0 ||
-					tileData.prison > 0 ||
-					tileData.hole ||
-					tileData.water ||
-					tileData.ice ||
-					tileData.conveyorBelt ||
-					tileData.dangerousToWalk ||
-					//tileData.solidObject ||
-					tileData.wallColliderUnreachable ||
-					!IsCloseToWall(vector, maxDistanceToWall))
-					badSpot = true;
-
-				if (!badSpot)
+				if (!(
+						tileData.owner > 0 ||
+						tileData.prison > 0 ||
+						tileData.hole ||
+						tileData.water ||
+						tileData.ice ||
+						tileData.conveyorBelt ||
+						tileData.dangerousToWalk ||
+						//tileData.solidObject ||
+						tileData.wallColliderUnreachable ||
+						!IsCloseToWall(vector, maxDistanceToWall)))
 					return vector;
 			}
 
 			return Vector2.zero;
 		}
+		public static bool IsPublic(Vector3 spot) =>
+			GC.tileInfo.GetTileData(spot).owner == 0;
 	}
 }
  

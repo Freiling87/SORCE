@@ -31,7 +31,7 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(BadNeighborhoods));
 		public static bool HasBushCannibals =>
 			!GC.challenges.Contains(nameof(Arcology));
-		public static bool HasCaveWallOutcroppings =>
+		public static bool HasWallOutcroppings =>
 			GC.challenges.Contains(nameof(DUMP)) ||
 			GC.challenges.Contains(nameof(SpelunkyDory));
 		public static bool HasCoziness =>
@@ -48,6 +48,8 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			TraitManager.IsPlayerTraitActive<UnderdankCitizen>();
+		public static bool HasColoredLakes =>
+			false;
 		public static bool HasPoisonedLakes =>
 			!GC.challenges.Contains(nameof(Arcology)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
@@ -116,8 +118,9 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
-			Core.debugMode ||
 			vanilla;
+		public static bool HasExplodingBarrels() =>
+			Core.debugMode;
 		public static bool HasFireHydrants(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) ||
@@ -167,7 +170,7 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(MACITS)) ||
 			GC.challenges.Contains(nameof(PoliceState)) ||
-			vanilla;
+			vanilla; 
 		public static bool HasTrees(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||

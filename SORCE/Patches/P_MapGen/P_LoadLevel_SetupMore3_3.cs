@@ -190,6 +190,11 @@ namespace SORCE.Patches.P_MapGen
 
 		// Cop Bots
 
+		/// <summary>
+		/// TODO: Doesn't work
+		/// </summary>
+		/// <param name="codeInstructions"></param>
+		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> ExplodingAndSlimeBarrels(IEnumerable<CodeInstruction> codeInstructions)
 		{
