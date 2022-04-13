@@ -48,9 +48,9 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			TraitManager.IsPlayerTraitActive<UnderdankCitizen>();
-		public static bool HasColoredLakes =>
+		public static bool HasLakesColored =>
 			false;
-		public static bool HasPoisonedLakes =>
+		public static bool HasLakesPolluted =>
 			!GC.challenges.Contains(nameof(Arcology)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
@@ -69,6 +69,7 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(SurveillanceSociety));
 		public static bool HasTurntablesAndSpeakers =>
 			GC.challenges.Contains(nameof(DiscoCityDanceoff));
+
 		public static string LakeColor()
         {
 			return "Green";
@@ -116,7 +117,6 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
-			Core.debugMode ||
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
 			vanilla;
@@ -127,7 +127,7 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(LowTechLowLife)) ||
 			vanilla;
 		public static bool HasFlameGrates(bool vanilla) =>
-			GC.challenges.Contains(nameof(FireGrates));
+			GC.challenges.Contains(nameof(FlameGrates));
 		public static bool HasFlamingBarrels(bool vanilla) =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&

@@ -9,20 +9,12 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
-#       General
-##      C   Migrate feature lists to documentation
-Copy the vanilla format of not listing specifics in trait descriptions, e.g.
 #	CT	Mutators
 ##      CT	Features
-###         T   00 District Object Delimitation
-####            C   00 Tube and fire grate spawn in hideouts
-Firegrates are fine, since they're on a mutator.
-Just do the same for Pipe or Tube or whatever. 
-    "Meats of Rogue"
-Since these are based on Start() transpilers, you'll need to make a custom method that returns magic numbers to meet the inequality check in the original method.
-####            H   00 Export all to Delimitation mod
+###         C   00 District Object Delimitation
+####            C   00 Export all to Delimitation mod
 Pending test of basic features
-#####               C   00 Add SORCE dependency and test
+####            C   00 Add SORCE dependency and test
 New
 ####            √   Flame Grate
 Complete
@@ -34,18 +26,15 @@ Complete
 Complete
 ####            √   Tube
 Complete
-###         T   Pollution Solution
-####            C   Smoke particles from poisoned lakes
-Water.SpreadPoisonStart postfix
-    Worked, but had a bad offset
-####            C   Slime Barrels
-HasSlimeBarrels works, but not HasSlime&Exploding
-Also need to split off exploding anyway
+###         C   Pollution Solution
 ####            C   Raise chance of poisoned lakes
 LoadLevel.SetupMore3_3 
     calls SpreadPoisonWait & SpreadPoisonStart
     water.SpreadPoisonWait(this.gc.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
 Didn't work
+####            H   Smoke particles from poisoned lakes
+Water.SpreadPoisonStart postfix
+This works, but need to vary timing, speed, transparency.
 ####            H   Scale chance to district
 Tie pollution amount to Slumminess
 Pending previous issues
@@ -165,6 +154,8 @@ Certain overhauls
 Arcology overhaul is only one so far
 ##      √   Features - Archive
 ###         √   Cart of the Deal
+Complete
+###         √   Meats of Rogue
 Complete
 ###         √   Power Whelming
 Complete

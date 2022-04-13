@@ -77,7 +77,7 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void PoisonLakes()
         {
-			if (MapFeatures.HasPoisonedLakes)
+			if (MapFeatures.HasLakesPolluted)
 				foreach (Water body in GC.watersList)
 					body.SpreadPoisonWait(GC.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
         }

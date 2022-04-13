@@ -152,7 +152,7 @@ namespace SORCE.Patches
 						while (GC.percentChance(chance))
 						{
 							Wreckage.SpawnWreckagePileObject_Granular(
-								new Vector2(spawnPosition.x, spawnPosition.y - 0.12f),
+								new Vector2(spawnPosition.x, spawnPosition.y - 0.16f),
 								VObject.FlamingBarrel,
 								false,
 								5,
