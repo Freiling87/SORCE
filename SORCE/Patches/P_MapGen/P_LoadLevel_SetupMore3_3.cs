@@ -211,16 +211,16 @@ namespace SORCE.Patches.P_MapGen
 
 					new CodeInstruction(OpCodes.Ldstr, "ExplodingSlimeBarrel"),
 					new CodeInstruction(OpCodes.Callvirt, contains),
-					new CodeInstruction(OpCodes.Stloc_S, 11),
-					new CodeInstruction(OpCodes.Ldloc_S, 11),
+					new CodeInstruction(OpCodes.Stloc_S, 11),										// clear
+					new CodeInstruction(OpCodes.Ldloc_S, 11),										// flag15
 					},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
 					//	flag15 = LevelGenTools.HasExplodingAndSlimeBarrels(flag15);
 
-					new CodeInstruction(OpCodes.Ldloc_S, 11), // flag15
-					new CodeInstruction(OpCodes.Call, LevelGenTools_HasExplodingAndSlimeBarrels), // bool
-					new CodeInstruction(OpCodes.Stloc_S, 11), // Clear
+					new CodeInstruction(OpCodes.Call, LevelGenTools_HasExplodingAndSlimeBarrels),	// bool
+					new CodeInstruction(OpCodes.Stloc_S, 11),										// Clear
+					new CodeInstruction(OpCodes.Ldloc_S, 11),										// flag15
 				});
 
 			patch.ApplySafe(instructions, logger);
