@@ -13,7 +13,7 @@ using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
 
-namespace SORCE.Patches
+namespace SORCE.Patches.P_PlayfieldObject
 {
     [HarmonyPatch(declaringType: typeof(Gun))]
     public static class P_Gun
@@ -21,14 +21,14 @@ namespace SORCE.Patches
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        //[RLSetup]
+        [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomSprite(CSprite.Casing, SpriteScope.Items, Properties.Resources.Casing);
-            RogueLibs.CreateCustomSprite(CSprite.ShotgunShell, SpriteScope.Items, Properties.Resources.ShotgunShell);
+            RogueLibs.CreateCustomSprite(CSprite.Casing, SpriteScope.Wreckage, Properties.Resources.Casing);
+            RogueLibs.CreateCustomSprite(CSprite.ShotgunShell, SpriteScope.Wreckage, Properties.Resources.ShotgunShell);
         }
 
-        //[HarmonyPostfix, HarmonyPatch(methodName: nameof(Gun.Shoot), argumentTypes: new[] { typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(string) })]
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Gun.Shoot), argumentTypes: new[] { typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(string) })]
         public static void Shoot_Postfix(bool specialAbility, bool silenced, bool rubber, int bulletNetID, string bulletStatusEffect, Gun __instance)
         {
             string invItem;
@@ -38,8 +38,7 @@ namespace SORCE.Patches
             else
                 invItem = __instance.agent.inventory.equippedWeapon.invItemName;
 
-            if (invItem == VItem.Shotgun ||
-                invItem == VItem.Pistol ||
+            if (invItem == VItem.Pistol ||
                 invItem == VItem.MachineGun ||
                 invItem == VItem.Revolver)
                 SpawnBulletCasing(__instance, CSprite.Casing);
@@ -60,7 +59,7 @@ namespace SORCE.Patches
             casing.justSpilled = true;
 
             tk2dSprite component = casing.tr.GetChild(0).transform.GetChild(0).GetComponent<tk2dSprite>();
-            component.SetSprite(component.GetSpriteIdByName(casingType));
+            component.SetSprite(casingType);
             component.transform.localPosition = Vector3.zero;
             component.color = Color.yellow;
 
