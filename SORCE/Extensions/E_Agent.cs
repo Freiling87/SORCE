@@ -19,5 +19,11 @@ namespace SORCE.Extensions
 		public static bool IsCriminal(this Agent agent) =>
 			agent.objectMultAgent.mustBeGuilty || 
 			VAgent.Criminal.Contains(agent.agentName);
+
+		public static bool IsFlushable(Agent agent) =>
+			!agent.statusEffects.hasStatusEffect(VStatusEffect.Giant) &&
+			!agent.HasTrait(VTrait.Bulky) &&
+			agent.statusEffects.hasTrait(VTrait.Diminutive) || agent.diminutive || // Latter untested
+			agent.statusEffects.hasStatusEffect(VStatusEffect.Shrunk) || agent.shrunk; // Latter untested
 	}
 }
