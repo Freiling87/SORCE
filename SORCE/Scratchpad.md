@@ -781,8 +781,8 @@ Poison resistance with + version
 ###			T	Spawns near Water
 TileInfo.WaterNearby has a levelTheme check 😡
 	Transpiler patched, test
-###			C	Disable Teleport to entry point
-Works, but has a chance of rolling self
+###			T	Disable Teleport to entry point
+Attempted
 ###         C   Flushing to Manhole doesn't work
 Technically works, but they fall right back in and trigger the flush method again.
 Find BM's old jump method of exiting.
