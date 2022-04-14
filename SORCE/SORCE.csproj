@@ -78,6 +78,7 @@
     <Compile Include="Challenges\ChallengeInfo.cs" />
     <Compile Include="Challenges\ChallengeManager.cs" />
     <Compile Include="Challenges\ChallengeMenuGroups.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\AmbientLightColorChallenge.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Reactor.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\NuclearWinter.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Goodsprings.cs" />

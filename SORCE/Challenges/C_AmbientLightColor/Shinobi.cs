@@ -11,16 +11,18 @@ using SORCE.Localization;
 
 namespace SORCE.Challenges.C_AmbientLightColor
 {
-	public class Shinobi
+	public class Shinobi : AmbientLightColorChallenge
 	{
+		public Shinobi() : base(nameof(Shinobi)) { }
+
+        public override Color32 filterColor => new Color32(75, 75, 150, 200);
+
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(Shinobi);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock()
 			{
-				Cancellations = CColor.AmbientLightColor.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightColor.Where(i => i != nameof(Shinobi)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Shinobi"))
