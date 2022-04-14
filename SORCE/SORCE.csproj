@@ -203,6 +203,7 @@
     <Compile Include="Patches\P_PlayfieldObject\P_FireHydrant.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_FlameGrate.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Fountain.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Gun.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Hole.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Lamp.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Manhole.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Patches\P_SpawnerFloor.cs" />
     <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Patches\P_StatusEffects.cs" />
+    <Compile Include="Patches\P_TileInfo.cs" />
     <Compile Include="Properties\ModInfo.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

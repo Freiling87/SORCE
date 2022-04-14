@@ -79,7 +79,8 @@ namespace SORCE.MapGenUtilities
         {
 			if (MapFeatures.HasLakesPolluted)
 				foreach (Water body in GC.watersList)
-					body.SpreadPoisonWait(GC.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
+					body.SpreadPoisonStart(GC.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
+			// SpreadPoisonWait didn't work
         }
 		private static void SpawnKillerPlants()
 		{
@@ -486,7 +487,8 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void SpawnManholes()
 		{
-			if (!MapFeatures.HasManholes_Underdank)
+			if (!MapFeatures.HasManholes_Underdank ||
+				GC.levelTheme == 3)
 				return;
 
 			int maxSpawns = (int)(Random.Range(8, 12) * LevelSize.ChunkCountRatio); 
@@ -503,7 +505,7 @@ namespace SORCE.MapGenUtilities
 				{
 					spotCandidate = GC.tileInfo.FindRandLocationGeneral(1.28f);
 
-					if (GC.objectRealList.OfType<Manhole>().Any(m => Vector2.Distance(m.tr.position, spotCandidate) < 14f)
+					if (GC.objectRealList.OfType<Manhole>().Any(m => Vector2.Distance(m.tr.position, spotCandidate) < (14f * LevelSize.ChunkCountRatio))
 						|| GC.tileInfo.WaterNearby(spotCandidate)
 						|| GC.tileInfo.IceNearby(spotCandidate)
 						|| GC.tileInfo.BridgeNearby(spotCandidate))
@@ -976,21 +978,12 @@ namespace SORCE.MapGenUtilities
 					location = GC.tileInfo.FindRandLocationGeneral(2f);
 
 					for (int k = 0; k < GC.objectRealList.Count; k++)
-						if (GC.objectRealList[k].objectName == VObject.Turntables &&
-								Vector2.Distance(GC.objectRealList[k].tr.position, location) < distanceBetween)
+						if ((GC.objectRealList[k].objectName == VObject.Turntables
+								&& Vector2.Distance(GC.objectRealList[k].tr.position, location) < distanceBetween)
+							|| GC.tileInfo.WaterNearby(location)
+							|| GC.tileInfo.IceNearby(location)
+							|| GC.tileInfo.BridgeNearby(location))
 							location = Vector2.zero;
-
-					if (location != Vector2.zero)
-					{
-						if (GC.tileInfo.WaterNearby(location))
-							location = Vector2.zero;
-
-						if (GC.tileInfo.IceNearby(location))
-							location = Vector2.zero;
-
-						if (GC.tileInfo.BridgeNearby(location))
-							location = Vector2.zero;
-					}
 
 					j++;
 				}

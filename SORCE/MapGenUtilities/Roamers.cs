@@ -180,6 +180,7 @@ namespace SORCE.MapGenUtilities
 				GC.spawnerMain.SpawnButlerBot();
 		}
 
+		// TODO: To Library
 		public static void SpawnRoamerSquad(string leaderType, string bodyguardType, int totalSpawns = 0, int gangSize = 0, string relationship = VRelationship.Neutral, bool alwaysRun = false, bool mustBeGuilty = true)
 		{
 			logger.LogDebug("Spawn Roamer Squad");

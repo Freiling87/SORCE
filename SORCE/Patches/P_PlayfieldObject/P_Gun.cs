@@ -39,8 +39,7 @@ namespace SORCE.Patches.P_PlayfieldObject
                 invItem = __instance.agent.inventory.equippedWeapon.invItemName;
 
             if (invItem == VItem.Pistol ||
-                invItem == VItem.MachineGun ||
-                invItem == VItem.Revolver)
+                invItem == VItem.MachineGun)
                 SpawnBulletCasing(__instance, CSprite.Casing);
             else if (invItem == VItem.Shotgun)
                 SpawnBulletCasing(__instance, CSprite.ShotgunShell);
