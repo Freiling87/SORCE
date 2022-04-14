@@ -9,7 +9,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 	{
 		public NuclearWinter() : base(nameof(NuclearWinter)) { }
 
-        public override Color32 filterColor => new Color32(255, 255, 255, 175);
+        public override Color32 FilterColor => new Color32(255, 255, 255, 175);
 
 		[RLSetup]
 		static void Start()

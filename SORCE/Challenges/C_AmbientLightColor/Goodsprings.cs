@@ -9,7 +9,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 	{
 		public Goodsprings() : base(nameof(Goodsprings)) { }
 
-		public override Color32 filterColor =>		new Color32(200, 125, 25, 190);
+		public override Color32 FilterColor =>		new Color32(200, 125, 25, 190);
 
 		[RLSetup]
 		static void Start()

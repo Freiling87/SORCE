@@ -85,6 +85,7 @@
     <Compile Include="Challenges\C_AmbientLightColor\ShadowRealm.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Shinobi.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Hellscape.cs" />
+    <Compile Include="Challenges\C_AmbientLightLevel\AmbientLightLevelChallenge.cs" />
     <Compile Include="Challenges\C_AmbientLightLevel\Blinding.cs" />
     <Compile Include="Challenges\C_AmbientLightLevel\Daytime.cs" />
     <Compile Include="Challenges\C_AmbientLightLevel\Evening.cs" />

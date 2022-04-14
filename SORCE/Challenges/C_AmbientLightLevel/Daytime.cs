@@ -1,26 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
-using System.Linq;
 using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_AmbientLightLevel
 {
-	public class Daytime
+    public class Daytime : AmbientLightLevelChallenge
 	{
-		//[RLSetup]
-		static void Start()
-		{
-			const string name = nameof(Daytime);
+		private Daytime() : base(nameof(Daytime)) { }
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+		public override int LightLevel => 200;
+
+        //[RLSetup]
+        static void Start()
+		{
+			RogueLibs.CreateCustomUnlock(new Daytime()
 			{
-				Cancellations = CColor.AmbientLightLevel.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightLevel.Where(i => i != nameof(Daytime)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Ambient Light Level - Daytime"))

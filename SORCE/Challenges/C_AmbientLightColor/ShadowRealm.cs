@@ -9,12 +9,12 @@ namespace SORCE.Challenges.C_AmbientLightColor
 	{
 		public ShadowRealm() : base(nameof(ShadowRealm)) { }
 
-        public override Color32 filterColor => new Color32(75, 75, 75, 175);
+        public override Color32 FilterColor => new Color32(75, 75, 75, 175);
 
 		[RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock()
+			RogueLibs.CreateCustomUnlock(new ShadowRealm()
 			{
 				Cancellations = CColor.AmbientLightColor.Where(i => i != nameof(ShadowRealm)).ToList()
 			})

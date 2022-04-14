@@ -34,15 +34,5 @@ namespace SORCE.Localization
 			nameof(HalfMoon),
 			nameof(NewMoon),
 		};
-		public static Dictionary<string, int> AmbientLightLevelDict = new Dictionary<string, int>()
-		{
-			// Convert these to inherited classes with fields
-			{ nameof(Blinding), 255 },
-			{ nameof(Daytime),  200 },
-			{ nameof(Evening),  150 },
-			{ nameof(FullMoon), 100 },
-			{ nameof(HalfMoon), 50 },
-			{ nameof(NewMoon),  0 },
-		};
 	}
 }

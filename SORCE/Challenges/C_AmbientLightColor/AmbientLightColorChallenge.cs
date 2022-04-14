@@ -7,6 +7,6 @@ namespace SORCE.Challenges.C_AmbientLightColor
     {
         public AmbientLightColorChallenge(string name) : base(name, true) { }
 
-        public abstract Color32 filterColor { get; }
+        public abstract Color32 FilterColor { get; }
     }
 }

@@ -347,7 +347,7 @@ namespace SORCE.Patches
 			if (ChallengeManager.IsChallengeFromListActive(CColor.AmbientLightColor))
 			{
 				AmbientLightColorChallenge challenge = RogueFramework.Unlocks.OfType<AmbientLightColorChallenge>().FirstOrDefault(c => c.IsEnabled);
-				Color32 color = challenge.filterColor;
+				Color32 color = challenge.FilterColor;
 				int objectColorDivisor = 2;
 				Color32 objectColor = new Color32(color.r, color.g, color.b, (byte)(color.a / objectColorDivisor));
 

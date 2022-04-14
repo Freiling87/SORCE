@@ -9,12 +9,12 @@ namespace SORCE.Challenges.C_AmbientLightColor
 	{
 		public Sepia() : base(nameof(Sepia)) { }
 
-        public override Color32 filterColor => new Color32(150, 150, 50, 190);
+        public override Color32 FilterColor => new Color32(150, 150, 50, 190);
 
 		[RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock()
+			RogueLibs.CreateCustomUnlock(new Sepia()
 			{
 				Cancellations = CColor.AmbientLightColor.Where(i => i != nameof(Sepia)).ToList()
 			})

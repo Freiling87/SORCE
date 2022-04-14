@@ -9,12 +9,12 @@ namespace SORCE.Challenges.C_AmbientLightColor
 	{
 		public Reactor() : base(nameof(Reactor)) { }
 
-		public override Color32 filterColor => new Color32(75, 200, 50, 125);
+		public override Color32 FilterColor => new Color32(75, 200, 50, 125);
 
 		[RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock()
+			RogueLibs.CreateCustomUnlock(new Reactor()
 			{
 				Cancellations = CColor.AmbientLightColor.Where(i => i != nameof(Reactor)).ToList()
 			})
