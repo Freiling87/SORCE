@@ -22,7 +22,7 @@ namespace SORCE.Challenges.C_Roamers
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Roamers - Mob Town"))
+					"Roamers - Union Town"))
 				.WithDescription(new CustomNameInfo(
 					"We run dis town. Enable dis mutatah, or else. Stugots!"));
 		}
