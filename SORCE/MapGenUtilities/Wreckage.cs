@@ -42,7 +42,7 @@ namespace SORCE.MapGenUtilities
 			bool publicOnly = HasPublicLitter && !HasPrivateLitter;
 			bool privateOnly = HasPrivateLitter && !HasPublicLitter;
 
-			int numObjects = (int)(250 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio());
+			int numObjects = (int)(250 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio);
 
 			for (int i = 0; i < numObjects; i++)
 			{

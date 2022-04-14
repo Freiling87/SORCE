@@ -215,6 +215,12 @@ New
 Complete
 ###         H   Flashlight Gun Mod?
 Someday
+##      T   Map Size
+###         T   Refactor
+###         √   Arthropolis
+###         √   Claustropolis
+###         √   Megapolis
+###         √   Ultrapolis
 ##		C	Roamers
 Split Crepe & Blahd mutators
 ###         C   Arsonist
@@ -735,10 +741,10 @@ P_RandomSelection.RandomSelect
 ###         √   Concrete Jungle
 ###			√	Green Living
 ###			√	Panoptikopolis
-###			T	Shanty Town
+###         T   Shanty Town
 A few different possibly-tile floors spawned as wood. 
 Just double check those categories.
-###     √	Spelunky Dory
+###         √	Spelunky Dory
 #	C	Traits
 ##		C	Underdank Citizen
 ###         C   New features

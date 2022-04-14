@@ -103,6 +103,7 @@
     <Compile Include="Challenges\C_Lighting\NoItemLights.cs" />
     <Compile Include="Challenges\C_Lighting\NoObjectGlow.cs" />
     <Compile Include="Challenges\C_Lighting\NoObjectLights.cs" />
+    <Compile Include="Challenges\C_MapSize\MapSizeChallenge.cs" />
     <Compile Include="Challenges\C_Overhaul\Hell.cs" />
     <Compile Include="Challenges\C_Overhaul\Tindertown.cs" />
     <Compile Include="Challenges\C_Overhaul\DUMP.cs" />
@@ -192,7 +193,6 @@
     <Compile Include="MapGenUtilities\Structures.cs" />
     <Compile Include="MapGenUtilities\Wreckage.cs" />
     <Compile Include="Patches\P_Agent.cs" />
-    <Compile Include="Patches\P_Gun.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_SetupMore3_3.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />

@@ -14,6 +14,8 @@ namespace SORCE.Localization
 {
     class CChallenge
     {
+		// TODO: Eliminate most of these lists 
+		// https://makolyte.com/csharp-get-a-list-of-types-defined-in-an-assembly-without-loading-it/
 		public static List<string> AddsCriminals = new List<string>()
 		{
 			nameof(TurfWar),

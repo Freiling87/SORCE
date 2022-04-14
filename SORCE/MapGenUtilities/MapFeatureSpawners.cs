@@ -86,7 +86,7 @@ namespace SORCE.MapGenUtilities
 			if (!MapFeatures.HasKillerPlants)
 				return;
 
-			int numObjects = (int)(Random.Range(6, 12) * LevelSize.ChunkCountRatio());
+			int numObjects = (int)(Random.Range(6, 12) * LevelSize.ChunkCountRatio);
 			float objectBuffer = .64f;
 
 			for (int i = 0; i < numObjects; i++)
@@ -100,7 +100,7 @@ namespace SORCE.MapGenUtilities
 
 					for (int j = 0; j < GC.objectRealList.Count; j++)
 						if (GC.objectRealList[j].objectName == VObject.Fountain
-							&& Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSize.ChunkCountRatio()))
+							&& Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSize.ChunkCountRatio))
 							location = Vector2.zero;
 
 					attempts++;
@@ -117,7 +117,7 @@ namespace SORCE.MapGenUtilities
 			if (!MapFeatures.HasWallOutcroppings)
 				return;
 
-			int maxSpawns = (int)(Random.Range(48, 64) * LevelSize.ChunkCountRatio());
+			int maxSpawns = (int)(Random.Range(48, 64) * LevelSize.ChunkCountRatio);
 			List<int> spawnedCount = new List<int>();
 			int itemCountIterator;
 
@@ -285,7 +285,7 @@ namespace SORCE.MapGenUtilities
 			if (!MapFeatures.HasFountains)
 				return;
 
-			int numObjects = (int)Mathf.Clamp(2f * LevelSize.ChunkCountRatio(), 1, 5);
+			int numObjects = (int)Mathf.Clamp(2f * LevelSize.ChunkCountRatio, 1, 5);
 			float objectBuffer = 14f;
 
 			for (int i = 0; i < numObjects; i++)
@@ -298,7 +298,7 @@ namespace SORCE.MapGenUtilities
 					location = GC.tileInfo.FindRandLocationGeneral(2f);
 
 					for (int j = 0; j < GC.objectRealList.Count; j++)
-						if (GC.objectRealList[j].objectName == VObject.Fountain && Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSize.ChunkCountRatio()))
+						if (GC.objectRealList[j].objectName == VObject.Fountain && Vector2.Distance(GC.objectRealList[j].tr.position, location) < (objectBuffer * LevelSize.ChunkCountRatio))
 							location = Vector2.zero;
 
 					attempts++;
@@ -316,7 +316,7 @@ namespace SORCE.MapGenUtilities
 				return;
 
 			Debug.Log("SORCE: Loading Disco Shit");
-			int maxSpawns = (int)(Random.Range(6, 12) * LevelSize.ChunkCountRatio());
+			int maxSpawns = (int)(Random.Range(6, 12) * LevelSize.ChunkCountRatio);
 			List<int> spawnedInChunks = new List<int>();
 
 			for (int i = 0; i < maxSpawns; i++)
@@ -489,7 +489,7 @@ namespace SORCE.MapGenUtilities
 			if (!MapFeatures.HasManholes_Underdank)
 				return;
 
-			int maxSpawns = (int)(Random.Range(8, 12) * LevelSize.ChunkCountRatio()); 
+			int maxSpawns = (int)(Random.Range(8, 12) * LevelSize.ChunkCountRatio); 
 			Manhole placedManhole;
 			List<Manhole> manholeList = new List<Manhole>();
 
@@ -546,7 +546,7 @@ namespace SORCE.MapGenUtilities
 			if (!MapFeatures.HasScreens)
 				return;
 
-			int maxPlacements = (int)(Random.Range(12, 24) * LevelSize.ChunkCountRatio());
+			int maxPlacements = (int)(Random.Range(12, 24) * LevelSize.ChunkCountRatio);
 			List<int> spawnedInChunks = new List<int>();
 
 			for (int i = 0; i < maxPlacements; i++)
@@ -657,7 +657,7 @@ namespace SORCE.MapGenUtilities
 
 			logger.LogDebug("SORCE: Loading Public Security Cams");
 
-			int bigTries = (int)(Random.Range(8, 12) * LevelSize.ChunkCountRatio() * LevelGenTools.SlumminessFactor);
+			int bigTries = (int)(Random.Range(8, 12) * LevelSize.ChunkCountRatio * LevelGenTools.SlumminessFactor);
 			List<int> spawnedInChunks = new List<int>();
 			int num2;
 
@@ -937,7 +937,7 @@ namespace SORCE.MapGenUtilities
 			if (!MapFeatures.HasSlimeBarrels())
 				return;
 
-			int numObjects = (int)(Random.Range(1, 3) * LevelSize.ChunkCountRatio() * LevelGenTools.SlumminessFactor);
+			int numObjects = (int)(Random.Range(1, 3) * LevelSize.ChunkCountRatio * LevelGenTools.SlumminessFactor);
 
 			for (int i = 0; i < numObjects; i++)
 			{

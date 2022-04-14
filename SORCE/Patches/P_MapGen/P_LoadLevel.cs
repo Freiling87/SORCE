@@ -47,9 +47,8 @@ namespace SORCE.Patches
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{ 
-					// LevelSize.SetLevelSizeMax(__instance);
+					// LevelSize.SetLevelSizeMax();
 
-					new CodeInstruction(OpCodes.Ldarg_0), // __instance
 					new CodeInstruction(OpCodes.Call, levelGenTools_SetLevelSizeModifier), // Clear
 				});
 
