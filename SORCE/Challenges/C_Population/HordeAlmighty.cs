@@ -1,26 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
 namespace SORCE.Challenges.C_Population
 {
-	public class HordeAlmighty
+    public class HordeAlmighty : PopulationChallenge
 	{
-		[RLSetup]
+		private HordeAlmighty() : base(nameof(HordeAlmighty)) { }
+
+		public override int PopulationMultiplier => 2;
+
+        [RLSetup]
 		static void Start()
 		{
-			const string name = nameof(HordeAlmighty);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new HordeAlmighty()
 			{
-				Cancellations = CChallenge.Population.Where(i => i != name).ToList()
+				Cancellations = CChallenge.Population.Where(i => i != nameof(HordeAlmighty)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Population - Horde Almighty"))

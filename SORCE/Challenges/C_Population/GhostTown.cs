@@ -1,26 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
 namespace SORCE.Challenges.C_Population
 {
-	public class GhostTown
+    public class GhostTown : PopulationChallenge
 	{
-		[RLSetup]
+		private GhostTown() : base(nameof(GhostTown)) { }
+
+		public override int PopulationMultiplier => 0;
+
+        [RLSetup]
 		static void Start()
 		{
-			const string name = nameof(GhostTown);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new GhostTown()
 			{
-				Cancellations = CChallenge.Population.Where(i => i != name).ToList()
+				Cancellations = CChallenge.Population.Where(i => i != nameof(GhostTown)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Population - Ghost Town"))

@@ -15,7 +15,7 @@ namespace SORCE.Challenges.C_AmbientLightLevel
 		{
 			RogueLibs.CreateCustomUnlock(new Evening()
 			{
-				Cancellations = CColor.AmbientLightLevel.Where(i => i != nameof(Evening).ToList()
+				Cancellations = CColor.AmbientLightLevel.Where(i => i != nameof(Evening)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Ambient Light Level - Evening"))

@@ -1,26 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
 namespace SORCE.Challenges.C_Population
 {
-	public class SwarmWelcome
+    public class SwarmWelcome : PopulationChallenge
 	{
-		[RLSetup]
+		private SwarmWelcome() : base(nameof(SwarmWelcome)) { }
+
+		public override int PopulationMultiplier => 8;
+
+        [RLSetup]
 		static void Start()
 		{
-			const string name = nameof(SwarmWelcome);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new SwarmWelcome()
 			{
-				Cancellations = CChallenge.Population.Where(i => i != name).ToList()
+				Cancellations = CChallenge.Population.Where(i => i != nameof(SwarmWelcome)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Population - Swarm Welcome"))
