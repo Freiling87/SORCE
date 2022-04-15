@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
+using JetBrains.Annotations;
 using RogueLibsCore;
 using SORCE.Challenges;
 using SORCE.Challenges.C_AmbientLightColor;
@@ -25,38 +26,6 @@ namespace SORCE.Patches
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
-
-		/// <summary>
-		/// Level Size
-		/// </summary>
-		/// <param name="instructionsEnumerable"></param>
-		/// <returns></returns>
-		[HarmonyTranspiler, HarmonyPatch(methodName: "CreateInitialMap", new Type[] { })]
-		private static IEnumerable<CodeInstruction> CreateInitialMap_Transpiler(IEnumerable<CodeInstruction> instructionsEnumerable, ILGenerator generator)
-		{
-			List<CodeInstruction> instructions = instructionsEnumerable.ToList();
-			FieldInfo loadLevel_levelSizeMax = AccessTools.Field(typeof(LoadLevel), nameof(LoadLevel.levelSizeMax));
-			MethodInfo levelGenTools_SetLevelSizeModifier = AccessTools.Method(typeof(LevelSize), nameof(LevelSize.SetChunkCount), new[] { typeof(LoadLevel) });
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					// Line 515
-
-					new CodeInstruction(OpCodes.Ldstr, "LEVEL SIZE: "),
-					new CodeInstruction(OpCodes.Ldarg_0)
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{ 
-					// LevelSize.SetLevelSizeMax();
-
-					new CodeInstruction(OpCodes.Call, levelGenTools_SetLevelSizeModifier), // Clear
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
 
 		/// <summary>
 		/// Public floors
@@ -330,6 +299,9 @@ namespace SORCE.Patches
 			return false;
 		}
 
+		/// <summary>
+		/// Call Spawn_Master
+		/// </summary>
 		[HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3", new Type[] { })]
 		public static void SetupMore3_3_Postfix()
 		{
@@ -358,6 +330,44 @@ namespace SORCE.Patches
 				IEnumerator SetRogueVisionLighting_Private_IEnumerator = (IEnumerator)SetRogueVisionLighting_Private.Invoke(__instance, new object[0]);
 				__instance.StartCoroutine(SetRogueVisionLighting_Private_IEnumerator);
 			}
+		}
+	}
+
+	[HarmonyPatch(declaringType: typeof(LoadLevel), methodName: "CreateInitialMap")]
+	static class P_LoadLevel_CreateInitialMap
+	{
+		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		[HarmonyTranspiler, UsedImplicitly]
+		private static IEnumerable<CodeInstruction> CreateInitialMap_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
+		{
+			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo setChunkCount = AccessTools.Method(typeof(LevelSize), nameof(LevelSize.SetChunkCount), new[] { typeof(LoadLevel) });
+
+			CodeReplacementPatch patch = new CodeReplacementPatch(
+				expectedMatches: 1,
+				prefixInstructionSequence: new List<CodeInstruction>
+				{
+					// Debug.Log("LEVEL SIZE: " + num.ToString());
+
+					new CodeInstruction(OpCodes.Ldstr, "LEVEL SIZE: "),
+					new CodeInstruction(OpCodes.Ldarg_0),
+					new CodeInstruction(OpCodes.Ldflda),
+					new CodeInstruction(OpCodes.Call),
+					new CodeInstruction(OpCodes.Call),
+					new CodeInstruction(OpCodes.Call),
+				},
+				insertInstructionSequence: new List<CodeInstruction>
+				{ 
+					// LevelSize.SetChunkCount(__instance);
+
+					new CodeInstruction(OpCodes.Ldarg_0), // __instance
+					new CodeInstruction(OpCodes.Call, setChunkCount), // Clear
+				});
+
+			patch.ApplySafe(instructions, logger);
+			return instructions;
 		}
 	}
 }

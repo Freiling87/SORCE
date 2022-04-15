@@ -13,18 +13,16 @@ namespace SORCE.Challenges.C_MapSize
 {
 	public class Megapolis : MapSizeChallenge
 	{
-		public Megapolis(string name) : base(name) { }
+		private Megapolis() : base(nameof(Megapolis)) { }
 
 		public override int ChunkCount => 48;
 
         [RLSetup]
 		static void Start()
 		{
-			const string name = nameof(Megapolis);
-
-			RogueLibs.CreateCustomUnlock(new Megapolis(name)
+			RogueLibs.CreateCustomUnlock(new Megapolis()
 			{
-				Cancellations = CChallenge.MapSize.Where(i => i != name).ToList()
+				Cancellations = CChallenge.MapSize.Where(i => i != nameof(Megapolis)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Map Size - Megapolis"))

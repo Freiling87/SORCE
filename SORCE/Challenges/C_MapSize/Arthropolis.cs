@@ -6,18 +6,16 @@ namespace SORCE.Challenges.C_MapSize
 {
     public class Arthropolis : MapSizeChallenge
 	{
-		public Arthropolis(string name) : base(name) { }
+		private Arthropolis() : base(nameof(Arthropolis)) { }
 
 		public override int ChunkCount => 4;
 
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(Arthropolis);
-
-			RogueLibs.CreateCustomUnlock(new Arthropolis(name)
+			RogueLibs.CreateCustomUnlock(new Arthropolis()
 			{
-				Cancellations = CChallenge.MapSize.Where(i => i != name).ToList()
+				Cancellations = CChallenge.MapSize.Where(i => i != nameof(Arthropolis)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Map Size - Arthropolis"))
