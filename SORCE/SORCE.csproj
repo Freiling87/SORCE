@@ -78,12 +78,14 @@
     <Compile Include="Challenges\ChallengeInfo.cs" />
     <Compile Include="Challenges\ChallengeManager.cs" />
     <Compile Include="Challenges\ChallengeMenuGroups.cs" />
+    <Compile Include="Challenges\C_AmbientLightColor\AmbientLightColorChallenge.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Reactor.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\NuclearWinter.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Goodsprings.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\ShadowRealm.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Shinobi.cs" />
     <Compile Include="Challenges\C_AmbientLightColor\Hellscape.cs" />
+    <Compile Include="Challenges\C_AmbientLightLevel\AmbientLightLevelChallenge.cs" />
     <Compile Include="Challenges\C_AmbientLightLevel\Blinding.cs" />
     <Compile Include="Challenges\C_AmbientLightLevel\Daytime.cs" />
     <Compile Include="Challenges\C_AmbientLightLevel\Evening.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Challenges\C_Lighting\NoItemLights.cs" />
     <Compile Include="Challenges\C_Lighting\NoObjectGlow.cs" />
     <Compile Include="Challenges\C_Lighting\NoObjectLights.cs" />
+    <Compile Include="Challenges\C_MapSize\MapSizeChallenge.cs" />
     <Compile Include="Challenges\C_Overhaul\Hell.cs" />
     <Compile Include="Challenges\C_Overhaul\Tindertown.cs" />
     <Compile Include="Challenges\C_Overhaul\DUMP.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="Challenges\C_Buildings\Panoptikopolis.cs" />
     <Compile Include="Challenges\C_Buildings\ShantyTown.cs" />
     <Compile Include="Challenges\C_Overhaul\LowTechLowLife.cs" />
+    <Compile Include="Challenges\C_Population\PopulationChallenge.cs" />
     <Compile Include="Challenges\C_Wreckage\BachelorerPads.cs" />
     <Compile Include="Challenges\C_Wreckage\FloralerFlora.cs" />
     <Compile Include="Challenges\C_Wreckage\DirtierDistricts.cs" />
@@ -192,7 +196,7 @@
     <Compile Include="MapGenUtilities\Structures.cs" />
     <Compile Include="MapGenUtilities\Wreckage.cs" />
     <Compile Include="Patches\P_Agent.cs" />
-    <Compile Include="Patches\P_PlayfieldObject\P_Gun.cs" />
+    <Compile Include="Patches\P_Gun.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_SetupMore3_3.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />
@@ -200,6 +204,7 @@
     <Compile Include="Patches\P_PlayfieldObject\P_FireHydrant.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_FlameGrate.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Fountain.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Gun.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Hole.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Item.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Lamp.cs" />
@@ -226,6 +231,7 @@
     <Compile Include="Patches\P_SpawnerFloor.cs" />
     <Compile Include="Patches\P_SpawnerMain.cs" />
     <Compile Include="Patches\P_StatusEffects.cs" />
+    <Compile Include="Patches\P_TileInfo.cs" />
     <Compile Include="Properties\ModInfo.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,29 +1,24 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
-using System.Linq;
 using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_AmbientLightLevel
 {
-	public class FullMoon
+    public class FullMoon : AmbientLightLevelChallenge
 	{
-		//[RLSetup]
-		static void Start()
-		{
-			const string name = nameof(FullMoon);
+		private FullMoon() : base(nameof(FullMoon)) { }
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+		public override int LightLevel => 100;
+
+        //[RLSetup]
+        static void Start()
+		{
+			RogueLibs.CreateCustomUnlock(new FullMoon()
 			{
-				Cancellations = CColor.AmbientLightLevel.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightLevel.Where(i => i != nameof(FullMoon)).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Ambient Lighting - Full Moon"))
+					"Ambient Light Level - Full Moon"))
 				.WithDescription(new CustomNameInfo(
 					""));
 		}

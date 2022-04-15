@@ -1,29 +1,24 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
-using System.Linq;
 using SORCE.Localization;
+using System.Linq;
 
 namespace SORCE.Challenges.C_AmbientLightLevel
 {
-	public class NewMoon
+    public class NewMoon : AmbientLightLevelChallenge
 	{
-		[RLSetup]
+		private NewMoon() : base(nameof(NewMoon)) { }
+
+		public override int LightLevel => 0;
+
+        [RLSetup]
 		static void Start()
 		{
-			const string name = nameof(NewMoon);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new NewMoon()
 			{
-				Cancellations = CColor.AmbientLightLevel.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightLevel.Where(i => i != nameof(NewMoon)).ToList()
 			})
 				.WithName(new CustomNameInfo(
-					"Ambient Lighting - New Moon"))
+					"Ambient Light Level - New Moon"))
 				.WithDescription(new CustomNameInfo(
 					"Moon must be busted. Brand new, and it's completely dark!"));
 		}

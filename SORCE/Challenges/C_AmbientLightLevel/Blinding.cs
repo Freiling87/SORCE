@@ -1,26 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
 namespace SORCE.Challenges.C_AmbientLightLevel
 {
-	public class Blinding
+    public class Blinding : AmbientLightLevelChallenge
 	{
-		//[RLSetup]
-		static void Start()
-		{
-			const string name = nameof(Blinding);
+		private Blinding() : base(nameof(Blinding)) { }
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+		public override int LightLevel => 255;
+
+        //[RLSetup]
+        static void Start()
+		{
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock()
 			{
-				Cancellations = CColor.AmbientLightLevel.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightLevel.Where(i => i != nameof(Blinding)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Ambient Light Level - Blinding"))

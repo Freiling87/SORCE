@@ -11,14 +11,18 @@ using System.Linq;
 
 namespace SORCE.Challenges.C_MapSize
 {
-	public class Claustropolis
+	public class Claustropolis : MapSizeChallenge
 	{
-		[RLSetup]
+		public Claustropolis(string name) : base(name) { }
+
+		public override int ChunkCount => 12;
+
+        [RLSetup]
 		static void Start()
 		{
 			const string name = nameof(Claustropolis);
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new Claustropolis(name)
 			{
 				Cancellations = CChallenge.MapSize.Where(i => i != name).ToList()
 			})

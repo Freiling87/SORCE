@@ -1,7 +1,9 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
+using RogueLibsCore;
 using SORCE.Challenges;
+using SORCE.Challenges.C_AmbientLightColor;
 using SORCE.Challenges.C_Features;
 using SORCE.Localization;
 using SORCE.Logging;
@@ -47,9 +49,8 @@ namespace SORCE.Patches
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{ 
-					// LevelSize.SetLevelSizeMax(__instance);
+					// LevelSize.SetLevelSizeMax();
 
-					new CodeInstruction(OpCodes.Ldarg_0), // __instance
 					new CodeInstruction(OpCodes.Call, levelGenTools_SetLevelSizeModifier), // Clear
 				});
 
@@ -345,8 +346,8 @@ namespace SORCE.Patches
 		{
 			if (ChallengeManager.IsChallengeFromListActive(CColor.AmbientLightColor))
 			{
-				string challenge = ChallengeManager.GetActiveChallengeFromList(CColor.AmbientLightColor);
-				Color32 color = CColor.AmbientLightColorDict[challenge];
+				AmbientLightColorChallenge challenge = RogueFramework.Unlocks.OfType<AmbientLightColorChallenge>().FirstOrDefault(c => c.IsEnabled);
+				Color32 color = challenge.FilterColor;
 				int objectColorDivisor = 2;
 				Color32 objectColor = new Color32(color.r, color.g, color.b, (byte)(color.a / objectColorDivisor));
 

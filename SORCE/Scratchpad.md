@@ -27,6 +27,12 @@ Complete
 ####            √   Tube
 Complete
 ###         C   Pollution Solution
+####            T   Raise chance of poisoned lakes
+PoisonLakes()
+	SpreadPoisonWait 
+		DW (?)
+	SpreadPoisonStart
+		Attempted
 ####            C   Raise chance of poisoned lakes
 MapFeatureSpawners.PoisonLakes()
 Didn't work
@@ -78,15 +84,15 @@ Avoid alleys if possible, signs need vantage
 ###         H   Signs
 Generate signs with premade text near business entrances
 Vary sprite
-    Slums:      A-Frame 
-    Industrial: Futuristic, Cautiony
-    Park: 
-    Downtown:   Fancy wrought iron
-    Uptown:     Floating hologram thing
+	Slums:      A-Frame 
+	Industrial: Futuristic, Cautiony
+	Park: 
+	Downtown:   Fancy wrought iron
+	Uptown:     Floating hologram thing
 Use wall-attached sprite if generated next to a wall, or free-standing sprite if not
 Show their text on hover/Space, with color added
 Make this data-driven so people can add content?
-    If so, divide them by chunk type
+	If so, divide them by chunk type
 ###         H   Super-Turrets
 All turrets are Super
 ###         H   Surveillance Society
@@ -99,22 +105,22 @@ Require owned wall, as spawning on junk walls doesn't make sense
   - Attempted
 - Detect Guilty/Wanted
   - Add buttons from hack with indicators to check status. Or just log when Agent interacts with it.
-    - Attempted
+	- Attempted
   - This:
-      - [Message: Bunny Mod] SecurityCam_Interact_Temporary
-        [Message: Bunny Mod]    Name:   SecurityCam (2288)
-        [Message: Bunny Mod]    Owner:  85
-        [Message: Bunny Mod]    Targets:        NonOwners
-        [Message: Bunny Mod]    Turrets#:       0
-        [Message: Bunny Mod] ObjectReal_Interact: SecurityCam (2288)
-        [Message: Bunny Mod] Player Agent detected on Camera
-        [Message: Bunny Mod]    OwnerID:        0
-        [Message: Bunny Mod]    AgentsInView:   0   
+	  - [Message: Bunny Mod] SecurityCam_Interact_Temporary
+		[Message: Bunny Mod]    Name:   SecurityCam (2288)
+		[Message: Bunny Mod]    Owner:  85
+		[Message: Bunny Mod]    Targets:        NonOwners
+		[Message: Bunny Mod]    Turrets#:       0
+		[Message: Bunny Mod] ObjectReal_Interact: SecurityCam (2288)
+		[Message: Bunny Mod] Player Agent detected on Camera
+		[Message: Bunny Mod]    OwnerID:        0
+		[Message: Bunny Mod]    AgentsInView:   0   
 - Attach to Turret
   - set securityType == "Turret"
-    - Attempted
+	- Attempted
   - set SecurityCam.turrets to include paired turret
-    - Attempted
+	- Attempted
 - Special hacking rules for public cams will be necessary
   - If owner=42069 & agent is cop, that'll work
 - Owncheck on tamper working?
@@ -174,25 +180,25 @@ Complete
 - SpawnerMain.SetLighting2
   - Don't give up on this method, try different approaches.
   - Agents
-    - DW
+	- DW
   - Objects
-    - DW
+	- DW
   - Items
-    - DW
+	- DW
   - NoObjectLights
-    - Works
+	- Works
 ###         C   No Agent Lights
 - The most recent attempt didn't make them move feet-first, but they still all have lights.
 - Didn't work, and made the agent move feet-first
   - Same outcome for both locations of attempt
 - Agent.hasLight
   - Postfix to false in
-    - Agent.Awake
-      - Attempted
-        - DW
-    - Agent.RecycleAwake
-      - Attempted
-        - DW
+	- Agent.Awake
+	  - Attempted
+		- DW
+	- Agent.RecycleAwake
+	  - Attempted
+		- DW
   - Note, there are a total of four attempts at this active so you'll need to pare down once you find a working one.
 - Exclude Ghosts!
 - SpawnerMain.SetLighting2
@@ -215,6 +221,12 @@ New
 Complete
 ###         H   Flashlight Gun Mod?
 Someday
+##      T   Map Size
+###         T   Refactor
+###         √   Arthropolis
+###         √   Claustropolis
+###         √   Megapolis
+###         √   Ultrapolis
 ##		C	Roamers
 Split Crepe & Blahd mutators
 ###         C   Arsonist
@@ -237,7 +249,7 @@ Arsonist
 ###         H   
 ###			√   Union Town
 Complete
-##		C	Wreckage
+##      C	Wreckage
 Raise it! And check for borders, that's a good idea
 ###         C   00 Spawns litter on level editor
 New
@@ -294,6 +306,33 @@ New
 Add Vendor Cart parts
 ###			√	Floraler Flora
 PoolsScene.SpawnObjectReal
+##      H   Decals
+Generate decoration across level.
+Most of these can be treated as Wreckage particles.
+Others would not be reactive in the same way.
+###         C   Private floors
+####            C   Bath mat
+Placed in front of bathtub
+####            C   Toilet paper roll
+Near toilets
+###         C   Private walls
+####            C   Painting
+####            C   Poster
+####            C   
+###         C   Public floors
+####            C   Body outline
+Murder scene
+####            C   Crushed cardboard box
+####            C   Plastic bag
+Blow in wind? Really unlikely
+####            C   Cigarette Butts
+####            C   Crushed can
+####            C   Puddle of Piss
+###         C   Public walls
+####            C   Graffiti
+Gang-related, political, or just obscene
+####            C   Poster
+Political, entertainment event, PSA
 ##		H	Laws
 ###			C	Legal Drugs
 ###			C	Legal Weapons
@@ -317,18 +356,18 @@ It needs to be moved to transpilers anyway.
 - Check out the Lake generator in LevelGen, it might have what you need to finally figure this out.
 - BasicFloor
   - SetExtraFloorParams
-    - Attempted: Water
-      - WORKS: Interior floors only, and only seems to make stuff float if set to water. No appearance or other behaviors. Maybe upstream this?
+	- Attempted: Water
+	  - WORKS: Interior floors only, and only seems to make stuff float if set to water. No appearance or other behaviors. Maybe upstream this?
   - Spawn
-    - WORKS: Interior floors
+	- WORKS: Interior floors
 - BasicSpawn
   - Spawn
-    - This one calls BasicFloor.Spawn
+	- This one calls BasicFloor.Spawn
 - LoadLevel
   - FillFloors
-    - Does not seem to have an effect. Left as Industrial to keep an eye out.
+	- Does not seem to have an effect. Left as Industrial to keep an eye out.
   - FillMapChunks
-    - WORKS: Exterior floors, split by level
+	- WORKS: Exterior floors, split by level
   - LoadStuff2
 - ObjectMult
   - LoadChunkWorldDataFloor
@@ -337,14 +376,14 @@ It needs to be moved to transpilers anyway.
   - ReadChild
 - SpawnerFloor
   - SetExtraFloorParams
-    - WORKS: Affects only certain portions of Home Base
+	- WORKS: Affects only certain portions of Home Base
   - spawn
-    - WORKS: Affects Home Base only
+	- WORKS: Affects Home Base only
 - TileInfo
   - BuildFloorTileAtPosition
   - setFloor *
-    - Attempted
-      - I think this ended up turning the whole homebase into water. SunkenCity had just been on and no effect was observed on the game itself.
+	- Attempted
+	  - I think this ended up turning the whole homebase into water. SunkenCity had just been on and no effect was observed on the game itself.
   - SetupFloorTile
   - SetupFloorTiles
 
@@ -422,32 +461,32 @@ Newish
 Cocaine is FREE, that's right, FREE, that's right, FREE COCAINE, that's right, COCAINE is FOR FREE now
 - Songs
   - How to play
-    - Hack or operate various machines
-      - Computer + Satellite Dish (Hack, operate)
-        - Affects all speakers in the level
-      - Jukebox (Hack, operate)
-        - Affects all speakers in chunk with same owner 
-        - Distinguishes between public and private speakers
-      - Turntables (Hack, operate)
-        - Affects all speakers in chunk with same owner 
-        - Distinguishes between public and private speakers
+	- Hack or operate various machines
+	  - Computer + Satellite Dish (Hack, operate)
+		- Affects all speakers in the level
+	  - Jukebox (Hack, operate)
+		- Affects all speakers in chunk with same owner 
+		- Distinguishes between public and private speakers
+	  - Turntables (Hack, operate)
+		- Affects all speakers in chunk with same owner 
+		- Distinguishes between public and private speakers
   - Songs
-    - Disco Inferno
-      - Speakers start shooting flames
-    - Electric Boogaloo
-      - Electro Touch
-    - Thriller
-      - Zombiism
-    - Kung-Fu Fighting
-      - Rage
-    - Stayin' Alive
-      - Resurrection
-    - We are Family
-      - Gain followers
-    - Do the Hustle
-      - Speed
-    - It's Raining Men
-      - People drop from the sky and are gibbed on impact, damaging anything they hit
+	- Disco Inferno
+	  - Speakers start shooting flames
+	- Electric Boogaloo
+	  - Electro Touch
+	- Thriller
+	  - Zombiism
+	- Kung-Fu Fighting
+	  - Rage
+	- Stayin' Alive
+	  - Resurrection
+	- We are Family
+	  - Gain followers
+	- Do the Hustle
+	  - Speed
+	- It's Raining Men
+	  - People drop from the sky and are gibbed on impact, damaging anything they hit
 - New Dance keybind
   - Anyone who sees you dance will stare at you
 #### Appearance
@@ -479,14 +518,14 @@ Cocaine is FREE, that's right, FREE, that's right, FREE COCAINE, that's right, C
 - Jukebox
 - Satellite Dish
   - Can hack/adjust to do something special... but what?
-    - Achy Breaky Bladder - All musicians are targeted by everyone in the level
-    - Make people storm the broadcasting station and attack everyone inside to destroy the dish
+	- Achy Breaky Bladder - All musicians are targeted by everyone in the level
+	- Make people storm the broadcasting station and attack everyone inside to destroy the dish
 - Speaker
   - Works, but needs Direction
   - Bass Boost
-    - Air blast anyone in range
+	- Air blast anyone in range
   - Tweeter Tweak
-    - Deafen anyone in range
+	- Deafen anyone in range
 - Turntables
   - Works, but doesn't always have speakers nearby
 #### Traits
@@ -533,27 +572,27 @@ On start:
 Brick borders
 Floors can resemble dungeon, wasteland, cave, idk
 Features
-    Lakes
-        poison
-        blood
-            ObjectMult.ChangeLakeColor
-            Heal vampires
-        magma
-            Too hot to touch, bounce you out
-            Smoke particles?
-    Flame spewers where public cameras would be
-    Flame grates throughout
-    Oil spills
+	Lakes
+		poison
+		blood
+			ObjectMult.ChangeLakeColor
+			Heal vampires
+		magma
+			Too hot to touch, bounce you out
+			Smoke particles?
+	Flame spewers where public cameras would be
+	Flame grates throughout
+	Oil spills
 Red ambient light
 Agents
-    Everyone is meaner
-    More ghosts & shapeshifters
-    Doctors are Lepers, no one can go near them
-    Slavers are slaves to demons
-        Obviously still wearing the mask
-    Cops are helpless babies who cry all the time
-        In the mod, I mean
-    Firefighters shoot oil at fire and explode
+	Everyone is meaner
+	More ghosts & shapeshifters
+	Doctors are Lepers, no one can go near them
+	Slavers are slaves to demons
+		Obviously still wearing the mask
+	Cops are helpless babies who cry all the time
+		In the mod, I mean
+	Firefighters shoot oil at fire and explode
 Everything costs too much
 
 #### Levels
@@ -564,7 +603,7 @@ Everything costs too much
 - Demons roam the level, killing anyone they see
 - Everyone has infinite resurrection 
 - Some demons jump out of holes in the ground
-  - similar to manhole but use the warzone cannibal sprite
+  - similar to warzone hole but use the warzone cannibal sprite
 #### Objects
 - Machines tend to backfire or cost impossible amounts
 ###         C   Low-Tech Low-Life
@@ -627,10 +666,10 @@ Bribery would be either completely eliminated, or rampant. Which way?
 - Roamers
   - Guilty NPCs automatically have Wanted, get beatdowns in public
   - Non-Humans no longer spawn in public areas
-    - Cannibals
-    - Zombies
-    - Vampires
-    - Werewolves are ok, they're hidden
+	- Cannibals
+	- Zombies
+	- Vampires
+	- Werewolves are ok, they're hidden
 - Secret Police
   - Assassin-based
   - Silenced machine guns
@@ -640,50 +679,50 @@ Bribery would be either completely eliminated, or rampant. Which way?
 #### Objects
 - Elevator requires access credentials 
   - Get from an UpperCruster
-    - Neutralize, Mug, Pickpocket, etc.
-      - Percent success based on skin/hair match
+	- Neutralize, Mug, Pickpocket, etc.
+	  - Percent success based on skin/hair match
   - Register credentials in City database
-    - Computer in Law Enforcement chunks
-      - Ensure generation if not present in chunk
-        - Random location within chunk
-          - Far from door +
-          - Owned Tiles +
-          - In Cell ---
+	- Computer in Law Enforcement chunks
+	  - Ensure generation if not present in chunk
+		- Random location within chunk
+		  - Far from door +
+		  - Owned Tiles +
+		  - In Cell ---
   - Buy fake pass from Fixer
-    - Resistance Leader would work in meantime?
+	- Resistance Leader would work in meantime?
   - Hack Elevator
-    - Failure means flood of law enforcement and lockout to that avenue
+	- Failure means flood of law enforcement and lockout to that avenue
   - Bribe Clerk in Deportation Center
   - Buy Day Pass at Elevator
-    - Not available if Wanted
-    - Most expensive option
+	- Not available if Wanted
+	- Most expensive option
   - Shapeshifter in Upper-Cruster or other authorized person
 - Security Cams
   - Always trigger for Wanted
   - Always trigger for Guilty
   - Don't spawn correctly on North-facing walls.
-    - It is possible that SecurityCam has Snap-To-Wall behaviors built-in that Trashcans don't. 
-      - Try removing this algorithm's snap-to-wall portions in order to not interrupt the Camera's code from doing its thing.
-    - Postfixed SetVars with `shiftAmountS = -0.16f`
-      - Didn't work
+	- It is possible that SecurityCam has Snap-To-Wall behaviors built-in that Trashcans don't. 
+	  - Try removing this algorithm's snap-to-wall portions in order to not interrupt the Camera's code from doing its thing.
+	- Postfixed SetVars with `shiftAmountS = -0.16f`
+	  - Didn't work
   - I think I get this algorithm now: the original spot they're locating is the blank between two placed trashcans. That's why you often see them right next to each other with a gap in between.
-    - So you can probably greatly simplify this algorithm to just use the spot in the middle.
+	- So you can probably greatly simplify this algorithm to just use the spot in the middle.
 #### Traits
 - The Law
   - This would be a whole different playstyle here, wouldn't it?
   - No removal of Wanted if you fuck up this badly. You're now persona non grata.
 - Trait Contraindications
   - Cops Don't Care
-    - They do
+	- They do
   - Wanted
-    - You are
+	- You are
 - Wanted Status
   - Not removeable if you have the Wanted trait to begin with
   - Applied if Cop goes Hostile
   - Can remove by accessing Police Station Computer
   - Applied automatically to all NPCs with Guilty
-    - Exempt if Chunk Owner?
-    - Types
+	- Exempt if Chunk Owner?
+	- Types
 ###			C	Technocracy
 Newish
 ###			H	Test Tube City
@@ -744,18 +783,20 @@ P_RandomSelection.RandomSelect
 ###         √   Concrete Jungle
 ###			√	Green Living
 ###			√	Panoptikopolis
-###			T	Shanty Town
+###         T   Shanty Town
 A few different possibly-tile floors spawned as wood. 
 Just double check those categories.
-###     √	Spelunky Dory
+###         √	Spelunky Dory
 #	C	Traits
 ##		C	Underdank Citizen
 ###         C   New features
 CHECK FEATURE LIST
 Poison resistance with + version
-###         C   Spawns next to water
-###			C	Disable Teleport to entry point
-Works, but has a chance of rolling self
+###			T	Spawns near Water
+TileInfo.WaterNearby has a levelTheme check 😡
+	Transpiler patched, test
+###			T	Disable Teleport to entry point
+Attempted
 ###         C   Flushing to Manhole doesn't work
 Technically works, but they fall right back in and trigger the flush method again.
 Find BM's old jump method of exiting.
@@ -764,24 +805,26 @@ Find BM's old jump method of exiting.
 - Take small damage if you walk into manhole instead of activating
   - Attempted
 - Walkover version of flushyourself:
-    [Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-    Stack trace:
-    BunnyMod.Content.BMObjects.Manhole_FlushYourself (Agent agent, ObjectReal __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
-    BunnyMod.Content.BMObjects.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
-    Hole.EnterRange (UnityEngine.GameObject myObject) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-    Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-    - This only occurred when no other manholes were open. There were active toilets.
-    - Walkover version also only sends to self.
-    - One manhole keeps getting excluded. Check that the random selection from lists isn't excluding anything from the running.
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	BunnyMod.Content.BMObjects.Manhole_FlushYourself (Agent agent, ObjectReal __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
+	BunnyMod.Content.BMObjects.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
+	Hole.EnterRange (UnityEngine.GameObject myObject) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
+	Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
+	- This only occurred when no other manholes were open. There were active toilets.
+	- Walkover version also only sends to self.
+	- One manhole keeps getting excluded. Check that the random selection from lists isn't excluding anything from the running.
 - Water splash
   - Needs a delay. It's appearing before the player is.
-    - Attempted Immediate teleportation
+	- Attempted Immediate teleportation
   - No longer working
 - Manhole to Toilet
   - Attempted
 - Toilet to Manhole
   - Attempted
 #	C	Release
+##		C	Set Unlock costs
+To get those sweet nuggets 😈
 ##		C	Disable Core.DebugMode
 ##		C	Version number
 1.0.0

@@ -1,24 +1,21 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
 namespace SORCE.Challenges.C_MapSize
 {
-	public class Arthropolis
+    public class Arthropolis : MapSizeChallenge
 	{
+		public Arthropolis(string name) : base(name) { }
+
+		public override int ChunkCount => 4;
+
 		[RLSetup]
 		static void Start()
 		{
 			const string name = nameof(Arthropolis);
 
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new Arthropolis(name)
 			{
 				Cancellations = CChallenge.MapSize.Where(i => i != name).ToList()
 			})
@@ -26,7 +23,7 @@ namespace SORCE.Challenges.C_MapSize
 					"Map Size - Arthropolis"))
 				.WithDescription(new CustomNameInfo(
 					"\"The Streets of Rogue City Building For Slum Dwellers Who Can't Be Rich Good\"\n\n" +
-					"    - Inscription over the entrance to the Slums, District 420, Floor 69"));
+					"    - Inscription over entrance to Slum District 69, Floor 420"));
 		}
 	}
 }

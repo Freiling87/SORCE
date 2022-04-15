@@ -39,7 +39,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 
 				if (h.Object.opened)
 				{
-					if (h.Agent.HasTrait<UnderdankCitizen>())
+					if (h.Agent.HasTrait<UnderdankCitizen>() && Exits(h.Agent).Count > 1)
 						h.AddButton(VButtonText.FlushYourself, m =>
 						{
 							FlushYourself(m.Agent, m.Object);
@@ -70,23 +70,24 @@ namespace SORCE.Patches.P_PlayfieldObject
 			});
 		}
 
-		public static void FlushYourself(Agent agent, ObjectReal entryObject)
+		public static List<ObjectReal> Exits(Agent agent)
 		{
 			List<ObjectReal> exits = new List<ObjectReal>();
 
-			foreach (ObjectReal objectReal in GC.objectRealList)
-            {
-				if ((objectReal is Manhole manhole && manhole.opened)
-						|| (objectReal is Toilet toilet && !toilet.destroyed
-						&& (agent.statusEffects.hasTrait(VTrait.Diminutive) || agent.shrunk)))
-					exits.Add(objectReal);
-            }
+			exits.AddRange(GC.objectRealList.OfType<Manhole>().Where(mh => mh.opened));
+
+			if (agent.statusEffects.hasTrait(VTrait.Diminutive) || agent.shrunk)
+				exits.AddRange(GC.objectRealList.OfType<Toilet>().Where(t => !t.destroyed));
+
+			return exits;
+		}
+
+		public static void FlushYourself(Agent agent, ObjectReal entryObject)
+		{
+			List<ObjectReal> exits = Exits(agent);
 
 			exits.Remove(entryObject);
-			ObjectReal exit = entryObject; // default
-
-			if (exits.Count > 0)
-				exit = exits[Random.Range(0, exits.Count - 1)];
+			ObjectReal exit = exits[Random.Range(0, exits.Count - 1)];
 
 			Vector3 exitSpot = Vector3.zero;
 
@@ -125,8 +126,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 				}
 
 				agent.Teleport(exitSpot, false, true);
-				GC.spawnerMain.SpawnExplosion(exit, exit.tr.position, "Water", false, -1, false,
-						exit.FindMustSpawnExplosionOnClients(agent));
+				GC.spawnerMain.SpawnExplosion(exit, exit.tr.position, VExplosion.Water, false, -1, false,
+					exit.FindMustSpawnExplosionOnClients(agent));
 			}
 		}
 
@@ -146,11 +147,11 @@ namespace SORCE.Patches.P_PlayfieldObject
 			manhole.objectSprite.meshRenderer.enabled = false;
 			manhole.opened = true;
 			manhole.SetSDangerousToWalk(true);
-			GC.audioHandler.Play(manhole, "ManholeOpen");
+			GC.audioHandler.Play(manhole, VAudioClip.ManholeOpen);
 
-			if (GC.levelFeeling == "WarZone")
+			if (GC.levelFeeling == VLevelFeeling.WarZone)
 			{
-				manhole.objectRealRealName = GC.nameDB.GetName("Hole", "Object");
+				manhole.objectRealRealName = GC.nameDB.GetName(VObject.Hole, "Object");
 				manhole.normalHole = true;
 			}
 

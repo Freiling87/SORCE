@@ -1,26 +1,22 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
-using System.Linq;
 using SORCE.Localization;
+using System.Linq;
+using UnityEngine;
 
 namespace SORCE.Challenges.C_AmbientLightColor
 {
-	public class ShadowRealm
+    public class ShadowRealm : AmbientLightColorChallenge
 	{
+		public ShadowRealm() : base(nameof(ShadowRealm)) { }
+
+        public override Color32 FilterColor => new Color32(75, 75, 75, 175);
+
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(ShadowRealm);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new ShadowRealm()
 			{
-				Cancellations = CColor.AmbientLightColor.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightColor.Where(i => i != nameof(ShadowRealm)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Shadow Realm"))

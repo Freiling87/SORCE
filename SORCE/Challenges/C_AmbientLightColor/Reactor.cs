@@ -1,26 +1,22 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
+using UnityEngine;
 
 namespace SORCE.Challenges.C_AmbientLightColor
 {
-	public class Reactor
+    public class Reactor : AmbientLightColorChallenge
 	{
+		public Reactor() : base(nameof(Reactor)) { }
+
+		public override Color32 FilterColor => new Color32(75, 200, 50, 125);
+
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(Reactor);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new Reactor()
 			{
-				Cancellations = CColor.AmbientLightColor.Where(i => i != name).ToList()
+				Cancellations = CColor.AmbientLightColor.Where(i => i != nameof(Reactor)).ToList()
 			})
 				.WithName(new CustomNameInfo(
 					"Ambient Light Color - Reactor"))

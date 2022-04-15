@@ -6,6 +6,7 @@ using SORCE.Challenges.C_Roamers;
 using SORCE.Challenges.C_Wreckage;
 using SORCE.Logging;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 
@@ -66,11 +67,8 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(TurfWar)) ? 12 :
 			vanilla;
 		public static int PopulationMultiplier() =>
-			GC.challenges.Contains(nameof(GhostTown)) ? 0 :
-			GC.challenges.Contains(nameof(HordeAlmighty)) ? 2 :
-			GC.challenges.Contains(nameof(LetMeSeeThatThrong)) ? 4 :
-			GC.challenges.Contains(nameof(SwarmWelcome)) ? 8 :
-			1;
+			RogueFramework.Unlocks.OfType<PopulationChallenge>().FirstOrDefault(c => c.IsEnabled)?.PopulationMultiplier
+				?? 1;
 		public static int PopulationMafia(int vanilla) =>
 			vanilla;
 
@@ -182,6 +180,7 @@ namespace SORCE.MapGenUtilities
 				GC.spawnerMain.SpawnButlerBot();
 		}
 
+		// TODO: To Library
 		public static void SpawnRoamerSquad(string leaderType, string bodyguardType, int totalSpawns = 0, int gangSize = 0, string relationship = VRelationship.Neutral, bool alwaysRun = false, bool mustBeGuilty = true)
 		{
 			logger.LogDebug("Spawn Roamer Squad");
