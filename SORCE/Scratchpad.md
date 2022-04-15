@@ -28,9 +28,7 @@ Complete
 Complete
 ###         C   Pollution Solution
 ####            C   Raise chance of poisoned lakes
-LoadLevel.SetupMore3_3 
-    calls SpreadPoisonWait & SpreadPoisonStart
-    water.SpreadPoisonWait(this.gc.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
+MapFeatureSpawners.PoisonLakes()
 Didn't work
 ####            H   Smoke particles from poisoned lakes
 Water.SpreadPoisonStart postfix
@@ -202,6 +200,8 @@ Complete
 ###         C   No Item/Wreckage Lights
 - SpawnerMain.SetLighting2
   - DW, try other ways in same method
+- Item.SetLightBrightness
+  - Not attempted yet
 ###         C   No Object Lights
 Works
 ####            C   Object type exclusions
@@ -276,11 +276,20 @@ More trash!
 ####            H   Spawn very specific trash particles when consuming objects
 More trash! 
 Custom sprites, or smaller/slightly darker/on side
-###         C   Shell Casings
-Generate a sprite with SpawnerMain.Spawn, or whatever's used in wreckage spawner
+###         C   Shootier Guns
 Use jump script from exiting water for particle spawned
-Will need a custom sprite
-    Customize for each weapon
+####            C   Orient spill consistently
+New
+####            C   Identify Bounce
+Item.OnCollisionEnter2D
+item.invItemName == "Wreckage"
+!Item.isrealItem is for wreckage I think
+GC.AudioHandler.Play(item, "ShellCasing")
+####            C   Randomize angle on bounce
+New
+####            C   Audio on bounce
+New
+####            C   Muzzle Flash
 ###         C   Goodie Dispenser
 Add Vendor Cart parts
 ###			√	Floraler Flora
@@ -744,6 +753,7 @@ Just double check those categories.
 ###         C   New features
 CHECK FEATURE LIST
 Poison resistance with + version
+###         C   Spawns next to water
 ###			C	Disable Teleport to entry point
 Works, but has a chance of rolling self
 ###         C   Flushing to Manhole doesn't work

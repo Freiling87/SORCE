@@ -38,12 +38,35 @@ namespace SORCE.Patches.P_PlayfieldObject
             else
                 invItem = __instance.agent.inventory.equippedWeapon.invItemName;
 
-            if (invItem == VItem.Pistol ||
-                invItem == VItem.MachineGun ||
-                invItem == VItem.Revolver)
-                SpawnBulletCasing(__instance, CSprite.Casing);
-            else if (invItem == VItem.Shotgun)
-                SpawnBulletCasing(__instance, CSprite.ShotgunShell);
+            switch (invItem)
+            {
+                case VItem.MachineGun:
+                    SpawnBulletCasing(__instance, CSprite.Casing);
+                    MuzzleFlash(__instance);
+
+                    break;
+
+                case VItem.Pistol:
+                    SpawnBulletCasing(__instance, CSprite.Casing);
+
+                    break;
+
+                case VItem.Revolver:
+                    SpawnBulletCasing(__instance, CSprite.Casing);
+
+                    break;
+
+                case VItem.Shotgun:
+                    SpawnBulletCasing(__instance, CSprite.ShotgunShell);
+
+                    break;
+
+            }
+        }
+
+        private static void MuzzleFlash(Gun gun)
+        {
+            // GC.spawnerMain.SpawnLightTemp(gun.tr.position, gun.agent, "GunFlash"); // dw
         }
 
         private static void SpawnBulletCasing(Gun gun, string casingType)
@@ -51,19 +74,21 @@ namespace SORCE.Patches.P_PlayfieldObject
             Vector3 vector = new Vector3(gun.transform.position.x, gun.transform.position.y, Random.Range(-0.78f, -1.82f));
 
             Item casing = GC.spawnerMain.wreckagePrefab.Spawn(vector);
+            casing.itemName = casingType;
             casing.DoEnable();
             casing.isWreckage = true;
             //casing.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
             casing.animator.enabled = true;
-            casing.animator.Play("ItemJump 1", -1, 0f);
             casing.justSpilled = true;
-
             tk2dSprite component = casing.tr.GetChild(0).transform.GetChild(0).GetComponent<tk2dSprite>();
             component.SetSprite(casingType);
             component.transform.localPosition = Vector3.zero;
-            component.color = Color.yellow;
 
-            casing.GetComponent<Movement>().Spill((float)Random.Range(90, 110), null, null);
+            Movement movement = casing.GetComponent<Movement>();
+            //movement.SetPhysics("Ice"); Looks a little like rolling
+            casing.animator.Play("ItemJump 1", -1, 0f);
+            movement.Spill((float)Random.Range(90, 120), null, null);
+            
             casing.FakeStart();
         }
     }

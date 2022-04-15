@@ -19,9 +19,15 @@ namespace SORCE.Patches.P_PlayfieldObject
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        //[HarmonyPostfix, HarmonyPatch(methodName: nameof(Water.SpreadPoison), argumentTypes: new[] { typeof(int), typeof(int), typeof(bool), typeof(string) })]
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Water.SpreadPoison), argumentTypes: new[] { typeof(int), typeof(int), typeof(bool), typeof(string) })]
         public static void SpreadPoisonStart_Postfix(int posX, int posY, bool firstSpread, string effectType, Water __instance)
         {
+            //foreach (string str in __instance.effectContents)
+            //    logger.LogDebug("Effect: " + str);
+
+            //foreach (string str in __instance.syringeContents)
+            //    logger.LogDebug("Syringe: " + str);
+
             if (effectType != "Clean" && GC.percentChance(1) && GC.percentChance(50))
                 GC.spawnerMain.SpawnParticleEffect(VParticleEffect.SmokePuffs, new Vector3(posX * 0.64f, posY * 0.64f, __instance.tr.position.z), 0f);
         }

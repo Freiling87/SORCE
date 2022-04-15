@@ -18,6 +18,7 @@ namespace SORCE.MapGenUtilities
 		public static GameController GC => GameController.gameController;
 
 		public static bool HasLeaves =>
+			Core.debugMode ||
 			GC.challenges.Contains(nameof(Arcology)) || // Leaves
 			GC.challenges.Contains(nameof(FloralerFlora));
 		public static bool HasPrivateLitter =>
@@ -120,23 +121,32 @@ namespace SORCE.MapGenUtilities
 			return WreckageMisc.RandomElement();
 		}
 
-		public static List<string> WreckageMisc = new List<string>()
-			{
-				VObject.MovieScreen, VObject.MovieScreen,
-				VObject.Shelf,
-				VObject.Stove,
-				VObject.Television,
-				VObject.TrashCan,
-				VObject.VendorCart,
-				VObject.Window, VObject.Window
-			};
+		public static string FoodWreckageType() =>
+			WreckageFood.RandomElement();
 
+		public static List<string> WreckageFood = new List<string>()
+		{
+			VObject.Shelf,
+			VObject.VendorCart,
+			VObject.BarStool,
+			VObject.MovieScreen,
+		};
+		public static List<string> WreckageMisc = new List<string>()
+		{
+			VObject.MovieScreen, VObject.MovieScreen,
+			VObject.Shelf,
+			VObject.Stove,
+			VObject.Television,
+			VObject.TrashCan,
+			VObject.VendorCart,
+			VObject.Window, VObject.Window
+		};
 		public static List<string> WreckageWood = new List<string>()
-			{
-				VObject.Chair,
-				VObject.Shelf,
-				VObject.Table,
-				VObject.TableBig,
-			};
+		{
+			VObject.Chair,
+			VObject.Shelf,
+			VObject.Table,
+			VObject.TableBig,
+		};
 	}
 }

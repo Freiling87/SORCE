@@ -143,7 +143,7 @@ namespace SORCE.MapGenUtilities
 			vanilla;
 		public static bool HasOilSpills(bool vanilla) =>
 			!GC.challenges.Contains(nameof(Arcology)) &&
-			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			!GC.challenges.Contains(nameof(LowTechLowLife)) && 
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(AnCapistan)) ||
@@ -203,3 +203,4 @@ namespace SORCE.MapGenUtilities
         #endregion
     }
 }
+ 

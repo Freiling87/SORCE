@@ -192,7 +192,7 @@
     <Compile Include="MapGenUtilities\Structures.cs" />
     <Compile Include="MapGenUtilities\Wreckage.cs" />
     <Compile Include="Patches\P_Agent.cs" />
-    <Compile Include="Patches\P_Gun.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Gun.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_SetupMore3_3.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />
@@ -201,6 +201,7 @@
     <Compile Include="Patches\P_PlayfieldObject\P_FlameGrate.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Fountain.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Hole.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Item.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Lamp.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Manhole.cs" />
     <Compile Include="Patches\P_BasicFloor.cs" />
