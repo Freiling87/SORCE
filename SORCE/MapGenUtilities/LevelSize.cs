@@ -23,11 +23,7 @@ namespace SORCE.MapGenUtilities
 		public static float ChunkCountRatio => 
 			ChunkCount / 30f;
 
-		public static void SetChunkCount(LoadLevel loadLevel)
-        {
-			logger.LogDebug("SetChunkCount: " + ChunkCount);
-
-			loadLevel.levelSizeMax = ChunkCount;
-		}
+		public static void SetChunkCount(LoadLevel loadLevel) =>
+			GC.loadLevel.levelSizeMax = ChunkCount;
 	}
 }

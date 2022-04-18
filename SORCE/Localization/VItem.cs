@@ -301,6 +301,14 @@ namespace SORCE.Localization
                     Crowbar,
 					Wrench,
 			};
+
+			public static List<string> SmallArms = new List<string>()
+			{
+				MachineGun,
+				Pistol,
+				Revolver,
+				Shotgun
+			};
 		}
 	}
 }

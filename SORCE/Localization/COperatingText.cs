@@ -5,7 +5,8 @@
         public static class COperatingText // Custom Operating Bar Text
         {
 			public const string
-				FountainStealing = "BeingAPieceOfShit";
+				FountainStealing = "FountainStealing",
+                ToiletShitting = "ToiletShitting";
         }
 	}
 }

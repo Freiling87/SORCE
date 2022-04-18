@@ -129,10 +129,10 @@ namespace SORCE.MapGenUtilities
 			VObject.Shelf,
 			VObject.VendorCart,
 			VObject.BarStool,
-			VObject.MovieScreen,
 		};
 		public static List<string> WreckageMisc = new List<string>()
 		{
+			VObject.BarStool,
 			VObject.MovieScreen, VObject.MovieScreen,
 			VObject.Shelf,
 			VObject.Stove,

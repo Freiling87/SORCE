@@ -171,6 +171,7 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(MACITS)) ||
 			GC.challenges.Contains(nameof(PoliceState)) ||
+			Core.debugMode ||
 			vanilla; 
 		public static bool HasTrees(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&

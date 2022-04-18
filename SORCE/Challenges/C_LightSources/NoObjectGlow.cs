@@ -9,19 +9,19 @@ using RogueLibsCore;
 
 namespace SORCE.Challenges.C_Lighting
 {
-	public static class NoAgentLights
+	public static class NoObjectGlow
 	{
 		[RLSetup]
 		public static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(NoAgentLights), true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(NoObjectGlow), true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Disables Agent Lights",
+					[LanguageCode.English] = "Objects no longer flash yellow if you have items you can use on them.",
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Lighting - No Agent Lights",
+					[LanguageCode.English] = "Light Sources - No Object Glow",
 				});
 		}
 	}

@@ -35,6 +35,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 					P_Manhole.PryOpen((Manhole)__instance);
 				else if (__instance is Fountain)
 					P_Fountain.Loot((Fountain)__instance);
+				else if (__instance is Toilet)
+					P_Toilet.TakeHugeShit((Toilet)__instance);
 			}
 		}
 

@@ -21,7 +21,7 @@ namespace SORCE.Challenges.C_Lighting
 				})
 				.WithName(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Lighting - No Item Lights",
+					[LanguageCode.English] = "Light Sources - No Item Lights",
 				});
 		}
 	}
