@@ -10,6 +10,7 @@ namespace SORCE.Localization
     {
         public const string
             Casing = "Casing",
+            RifleCasing = "RifleCasing",
             ShotgunShell = "ShotgunShell";
     }
 }

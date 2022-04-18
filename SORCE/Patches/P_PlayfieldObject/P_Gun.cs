@@ -4,6 +4,7 @@ using RogueLibsCore;
 using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
+using SORCE.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,55 @@ namespace SORCE.Patches.P_PlayfieldObject
         public static void Setup()
         {
             RogueLibs.CreateCustomSprite(CSprite.Casing, SpriteScope.Wreckage, Properties.Resources.Casing);
+            RogueLibs.CreateCustomSprite(CSprite.RifleCasing, SpriteScope.Wreckage, Properties.Resources.RifleCasing);
             RogueLibs.CreateCustomSprite(CSprite.ShotgunShell, SpriteScope.Wreckage, Properties.Resources.ShotgunShell);
         }
 
+        [HarmonyPrefix, HarmonyPatch(methodName: nameof(Gun.Shoot), argumentTypes: new[] { typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(string) })]
+        public static bool Shoot_Prefix(bool specialAbility, bool silenced, bool rubber, int bulletNetID, string bulletStatusEffect, Gun __instance)
+        {
+            string invItem;
+
+            if (specialAbility)
+                invItem = __instance.agent.inventory.equippedSpecialAbility.invItemName;
+            else
+                invItem = __instance.agent.inventory.equippedWeapon.invItemName;
+
+            switch (invItem)
+            {
+                case VItem.MachineGun:
+                    Audiovisual.MuzzleFlash(__instance.tr.position);
+
+                    break;
+
+                case VItem.Pistol:
+                    Audiovisual.MuzzleFlash(__instance.tr.position);
+
+                    break;
+
+                case VItem.Revolver:
+                    Audiovisual.MuzzleFlash(__instance.tr.position);
+
+                    break;
+
+                case VItem.Shotgun:
+                    Audiovisual.MuzzleFlash(__instance.tr.position);
+
+                    break;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Bullet casing spawners
+        /// </summary>
+        /// <param name="specialAbility"></param>
+        /// <param name="silenced"></param>
+        /// <param name="rubber"></param>
+        /// <param name="bulletNetID"></param>
+        /// <param name="bulletStatusEffect"></param>
+        /// <param name="__instance"></param>
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Gun.Shoot), argumentTypes: new[] { typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(string) })]
         public static void Shoot_Postfix(bool specialAbility, bool silenced, bool rubber, int bulletNetID, string bulletStatusEffect, Gun __instance)
         {
@@ -41,55 +88,24 @@ namespace SORCE.Patches.P_PlayfieldObject
             switch (invItem)
             {
                 case VItem.MachineGun:
-                    SpawnBulletCasing(__instance, CSprite.Casing);
-                    MuzzleFlash(__instance);
+                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.Casing);
 
                     break;
 
                 case VItem.Pistol:
-                    SpawnBulletCasing(__instance, CSprite.Casing);
+                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.Casing);
 
                     break;
 
                 case VItem.Revolver:
-                    SpawnBulletCasing(__instance, CSprite.Casing);
 
                     break;
 
                 case VItem.Shotgun:
-                    SpawnBulletCasing(__instance, CSprite.ShotgunShell);
+                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.ShotgunShell);
 
                     break;
-
             }
-        }
-
-        private static void MuzzleFlash(Gun gun)
-        {
-            // GC.spawnerMain.SpawnLightTemp(gun.tr.position, gun.agent, "GunFlash"); // dw
-        }
-
-        private static void SpawnBulletCasing(Gun gun, string casingType)
-        {
-            Vector3 vector = new Vector3(gun.transform.position.x, gun.transform.position.y, Random.Range(-0.78f, -1.82f));
-
-            Item casing = GC.spawnerMain.wreckagePrefab.Spawn(vector);
-            casing.itemName = casingType;
-            casing.DoEnable();
-            casing.isWreckage = true;
-            //casing.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
-            casing.animator.enabled = true;
-            casing.justSpilled = true;
-            tk2dSprite component = casing.tr.GetChild(0).transform.GetChild(0).GetComponent<tk2dSprite>();
-            component.SetSprite(casingType);
-            component.transform.localPosition = Vector3.zero;
-
-            Movement movement = casing.GetComponent<Movement>();
-            //movement.SetPhysics("Ice"); Looks a little like rolling
-            casing.animator.Play("ItemJump 1", -1, 0f);
-            movement.Spill((float)Random.Range(90, 120), null, null);
-            
-            casing.FakeStart();
         }
     }
 }
