@@ -69,6 +69,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\Libraries\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
       <HintPath>..\Libraries\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
@@ -101,10 +104,11 @@
     <Compile Include="Challenges\C_Features\FlameGrates.cs" />
     <Compile Include="Challenges\C_Features\WelcomeMats.cs" />
     <Compile Include="Challenges\C_Features\VerdantVistas.cs" />
-    <Compile Include="Challenges\C_Lighting\NoAgentLights.cs" />
-    <Compile Include="Challenges\C_Lighting\NoItemLights.cs" />
-    <Compile Include="Challenges\C_Lighting\NoObjectGlow.cs" />
-    <Compile Include="Challenges\C_Lighting\NoObjectLights.cs" />
+    <Compile Include="Challenges\C_LightSources\NoAgentLights.cs" />
+    <Compile Include="Challenges\C_LightSources\NoItemLights.cs" />
+    <Compile Include="Challenges\C_LightSources\NoObjectGlow.cs" />
+    <Compile Include="Challenges\C_LightSources\NoObjectLights.cs" />
+    <Compile Include="Challenges\C_LightSources\NoParticleLights.cs" />
     <Compile Include="Challenges\C_MapSize\MapSizeChallenge.cs" />
     <Compile Include="Challenges\C_Overhaul\Hell.cs" />
     <Compile Include="Challenges\C_Overhaul\Tindertown.cs" />
@@ -196,10 +200,11 @@
     <Compile Include="MapGenUtilities\Structures.cs" />
     <Compile Include="MapGenUtilities\Wreckage.cs" />
     <Compile Include="Patches\P_Agent.cs" />
-    <Compile Include="Patches\P_Gun.cs" />
+    <Compile Include="Patches\P_GameController.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_SetupMore3_3.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Bullet.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Elevator.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_FireHydrant.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_FlameGrate.cs" />
