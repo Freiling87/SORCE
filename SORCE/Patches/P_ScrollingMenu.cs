@@ -11,6 +11,8 @@ using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_AmbientLightColor;
 using SORCE.Challenges.C_AmbientLightLevel;
 using SORCE.Challenges;
+using SORCE.Challenges.C_Lighting;
+using SORCE.Patches.P_PlayfieldObject;
 
 namespace SORCE.Patches.Interface
 {
@@ -27,6 +29,10 @@ namespace SORCE.Patches.Interface
 				GC.cameraScript.lightingSystem.EnableAmbientLight = false;
 			else
 				GC.cameraScript.lightingSystem.EnableAmbientLight = true;
+
+			P_Bullet.NoBulletLights = 
+				GC.challenges.Contains(nameof(NoParticleLights)) ||
+				Core.debugMode;
 
 			// TODO: Check for Mutator Menu, or that the button regards ambient light mutators. For now, this'll work.
 			GC.loadLevel.SetNormalLighting();

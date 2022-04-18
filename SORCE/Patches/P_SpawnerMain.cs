@@ -16,6 +16,7 @@ using SORCE.Challenges.C_Wreckage;
 using SORCE.Challenges.C_Lighting;
 using SORCE.Challenges.C_Overhaul;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace SORCE.Patches
 {
@@ -53,10 +54,10 @@ namespace SORCE.Patches
 			__result = lightReal.lightReal2Color;
 			return false;
 
-            #region Vanilla
+			#region Vanilla
 
-			#pragma warning disable CS0162 // Unreachable code detected
-            if (lightRealName == "ArenaRingLight")
+#pragma warning disable CS0162 // Unreachable code detected
+			if (lightRealName == "ArenaRingLight")
 				lightReal.lightReal2Color = VColor.arenaRingColor;
 			else if (lightRealName == "BankLight")
 				lightReal.lightReal2Color = VColor.whiteColor;
@@ -74,8 +75,8 @@ namespace SORCE.Patches
 				lightReal.lightReal2Color = VColor.fireStationColor;
 			else if (lightRealName == "GraveyardLight")
 				lightReal.lightReal2Color = VColor.cyanColor;
-			#pragma warning restore CS0162 // Unreachable code detected
-            if (lightRealName == "GreenLight")
+#pragma warning restore CS0162 // Unreachable code detected
+			if (lightRealName == "GreenLight")
 				lightReal.lightReal2Color = VColor.greenColor;
 			else if (lightRealName == "HomeLight")
 			{
@@ -151,32 +152,24 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SetLighting2), argumentTypes: new[] { typeof(PlayfieldObject) })]
 		public static bool SetLighting2_Prefix(PlayfieldObject myObject, SpawnerMain __instance)
 		{
-			// Don't use Debug mode with these, it can mess with it.
-
-			if (myObject.CompareTag("Agent") && 
-				GC.challenges.Contains(nameof(NoAgentLights)))
+			if (myObject.CompareTag("ObjectReal") &&
+				GC.challenges.Contains(nameof(NoObjectLights)) &&
+				!VObject.Electronics.Contains(myObject.objectName))
 			{
-				Agent agent = (Agent)myObject;
-				agent.hasLight = false;
+				ObjectReal objectReal = (ObjectReal)myObject;
+				objectReal.noLight = true;
 			}
 
-            // This one doesn't work, but this still might be the right method to patch.
-
-            //if (myObject.CompareTag("Item") &&
-            //	GC.challenges.Contains(nameof(NoItemLights)))
-            //{
-            //	Item item = (Item)myObject;
-            //	item.hasLightTemp = false;
-            //}
-
-            if (myObject.CompareTag("ObjectReal") &&
-                GC.challenges.Contains(nameof(NoObjectLights)))
+			if (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage") &&
+				GC.challenges.Contains(nameof(NoItemLights)))
             {
-                ObjectReal objectReal = (ObjectReal)myObject;
-                objectReal.noLight = true;
-            }
+				Item item = (Item)myObject;
 
-            return true;
+				myObject.defaultShader = GC.normalShader; // TODO: Test use LitShader with NewMoon to make them stand out subtly?
+				return false;
+			}
+
+			return true;
 		}
 	}
-}
+} 
