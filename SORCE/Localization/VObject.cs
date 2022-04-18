@@ -1,4 +1,6 @@
-﻿namespace SORCE.Localization
+﻿using System.Collections.Generic;
+
+namespace SORCE.Localization
 {
     public static partial class NameLists
 	{
@@ -83,6 +85,40 @@
 					WaterPump = "WaterPump",
 					Well = "Well",
 					Window = "Window";
+
+			public static List<string> Electronics = new List<string>()
+			{
+				AirConditioner,
+				AlarmButton,
+				AmmoDispenser,
+				ArcadeGame,
+				ATMMachine,
+				AugmentationBooth,
+				CapsuleMachine,
+				CloneMachine,
+				Computer,
+				Elevator,
+				Generator,
+				Generator2,
+				Jukebox,
+				Lamp,
+				LaserEmitter,
+				LoadoutMachine,
+				MovieScreen,
+				PawnShopMachine,
+				PoliceBox,
+				PowerBox,
+				Refrigerator,
+				Safe,
+				SatelliteDish,
+				SecurityCam,
+				SlotMachine,
+				Speaker,
+				Television,
+				Turntables,
+				Turret
+			};
 		}
+
 	}
 }
