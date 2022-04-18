@@ -9,6 +9,15 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
+#	C	Randomass ideas
+No ObjectReal mouse hover text
+	Or maybe only work with Space or other key
+	Save for a GUI mod
+#	T	Recent commit testing
+Toilet 
+	0-cost (no AnCap)?
+	All vanilla works still
+Trash cans don't seem to be spawning unless Core.Debug is in HasTrashcans. Test this.
 #	CT	Mutators
 ##      CT	Features
 ###         C   00 District Object Delimitation
@@ -16,16 +25,16 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 Pending test of basic features
 ####            C   00 Add SORCE dependency and test
 New
-####            √   Flame Grate
-Complete
+####            C   Flame Grate
+Delimitation Trait Gate
 ####            √   Manhole
 Complete
-####            √   SawBlade
-Complete
+####            C   SawBlade
+Delimitation Trait Gate
 ####            √   SlimeBarrel
 Complete
-####            √   Tube
-Complete
+####            C   Tube
+Delimitation Trait Gate?
 ###         C   Pollution Solution
 ####            T   Raise chance of poisoned lakes
 PoisonLakes()
@@ -157,8 +166,10 @@ Certain overhauls
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
 ##      √   Features - Archive
-###         √   Cart of the Deal
+###         √H   Cart of the Deal
 Complete
+####			H	Bodyguards
+If their spawns are more frequent, bodyguards might balance it
 ###         √   Meats of Rogue
 Complete
 ###         √   Power Whelming
@@ -188,39 +199,42 @@ Complete
   - NoObjectLights
 	- Works
 ###         C   No Agent Lights
-- The most recent attempt didn't make them move feet-first, but they still all have lights.
-- Didn't work, and made the agent move feet-first
-  - Same outcome for both locations of attempt
-- Agent.hasLight
-  - Postfix to false in
-	- Agent.Awake
-	  - Attempted
-		- DW
-	- Agent.RecycleAwake
-	  - Attempted
-		- DW
-  - Note, there are a total of four attempts at this active so you'll need to pare down once you find a working one.
-- Exclude Ghosts!
-- SpawnerMain.SetLighting2
-  - DW, try other ways in same method
-###         C   No Item/Wreckage Lights
-- SpawnerMain.SetLighting2
-  - DW, try other ways in same method
-- Item.SetLightBrightness
-  - Not attempted yet
-###         C   No Object Lights
-Works
-####            C   Object type exclusions
-Double check that all active electronics glow
-###         C   Player Agent Light Size
+Attempts
+	P_Agent
+		Awake_Postfix
+	P_Agent
+		RecycleAwake_Postfix
+	P_Agent
+		SetLightBrightness_Prefix
+	P_SpawnerMain
+		SetLighting2_Prefix
+####			C	Exclude Ghosts
+Or even add a blue glow
+###         H   Player Agent Light Size
 New
 This would be a stand-in for the flashlight
-###         C   Flashlight following player reticle
+###         H   Flashlight following player reticle
 New
-###         √   No Object Glow
-Complete
 ###         H   Flashlight Gun Mod?
 Someday
+###			√H	No Item/Wreckage Lights
+P_SpawnerMain.SetLighting2_Prefix
+####			H	Omit briefcase
+Because Pulp Fiction
+###			√H	No Object Lights
+P_SpawnerMain.SetLighting2_Prefix
+####			H	Custom Electronic lights
+Computer				Green glow
+SecurityCam				Sparse red blink
+TV						Blue ray
+###			√	Muzzle Flash
+P_Gun.Shoot_Prefix
+####			√	Apply to Turrets
+New
+###			√	No Bullet Lights
+P_Bullet.RealAwake_Postfix
+###			√	No Object Glow
+Complete
 ##      T   Map Size
 ###         T   Refactor
 ###         √   Arthropolis
@@ -258,7 +272,7 @@ New
 House: scale to chance. Some people are slobs, some aren't.
 Some are also slobs in different ways. The main 
 ####            C   Bathtub
-Pre-splashed water around tub
+Find a way to make the splash smaller
 ####            C   Bed
 Crumpled up tissues, make it look like they're under the bed
 ####            C   Desk
@@ -272,8 +286,8 @@ Food OR paper waste
 ####            C   Table (Small)
 Food OR paper waste
 ####            C   Toilet
-Move it here
 Highest chances in public toilets
+Find a way to make the splash smaller
 ####            C   Trashcan
 Differentiate indoor/outdoor
 ###         H   Flammable Wreckage
@@ -288,28 +302,48 @@ More trash!
 ####            H   Spawn very specific trash particles when consuming objects
 More trash! 
 Custom sprites, or smaller/slightly darker/on side
+###			C	Lootier Boxes
+Spawn "hoard" sprites around Safe or Chest in Armory
+Vary spawns per chunk type
 ###         C   Shootier Guns
 Use jump script from exiting water for particle spawned
 ####            C   Orient spill consistently
 New
 ####            C   Identify Bounce
 Item.OnCollisionEnter2D
-item.invItemName == "Wreckage"
+item.invItemName == "Wreckage" 
 !Item.isrealItem is for wreckage I think
 GC.AudioHandler.Play(item, "ShellCasing")
-####            C   Randomize angle on bounce
+####            C   Randomize sprite rotation on bounce
 New
 ####            C   Audio on bounce
 New
 ####            C   Muzzle Flash
+P_Gun.Shoot_Prefix
+P_Turret.FireGun_Postfix
 ###         C   Goodie Dispenser
 Add Vendor Cart parts
-###			√	Floraler Flora
+###			C	Floraler Flora
 PoolsScene.SpawnObjectReal
+####			C	Stopped working on Hedge Walls
+New
 ##      H   Decals
 Generate decoration across level.
 Most of these can be treated as Wreckage particles.
 Others would not be reactive in the same way.
+I think we can safely use the Wreckage layer, even though these won't be spawned in the same way.
+
+Item.rb.collisionDetectionMode = CollisionDetectionmode2D.None;
+SpawnerMain.SpawnFloorDecal
+##		H	Decals - Gunplay
+Blood 
+	Exit wound
+	Trailing from recently-hit agents 
+		(no need for bleeding status effect yet)
+	Small pool on death
+		Tracked shoe prints are probably a no-go
+Bullet holes
+	Different sprites & sounds for wall types
 ###         C   Private floors
 ####            C   Bath mat
 Placed in front of bathtub
@@ -791,12 +825,21 @@ Just double check those categories.
 ##		C	Underdank Citizen
 ###         C   New features
 CHECK FEATURE LIST
-Poison resistance with + version
+###			C	Opened manhole did not detect toilet exits
+Beginning of level
+###			C	Chance for Poopsplosion when exiting toilet
+Should work for vanilla flushing too
+Prevents future use, too disgusting
+Spawn tiny Hazard to make NPCs frightened of toilet permanently
+###			C	Death by E_
+Probably just setting a string
 ###			T	Spawns near Water
 TileInfo.WaterNearby has a levelTheme check 😡
 	Transpiler patched, test
-###			T	Disable Teleport to entry point
-Attempted
+###			C	Falling in does not randomize exit
+
+###			C	Manhole Agent Brain broken
+I think this is an import from BunnyMod
 ###         C   Flushing to Manhole doesn't work
 Technically works, but they fall right back in and trigger the flush method again.
 Find BM's old jump method of exiting.
@@ -822,7 +865,14 @@ Find BM's old jump method of exiting.
   - Attempted
 - Toilet to Manhole
   - Attempted
+##		C	Underdank VIP
+###			C	Poison Resistance
+###			C	No falling damage for Manholes
+###			C	Don't annoy except when poopy
 #	C	Release
+##		C	Export
+- Scary Guns
+  - P_Bullet.SetupBullet_Postfix
 ##		C	Set Unlock costs
 To get those sweet nuggets 😈
 ##		C	Disable Core.DebugMode

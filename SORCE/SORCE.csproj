@@ -169,8 +169,9 @@
     <Compile Include="Localization\VParticleEffect.cs" />
     <Compile Include="Localization\VAgentGoal.cs" />
     <Compile Include="Localization\VRelationship.cs" />
-    <Compile Include="MapGenUtilities\AmbientAudio.cs" />
-    <Compile Include="MapGenUtilities\LevelGenTools.cs" />
+    <Compile Include="Utilities\Audiovisual.cs" />
+    <Compile Include="Utilities\MapGen\AmbientAudio.cs" />
+    <Compile Include="Utilities\MapGen\LevelGenTools.cs" />
     <Compile Include="Localization\VAgent.cs" />
     <Compile Include="Localization\VAmbience.cs" />
     <Compile Include="Localization\VAnimation.cs" />
@@ -194,13 +195,11 @@
     <Compile Include="Localization\VWall.cs" />
     <Compile Include="Localization\VWallGroup.cs" />
     <Compile Include="Logging\SORCELogger.cs" />
-    <Compile Include="MapGenUtilities\MapFeatures.cs" />
-    <Compile Include="MapGenUtilities\MapFeatureSpawners.cs" />
-    <Compile Include="MapGenUtilities\Roamers.cs" />
-    <Compile Include="MapGenUtilities\Structures.cs" />
-    <Compile Include="MapGenUtilities\Wreckage.cs" />
-    <Compile Include="Patches\P_Agent.cs" />
-    <Compile Include="Patches\P_GameController.cs" />
+    <Compile Include="Utilities\MapGen\MapFeatures.cs" />
+    <Compile Include="Utilities\MapGen\MapFeatureSpawners.cs" />
+    <Compile Include="Utilities\MapGen\Roamers.cs" />
+    <Compile Include="Utilities\MapGen\Structures.cs" />
+    <Compile Include="Utilities\MapGen\Wreckage.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_SetupMore3_3.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />
@@ -247,7 +246,7 @@
     </Compile>
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\UnderdankCitizen.cs" />
-    <Compile Include="MapGenUtilities\LevelSize.cs" />
+    <Compile Include="Utilities\MapGen\LevelSize.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Screenshots\" />
@@ -256,12 +255,13 @@
     <None Include="Documentation\2.0. Features.md" />
     <None Include="Documentation\1.0. Installation.md" />
     <None Include="packages.config" />
+    <None Include="Resources\Casing.bin" />
+    <None Include="Resources\RifleCasing.bin" />
+    <None Include="Resources\ShotgunShell.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\SORCE_64x64.png" />
-    <None Include="Resources\ShotgunShell.png" />
-    <None Include="Resources\Casing.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

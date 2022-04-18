@@ -9,6 +9,7 @@ using SORCE.Traits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -23,8 +24,6 @@ namespace SORCE.Patches.P_PlayfieldObject
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		static int toiletCost;
-
 		// To remove vanilla buttons, until RL is patched to do so:
 		//	FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
 		//	List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
@@ -37,12 +36,24 @@ namespace SORCE.Patches.P_PlayfieldObject
 		{
 			string t = VNameType.Interface;
 			RogueLibs.CreateCustomName(CButtonText.TakeHugeShit, t, new CustomNameInfo("Take a huge shit"));
+			RogueLibs.CreateCustomName(COperatingText.ToiletShitting, t, new CustomNameInfo("Taking a huge shit"));
+			t = VNameType.Dialogue;
+			RogueLibs.CreateCustomName(CDialogue.ToiletDisgusting, t, new CustomNameInfo("*Gag* Nope."));
 
 			RogueInteractions.CreateProvider<Toilet>(h =>
 			{
-				toiletCost = GC.challenges.Contains(nameof(AnCapistan))
-					? 10
-					: 0;
+				if (h.Object.GetHook<P_Toilet_Hook>().disgusting)
+				{
+					h.Agent.SayDialogue(CDialogue.ToiletDisgusting);
+					h.Agent.StopInteraction();
+				}
+				
+				// Vanilla Flush removal
+				//FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
+				//List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
+				//interactions.RemoveAll(i => i.ButtonName is VButtonText.FlushYourself);
+
+				int toiletCost = h.Object.GetHook<P_Toilet_Hook>().toiletCost;
 
 				if (E_Agent.IsFlushable(h.Agent))
 					h.AddButton(VButtonText.FlushYourself, toiletCost, m =>
@@ -59,14 +70,13 @@ namespace SORCE.Patches.P_PlayfieldObject
 				if (Core.debugMode)
 					h.AddButton(CButtonText.TakeHugeShit, toiletCost, m =>
 					{
-						// Add loading bar
-						TakeHugeShit(m.Agent, m.Object);
+						m.StartOperating(2f, false, COperatingText.ToiletShitting);
 					});
 			});
 		}
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Toilet.FlushYourself), argumentTypes: new Type[] { })]
-		public static bool FlushYourself_Prefix(Toilet __instance) 
+		public static bool FlushYourself_Prefix(Toilet __instance)
 		{
 			if (!__instance.interactingAgent.HasTrait<UnderdankCitizen>())
 				return true;
@@ -75,19 +85,55 @@ namespace SORCE.Patches.P_PlayfieldObject
 			return false;
 		}
 
-		private static void TakeHugeShit(Agent agent, Toilet toilet)
+		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(Toilet.DetermineButtons), argumentTypes: new Type[] { })]
+		public static bool DetermineButtons_Prefix(Toilet __instance)
         {
-			Vector2 loc = toilet.tr.position;
+			P_00_ObjectReal.DetermineButtons_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
 
-			Wreckage.SpawnWreckagePileObject_Granular(
-				new Vector2(loc.x, loc.y),
-				VObject.FlamingBarrel,
-				false,
-				3,
-				0.64f, 0.64f);
+			return false;
+        } 
 
-			GC.spawnerMain.SpawnExplosion(agent, loc, VExplosion.Water);
-			P_00_ObjectReal.AnnoyWitnessesVictimless(agent);
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Toilet.SetVars), argumentTypes: new Type[] { })]
+		public static void SetVars_Postfix(Toilet __instance)
+        {
+			__instance.AddHook<P_Toilet_Hook>();
 		}
+
+		public static void TakeHugeShit(Toilet toilet)
+		{
+			Agent agent = toilet.interactingAgent;
+
+			Poopsplosion(toilet);
+			P_00_ObjectReal.AnnoyWitnessesVictimless(agent);
+			//agent.StopInteraction();
+			//toilet.StopInteraction();
+		}
+
+		public static void Poopsplosion(ObjectReal targetObj)
+		{
+			Agent agent = targetObj.interactingAgent;
+			GC.spawnerMain.SpawnExplosion(agent, targetObj.tr.position, VExplosion.Water);
+			GC.spawnerMain.SpawnWreckagePileObject(targetObj.tr.position, VObject.FlamingBarrel, false);
+			GC.spawnerMain.SpawnWreckagePileObject(targetObj.tr.position, VObject.MovieScreen, false);
+
+			if (targetObj is Toilet toilet)
+				toilet.GetHook<P_Toilet_Hook>().disgusting = true;
+		}
+	}
+
+	public class P_Toilet_Hook : HookBase<PlayfieldObject>
+	{
+		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		public static GameController GC => GameController.gameController;
+
+		protected override void Initialize() { }
+
+		public bool disgusting = false;
+		public bool hackedFree = false;
+		public bool hackedPoopsplosion = false;
+		public bool hackedWaterSpray = false;
+		public int toiletCost = GC.challenges.Contains(nameof(AnCapistan)) 
+			? 10 
+			: 0;
 	}
 }
