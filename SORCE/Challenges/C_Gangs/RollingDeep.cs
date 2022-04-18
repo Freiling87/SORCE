@@ -9,7 +9,7 @@ using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Roamers
+namespace SORCE.Challenges.C_Gangs
 {
 	public class RollingDeep
 	{

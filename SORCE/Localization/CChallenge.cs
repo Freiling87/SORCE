@@ -2,7 +2,7 @@
 using SORCE.Challenges.C_MapSize;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Population;
-using SORCE.Challenges.C_Roamers;
+using SORCE.Challenges.C_Gangs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

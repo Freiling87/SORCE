@@ -9,22 +9,22 @@ using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Roamers
+namespace SORCE.Challenges.C_Gangs
 {
-	public class TurfWar
+	public class UnionTown
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(TurfWar);
+			const string name = nameof(UnionTown);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Roamers - Turf War"))
+					"Roamers - Union Town"))
 				.WithDescription(new CustomNameInfo(
-					"The annual charity drive for the Blahds and Crepes happened to overlap this year. They're in tough competition to sell the most cookies... by any means necessary!"));
+					"We run dis town. Enable dis mutatah, or else. Stugots!"));
 		}
 	}
 }
