@@ -2,7 +2,7 @@
 using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Features;
 using SORCE.Challenges.C_Overhaul;
-using SORCE.Challenges.C_Roamers;
+using SORCE.Challenges.C_Gangs;
 using SORCE.Challenges.C_Wreckage;
 using SORCE.Localization;
 using SORCE.Logging;

@@ -2,7 +2,7 @@
 using RogueLibsCore;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Population;
-using SORCE.Challenges.C_Roamers;
+using SORCE.Challenges.C_Gangs;
 using SORCE.Challenges.C_Wreckage;
 using SORCE.Logging;
 using System.Collections.Generic;
@@ -18,18 +18,19 @@ namespace SORCE.MapGenUtilities
 		public static GameController GC => GameController.gameController;
 
 		public static int GangTotalCount =>
-			Random.Range(5, 15);
+			(int)(Random.Range(12, 24) * LevelSize.ChunkCountRatio);
 		public static int GangSize =>
-			Random.Range(3, 5);
+			Random.Range(3, 8);
 
 		public static bool HasArsonists =>
 			Core.debugMode;
-		public static bool HasButlerBot =>
-			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
-			GC.challenges.Contains(nameof(Technocracy)); // Human butler?
 		public static bool HasBlahdGangs =>
 			Core.debugMode;
 		public static bool HasCannibalGangs =>
+			Core.debugMode;
+		public static bool HasCopGangs =>
+			Core.debugMode;
+		public static bool HasCopBotGangs =>
 			Core.debugMode;
 		public static bool HasCrepeGangs =>
 			Core.debugMode;
@@ -37,19 +38,6 @@ namespace SORCE.MapGenUtilities
 			Core.debugMode;
 		public static bool HasFirefighterGangs =>
 			Core.debugMode;
-		public static bool HasGangbangerGangs(bool vanilla) =>
-			!GC.challenges.Contains(nameof(MACITS)) &&
-			!GC.challenges.Contains(nameof(PoliceState)) &&
-			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(RollingDeep)) ||
-			Core.debugMode ||
-			vanilla;
-		public static bool HasMafiaGangs(bool vanilla) =>
-			!GC.challenges.Contains(nameof(PoliceState)) &&
-			!GC.challenges.Contains(nameof(MACITS)) &&
-			GC.challenges.Contains(nameof(AnCapistan)) ||
-			GC.challenges.Contains(nameof(UnionTown)) ||
-			vanilla;
 		public static bool HasSlaverGangs =>
 			Core.debugMode;
 		public static bool HasSoldierGangs =>
@@ -62,6 +50,23 @@ namespace SORCE.MapGenUtilities
 			Core.debugMode;
 		public static bool HasWerewolfGangs =>
 			Core.debugMode;
+
+		public static bool HasButlerBot => // Vanilla?
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
+			GC.challenges.Contains(nameof(Technocracy)); // Human butler?
+		public static bool HasGangbangerGangs(bool vanilla) => // TODO: Consider eliminating this one, since it's mostly redundant to the more granular ones.
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(RollingDeep)) ||
+			Core.debugMode ||
+			vanilla;
+		public static bool HasMafiaGangs(bool vanilla) =>
+			!GC.challenges.Contains(nameof(PoliceState)) &&
+			!GC.challenges.Contains(nameof(MACITS)) &&
+			GC.challenges.Contains(nameof(AnCapistan)) ||
+			GC.challenges.Contains(nameof(UnionTown)) ||
+			vanilla;
 
 		public static int PopulationGang(int vanilla) =>
 			GC.challenges.Contains(nameof(TurfWar)) ? 12 :
@@ -99,39 +104,84 @@ namespace SORCE.MapGenUtilities
 			SpawnButlerBot();
 
 			if (HasBlahdGangs)
-				SpawnRoamerSquad(VAgent.Blahd, VAgent.Blahd);
-			
+				SpawnRoamerSquad(VAgent.Blahd, VAgent.Blahd,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
+
 			if (HasCannibalGangs)
-				SpawnRoamerSquad(VAgent.Cannibal, VAgent.Cannibal);
+				SpawnRoamerSquad(VAgent.Cannibal, VAgent.Cannibal,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
+
+			if (HasCopGangs)
+				SpawnRoamerSquad(VAgent.Cop, VAgent.Cop,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 			
+			if (HasCopBotGangs)
+				SpawnRoamerSquad(VAgent.CopBot, VAgent.CopBot,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
+
 			if (HasCrepeGangs)
-				SpawnRoamerSquad(VAgent.Crepe, VAgent.Crepe);
+				SpawnRoamerSquad(VAgent.Crepe, VAgent.Crepe,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 
 			if (HasDrugDealerGangs)
-				SpawnRoamerSquad(VAgent.DrugDealer, VAgent.Goon);
+				SpawnRoamerSquad(VAgent.DrugDealer, VAgent.Goon,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 
 			if (HasFirefighterGangs)
-				SpawnRoamerSquad(VAgent.Doctor, VAgent.Firefighter); // Squad has an EMT
+				SpawnRoamerSquad(VAgent.Doctor, VAgent.Firefighter,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 
 			// TODO: This will need special attention
 			if (HasSlaverGangs)
-				SpawnRoamerSquad(VAgent.Slavemaster, VAgent.Slave);
+				SpawnRoamerSquad(VAgent.Slavemaster, VAgent.Slave,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 
 			if (HasSoldierGangs)
-				SpawnRoamerSquad(VAgent.Soldier, VAgent.Soldier);
+				SpawnRoamerSquad(VAgent.Soldier, VAgent.Soldier,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 
 			if (HasSupercopGangs)
-				SpawnRoamerSquad(VAgent.SuperCop, VAgent.SuperCop);
+				SpawnRoamerSquad(VAgent.SuperCop, VAgent.SuperCop,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 
 			if (HasThiefGangs)
-				SpawnRoamerSquad(VAgent.Thief, VAgent.Thief);
+				SpawnRoamerSquad(VAgent.Thief, VAgent.Thief,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 
 			if (HasVampireGangs)
-				SpawnRoamerSquad(VAgent.Vampire, VAgent.Werewolf);
+				SpawnRoamerSquad(VAgent.Vampire, VAgent.Vampire,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
 
 			if (HasWerewolfGangs)
-				SpawnRoamerSquad(VAgent.Werewolf, VAgent.Werewolf);
-        }
+				SpawnRoamerSquad(VAgent.Werewolf, VAgent.Werewolf,
+					relationship: VRelationship.Neutral,
+					alwaysRun: false,
+					mustBeGuilty: true);
+		}
 
 		public static void SpawnArsonist()
         {
@@ -183,19 +233,18 @@ namespace SORCE.MapGenUtilities
 		// TODO: To Library
 		public static void SpawnRoamerSquad(string leaderType, string bodyguardType, int totalSpawns = 0, int gangSize = 0, string relationship = VRelationship.Neutral, bool alwaysRun = false, bool mustBeGuilty = true)
 		{
-			logger.LogDebug("Spawn Roamer Squad");
-
 			if (totalSpawns == 0)
 				totalSpawns = GangTotalCount;
+
 			if (gangSize == 0)
 				gangSize = GangSize;
 
 			List<Agent> spawnedAgentList = new List<Agent>();
 			Agent playerAgent = GC.playerAgent;
-			LoadLevel loadLevel = GC.loadLevel;
 			//playerAgent.gangStalking = Agent.gangCount;
 			Vector2 pos = Vector2.zero;
-			totalSpawns = (int)(totalSpawns * loadLevel.levelSizeModifier);
+			
+			totalSpawns = (int)(totalSpawns * LevelSize.ChunkCountRatio);
 
 			for (int i = 0; i < totalSpawns; i++)
 			{

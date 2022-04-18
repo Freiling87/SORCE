@@ -242,16 +242,26 @@ Complete
 ###         √   Megapolis
 ###         √   Ultrapolis
 ##		C	Roamers
-Split Crepe & Blahd mutators
+###			C	FIRST,
+Refactor into RoamerChallenge inheritance. This is a clean slate so don't duplicate work.
+###			H	Others
+You might need to change spawn numbers to balance these
+####			H	Crêpin' on the Low Low
+I be, I be rollin' solo
+Spawns Crepe gangs of 1, same total number of agents.
+####			H	Blahd Runs Thick
+Blahd gangs are larger, same total number of agents.
 ###         C   Arsonist
 DW
 ###         C   Butler Bot
 Spawned, but only cleans bodies & not wreckage
-How to exclude private areas?s
+How to exclude private areas?
 ###         C   Roaming Cannibal Gangs
 New
 ###			T	Turf War
 DW
+Might be redundant anyway, consider eliminating it in favor of the granular ones.
+This name also sounds more like a Disaster akin to Warzone.
 ###			H	Rolling Deep
 Pending resolution of TW
 ###         H   Other Roamers
@@ -294,13 +304,13 @@ Differentiate indoor/outdoor
 New
 ###			C	Dirtier Districts
 PoolsScene.SpawnObjectReal
-####            C   Plant - Use leaf
-You can specify a wreckage type, so use the right kind of leaves. One or two of them look good.
 ####            C   Check for Indoors when spawning particle
 ####            H   Spawn receipt when using machines
 More trash!
 ####            H   Spawn very specific trash particles when consuming objects
 More trash! 
+####         C   Goodie Dispenser
+Add Vendor Cart parts
 Custom sprites, or smaller/slightly darker/on side
 ###			C	Lootier Boxes
 Spawn "hoard" sprites around Safe or Chest in Armory
@@ -321,8 +331,6 @@ New
 ####            C   Muzzle Flash
 P_Gun.Shoot_Prefix
 P_Turret.FireGun_Postfix
-###         C   Goodie Dispenser
-Add Vendor Cart parts
 ###			C	Floraler Flora
 PoolsScene.SpawnObjectReal
 ####			C	Stopped working on Hedge Walls

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace SORCE.MapGenUtilities
 {
-    internal class LevelSize
+    public class LevelSize
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
