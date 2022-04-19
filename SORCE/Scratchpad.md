@@ -19,7 +19,7 @@ Toilet
 	All vanilla works still
 Trash cans don't seem to be spawning unless Core.Debug is in HasTrashcans. Test this.
 #	CT	Mutators
-##      CT	Features
+##		CT	Features
 ###         C   00 District Object Delimitation
 ####            C   00 Export all to Delimitation mod
 Pending test of basic features
@@ -102,8 +102,6 @@ Use wall-attached sprite if generated next to a wall, or free-standing sprite if
 Show their text on hover/Space, with color added
 Make this data-driven so people can add content?
 	If so, divide them by chunk type
-###         H   Super-Turrets
-All turrets are Super
 ###         H   Surveillance Society
 On hold until Overhaul update 
 Require owned wall, as spawning on junk walls doesn't make sense
@@ -156,6 +154,10 @@ This will prefer dark alleys, etc.
 ###         √H   Brought Back Fountain
 ####			H	AnCapistan: Poisoned Fountains
 New
+###         √H   Cart of the Deal
+Complete
+####			H	Bodyguards
+If their spawns are more frequent, bodyguards might balance it
 ###         √H  Lake it or Leave it
 ####			H	Do not make lakes over Downtown bridges
 This is low-priority. I've just excluded Downtown for the time being.
@@ -165,11 +167,7 @@ Certain overhauls
 ###         √H  Verdant Vistas
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
-##      √   Features - Archive
-###         √H   Cart of the Deal
-Complete
-####			H	Bodyguards
-If their spawns are more frequent, bodyguards might balance it
+##		√	Features - Archive
 ###         √   Meats of Rogue
 Complete
 ###         √   Power Whelming
@@ -227,7 +225,7 @@ P_SpawnerMain.SetLighting2_Prefix
 Computer				Green glow
 SecurityCam				Sparse red blink
 TV						Blue ray
-###			√	Muzzle Flash
+###			√	Add Muzzle Flash
 P_Gun.Shoot_Prefix
 ####			√	Apply to Turrets
 New
@@ -235,15 +233,9 @@ New
 P_Bullet.RealAwake_Postfix
 ###			√	No Object Glow
 Complete
-##      T   Map Size
-###         T   Refactor
-###         √   Arthropolis
-###         √   Claustropolis
-###         √   Megapolis
-###         √   Ultrapolis
-##		C	Roamers
+##		C	Gangs
 ###			C	FIRST,
-Refactor into RoamerChallenge inheritance. This is a clean slate so don't duplicate work.
+Refactor into GangChallenge inheritance. This is a clean slate so don't duplicate work.
 ###			H	Others
 You might need to change spawn numbers to balance these
 ####			H	Crêpin' on the Low Low
@@ -273,11 +265,12 @@ Arsonist
 ###         H   
 ###			√   Union Town
 Complete
-##      C	Wreckage
+##		C	Litter
 Raise it! And check for borders, that's a good idea
+###			C	Rename to Litter
 ###         C   00 Spawns litter on level editor
 New
-###         C   Bachelorer Pads
+###			C   Bachelorer Pads
 ####            C   Scale litter to chunk type & Slumminess
 House: scale to chance. Some people are slobs, some aren't.
 Some are also slobs in different ways. The main 
@@ -300,6 +293,17 @@ Highest chances in public toilets
 Find a way to make the splash smaller
 ####            C   Trashcan
 Differentiate indoor/outdoor
+###		C	Consumerer Products
+On using consumables, spawn litter
+####			C	00 Add some of these to generic litter sprite inventories
+####            C   Cigarette Butt
+Fucking everywhere 
+####            C   Beer can
+Though this might not work with the throwable beer can
+####			C	Fud Jar
+With scorched Hot variant
+####			C	Smeared Banana peel
+After someone slips on it
 ###         H   Flammable Wreckage
 New
 ###			C	Dirtier Districts
@@ -335,14 +339,42 @@ P_Turret.FireGun_Postfix
 PoolsScene.SpawnObjectReal
 ####			C	Stopped working on Hedge Walls
 New
-##      H   Decals
+##		H	Decals
 Generate decoration across level.
 Most of these can be treated as Wreckage particles.
 Others would not be reactive in the same way.
 I think we can safely use the Wreckage layer, even though these won't be spawned in the same way.
+Will also need to figure out how to destroy decals when their host wall is destroyed.
 
 Item.rb.collisionDetectionMode = CollisionDetectionmode2D.None;
 SpawnerMain.SpawnFloorDecal
+###			C	Content
+Trash bags spawned near trash cans
+
+###         C   Private floors
+####            C   Bath mat
+Placed in front of bathtub
+####            C   Toilet paper roll
+Near toilets
+###         C   Private walls
+####            C   Painting
+####            C   Poster
+###         C   Public floors
+####            C   Body outline
+Murder scene
+####            C   Crushed cardboard box
+####            C   Plastic bag
+Only if you can make it blow in the wind.
+That said, if you could have a few frames of sprites that'd be really cool.
+####            C   Puddle of Piss
+Near toilets
+####			C	Trash bags
+Near trashcan spawns
+###         C   Public walls
+####            C   Graffiti
+Gang-related, political, or just obscene
+####            C   Poster
+Political, entertainment event, PSA
 ##		H	Decals - Gunplay
 Blood 
 	Exit wound
@@ -352,29 +384,6 @@ Blood
 		Tracked shoe prints are probably a no-go
 Bullet holes
 	Different sprites & sounds for wall types
-###         C   Private floors
-####            C   Bath mat
-Placed in front of bathtub
-####            C   Toilet paper roll
-Near toilets
-###         C   Private walls
-####            C   Painting
-####            C   Poster
-####            C   
-###         C   Public floors
-####            C   Body outline
-Murder scene
-####            C   Crushed cardboard box
-####            C   Plastic bag
-Blow in wind? Really unlikely
-####            C   Cigarette Butts
-####            C   Crushed can
-####            C   Puddle of Piss
-###         C   Public walls
-####            C   Graffiti
-Gang-related, political, or just obscene
-####            C   Poster
-Political, entertainment event, PSA
 ##		H	Laws
 ###			C	Legal Drugs
 ###			C	Legal Weapons
@@ -817,7 +826,7 @@ Complete, until Overhauls are scoped
 New, for stealth
 ###         C   Zombies Moan
 New
-##		T	Buildings
+##		√	Buildings
 ###         √   00 Flammable buildings don't spawn Fire Spewers
 P_RandomSelection.RandomSelect
 ###         √   Brixton
@@ -825,10 +834,13 @@ P_RandomSelection.RandomSelect
 ###         √   Concrete Jungle
 ###			√	Green Living
 ###			√	Panoptikopolis
-###         T   Shanty Town
-A few different possibly-tile floors spawned as wood. 
-Just double check those categories.
+###         √   Shanty Town
 ###         √	Spelunky Dory
+##		√	Map Size
+###         √   Arthropolis
+###         √   Claustropolis
+###         √   Megapolis
+###         √   Ultrapolis
 #	C	Traits
 ##		C	Underdank Citizen
 ###         C   New features
