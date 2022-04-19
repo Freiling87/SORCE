@@ -233,38 +233,48 @@ New
 P_Bullet.RealAwake_Postfix
 ###			√	No Object Glow
 Complete
-##		C	Gangs
-###			C	FIRST,
-Refactor into GangChallenge inheritance. This is a clean slate so don't duplicate work.
+##		T	Gangs
+###			T	Back Draft
+###			T	Banana Smugglers
+###			T	Bando Brothers
+####			H	Junkie Class
+Someday
+###			T	BURPs
+###			T	Crooklyn Ave.
+###			T	Experimental Excursion
+###			T	Headhunters
+###			T	Home Team
+###			T	Lunch Hour
+###			T	Merchant Caravans
+###			T	Not Swearwolves
+WerewolfB
+If no worky, try WerewolfA
+###			T	Piru St.
+###			T	Professional Network
+###			T	Protect & Servo
+May act differently in levels without Confiscation Centers
+###			T	Rougher Ruffians
+###			T	Team Melvin
+###			T	The Blue Line
+###			T	The Bluer Line
+###			T	Union Town
+###			T	We Love Our Job Creators
+Test various slave stuff
+###			C	Modifiers
+####			C	Fast Gangs
+####			C	Large Gang Size
+####			C	Small Gang Size
+####			C	More Gang Spawns
 ###			H	Others
-You might need to change spawn numbers to balance these
 ####			H	Crêpin' on the Low Low
 I be, I be rollin' solo
 Spawns Crepe gangs of 1, same total number of agents.
 ####			H	Blahd Runs Thick
 Blahd gangs are larger, same total number of agents.
-###         C   Arsonist
-DW
-###         C   Butler Bot
-Spawned, but only cleans bodies & not wreckage
-How to exclude private areas?
-###         C   Roaming Cannibal Gangs
-New
-###			T	Turf War
-DW
-Might be redundant anyway, consider eliminating it in favor of the granular ones.
-This name also sounds more like a Disaster akin to Warzone.
-###			H	Rolling Deep
-Pending resolution of TW
-###         H   Other Roamers
-Cannibal, Soldier
-Cop, Supercop
-Vampire, Werewolf
-Thief
-Arsonist
-###         H   
-###			√   Union Town
-Complete
+####			H	Faster Gangs
+Always Run
+####			H	Guilty Gangs
+####			H	Innocent Gangs
 ##		C	Litter
 Raise it! And check for borders, that's a good idea
 ###			C	Rename to Litter
@@ -339,6 +349,12 @@ P_Turret.FireGun_Postfix
 PoolsScene.SpawnObjectReal
 ####			C	Stopped working on Hedge Walls
 New
+##		C	Roamers
+###         C   Arsonist
+DW
+###         C   Butler Bot
+Spawned, but only cleans bodies & not wreckage
+How to exclude private areas?
 ##		H	Decals
 Generate decoration across level.
 Most of these can be treated as Wreckage particles.

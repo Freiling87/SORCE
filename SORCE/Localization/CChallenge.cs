@@ -16,12 +16,11 @@ namespace SORCE.Localization
     {
 		// TODO: Eliminate most of these lists 
 		// https://makolyte.com/csharp-get-a-list-of-types-defined-in-an-assembly-without-loading-it/
-		public static List<string> AddsCriminals = new List<string>()
-		{
-			nameof(TurfWar),
-			nameof(UnionTown),
-			nameof(RollingDeep),
-		};
+		//public static List<string> AddsCriminals = new List<string>()
+		//{
+		//	nameof(UnionTown),
+		//	nameof(BiggerGangs),
+		//};
 		public static List<string> AffectsLights = new List<string>()
 		{
 			nameof(DiscoCityDanceoff),

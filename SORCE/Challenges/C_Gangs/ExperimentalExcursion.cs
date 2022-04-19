@@ -4,13 +4,13 @@ using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Gangs
 {
-    public class UnionTown : GangChallenge
+    public class ExperimentalExcursion : GangChallenge
 	{
-		public UnionTown(string name) : base(name) { }
+		public ExperimentalExcursion(string name) : base(name) { }
 
-		public override string LeaderAgent =>		VanillaAgents.Mobster;
-		public override string[] MiddleAgents =>	new string[] { VanillaAgents.Mobster };
-        public override string LastAgent =>			VanillaAgents.Mobster;
+		public override string LeaderAgent =>		VanillaAgents.Bouncer;
+		public override string[] MiddleAgents =>	new string[] { VanillaAgents.Scientist };
+        public override string LastAgent =>			VanillaAgents.Bouncer;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
@@ -23,13 +23,13 @@ namespace SORCE.Challenges.C_Gangs
         [RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new UnionTown(nameof(UnionTown))
+			RogueLibs.CreateCustomUnlock(new ExperimentalExcursion(nameof(ExperimentalExcursion))
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Gangs - Union Town"))
+					"Gangs - Experimental Excursion"))
 				.WithDescription(new CustomNameInfo(
-					"Dis is just a quiet, hardworking place wit normal people who pay respect to da proper people. Enable dis mutatah, or else!"));
+					"Roaming the streets randomly and getting killed for stupid reasons... for science!"));
 		}
 	}
 }

@@ -6,6 +6,7 @@ using RogueLibsCore;
 using SORCE.Challenges;
 using SORCE.Challenges.C_AmbientLightColor;
 using SORCE.Challenges.C_Features;
+using SORCE.Challenges.C_Gangs;
 using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
@@ -306,6 +307,7 @@ namespace SORCE.Patches
 		public static void SetupMore3_3_Postfix()
 		{
 			MapFeatureSpawners.Spawn_Master();
+			GangChallengeTools.Spawner_Main();
 			Roamers.Spawner_Main();
 		}
 

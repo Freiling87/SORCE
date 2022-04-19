@@ -1,16 +1,15 @@
 ﻿using RogueLibsCore;
-using SORCE.MapGenUtilities;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Gangs
 {
-    public class UnionTown : GangChallenge
+    public class LunchHour : GangChallenge
 	{
-		public UnionTown(string name) : base(name) { }
+		public LunchHour(string name) : base(name) { }
 
-		public override string LeaderAgent =>		VanillaAgents.Mobster;
-		public override string[] MiddleAgents =>	new string[] { VanillaAgents.Mobster };
-        public override string LastAgent =>			VanillaAgents.Mobster;
+		public override string LeaderAgent =>		VAgent.InvestmentBanker;
+		public override string[] MiddleAgents =>	new string[] { VAgent.Clerk, VAgent.OfficeDrone, VAgent.Worker, VAgent.Hacker };
+        public override string LastAgent =>			VAgent.OfficeDrone;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
@@ -23,13 +22,13 @@ namespace SORCE.Challenges.C_Gangs
         [RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new UnionTown(nameof(UnionTown))
+			RogueLibs.CreateCustomUnlock(new LunchHour(nameof(LunchHour))
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Gangs - Union Town"))
+					"Gangs - Lunch Hour"))
 				.WithDescription(new CustomNameInfo(
-					"Dis is just a quiet, hardworking place wit normal people who pay respect to da proper people. Enable dis mutatah, or else!"));
+					"Various losers & dweebs are out to grab lunch."));
 		}
 	}
 }

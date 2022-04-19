@@ -4,13 +4,13 @@ using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Gangs
 {
-    public class UnionTown : GangChallenge
+    public class CrooklynAve : GangChallenge
 	{
-		public UnionTown(string name) : base(name) { }
+		public CrooklynAve(string name) : base(name) { }
 
-		public override string LeaderAgent =>		VanillaAgents.Mobster;
-		public override string[] MiddleAgents =>	new string[] { VanillaAgents.Mobster };
-        public override string LastAgent =>			VanillaAgents.Mobster;
+		public override string LeaderAgent =>		VanillaAgents.GangsterCrepe;
+		public override string[] MiddleAgents =>	new string[] { VanillaAgents.GangsterCrepe };
+        public override string LastAgent =>			VanillaAgents.GangsterCrepe;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
@@ -23,13 +23,13 @@ namespace SORCE.Challenges.C_Gangs
         [RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new UnionTown(nameof(UnionTown))
+			RogueLibs.CreateCustomUnlock(new CrooklynAve(nameof(CrooklynAve))
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Gangs - Union Town"))
+					"Gangs - Crooklyn Ave."))
 				.WithDescription(new CustomNameInfo(
-					"Dis is just a quiet, hardworking place wit normal people who pay respect to da proper people. Enable dis mutatah, or else!"));
+					"If you're not Crepe-walking, you'd better be running."));
 		}
 	}
 }

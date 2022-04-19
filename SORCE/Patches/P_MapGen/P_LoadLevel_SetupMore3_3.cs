@@ -355,36 +355,6 @@ namespace SORCE.Patches.P_MapGen
 		// Manholes (Done with custom method, not sure vanilla will be needed)
 
 		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> Mafia(IEnumerable<CodeInstruction> codeInstructions)
-        {
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo HasMafia = AccessTools.Method(typeof(Roamers), nameof(Roamers.HasMafiaGangs), new[] { typeof(bool) });
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				postfixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldloc_S, 229),
-					new CodeInstruction(OpCodes.Brfalse),
-					new CodeInstruction(OpCodes.Ldloc_1),
-					new CodeInstruction(OpCodes.Ldfld),
-					new CodeInstruction(OpCodes.Ldfld),
-					new CodeInstruction(OpCodes.Ldstr, "HarmAtIntervals")
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldloc_S, 229),
-					new CodeInstruction(OpCodes.Call, HasMafia),
-					new CodeInstruction(OpCodes.Stloc_S, 229)
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		// Musician
-
-		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> Mines(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
@@ -510,78 +480,6 @@ namespace SORCE.Patches.P_MapGen
 					new CodeInstruction(OpCodes.Ldloc_2), // flag
 					new CodeInstruction(OpCodes.Call, hasPowerBoxes), // bool
 					new CodeInstruction(OpCodes.Stloc_2) // Clear
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> RoamingGangs(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo HasGangs = AccessTools.Method(typeof(Roamers), nameof(Roamers.HasGangbangerGangs), new[] { typeof(bool) });
-			
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					//	Line 25820
-
-					new CodeInstruction(OpCodes.Ldstr, "Gangbanger"),
-					new CodeInstruction(OpCodes.Callvirt),
-					new CodeInstruction(OpCodes.Stloc_S, 228),
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					//	flag34 = Roamers.HasRoamingGangbangers(flag34)
-
-					new CodeInstruction(OpCodes.Ldloc_S, 228),		//	flag34
-					new CodeInstruction(OpCodes.Call, HasGangs),	//	bool
-					new CodeInstruction(OpCodes.Stloc_S, 228),		//	clear
-				});
-
-			patch.ApplySafe(instructions, logger);
-			return instructions;
-		}
-
-		//[HarmonyTranspiler, UsedImplicitly]
-		private static IEnumerable<CodeInstruction> RoamingGangCount(IEnumerable<CodeInstruction> codeInstructions)
-		{
-			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo GangCount = AccessTools.Method(typeof(Roamers), nameof(Roamers.PopulationGang), new[] { typeof(int) });
-
-			// This is example code for accessing a field from an Enumerator.
-			// It's not complete and I don't understand it "yet"
-			// And those are scare quotes, not misused emphatic quotes
-			List<SearchMask> masks = new List<SearchMask>
-			{
-				SearchMask.MatchOpCode(OpCodes.Ldarg_0, false),
-				SearchMask.MatchAny(true)
-			};
-			InstructionSearcher searcher = new InstructionSearcher(masks, 1);
-			List<List<CodeInstruction>> result = searcher.DoSearchSafe(instructions, null);
-			object operand = result[0][0];
-			//
-
-			CodeReplacementPatch patch = new CodeReplacementPatch(
-				expectedMatches: 1,
-				prefixInstructionSequence: new List<CodeInstruction>
-				{
-					new CodeInstruction(OpCodes.Ldarg_0),
-					new CodeInstruction(OpCodes.Ldc_I4_0),
-					new CodeInstruction(OpCodes.Stfld),
-					new CodeInstruction(OpCodes.Br),
-					new CodeInstruction(OpCodes.Ldloc_1),
-					new CodeInstruction(OpCodes.Ldfld),
-					new CodeInstruction(OpCodes.Ldstr, "Gangbanger"),
-					new CodeInstruction(OpCodes.Ldstr, "GangbangerB")
-				},
-				insertInstructionSequence: new List<CodeInstruction>
-				{
-					//new CodeInstruction(OpCodes.Ldfld, BigTries),
-					new CodeInstruction(OpCodes.Call, GangCount),
-					//new CodeInstruction(OpCodes.Stfld, BigTries),
 				});
 
 			patch.ApplySafe(instructions, logger);

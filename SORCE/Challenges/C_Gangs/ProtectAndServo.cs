@@ -1,16 +1,15 @@
 ﻿using RogueLibsCore;
-using SORCE.MapGenUtilities;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Gangs
 {
-    public class UnionTown : GangChallenge
+    public class ProtectAndServo : GangChallenge
 	{
-		public UnionTown(string name) : base(name) { }
+		public ProtectAndServo(string name) : base(name) { }
 
-		public override string LeaderAgent =>		VanillaAgents.Mobster;
-		public override string[] MiddleAgents =>	new string[] { VanillaAgents.Mobster };
-        public override string LastAgent =>			VanillaAgents.Mobster;
+		public override string LeaderAgent =>		VAgent.CopBot;
+		public override string[] MiddleAgents =>	new string[] { VAgent.CopBot };
+        public override string LastAgent =>			VAgent.CopBot;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
@@ -23,13 +22,14 @@ namespace SORCE.Challenges.C_Gangs
         [RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new UnionTown(nameof(UnionTown))
+			RogueLibs.CreateCustomUnlock(new ProtectAndServo(nameof(ProtectAndServo))
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Gangs - Union Town"))
+					"Gangs - Protect & Servo"))
 				.WithDescription(new CustomNameInfo(
-					"Dis is just a quiet, hardworking place wit normal people who pay respect to da proper people. Enable dis mutatah, or else!"));
+					"Edison, Inc. presents: Police©!\n\n" +
+					"The futuristic solution to law enforcement."));
 		}
 	}
 }

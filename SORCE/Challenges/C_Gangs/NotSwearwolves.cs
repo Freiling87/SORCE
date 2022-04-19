@@ -1,16 +1,15 @@
 ﻿using RogueLibsCore;
-using SORCE.MapGenUtilities;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Gangs
 {
-    public class UnionTown : GangChallenge
+    public class NotSwearwolves : GangChallenge
 	{
-		public UnionTown(string name) : base(name) { }
+		public NotSwearwolves(string name) : base(name) { }
 
-		public override string LeaderAgent =>		VanillaAgents.Mobster;
-		public override string[] MiddleAgents =>	new string[] { VanillaAgents.Mobster };
-        public override string LastAgent =>			VanillaAgents.Mobster;
+		public override string LeaderAgent =>		VAgent.Werewolf;
+		public override string[] MiddleAgents =>	new string[] { VAgent.Werewolf };
+        public override string LastAgent =>			VAgent.Werewolf;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
@@ -23,13 +22,13 @@ namespace SORCE.Challenges.C_Gangs
         [RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new UnionTown(nameof(UnionTown))
+			RogueLibs.CreateCustomUnlock(new NotSwearwolves(nameof(NotSwearwolves))
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Gangs - Union Town"))
+					"Gangs - Not Swear-wolves"))
 				.WithDescription(new CustomNameInfo(
-					"Dis is just a quiet, hardworking place wit normal people who pay respect to da proper people. Enable dis mutatah, or else!"));
+					"YES, they have insatiable bloodlust sometimes. But they're good guys, otherwise!"));
 		}
 	}
 }

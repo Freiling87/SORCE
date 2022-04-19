@@ -1,16 +1,17 @@
 ﻿using RogueLibsCore;
-using SORCE.MapGenUtilities;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Gangs
 {
-    public class UnionTown : GangChallenge
+    public class RougherRuffians : GangChallenge
 	{
-		public UnionTown(string name) : base(name) { }
+		public static GameController GC => GameController.gameController;
 
-		public override string LeaderAgent =>		VanillaAgents.Mobster;
-		public override string[] MiddleAgents =>	new string[] { VanillaAgents.Mobster };
-        public override string LastAgent =>			VanillaAgents.Mobster;
+		public RougherRuffians(string name) : base(name) { }
+
+		public override string LeaderAgent =>		VAgent.Thief;
+		public override string[] MiddleAgents =>	new string[] { VAgent.Thief };
+        public override string LastAgent =>			VAgent.Thief;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
@@ -23,13 +24,13 @@ namespace SORCE.Challenges.C_Gangs
         [RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new UnionTown(nameof(UnionTown))
+			RogueLibs.CreateCustomUnlock(new RougherRuffians(nameof(RougherRuffians))
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Gangs - Union Town"))
+					"Gangs - Rougher Ruffians"))
 				.WithDescription(new CustomNameInfo(
-					"Dis is just a quiet, hardworking place wit normal people who pay respect to da proper people. Enable dis mutatah, or else!"));
+					"Be careful, they aren't just mugging for the camera!"));
 		}
 	}
 }

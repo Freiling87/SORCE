@@ -54,7 +54,7 @@ namespace SORCE.Localization
 					Wrestler = "Wrestler",
 					Zombie = "Zombie";
 
-			public static List<string> Criminal = new List<string>()
+		public static List<string> Criminal = new List<string>()
 		{
 				Blahd,
 				Crepe,
@@ -63,21 +63,21 @@ namespace SORCE.Localization
 				Thief,
 		};
 
-			public static List<string> Evil = new List<string>()
+		public static List<string> Evil = new List<string>()
 		{
 				ShapeShifter,
 				Vampire,
 				Zombie
 		};
 
-			public static List<string> LawEnforcement = new List<string>()
+		public static List<string> LawEnforcement = new List<string>()
 		{
 				Cop,
 				CopBot,
 				SuperCop,
 		};
 
-			public static List<string> Nonhuman = new List<string>()
+		public static List<string> Nonhuman = new List<string>()
 		{
 				Alien,
 				CopBot,
@@ -91,7 +91,7 @@ namespace SORCE.Localization
 				Zombie,
 		};
 
-			public static List<string> Supernatural = new List<string>()
+		public static List<string> Supernatural = new List<string>()
 		{
 				Ghost,
 				Werewolf,
@@ -99,7 +99,7 @@ namespace SORCE.Localization
 				Zombie,
 		};
 
-			public static List<string> Undead = new List<string>()
+		public static List<string> Undead = new List<string>()
 		{
 				Ghost,
 				Vampire,
