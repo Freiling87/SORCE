@@ -20,34 +20,40 @@ Toilet
 Trash cans don't seem to be spawning unless Core.Debug is in HasTrashcans. Test this.
 #	CT	Mutators
 ##		CT	Features
-###         C   00 District Object Delimitation
+###         CT   00 District Object Delimitation
 ####            C   00 Export all to Delimitation mod
 Pending test of basic features
 ####            C   00 Add SORCE dependency and test
 New
-####            C   Flame Grate
-Delimitation Trait Gate
+####            T	Flame Grate
+Refactored
+####            T   SawBlade
+Refactored
+####            T   Tube
+Refactored
 ####            √   Manhole
 Complete
-####            C   SawBlade
-Delimitation Trait Gate
 ####            √   SlimeBarrel
 Complete
-####            C   Tube
-Delimitation Trait Gate?
 ###         C   Pollution Solution
+####			H	Split up into granular mutators?
+Oil Spills
+Slime Barrels
+Poisoned Lakes
 ####            T   Raise chance of poisoned lakes
 PoisonLakes()
 	SpreadPoisonWait 
 		DW (?)
 	SpreadPoisonStart
-		Attempted
-####            C   Raise chance of poisoned lakes
-MapFeatureSpawners.PoisonLakes()
-Didn't work
+		DW
+	MapFeatureSpawners.PoisonLakes()
+		DW
+	Computer.PoisonLake
+		T
 ####            H   Smoke particles from poisoned lakes
 Water.SpreadPoisonStart postfix
 This works, but need to vary timing, speed, transparency.
+Spawns past border of lake. Test TileInfo for water.
 ####            H   Scale chance to district
 Tie pollution amount to Slumminess
 Pending previous issues
@@ -330,11 +336,11 @@ Custom sprites, or smaller/slightly darker/on side
 Spawn "hoard" sprites around Safe or Chest in Armory
 Vary spawns per chunk type
 ###         C   Shootier Guns
-Use jump script from exiting water for particle spawned
 ####            C   Orient spill consistently
 New
 ####            C   Identify Bounce
 Item.OnCollisionEnter2D
+	dw
 item.invItemName == "Wreckage" 
 !Item.isrealItem is for wreckage I think
 GC.AudioHandler.Play(item, "ShellCasing")
@@ -342,7 +348,9 @@ GC.AudioHandler.Play(item, "ShellCasing")
 New
 ####            C   Audio on bounce
 New
-####            C   Muzzle Flash
+####			C	Smoke from Rockets
+New
+####            √   Muzzle Flash
 P_Gun.Shoot_Prefix
 P_Turret.FireGun_Postfix
 ###			C	Floraler Flora

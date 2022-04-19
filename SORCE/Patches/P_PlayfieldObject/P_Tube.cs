@@ -54,7 +54,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 			return instructions;
 		}
 
-		public static int AllowSpawn =>
+		private static int AllowSpawn =>
+			GC.levelTheme == 1 || 
+			GC.levelTheme == 2 ||
 			GC.challenges.Contains(nameof(MeatsOfRogue))
 			? 1
 			: GC.levelTheme;

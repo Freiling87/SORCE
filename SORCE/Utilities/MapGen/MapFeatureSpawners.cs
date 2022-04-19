@@ -75,13 +75,69 @@ namespace SORCE.MapGenUtilities
 				body.objectMult.CallRpcChangeLakeColor(array, lakeColor);
 			}
 		}
+
+		/// <summary>
+		/// Copied from Computer.PoisonWater
+		/// </summary>
 		private static void PoisonLakes()
         {
-			if (MapFeatures.HasLakesPolluted)
-				foreach (Water body in GC.watersList)
-					body.SpreadPoisonStart(GC.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
-			// SpreadPoisonWait didn't work
-        }
+			if (!MapFeatures.HasLakesPolluted)
+				return;
+
+			if (GC.serverPlayer)
+			{
+				foreach (Water water in GC.watersList)
+				{
+					if (!water.effectContents.Contains("Poisoned") && !water.syringeContents.Contains("Poisoned"))
+					{
+						if (water.waterTiles.Count == 0)
+						{
+							water.SpreadPoisonStart(null, false);
+						}
+						water.effectContents.Add("Poisoned");
+						water.poisonedWholeLevel = true;
+					}
+				}
+
+				for (int i = 0; i < GC.loadLevel.levelSizeAxis * 16; i++)
+				{
+					for (int j = 0; j < GC.loadLevel.levelSizeAxis * 16; j++)
+					{
+						int tile = GC.tileInfo.tilemapFloors4.GetTile(i, j, 0);
+
+						if (tile >= 688 && tile <= 711)
+						{
+							GC.tileInfo.tilemapFloors4.SetTile(i, j, 0, GC.tileInfo.tilemapFloors4.GetTile(i, j, 0) + 112);
+							bool flag = false;
+
+							for (int k = 0; k < GC.tileInfo.changedLakeColorTiles.Count; k++)
+							{
+								if (GC.tileInfo.changedLakeColorTiles[k].x == (float)i && 
+									GC.tileInfo.changedLakeColorTiles[k].y == (float)j)
+								{
+									GC.tileInfo.changedLakeColor[k] = 2;
+									flag = true;
+									break;
+								}
+							}
+
+							if (!flag)
+							{
+								GC.tileInfo.changedLakeColorTiles.Add(new Vector2((float)i, (float)j));
+								GC.tileInfo.changedLakeColor.Add(2);
+							}
+						}
+					}
+				}
+
+				GC.playerAgent.objectMult.ChangeLakeColor2();
+				GC.tileInfo.tilemapFloors4.Build();
+			}
+			else
+			{
+				GC.playerAgent.objectMult.ObjectAction(GC.importantObjectList[0].objectNetID, "PoisonWater");
+			}
+		}
 		private static void SpawnKillerPlants()
 		{
 			if (!MapFeatures.HasKillerPlants)

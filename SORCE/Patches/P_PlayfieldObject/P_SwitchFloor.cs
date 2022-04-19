@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
+using SORCE.Challenges.C_Features;
 using SORCE.Logging;
 using System;
 using System.Collections.Generic;
@@ -47,23 +48,40 @@ namespace SORCE.Patches.P_PlayfieldObject
 		}
 
 		/// <summary>
-		/// A copy of the original portion
+		/// District delimitation
 		/// </summary>
 		/// <param name="switchFloor"></param>
 		/// <returns></returns>
 		public static string TrapType(SwitchFloor switchFloor)
         {
-			if (switchFloor.moveNS)
+			if (GC.challenges.Contains(nameof(TrapsUnlimited)))
 			{
-				if (switchFloor.stepCountN + switchFloor.stepCountS <= 4)
-					return GC.Choose("Crusher", "DartTrap", "TrapDoor");
+				if ((switchFloor.moveNS &&
+					switchFloor.stepCountN + switchFloor.stepCountS <= 4) ||
+					switchFloor.stepCountE + switchFloor.stepCountW <= 4)
+					return "Crusher";
+				else
+					return GC.Choose("Crusher", "SawBlade", "DartTrap", "TrapDoor");
+			}
+
+			if (GC.levelTheme == 1)
+			{
+				if (switchFloor.moveNS)
+				{
+					if (switchFloor.stepCountN + switchFloor.stepCountS <= 4)
+						return "Crusher";
+					else
+						return GC.Choose("Crusher", "SawBlade");
+				}
+				else if (switchFloor.stepCountE + switchFloor.stepCountW <= 4)
+					return "Crusher";
 				else
 					return GC.Choose("Crusher", "SawBlade");
 			}
-			else if (switchFloor.stepCountE + switchFloor.stepCountW <= 4)
+			else if (switchFloor.moveNS)
 				return GC.Choose("Crusher", "DartTrap", "TrapDoor");
 			else
-				return GC.Choose("Crusher", "SawBlade");
+				return GC.Choose("Crusher", "DartTrap", "TrapDoor");
 		}
 	}
 }

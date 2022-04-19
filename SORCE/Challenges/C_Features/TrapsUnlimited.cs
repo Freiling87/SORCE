@@ -2,20 +2,20 @@
 
 namespace SORCE.Challenges.C_Features
 {
-    public class FlameGrates
+    public class TrapsUnlimited
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(FlameGrates);
+			const string name = nameof(TrapsUnlimited);
 
 			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Features - Flame Grates"))
+					"Features - Traps Unlimited"))
 				.WithDescription(new CustomNameInfo(
-					"Allows flame grates in all districts.\n\nWhat, you expected some dumb pun? I would never sink that low!"));
+					"Allows flame grates & sawblades in all districts."));
 		}
 	}
 }

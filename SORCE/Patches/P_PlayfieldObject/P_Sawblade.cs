@@ -2,9 +2,13 @@
 using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
 using JetBrains.Annotations;
+using SORCE.Challenges.C_Features;
 using SORCE.Logging;
+using SORCE.MapGenUtilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 
 namespace SORCE.Patches.P_PlayfieldObject
@@ -27,6 +31,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		private static IEnumerable<CodeInstruction> Start_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
+			MethodInfo allowSpawn = AccessTools.PropertyGetter(typeof(P_SawBlade_Start), nameof(AllowSpawn));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -42,13 +47,18 @@ namespace SORCE.Patches.P_PlayfieldObject
 				},
 				insertInstructionSequence: new List<CodeInstruction>
 				{
-					// This is a silly way to just bypass the if-block
-					new CodeInstruction(OpCodes.Ldc_I4_1),	//	1
-					new CodeInstruction(OpCodes.Ldc_I4_1),	//	1, 1
+					new CodeInstruction(OpCodes.Call, allowSpawn),		//	int
+					new CodeInstruction(OpCodes.Ldc_I4_1),				//	int, 1
 				});
 
 			patch.ApplySafe(instructions, logger);
 			return instructions;
 		}
+
+		private static int AllowSpawn =>
+			GC.levelTheme == 1 ||
+			GC.challenges.Contains(nameof(TrapsUnlimited))
+				? 1
+				: 0;
 	}
 }
