@@ -146,9 +146,10 @@
     <Compile Include="Challenges\C_Overhaul\LowTechLowLife.cs" />
     <Compile Include="Challenges\C_Population\PopulationChallenge.cs" />
     <Compile Include="Challenges\C_Gangs\GangChallenge.cs" />
-    <Compile Include="Challenges\C_Wreckage\BachelorerPads.cs" />
-    <Compile Include="Challenges\C_Wreckage\FloralerFlora.cs" />
-    <Compile Include="Challenges\C_Wreckage\DirtierDistricts.cs" />
+    <Compile Include="Challenges\C_VFX\ShootierGuns.cs" />
+    <Compile Include="Challenges\C_VFX\BachelorerPads.cs" />
+    <Compile Include="Challenges\C_VFX\FloralerFlora.cs" />
+    <Compile Include="Challenges\C_VFX\DirtierDistricts.cs" />
     <Compile Include="Extensions\E_Agent.cs" />
     <Compile Include="Extensions\E_Enum.cs" />
     <Compile Include="Extensions\E_PlayfieldObject.cs" />
@@ -218,7 +219,7 @@
     <Compile Include="Utilities\MapGen\MapFeatureSpawners.cs" />
     <Compile Include="Utilities\MapGen\Roamers.cs" />
     <Compile Include="Utilities\MapGen\Structures.cs" />
-    <Compile Include="Utilities\MapGen\Wreckage.cs" />
+    <Compile Include="Utilities\MapGen\VFX.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_SetupMore3_3.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />

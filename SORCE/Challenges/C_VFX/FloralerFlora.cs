@@ -9,20 +9,23 @@ using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Wreckage
+namespace SORCE.Challenges.C_VFX
 {
-	public class BachelorerPads
+	public class FloralerFlora
 	{
 		[RLSetup]
 		static void Start()
 		{
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock("BachelorerPads", true)
+			const string name = nameof(FloralerFlora);
+
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Wreckage - Bachelorer Pads"))
+					"VFX - Floraler Flora"))
 				.WithDescription(new CustomNameInfo(
-					"Now you don't just live in a disgusting dump, you play in a virtual one too!"));
+					"The #1 most requested mutator ever. An absolute game-changer, practically Streets of Rogue 2!\n\n" +
+					"- Spawns leaves around plants"));
 		}
 	}
 }

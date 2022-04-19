@@ -2,7 +2,7 @@
 using Light2D;
 using SORCE.Challenges;
 using SORCE.Challenges.C_Overhaul;
-using SORCE.Challenges.C_Wreckage;
+using SORCE.Challenges.C_VFX;
 using SORCE.Localization;
 using SORCE.Logging;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 namespace SORCE.MapGenUtilities
 {
-    internal class Wreckage
+    internal class VFX
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;

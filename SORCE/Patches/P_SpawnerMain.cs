@@ -12,7 +12,7 @@ using SORCE.Logging;
 using SORCE.Localization;
 using SORCE.Challenges.C_Buildings;
 using static SORCE.Localization.NameLists;
-using SORCE.Challenges.C_Wreckage;
+using SORCE.Challenges.C_VFX;
 using SORCE.Challenges.C_Lighting;
 using SORCE.Challenges.C_Overhaul;
 using System.Linq;

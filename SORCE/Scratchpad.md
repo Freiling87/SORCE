@@ -221,7 +221,7 @@ This would be a stand-in for the flashlight
 New
 ###         H   Flashlight Gun Mod?
 Someday
-###			√H	No Item/Wreckage Lights
+###			√H	No Item Lights
 P_SpawnerMain.SetLighting2_Prefix
 ####			H	Omit briefcase
 Because Pulp Fiction
@@ -281,7 +281,7 @@ Blahd gangs are larger, same total number of agents.
 Always Run
 ####			H	Guilty Gangs
 ####			H	Innocent Gangs
-##		C	Litter
+##		C	VFX
 Raise it! And check for borders, that's a good idea
 ###			C	Rename to Litter
 ###         C   00 Spawns litter on level editor
@@ -368,13 +368,18 @@ if objectReal.CompareTag("Wall")
 Then branch to wall types from there
 ####			H	Smoke from Rockets
 New
-####            √   Muzzle Flash
+####			C	Wall Fragments
+Spawn TINY fragments of wood, glass, etc. when you shoot a wall
+Could also use a particle effect that resembles dust, which would dispose of itself rather than cluttering/slowing
+####			√   Muzzle Flash
 P_Gun.Shoot_Prefix
 P_Turret.FireGun_Postfix
 ###			C	Floraler Flora
 PoolsScene.SpawnObjectReal
 ####			C	Stopped working on Hedge Walls
 New
+####			C	Throw leaves around when you hit a plant
+Before destruction
 ##		C	Roamers
 ###         C   Arsonist
 DW

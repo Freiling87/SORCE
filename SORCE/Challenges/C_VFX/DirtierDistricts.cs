@@ -9,23 +9,20 @@ using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
-namespace SORCE.Challenges.C_Wreckage
+namespace SORCE.Challenges.C_VFX
 {
-	public class FloralerFlora
+	public class DirtierDistricts
 	{
 		[RLSetup]
 		static void Start()
 		{
-			const string name = nameof(FloralerFlora);
-
-			RogueLibs.CreateCustomUnlock(new MutatorUnlock(name, true)
+			RogueLibs.CreateCustomUnlock(new MutatorUnlock("DirtierDistricts", true)
 			{
 			})
 				.WithName(new CustomNameInfo(
-					"Wreckage - Floraler Flora"))
+					"VFX - Dirtier Districts"))
 				.WithDescription(new CustomNameInfo(
-					"The #1 most requested mutator ever. An absolute game-changer, practically Streets of Rogue 2!\n\n" +
-					"- Spawns leaves around plants"));
+					"Also known as Realistic Mode."));
 		}
 	}
 }

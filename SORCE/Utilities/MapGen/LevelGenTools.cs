@@ -7,7 +7,7 @@ using SORCE.Challenges.C_Features;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Population;
 using SORCE.Challenges.C_Gangs;
-using SORCE.Challenges.C_Wreckage;
+using SORCE.Challenges.C_VFX;
 using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.Traits;

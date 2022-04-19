@@ -9,7 +9,7 @@ using System;
 using SORCE;
 using SORCE.Challenges;
 using SORCE.Logging;
-using SORCE.Challenges.C_Wreckage;
+using SORCE.Challenges.C_VFX;
 using static SORCE.Localization.NameLists;
 using SORCE.Localization;
 using SORCE.MapGenUtilities;

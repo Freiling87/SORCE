@@ -43,7 +43,7 @@ namespace SORCE.MapGenUtilities
 			SpawnSlimeBarrels();
 			SpawnTurntablesAndSpeakers();
 
-			Wreckage.SpawnPublicLitter();
+			VFX.SpawnPublicLitter();
 		}
 		private static void BreakWindows()
 		{
