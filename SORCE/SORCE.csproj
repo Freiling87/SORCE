@@ -187,6 +187,7 @@
     <Compile Include="Localization\VParticleEffect.cs" />
     <Compile Include="Localization\VAgentGoal.cs" />
     <Compile Include="Localization\VRelationship.cs" />
+    <Compile Include="Resources\SpriteLoader.cs" />
     <Compile Include="Utilities\Audiovisual.cs" />
     <Compile Include="Utilities\MapGen\AmbientAudio.cs" />
     <Compile Include="Utilities\MapGen\LevelGenTools.cs" />
@@ -273,6 +274,7 @@
     <None Include="Documentation\2.0. Features.md" />
     <None Include="Documentation\1.0. Installation.md" />
     <None Include="packages.config" />
+    <None Include="Resources\BulletHole.bin" />
     <None Include="Resources\Casing.bin" />
     <None Include="Resources\RifleCasing.bin" />
     <None Include="Resources\ShotgunShell.bin" />

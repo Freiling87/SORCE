@@ -335,20 +335,38 @@ Custom sprites, or smaller/slightly darker/on side
 ###			C	Lootier Boxes
 Spawn "hoard" sprites around Safe or Chest in Armory
 Vary spawns per chunk type
-###         C   Shootier Guns
-####            C   Orient spill consistently
+###         CT  Shootier Guns
+####			T	Decals
+#####				C	Blood 
+######					C	Exit wound
+######					C	Pool
+Small pool on death
+	Tracked shoe prints are probably a no-go
+######					C	Trail
+From recently-hit agents 
+	(no need for bleeding status effect yet)
+#####			T	Bullet holes
+	Attempted
+######				H	Different sprites for wall types
+Glass might be the only one where it's appropriate
+Hedge can fully omit the hole
+####			C	Shell Casings
+#####				C   Orient spill consistently
 New
-####            C   Identify Bounce
+#####				C   Identify Bounce
 Item.OnCollisionEnter2D
 	dw
 item.invItemName == "Wreckage" 
 !Item.isrealItem is for wreckage I think
 GC.AudioHandler.Play(item, "ShellCasing")
-####            C   Randomize sprite rotation on bounce
+#####				C   Randomize sprite rotation on bounce
 New
-####            C   Audio on bounce
+#####				C   Audio on bounce
 New
-####			C	Smoke from Rockets
+GC.AudioHandler.Play(objectReal, "BulletHitwall")
+if objectReal.CompareTag("Wall")
+Then branch to wall types from there
+####			H	Smoke from Rockets
 New
 ####            √   Muzzle Flash
 P_Gun.Shoot_Prefix
@@ -399,15 +417,6 @@ Near trashcan spawns
 Gang-related, political, or just obscene
 ####            C   Poster
 Political, entertainment event, PSA
-##		H	Decals - Gunplay
-Blood 
-	Exit wound
-	Trailing from recently-hit agents 
-		(no need for bleeding status effect yet)
-	Small pool on death
-		Tracked shoe prints are probably a no-go
-Bullet holes
-	Different sprites & sounds for wall types
 ##		H	Laws
 ###			C	Legal Drugs
 ###			C	Legal Weapons

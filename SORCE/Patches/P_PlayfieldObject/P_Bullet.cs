@@ -2,6 +2,7 @@
 using HarmonyLib;
 using RogueLibsCore;
 using SORCE.Challenges.C_Lighting;
+using SORCE.Localization;
 using SORCE.Logging;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,16 @@ namespace SORCE.Patches.P_PlayfieldObject
 
         public static bool NoBulletLights;
         public static bool RealisticBullets = Core.debugMode;
+
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.BulletHitEffect), argumentTypes: new[] { typeof(GameObject) })]
+        public static void BulletHitEffect_Postfix(GameObject hitObject, Bullet __instance)
+        {
+            if (bullets.Contains((int)__instance.bulletType) 
+                && hitObject.CompareTag("Wall"))
+            {
+                SpawnWallDecal(hitObject.transform.position);
+            }
+        }
 
         /// <summary>
         /// No Bullet Lights
@@ -52,6 +63,18 @@ namespace SORCE.Patches.P_PlayfieldObject
         {
             1, 2, 19
         };
+
+        public static void SpawnWallDecal(Vector3 pos)
+        {
+            Vector3 newPos = new Vector3(pos.x, pos.y, 0f); // Might be redundant
+            GameObject gameObject = GC.spawnerMain.floorDecalPrefab.Spawn(newPos);
+            gameObject.layer = 23;
+            gameObject.GetComponent<tk2dSprite>().SetSprite(CSprite.BulletHole);
+
+            //GC.floorDecalsList.Add(gameObject);
+
+            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
     }
 } 
   

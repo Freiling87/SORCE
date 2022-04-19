@@ -1,18 +1,9 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using RogueLibsCore;
 using SORCE.Localization;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
 using SORCE.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using static SORCE.Localization.NameLists;
-using Random = UnityEngine.Random;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
@@ -21,14 +12,6 @@ namespace SORCE.Patches.P_PlayfieldObject
     {
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
-
-        [RLSetup]
-        public static void Setup()
-        {
-            RogueLibs.CreateCustomSprite(CSprite.Casing, SpriteScope.Wreckage, Properties.Resources.Casing);
-            RogueLibs.CreateCustomSprite(CSprite.RifleCasing, SpriteScope.Wreckage, Properties.Resources.RifleCasing);
-            RogueLibs.CreateCustomSprite(CSprite.ShotgunShell, SpriteScope.Wreckage, Properties.Resources.ShotgunShell);
-        }
 
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Gun.Shoot), argumentTypes: new[] { typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(string) })]
         public static bool Shoot_Prefix(bool specialAbility, bool silenced, bool rubber, int bulletNetID, string bulletStatusEffect, Gun __instance)
