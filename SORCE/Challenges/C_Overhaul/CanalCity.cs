@@ -1,17 +1,10 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
 using SORCE.Localization;
 using System.Linq;
 
 namespace SORCE.Challenges.C_Overhaul
 {
-	public class CanalCity
+    public class CanalCity
 	{
 		//[RLSetup]
 		static void Start()

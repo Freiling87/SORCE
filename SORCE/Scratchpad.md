@@ -277,16 +277,20 @@ New
 ####            C   Scale litter to chunk type & Slumminess
 House: scale to chance. Some people are slobs, some aren't.
 Some are also slobs in different ways. 
-####            C   Bathtub
+####            T   Bathtub
 Find a way to make the splash smaller
+	Attempted
 ####            C   Bed
 Crumpled up tissues, make it look like they're under the bed
 ####            C   Desk
-Paper waste
+Frequency +
+Amount --
+Spread +
 ####            C   Refrigerator
 Food waste
 ####            C   Stove
 Food waste
+Added Oil splash
 ####            C   Table (Big)
 Food OR paper waste
 ####            C   Table (Small)
@@ -295,7 +299,6 @@ Food OR paper waste
 Highest chances in public toilets
 Find a way to make the splash smaller
 ####            C   Trashcan
-Differentiate indoor/outdoor
 ###		C	Consumerer Products
 On using consumables, spawn litter
 ####			C	00 Add some of these to generic litter sprite inventories

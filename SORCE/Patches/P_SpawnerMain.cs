@@ -1,26 +1,16 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using UnityEngine;
-using RogueLibsCore;
-using Random = UnityEngine.Random;
-using System.Collections;
-using System.Reflection;
-using System;
-using Light2D;
 using SORCE.Challenges;
-using SORCE.Logging;
-using SORCE.Localization;
 using SORCE.Challenges.C_Buildings;
-using static SORCE.Localization.NameLists;
-using SORCE.Challenges.C_VFX;
 using SORCE.Challenges.C_Lighting;
-using SORCE.Challenges.C_Overhaul;
-using System.Linq;
-using System.Collections.Generic;
+using SORCE.Localization;
+using SORCE.Logging;
+using UnityEngine;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {
-	[HarmonyPatch(declaringType: typeof(SpawnerMain))]
+    [HarmonyPatch(declaringType: typeof(SpawnerMain))]
 	public static class P_SpawnerMain
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
