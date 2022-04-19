@@ -9,12 +9,12 @@ using RogueLibsCore;
 
 namespace SORCE.Challenges.C_Lighting
 {
-	public static class NoParticleLights
+	public static class NoBulletLights
 	{
 		[RLSetup]
 		public static void Start()
 		{
-			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(NoParticleLights), true))
+			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(NoBulletLights), true))
 				.WithDescription(new CustomNameInfo
 				{
 					[LanguageCode.English] = "Disables Bullet Lights",

@@ -28,7 +28,8 @@ namespace SORCE.Patches.P_PlayfieldObject
             //foreach (string str in __instance.syringeContents)
             //    logger.LogDebug("Syringe: " + str);
 
-            if (effectType != "Clean" && GC.percentChance(1) && GC.percentChance(50))
+            if (effectType != "Clean" && GC.percentChance(1) && GC.percentChance(50)
+                && GC.tileInfo.GetTileData(new Vector3(posX, posY, 0f)).water)
                 GC.spawnerMain.SpawnParticleEffect(VParticleEffect.SmokePuffs, new Vector3(posX * 0.64f, posY * 0.64f, __instance.tr.position.z), 0f);
         }
     }

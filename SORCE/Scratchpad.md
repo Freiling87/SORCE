@@ -35,7 +35,7 @@ Refactored
 Complete
 ####            √   SlimeBarrel
 Complete
-###         C   Pollution Solution
+###         T   Pollution Solution
 ####			H	Split up into granular mutators?
 Oil Spills
 Slime Barrels
@@ -50,13 +50,14 @@ PoisonLakes()
 		DW
 	Computer.PoisonLake
 		T
-####            H   Smoke particles from poisoned lakes
+####            T   Smoke particles from poisoned lakes
 Water.SpreadPoisonStart postfix
 This works, but need to vary timing, speed, transparency.
 Spawns past border of lake. Test TileInfo for water.
+	Added Water check to TileInfo.
 ####            H   Scale chance to district
 Tie pollution amount to Slumminess
-Pending previous issues
+Pending non-poisoned lake issue
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
@@ -185,23 +186,13 @@ Complete
 ###         √   Welcome Mats
 Complete
 ##		C	Light Sources
-- CameraScript.SetLighting
-  - DW
-- StatusEffects.WerewolfTransform
-- StatusEffects.WerewolfTransformBack
-- LoadLevel.SetNormalLighting 
-- LoadLevel.SetRogueVisionLighting
-###         C   All-in-One Attempts
-- SpawnerMain.SetLighting2
-  - Don't give up on this method, try different approaches.
-  - Agents
-	- DW
-  - Objects
-	- DW
-  - Items
-	- DW
-  - NoObjectLights
-	- Works
+CameraScript
+	.SetLighting
+		Objects & Items
+StatusEffects
+	.WerewolfTransformBack
+LoadLevel
+	.SetNormalLighting 
 ###         C   No Agent Lights
 Attempts
 	P_Agent
@@ -231,10 +222,7 @@ P_SpawnerMain.SetLighting2_Prefix
 Computer				Green glow
 SecurityCam				Sparse red blink
 TV						Blue ray
-###			√	Add Muzzle Flash
-P_Gun.Shoot_Prefix
-####			√	Apply to Turrets
-New
+etc.
 ###			√	No Bullet Lights
 P_Bullet.RealAwake_Postfix
 ###			√	No Object Glow
@@ -259,6 +247,7 @@ If no worky, try WerewolfA
 ###			T	Professional Network
 ###			T	Protect & Servo
 May act differently in levels without Confiscation Centers
+Probably just need to include those in chunk lists if enabled
 ###			T	Rougher Ruffians
 ###			T	Team Melvin
 ###			T	The Blue Line
@@ -282,14 +271,12 @@ Always Run
 ####			H	Guilty Gangs
 ####			H	Innocent Gangs
 ##		C	VFX
-Raise it! And check for borders, that's a good idea
-###			C	Rename to Litter
 ###         C   00 Spawns litter on level editor
 New
 ###			C   Bachelorer Pads
 ####            C   Scale litter to chunk type & Slumminess
 House: scale to chance. Some people are slobs, some aren't.
-Some are also slobs in different ways. The main 
+Some are also slobs in different ways. 
 ####            C   Bathtub
 Find a way to make the splash smaller
 ####            C   Bed

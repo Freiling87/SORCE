@@ -341,6 +341,11 @@ namespace SORCE.Patches
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		/// <summary>
+		/// Level Size
+		/// </summary>
+		/// <param name="codeInstructions"></param>
+		/// <returns></returns>
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> CreateInitialMap_Transpiler(IEnumerable<CodeInstruction> codeInstructions)
 		{

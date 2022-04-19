@@ -31,7 +31,7 @@ namespace SORCE.Patches.Interface
 				GC.cameraScript.lightingSystem.EnableAmbientLight = true;
 
 			P_Bullet.NoBulletLights = 
-				GC.challenges.Contains(nameof(NoParticleLights)) ||
+				GC.challenges.Contains(nameof(NoBulletLights)) ||
 				Core.debugMode;
 
 			// TODO: Check for Mutator Menu, or that the button regards ambient light mutators. For now, this'll work.

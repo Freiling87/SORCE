@@ -127,7 +127,7 @@
     <Compile Include="Challenges\C_LightSources\NoItemLights.cs" />
     <Compile Include="Challenges\C_LightSources\NoObjectGlow.cs" />
     <Compile Include="Challenges\C_LightSources\NoObjectLights.cs" />
-    <Compile Include="Challenges\C_LightSources\NoParticleLights.cs" />
+    <Compile Include="Challenges\C_LightSources\NoBulletLights.cs" />
     <Compile Include="Challenges\C_MapSize\MapSizeChallenge.cs" />
     <Compile Include="Challenges\C_Overhaul\Hell.cs" />
     <Compile Include="Challenges\C_Overhaul\Tindertown.cs" />
