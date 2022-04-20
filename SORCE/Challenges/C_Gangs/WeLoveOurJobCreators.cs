@@ -8,8 +8,8 @@ namespace SORCE.Challenges.C_Gangs
 		public WeLoveOurJobCreators(string name) : base(name) { }
 
 		public override string LeaderAgent =>		VAgent.Slavemaster;
-		public override string[] MiddleAgents =>	new string[] { VAgent.Slave };
-        public override string LastAgent =>			VAgent.Slavemaster;
+		public override string[] MiddleAgents =>	new string[] { VAgent.Slavemaster, VAgent.Slave, VAgent.Slave, VAgent.Slave, VAgent.Slave, VAgent.Slave };
+        public override string LastAgent =>			VAgent.Slave;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;

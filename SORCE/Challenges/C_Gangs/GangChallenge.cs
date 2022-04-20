@@ -32,7 +32,7 @@ namespace SORCE.Challenges.C_Gangs
 		public static GameController GC => GameController.gameController;
 
 		public static int GangTotalCount =>
-            (int)(Random.Range(12, 18) * LevelSize.ChunkCountRatio);
+            Mathf.Max(4, (int)(Random.Range(8f, 16f) * LevelSize.ChunkCountRatio));
         public static int GangSize =>
             Random.Range(4, 6);
 
@@ -46,6 +46,8 @@ namespace SORCE.Challenges.C_Gangs
 			SpawnGangs(challenge.LeaderAgent, challenge.MiddleAgents, challenge.LastAgent, challenge.TotalSpawns, challenge.GangSize, challenge.Relationship, challenge.AlwaysRun, challenge.MustBeGuilty);
 		public static void SpawnGangs(string leaderAgent, string[] middleAgents, string lastAgent, int totalSpawns = 0, int gangSize = 0, string relationship = VRelationship.Neutral, bool alwaysRun = false, bool mustBeGuilty = true)
 		{
+			logger.LogDebug("RATIO: " + LevelSize.ChunkCountRatio); 
+
 			if (totalSpawns == 0)
 				totalSpawns = GangTotalCount;
 
@@ -57,6 +59,8 @@ namespace SORCE.Challenges.C_Gangs
 			//playerAgent.gangStalking = Agent.gangCount;
 			Vector2 pos = Vector2.zero;
 			int middleAgentIndex = 0;
+			List<Agent> slaveMasters = new List<Agent>();
+			string securityType = GC.Choose("Normal", "Weapons");
 
 			totalSpawns = (int)(totalSpawns * LevelSize.ChunkCountRatio);
 
@@ -68,6 +72,11 @@ namespace SORCE.Challenges.C_Gangs
 				if (i % gangSize == 0) // First
 				{
 					Agent.gangCount++;
+
+					if (slaveMasters.Any())
+						slaveMasters.Clear();
+
+					securityType = GC.Choose("Normal", "Weapons", "ID");
 
 					while ((pos == Vector2.zero || Vector2.Distance(pos, GC.playerAgent.tr.position) < 20f) && attempts < 300)
 					{
@@ -105,6 +114,24 @@ namespace SORCE.Challenges.C_Gangs
 					//agent.statusEffects.AddStatusEffect("InvisiblePermanent");
 					agent.oma.mustBeGuilty = mustBeGuilty;
 					spawnedAgentList.Add(agent);
+
+					if (agentType == VAgent.Slavemaster)
+						slaveMasters.Add(agent);
+					else if (agentType == VAgent.Slave &&
+						slaveMasters.Any())
+					{
+						logger.LogDebug("Slave");
+						logger.LogDebug("Slavemasters: " + slaveMasters.Count());
+						foreach (Agent slavemaster in slaveMasters)
+						{
+							slavemaster.slavesOwned.Add(agent);
+							agent.slaveOwners.Add(slavemaster);
+						}
+					}
+					else if (agentType == VAgent.Thief)
+						agent.losCheckAtIntervals = GC.percentChance(100);
+					else if (agentType == VAgent.CopBot)
+						agent.oma.securityType = agent.oma.convertSecurityTypeToInt(securityType);
 
 					if (spawnedAgentList.Count > 1)
 						for (int j = 0; j < spawnedAgentList.Count; j++)

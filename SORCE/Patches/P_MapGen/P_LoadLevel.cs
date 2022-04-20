@@ -28,6 +28,20 @@ namespace SORCE.Patches
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.CanUseChunk), argumentTypes: new[] { typeof(GameObject), typeof(ChunkData), typeof(bool), typeof(int), typeof(int), typeof(Vector3) })]
+		public static bool CanUseChunk_Prefix(GameObject myChunkGo, ChunkData myChunkBasic, bool checkSessionData, int randChunkNum, int chunkShape, Vector3 myNewPos, ref bool __result)
+        {
+			if (GC.challenges.Contains(nameof(ProtectAndServo)) &&
+				myChunkBasic.description == VChunkType.ConfiscationCenter ||
+				myChunkBasic.description == VChunkType.DeportationCenter)
+            {
+				__result = true;
+				return false;
+			}
+
+			return true;
+		}
+
 		/// <summary>
 		/// Public floors
 		///		This works in two different places, which work on different districts.
@@ -227,7 +241,7 @@ namespace SORCE.Patches
 		/// <param name="__instance"></param>
 		/// <param name="___tilemapWalls"></param>
 		/// <param name="___tilemapFloors2"></param>
-		/// <returns></returns>
+		/// <returns></returns> 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.SetupBasicLevel), new Type[] { })]
 		public static bool SetupBasicLevel_Prefix(LoadLevel __instance, tk2dTileMap ___tilemapWalls, tk2dTileMap ___tilemapFloors2)
 		{

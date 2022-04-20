@@ -9,7 +9,7 @@ namespace SORCE.Challenges.C_Gangs
 
 		public override string LeaderAgent =>		VAgent.CopBot;
 		public override string[] MiddleAgents =>	new string[] { VAgent.CopBot };
-        public override string LastAgent =>			VAgent.Hacker;
+        public override string LastAgent =>			VAgent.CopBot;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
@@ -28,7 +28,7 @@ namespace SORCE.Challenges.C_Gangs
 				.WithName(new CustomNameInfo(
 					"Gangs - Protect & Servo"))
 				.WithDescription(new CustomNameInfo(
-					"Edison, Inc. presents: Police©!\n\n" +
+					"Edison, Inc. presents: Police©!\n" +
 					"The futuristic solution to law enforcement."));
 		}
 	}
