@@ -23,7 +23,7 @@ namespace SORCE.Challenges.C_Gangs
         [RLSetup]
 		static void Start()
 		{
-            _ = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(PiruSt))
+            _ = RogueLibs.CreateCustomUnlock(new PiruSt(nameof(PiruSt))
             {
             })
                 .WithName(new CustomNameInfo(

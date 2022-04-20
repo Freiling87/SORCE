@@ -32,9 +32,9 @@ namespace SORCE.Challenges.C_Gangs
 		public static GameController GC => GameController.gameController;
 
 		public static int GangTotalCount =>
-            (int)(Random.Range(12, 24) * LevelSize.ChunkCountRatio);
+            (int)(Random.Range(12, 18) * LevelSize.ChunkCountRatio);
         public static int GangSize =>
-            Random.Range(4, 8);
+            Random.Range(4, 6);
 
 		public static void Spawner_Main()
 		{

@@ -18,6 +18,10 @@ Toilet
 	0-cost (no AnCap)?
 	All vanilla works still
 Trash cans don't seem to be spawning unless Core.Debug is in HasTrashcans. Test this.
+Big Black Blotch
+	This is either due to Muzzle Flash or shell casing negative ambient light.
+Map Size Downtown
+	I think Canals used up all the chunks, so vanilla ended up with 2 or 3 buildings
 #	CT	Mutators
 ##		CT	Features
 ###         CT   00 District Object Delimitation
@@ -194,6 +198,8 @@ StatusEffects
 LoadLevel
 	.SetNormalLighting 
 ###         C   No Agent Lights
+Light stays until body is gibbed
+	See what method that is and analyze it
 Attempts
 	P_Agent
 		Awake_Postfix
@@ -227,34 +233,28 @@ etc.
 P_Bullet.RealAwake_Postfix
 ###			√	No Object Glow
 Complete
-##		T	Gangs
-###			T	Back Draft
-###			T	Banana Smugglers
-###			T	Bando Brothers
-####			H	Junkie Class
-Someday
-###			T	BURPs
-###			T	Crooklyn Ave.
-###			T	Experimental Excursion
-###			T	Headhunters
-###			T	Home Team
-###			T	Lunch Hour
-###			T	Merchant Caravans
-###			T	Not Swearwolves
+##		C	Gangs
+###			C	00 Gang Minimum
+Have a gang size minimum at which to cut off the gangspawner, since some of them don't make sense in too few numbers.
+###			C	00 Exclude Home Base
+New
+###			C	Gangs stop navigating
+Stopped in place
+###			C	Not Swearwolves
 WerewolfB
-If no worky, try WerewolfA
-###			T	Piru St.
-###			T	Professional Network
-###			T	Protect & Servo
-May act differently in levels without Confiscation Centers
+	If no worky, try WerewolfA
+	Spawned perma-wolves
+		Might want one specific to that anyway
+###			C	Protect & Servo
+####			C	Enable Confiscation / Deportation Centers
 Probably just need to include those in chunk lists if enabled
-###			T	Rougher Ruffians
-###			T	Team Melvin
-###			T	The Blue Line
-###			T	The Bluer Line
-###			T	Union Town
-###			T	We Love Our Job Creators
-Test various slave stuff
+###			C	Rougher Ruffians
+####			C	Did not pickpocket
+###			C	We Love Our Job Creators
+Tried to buy a slave
+	Everything worked correctly, but he thinks he doesn't have any slaves. This should be a quick fix.
+Killed slavemaster
+	Alignment works, but slave relationship isn't set. Probably same as above.
 ###			C	Modifiers
 ####			C	Fast Gangs
 ####			C	Large Gang Size
@@ -270,6 +270,24 @@ Blahd gangs are larger, same total number of agents.
 Always Run
 ####			H	Guilty Gangs
 ####			H	Innocent Gangs
+###			√	Back Draft
+###			√	Banana Smugglers
+###			√H	Bando Brothers
+####			H	Junkie Class
+Someday
+###			√	BURPs
+###			√	Crooklyn Ave.
+###			√	Experimental Excursion
+###			√	Headhunters
+###			√	Home Team
+###			√	Lunch Hour
+###			√	Merchant Caravans
+###			√	Piru St.
+###			√	Professional Network
+###			√	Team Melvin
+###			√	The Blue Line
+###			√	The Bluer Line
+###			√	Union Town
 ##		C	VFX
 ###         C   00 Spawns litter on level editor
 New
@@ -326,6 +344,8 @@ Custom sprites, or smaller/slightly darker/on side
 Spawn "hoard" sprites around Safe or Chest in Armory
 Vary spawns per chunk type
 ###         CT  Shootier Guns
+####			C	00 Destroy on Level End
+Lasted into Home Base
 ####			T	Decals
 #####				C	Blood 
 ######					C	Exit wound

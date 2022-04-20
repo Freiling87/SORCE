@@ -9,13 +9,13 @@ namespace SORCE.Challenges.C_Gangs
 
 		public override string LeaderAgent =>		VAgent.CopBot;
 		public override string[] MiddleAgents =>	new string[] { VAgent.CopBot };
-        public override string LastAgent =>			VAgent.CopBot;
+        public override string LastAgent =>			VAgent.Hacker;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
 
-        public override int GangSize =>				GangChallengeTools.GangSize;
-        public override int TotalSpawns =>			GangChallengeTools.GangTotalCount;
+        public override int GangSize =>				2;
+        public override int TotalSpawns =>			(GangChallengeTools.GangTotalCount / 2) * 2;
 
         public override string Relationship =>		VRelationship.Neutral;
 

@@ -133,7 +133,7 @@ namespace SORCE.Patches
 						//if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
 						if (GC.percentChance(100))
 							//GC.spawnerMain.SpawnExplosion(GC.playerAgent, spawnPosition, VExplosion.Water);
-							GC.tileInfo.SpillLiquidLarge(spawnPosition, VExplosion.Water, false, 1, true); // Attempt at smaller pool. expandLevel is inverse to size.
+							GC.tileInfo.SpillLiquidLarge(spawnPosition, VExplosion.Water, false, 1, !avoidPrivate); // Attempt at smaller pool. expandLevel is inverse to size.
 
 						break;
 
@@ -303,8 +303,8 @@ namespace SORCE.Patches
 								avoidPublic, avoidPrivate);
 						}
 
-						if (GC.percentChance(100)) // Adjust
-							GC.tileInfo.SpillLiquidLarge(spawnPosition, "Oil", false, 1, true); // Attempt at smaller pool. expandLevel is inverse to size.
+						if (GC.percentChance(1))
+							GC.tileInfo.SpillLiquidLarge(spawnPosition, "Oil", false, 2, !avoidPrivate);
 
 						break;
 
@@ -364,10 +364,8 @@ namespace SORCE.Patches
 							}
 						}
 
-						//if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 15f)))
-						if (GC.percentChance(100))
-							//GC.spawnerMain.SpawnExplosion(GC.playerAgent, spawnPosition, VExplosion.Water);
-							GC.tileInfo.SpillLiquidLarge(spawnPosition, VExplosion.Water, false, 1, true); // Attempt at smaller pool. expandLevel is inverse to size.
+						if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
+							GC.tileInfo.SpillLiquidLarge(spawnPosition, VExplosion.Water, false, 4, !avoidPrivate);
 
 						break;
 

@@ -14,8 +14,8 @@ namespace SORCE.Challenges.C_Gangs
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
 
-        public override int GangSize =>				GangChallengeTools.GangSize;
-        public override int TotalSpawns =>			GangChallengeTools.GangTotalCount;
+        public override int GangSize =>				4;
+        public override int TotalSpawns =>			(GangChallengeTools.GangTotalCount / 4) * 4;
 
         public override string Relationship =>		VRelationship.Neutral;
 

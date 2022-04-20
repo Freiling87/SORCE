@@ -10,13 +10,13 @@ namespace SORCE.Challenges.C_Gangs
 
 		public override string LeaderAgent =>		VanillaAgents.Bouncer;
 		public override string[] MiddleAgents =>	new string[] { VanillaAgents.Scientist };
-        public override string LastAgent =>			VanillaAgents.Bouncer;
+        public override string LastAgent =>			VanillaAgents.Scientist;
 
 		public override bool AlwaysRun =>			false;
         public override bool MustBeGuilty =>		false;
 
         public override int GangSize =>				GangChallengeTools.GangSize;
-        public override int TotalSpawns =>			GangChallengeTools.GangTotalCount;
+        public override int TotalSpawns =>			(int)(GangChallengeTools.GangTotalCount * 1.10f);
 
         public override string Relationship =>		VRelationship.Neutral;
 
