@@ -9,7 +9,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 	{
 		public Shinobi() : base(nameof(Shinobi)) { }
 
-        public override Color32 FilterColor => new Color32(75, 75, 150, 200);
+        public override Color32 FilterColor => new Color32(70, 70, 140, 175);
 
 		[RLSetup]
 		static void Start()

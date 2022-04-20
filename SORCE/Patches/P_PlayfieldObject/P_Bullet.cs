@@ -24,13 +24,13 @@ namespace SORCE.Patches.P_PlayfieldObject
         public static bool NoBulletLights;
         public static bool RealisticBullets = Core.debugMode;
 
-        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.BulletHitEffect), argumentTypes: new[] { typeof(GameObject) })]
+        //[HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.BulletHitEffect), argumentTypes: new[] { typeof(GameObject) })]
         public static void BulletHitEffect_Postfix(GameObject hitObject, Bullet __instance)
         {
             if (bullets.Contains((int)__instance.bulletType) 
                 && hitObject.CompareTag("Wall"))
             {
-                SpawnWallDecal(hitObject.transform.position);
+                SpawnBulletHole(__instance.transform.position);
             }
         }
 
@@ -56,25 +56,28 @@ namespace SORCE.Patches.P_PlayfieldObject
                 __instance.speed = 27;
 
                 // Highest good     27
-                // Lowest bad       28
+                // Lowest bad       26
+                // Suddenly, very low values are noclipping badly.
             }
         }
-        private static List<int> bullets = new List<int>()
+        private static readonly List<int> bullets = new List<int>()
         {
             1, 2, 19
         };
 
-        public static void SpawnWallDecal(Vector3 pos)
+        public static void SpawnBulletHole(Vector3 pos)
         {
-            Vector3 newPos = new Vector3(pos.x, pos.y, 0f); // Might be redundant
-            GameObject gameObject = GC.spawnerMain.floorDecalPrefab.Spawn(newPos);
-            gameObject.layer = 23;
+            GameObject gameObject = GC.spawnerMain.floorDecalPrefab.Spawn(pos);
+            gameObject.layer = 5;
+            // 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
+            // ~ ~ X X ~ X X X X  X  X                       X  X  X           X
             gameObject.GetComponent<tk2dSprite>().SetSprite(CSprite.BulletHole);
 
-            //GC.floorDecalsList.Add(gameObject);
+            // GC.floorDecalsList.Add(gameObject); // Hoping this will cause it to not stay over level // DW
 
-            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
+            int num = Random.Range(0, 360);
+            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, num);
+        } 
     }
 } 
   

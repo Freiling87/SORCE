@@ -12,6 +12,8 @@ namespace SORCE.Challenges.C_Gangs
         public override string LastAgent =>			VAgent.SlumDweller;
 
 		public override bool AlwaysRun =>			false;
+        public override bool GangsAligned =>		true;
+		public override bool MakeTrouble =>			false;
         public override bool MustBeGuilty =>		true;
 
         public override int GangSize =>				GangChallengeTools.GangSize;

@@ -56,13 +56,14 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
 			Core.debugMode;
-		public static bool HasRugs =>
+		public static bool HasRugs => 
 			GC.challenges.Contains(nameof(GrandCityHotel)) ||
 			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
 			Core.debugMode;
 		public static bool HasScreens =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
-			GC.challenges.Contains(nameof(Technocracy));
+			GC.challenges.Contains(nameof(Technocracy)) ||
+			Core.debugMode;
 		public static bool HasSecurityCamsAndTurrets =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(PoliceState)) ||

@@ -12,6 +12,8 @@ namespace SORCE.Challenges.C_Gangs
         public override string LastAgent =>			VAgent.Cop;
 
 		public override bool AlwaysRun =>			false;
+        public override bool GangsAligned =>		true;
+		public override bool MakeTrouble =>			true;
         public override bool MustBeGuilty =>		false;
 
 		// Force pairs of 2

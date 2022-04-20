@@ -19,9 +19,10 @@ Toilet
 	All vanilla works still
 Trash cans don't seem to be spawning unless Core.Debug is in HasTrashcans. Test this.
 Big Black Blotch
-	This is either due to Muzzle Flash or shell casing negative ambient light.
+	I think this is muzzle flash.
 Map Size Downtown
 	I think Canals used up all the chunks, so vanilla ended up with 2 or 3 buildings
+Spawned Conf centers when no cop bots
 #	CT	Mutators
 ##		CT	Features
 ###         CT   00 District Object Delimitation
@@ -240,41 +241,28 @@ Have a gang size minimum at which to cut off the gangspawner, since some of them
 New
 ###			C	Gangs stop navigating
 Stopped in place
+###			C	Initial Relationship
 ###			C	Not Swearwolves
-WerewolfB
-	If no worky, try WerewolfA
-	Spawned perma-wolves
-		Might want one specific to that anyway
-###			C	Protect & Servo
-####			C	Enable Confiscation / Deportation Centers
-Probably just need to include those in chunk lists if enabled
-###			C	Rougher Ruffians
-####			C	Did not pickpocket
-###			C	We Love Our Job Creators
-Tried to buy a slave
-	Everything worked correctly, but he thinks he doesn't have any slaves. This should be a quick fix.
-Killed slavemaster
-	Alignment works, but slave relationship isn't set. Probably same as above.
-###			C	Modifiers
+WerewolfB Spawned perma-wolves
+	Might want one specific to that anyway
+Try making an Office drone and giving him the special ability.
+###			H	Modifiers
+####			H	Blahd Runs Thick
+Blahd gangs are larger, same total number of agents.
+####			H	Crêpin' on the Low Low
+I be, I be rollin' solo
+Crepe gangs of 1, same total number of agents.
 ####			C	Fast Gangs
 ####			C	Large Gang Size
 ####			C	Small Gang Size
 ####			C	More Gang Spawns
-###			H	Others
-####			H	Crêpin' on the Low Low
-I be, I be rollin' solo
-Spawns Crepe gangs of 1, same total number of agents.
-####			H	Blahd Runs Thick
-Blahd gangs are larger, same total number of agents.
-####			H	Faster Gangs
-Always Run
 ####			H	Guilty Gangs
 ####			H	Innocent Gangs
+###			√H	Protect & Servo
+####			H	Split into enforcement & spawn types
 ###			√	Back Draft
 ###			√	Banana Smugglers
-###			√H	Bando Brothers
-####			H	Junkie Class
-Someday
+###			√	Bando Brothers
 ###			√	BURPs
 ###			√	Crooklyn Ave.
 ###			√	Experimental Excursion
@@ -283,11 +271,14 @@ Someday
 ###			√	Lunch Hour
 ###			√	Merchant Caravans
 ###			√	Piru St.
-###			√	Professional Network
+###			C	Professional Network
+####			C	Disable thief's pickpocket
+###			√	Rougher Ruffians
 ###			√	Team Melvin
 ###			√	The Blue Line
 ###			√	The Bluer Line
 ###			√	Union Town
+###			√	We Love Our Job Creators
 ##		C	VFX
 ###         C   00 Spawns litter on level editor
 New
@@ -322,6 +313,8 @@ On using consumables, spawn litter
 ####			C	00 Add some of these to generic litter sprite inventories
 ####            C   Cigarette Butt
 Fucking everywhere 
+Tiny smoke particle that burns out quickly
+If it lands on oil, light it up!
 ####            C   Beer can
 Though this might not work with the throwable beer can
 ####			C	Fud Jar
@@ -355,8 +348,11 @@ Small pool on death
 ######					C	Trail
 From recently-hit agents 
 	(no need for bleeding status effect yet)
-#####			T	Bullet holes
-	Attempted
+#####			H	Bullet holes
+Sprite spawn works
+######				C	Determine layer
+Certain layers are over wall, but not over player. Not sure if a vanilla layer can do this.
+######				C	Adjust placement per wall facing
 ######				H	Different sprites for wall types
 Glass might be the only one where it's appropriate
 Hedge can fully omit the hole
@@ -433,12 +429,50 @@ Gang-related, political, or just obscene
 ####            C   Poster
 Political, entertainment event, PSA
 ##		H	Laws
-###			C	Legal Drugs
-###			C	Legal Weapons
-###			C	Stop & Frisk
-Cops will occasionally confiscate contraband
-###			C	Gun Ban
+###			C	Classes
+Class statuses defined by mutators
+Affects: 
+	prejudice from law enforcement
+	prices when dealing with other class
+	Gates to service from agents & machines
+###			C	Prohibitions
+####			C	Alcohol Ban
+Contraband
+####			C	Alcohol Public Use Ban
+Law strikes
+####			C	Alcohol Disapproval
+Bartenders & drinkers annoy public
+####			C	Gun Ban
 All guns are contraband
+Having a weapon out is instant hostility
+####			C	Gun Disapproval
+Open carry & use annoys
+Raise threat level of guns to cause fleeing instead of fighting
+####			C	Gun Legalization
+LevelTransition.ChangeLevel_Postfix
+	Set placedConfiscationCenter to true
+In CopBot spawn, set security type to anything but "Weapons"
+####			C	Gun Limitation
+Certain weapons are completely banned (rockets, etc.)
+####			C	Gun Open Carry Ban
+Putting a weapon away ends Accost
+####			C	Drug Ban
+New
+####			C	Drug Decriminalization
+New
+####			C	Drug Disapproval
+Annoys
+####			C	Drug Legalization
+LevelTransition.ChangeLevel_Postfix
+	Set placedConfiscationCenter to true
+In CopBot spawn, set security type to anything but "Normal"
+###			C	Punishments
+####			C	Fine, Just Fine!
+Cops may Fine you instead of attacking, depending on severity
+####			C	Stop & Frisk
+Cops will occasionally confiscate contraband
+####			C	Time Served
+Cops may Deport you instead of attacking, depending on severity
 ##		H	Overhauls
 Scope:
 	Public Floors

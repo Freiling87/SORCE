@@ -9,7 +9,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 	{
 		public Reactor() : base(nameof(Reactor)) { }
 
-		public override Color32 FilterColor => new Color32(75, 200, 50, 125);
+		public override Color32 FilterColor => new Color32(75, 200, 50, 100);
 
 		[RLSetup]
 		static void Start()

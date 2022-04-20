@@ -188,6 +188,8 @@
     <Compile Include="Localization\VParticleEffect.cs" />
     <Compile Include="Localization\VAgentGoal.cs" />
     <Compile Include="Localization\VRelationship.cs" />
+    <Compile Include="Patches\P_LevelTransition.cs" />
+    <Compile Include="Patches\P_MapGen\P_LoadLevel_FillMapChunks2.cs" />
     <Compile Include="Resources\SpriteLoader.cs" />
     <Compile Include="Utilities\Audiovisual.cs" />
     <Compile Include="Utilities\MapGen\AmbientAudio.cs" />

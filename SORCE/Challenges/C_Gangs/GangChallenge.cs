@@ -18,6 +18,8 @@ namespace SORCE.Challenges.C_Gangs
         public abstract string LastAgent { get; }
 
         public abstract bool AlwaysRun { get; }
+		public abstract bool GangsAligned { get; }
+		public abstract bool MakeTrouble { get; }
         public abstract bool MustBeGuilty { get; }
 
         public abstract int GangSize { get; }
@@ -43,10 +45,11 @@ namespace SORCE.Challenges.C_Gangs
 		}
 
 		public static void SpawnGangs(GangChallenge challenge) =>
-			SpawnGangs(challenge.LeaderAgent, challenge.MiddleAgents, challenge.LastAgent, challenge.TotalSpawns, challenge.GangSize, challenge.Relationship, challenge.AlwaysRun, challenge.MustBeGuilty);
-		public static void SpawnGangs(string leaderAgent, string[] middleAgents, string lastAgent, int totalSpawns = 0, int gangSize = 0, string relationship = VRelationship.Neutral, bool alwaysRun = false, bool mustBeGuilty = true)
+			SpawnGangs(challenge.LeaderAgent, challenge.MiddleAgents, challenge.LastAgent, challenge.TotalSpawns, challenge.GangSize, challenge.Relationship, challenge.AlwaysRun, challenge.MustBeGuilty, challenge.MakeTrouble, challenge.GangsAligned);
+		public static void SpawnGangs(string leaderAgent, string[] middleAgents, string lastAgent, int totalSpawns = 0, int gangSize = 0, string relationship = VRelationship.Neutral, bool alwaysRun = false, bool mustBeGuilty = true, bool makeTrouble = true, bool gangsAligned = false)
 		{
-			logger.LogDebug("RATIO: " + LevelSize.ChunkCountRatio); 
+			logger.LogDebug("RATIO: " + LevelSize.ChunkCountRatio);
+			logger.LogDebug("GANGTOTALCOUNT: " + GangTotalCount);
 
 			if (totalSpawns == 0)
 				totalSpawns = GangTotalCount;
@@ -60,9 +63,7 @@ namespace SORCE.Challenges.C_Gangs
 			Vector2 pos = Vector2.zero;
 			int middleAgentIndex = 0;
 			List<Agent> slaveMasters = new List<Agent>();
-			string securityType = GC.Choose("Normal", "Weapons");
-
-			totalSpawns = (int)(totalSpawns * LevelSize.ChunkCountRatio);
+			string securityType = GC.Choose("Normal", "Weapons", "ID");
 
 			for (int i = 0; i < totalSpawns; i++)
 			{
@@ -72,6 +73,9 @@ namespace SORCE.Challenges.C_Gangs
 				if (i % gangSize == 0) // First
 				{
 					Agent.gangCount++;
+
+					if (!gangsAligned)
+						spawnedAgentList.Clear();
 
 					if (slaveMasters.Any())
 						slaveMasters.Clear();
@@ -128,10 +132,19 @@ namespace SORCE.Challenges.C_Gangs
 							agent.slaveOwners.Add(slavemaster);
 						}
 					}
-					else if (agentType == VAgent.Thief)
-						agent.losCheckAtIntervals = GC.percentChance(100);
 					else if (agentType == VAgent.CopBot)
 						agent.oma.securityType = agent.oma.convertSecurityTypeToInt(securityType);
+
+					if (agentType == VAgent.Thief
+						|| agentType == VAgent.Vampire
+						|| agentType == VAgent.Cannibal
+						|| agentType == VAgent.CopBot)
+					{
+						if (makeTrouble)
+							agent.losCheckAtIntervals = GC.percentChance(50);
+						else if (!makeTrouble)
+							agent.losCheckAtIntervals = false;
+					}
 
 					if (spawnedAgentList.Count > 1)
 						for (int j = 0; j < spawnedAgentList.Count; j++)
