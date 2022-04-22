@@ -3,6 +3,7 @@ using HarmonyLib;
 using SORCE.Challenges.C_Lighting;
 using SORCE.Logging;
 using System;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -36,12 +37,18 @@ namespace SORCE.Patches.P_PlayfieldObject
 				else if (__instance is Fountain)
 					P_Fountain.Loot((Fountain)__instance);
 				else if (__instance is Toilet)
-					P_Toilet.TakeHugeShit((Toilet)__instance);
+                {
+					AnnoyWitnessesVictimless(__instance.interactingAgent);
+					P_Toilet.TakeHugeShit((Toilet)__instance, true);
+				}
 			}
 		}
 
 		public static void AnnoyWitnessesVictimless(Agent perp)
 		{
+			if (!GC.agentList.Any())
+				return;
+
 			foreach (Agent bystander in GC.agentList)
 			{
 				if (Vector2.Distance(bystander.tr.position, perp.tr.position) < bystander.LOSRange / perp.hardToSeeFromDistance &&

@@ -1,8 +1,10 @@
 ﻿using BepInEx.Logging;
 using SORCE.Challenges.C_Features;
 using SORCE.Challenges.C_Overhaul;
+using SORCE.Challenges.C_VFX;
 using SORCE.Extensions;
 using SORCE.Logging;
+using SORCE.Patches.P_PlayfieldObject;
 using SORCE.Traits;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,7 @@ namespace SORCE.MapGenUtilities
 			BreakWindows();
 			// ColorLakes();
 			PoisonLakes();
+			RuinToilets();
 
 			//SpawnWallOutcroppings();.
 			SpawnCoziness();
@@ -45,6 +48,7 @@ namespace SORCE.MapGenUtilities
 
 			VFX.SpawnPublicLitter();
 		}
+
 		private static void BreakWindows()
 		{
 			if (!MapFeatures.HasBrokenWindows)
@@ -75,12 +79,8 @@ namespace SORCE.MapGenUtilities
 				body.objectMult.CallRpcChangeLakeColor(array, lakeColor);
 			}
 		}
-
-		/// <summary>
-		/// Copied from Computer.PoisonWater
-		/// </summary>
 		private static void PoisonLakes()
-        {
+		{
 			if (!MapFeatures.HasLakesPolluted)
 				return;
 
@@ -112,7 +112,7 @@ namespace SORCE.MapGenUtilities
 
 							for (int k = 0; k < GC.tileInfo.changedLakeColorTiles.Count; k++)
 							{
-								if (GC.tileInfo.changedLakeColorTiles[k].x == (float)i && 
+								if (GC.tileInfo.changedLakeColorTiles[k].x == (float)i &&
 									GC.tileInfo.changedLakeColorTiles[k].y == (float)j)
 								{
 									GC.tileInfo.changedLakeColor[k] = 2;
@@ -138,6 +138,22 @@ namespace SORCE.MapGenUtilities
 				GC.playerAgent.objectMult.ObjectAction(GC.importantObjectList[0].objectNetID, "PoisonWater");
 			}
 		}
+		private static void RuinToilets()
+		{
+            if (!VFX.HasPrivateLitter)
+                return;
+
+            int chanceToShid = (int)(LevelGenTools.SlumminessFactor * 15f);
+
+			foreach (ObjectReal objectReal in GC.objectRealList)
+				if (objectReal is Toilet toilet
+					&& GC.percentChance(chanceToShid))
+					P_Toilet.TakeHugeShit(toilet, false);
+		}
+
+		/// <summary>
+		/// Copied from Computer.PoisonWater
+		/// </summary>
 		private static void SpawnKillerPlants()
 		{
 			if (!MapFeatures.HasKillerPlants)

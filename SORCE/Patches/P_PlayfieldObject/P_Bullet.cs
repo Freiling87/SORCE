@@ -53,7 +53,7 @@ namespace SORCE.Patches.P_PlayfieldObject
                 && RealisticBullets) 
             {
                 __instance.tr.localScale *= 0.20f;
-                __instance.speed = 27;
+                //__instance.speed = 27;
 
                 // Highest good     27
                 // Lowest bad       26
@@ -67,13 +67,14 @@ namespace SORCE.Patches.P_PlayfieldObject
 
         public static void SpawnBulletHole(Vector3 pos)
         {
+            pos.z = 0.01f;
             GameObject gameObject = GC.spawnerMain.floorDecalPrefab.Spawn(pos);
             gameObject.layer = 5;
             // 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
             // ~ ~ X X ~ X X X X  X  X                       X  X  X           X
             gameObject.GetComponent<tk2dSprite>().SetSprite(CSprite.BulletHole);
 
-            // GC.floorDecalsList.Add(gameObject); // Hoping this will cause it to not stay over level // DW
+            // GC.floorDecalsList.Add(gameObject); // Hoping this will cause it to not stay over level // DW 
 
             int num = Random.Range(0, 360);
             gameObject.transform.rotation = Quaternion.Euler(0f, 0f, num);

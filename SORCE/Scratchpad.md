@@ -14,9 +14,6 @@ No ObjectReal mouse hover text
 	Or maybe only work with Space or other key
 	Save for a GUI mod
 #	T	Recent commit testing
-Toilet 
-	0-cost (no AnCap)?
-	All vanilla works still
 Trash cans don't seem to be spawning unless Core.Debug is in HasTrashcans. Test this.
 Big Black Blotch
 	I think this is muzzle flash.
@@ -307,6 +304,7 @@ Food OR paper waste
 ####            C   Toilet
 Highest chances in public toilets
 Find a way to make the splash smaller
+#####				C	
 ####            C   Trashcan
 ###		C	Consumerer Products
 On using consumables, spawn litter
@@ -946,6 +944,25 @@ I think this is an import from BunnyMod
 Technically works, but they fall right back in and trigger the flush method again.
 Find BM's old jump method of exiting.
 ###         C   Patch Toilet FlushYourself
+####			C	E_Agent.IsFlushable error
+
+	[Error  :RogueLibsCore] SimpleInteractionProvider's handler on Toilet (1541) (Toilet) threw an exception.
+	[Error  :RogueLibsCore] System.NullReferenceException: Object reference not set to an instance of an object
+	  at SORCE.Extensions.E_Agent.IsFlushable (Agent agent) [0x00000] in <a6d3df63bb624a78a65160bf3239316e>:0
+	  at SORCE.Patches.P_PlayfieldObject.P_Toilet+<>c.<Setup>b__3_0 (RogueLibsCore.SimpleInteractionProvider`1[T] h) [0x000e8] in <a6d3df63bb624a78a65160bf3239316e>:0
+	  at RogueLibsCore.SimpleInteractionProvider`1[T].RogueLibsCore.IInteractionProvider.GetInteractions (RogueLibsCore.InteractionModel model) [0x0001c] in <f2d3b562e3ca434aac96212154c6ffc3>:0
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	RogueLibsCore.VanillaInteractions+<>c.<Patch_Toilet>b__55_1 (RogueLibsCore.InteractionModel`1[T] m) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
+	RogueLibsCore.SimpleInteractionProvider`1+<>c__DisplayClass12_0[T].<SetStopCallback>g__Callback|0 () (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
+	RogueLibsCore.InteractionModel.OnDetermineButtons () (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
+	RogueLibsCore.RogueLibsPlugin.DetermineButtonsHook (PlayfieldObject __instance) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
+	Toilet.DetermineButtons () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	RogueLibsCore.RogueLibsPlugin.InteractHook (PlayfieldObject __instance, Agent agent) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
+	Toilet.Interact (Agent agent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	InteractionHelper.UpdateInteractionHelper () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	Updater.UpdateInterface () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	Updater.Update () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
 ###			C	Old Notes
 - Take small damage if you walk into manhole instead of activating
   - Attempted

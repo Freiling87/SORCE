@@ -44,34 +44,44 @@ namespace SORCE.Patches.P_PlayfieldObject
 			{
 				if (h.Object.GetHook<P_Toilet_Hook>().disgusting)
 				{
-					h.Agent.SayDialogue(CDialogue.ToiletDisgusting);
-					h.Agent.StopInteraction();
+					InteractionModel<Toilet> model = h.Model;
+					Agent agent = h.Agent;
+
+					model.CancelCallback = () =>
+					{
+						agent.SayDialogue(CDialogue.ToiletDisgusting);
+					};
+
+					h.StopInteraction();
 				}
-				
-				// Vanilla Flush removal
-				//FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
-				//List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
-				//interactions.RemoveAll(i => i.ButtonName is VButtonText.FlushYourself);
+				else
+				{
+					// Vanilla button removal
+					FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
+					List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
+					interactions.RemoveAll(i => i.ButtonName is VButtonText.FlushYourself);
+					interactions.RemoveAll(i => i.ButtonName is VButtonText.PurgeStatusEffects);
 
-				int toiletCost = h.Object.GetHook<P_Toilet_Hook>().toiletCost;
+					int toiletCost = h.Object.GetHook<P_Toilet_Hook>().toiletCost;
 
-				if (E_Agent.IsFlushable(h.Agent))
-					h.AddButton(VButtonText.FlushYourself, toiletCost, m =>
-					{
-						m.Object.FlushYourself();
-					});
+					if (E_Agent.IsFlushable(h.Agent))
+						h.AddButton(VButtonText.FlushYourself, toiletCost, m =>
+						{
+							m.Object.FlushYourself();
+						});
 
-				if (h.Object.hasPurgeStatusEffects())
-					h.AddButton(VButtonText.PurgeStatusEffects, toiletCost, m =>
-					{
-						m.Object.PurgeStatusEffects();
-					});
+					if (h.Object.hasPurgeStatusEffects())
+						h.AddButton(VButtonText.PurgeStatusEffects, toiletCost, m =>
+						{
+							m.Object.PurgeStatusEffects();
+						});
 
-				if (Core.debugMode)
-					h.AddButton(CButtonText.TakeHugeShit, toiletCost, m =>
-					{
-						m.StartOperating(2f, false, COperatingText.ToiletShitting);
-					});
+					if (Core.debugMode)
+						h.AddButton(CButtonText.TakeHugeShit, toiletCost, m =>
+						{
+							m.StartOperating(2f, false, COperatingText.ToiletShitting);
+						});
+				}
 			});
 		}
 
@@ -99,25 +109,49 @@ namespace SORCE.Patches.P_PlayfieldObject
 			__instance.AddHook<P_Toilet_Hook>();
 		}
 
-		public static void TakeHugeShit(Toilet toilet)
+		public static void TakeHugeShit(Toilet toilet, bool loud = true)
 		{
-			Agent agent = toilet.interactingAgent;
-
-			Poopsplosion(toilet);
-			P_00_ObjectReal.AnnoyWitnessesVictimless(agent);
-			//agent.StopInteraction();
-			//toilet.StopInteraction();
+			Poopsplosion(toilet, loud);
+			toilet.StopInteraction();
 		}
 
-		public static void Poopsplosion(ObjectReal targetObj)
+		public static void Poopsplosion(ObjectReal targetObj, bool loud = true)
 		{
 			Agent agent = targetObj.interactingAgent;
-			GC.spawnerMain.SpawnExplosion(agent, targetObj.tr.position, VExplosion.Water);
-			GC.spawnerMain.SpawnWreckagePileObject(targetObj.tr.position, VObject.FlamingBarrel, false);
-			GC.spawnerMain.SpawnWreckagePileObject(targetObj.tr.position, VObject.MovieScreen, false);
+			Vector2 pos = targetObj.transform.position;
+			bool avoidPublic = !VFX.HasPublicLitter;
+			bool avoidPrivate = !VFX.HasPrivateLitter;
+
+			if (loud)
+				GC.spawnerMain.SpawnExplosion(targetObj, pos, VExplosion.Water);
+			else 
+				GC.tileInfo.SpillLiquidLarge(pos, VExplosion.Water, false, 2, !avoidPrivate);
+
+			VFX.SpawnWreckagePileObject_Granular(
+				new Vector2(pos.x, pos.y - 0.08f),
+				VObject.FlamingBarrel,
+				false,
+				Random.Range(1, 4),
+				0.24f, 0.24f,
+				0,
+				avoidPublic, avoidPrivate);
+
+			int chance = 100;
+			while (GC.percentChance(chance))
+			{
+				VFX.SpawnWreckagePileObject_Granular(
+					new Vector2(pos.x, pos.y - 0.08f),
+					VObject.MovieScreen,
+					false,
+					Random.Range(3, 6),
+					0.48f, 0.48f,
+					0,
+					avoidPublic, avoidPrivate);
+				chance -= 25;
+			}
 
 			if (targetObj is Toilet toilet)
-				toilet.GetHook<P_Toilet_Hook>().disgusting = true;
+				toilet.GetComponent<PlayfieldObject>().GetHook<P_Toilet_Hook>().disgusting = true;
 		}
 	}
 

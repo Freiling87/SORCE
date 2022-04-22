@@ -7,6 +7,7 @@ using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_VFX;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
+using SORCE.Patches.P_PlayfieldObject;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -303,7 +304,7 @@ namespace SORCE.Patches
 						}
 
 						if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 5f)))
-							GC.tileInfo.SpillLiquidLarge(spawnPosition, "Oil", false, 2, !avoidPrivate);
+							GC.tileInfo.SpillLiquidLarge(spawnPosition, "Oil", false, 3, !avoidPrivate);
 
 						break;
 
@@ -337,38 +338,12 @@ namespace SORCE.Patches
 
 						break;
 
-					case VObject.Toilet:
-						if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
-						{
-							VFX.SpawnWreckagePileObject_Granular(
-								new Vector2(spawnPosition.x, spawnPosition.y - 0.08f),
-								VObject.FlamingBarrel,
-								false,
-								Random.Range(1, 4),
-								0.24f, 0.24f,
-								0,
-								avoidPublic, avoidPrivate);
-
-							while (GC.percentChance(chance))
-							{
-								VFX.SpawnWreckagePileObject_Granular(
-									new Vector2(spawnPosition.x, spawnPosition.y - 0.08f),
-									VObject.MovieScreen,
-									false,
-									Random.Range(3, 6),
-									0.48f, 0.48f,
-									0,
-									avoidPublic, avoidPrivate);
-								chance -= 25;
-							}
-						}
-
-						if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
-							GC.tileInfo.SpillLiquidLarge(spawnPosition, VExplosion.Water, false, 4, !avoidPrivate);
+                    case VObject.Toilet:
+						// Moved to MapFeatureSpawners, since it requires a completed GameObject to access Hook.
 
 						break;
 
-					case VObject.TrashCan:
+                    case VObject.TrashCan:
 						while (GC.percentChance(1)) // TODO: Move this part to Trash mod
 							GC.spawnerMain.SpawnItem(new Vector2(
 								spawnPosition.x + Random.Range(-0.32f, 0.32f),
