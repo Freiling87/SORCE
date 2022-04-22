@@ -44,6 +44,7 @@ namespace SORCE.MapGenUtilities
 			SpawnScreens();
 			SpawnSecurityCamsAndTurrets();
 			SpawnSlimeBarrels();
+			SpawnTrashBags();
 			SpawnTurntablesAndSpeakers();
 
 			VFX.SpawnPublicLitter();
@@ -1029,6 +1030,25 @@ namespace SORCE.MapGenUtilities
 					GC.spawnerMain.spawnObjectReal(location, null, VObject.SlimeBarrel);
 			}
 		}
+		private static void SpawnTrashBags()
+        {
+			if (!VFX.HasPublicLitter)
+				return;
+
+			foreach (ObjectReal objectReal in GC.objectRealList.Where(o => o is TrashCan trashcan))
+            {
+				// Pending resolution of decal layer issue.
+
+				//VFX.SpawnDecal_Granular(
+				//	objectReal.tr.position,
+				//	"TrashBag",
+				//	false,
+				//	GC.Choose(1, 1, 1, 2),
+				//	0.64f, 0.64f,
+				//	0,
+				//	false, true);
+			}
+        }
 		private static void SpawnTurntablesAndSpeakers()
 		{
 			if (!MapFeatures.HasTurntablesAndSpeakers)

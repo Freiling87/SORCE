@@ -142,16 +142,16 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SetLighting2), argumentTypes: new[] { typeof(PlayfieldObject) })]
 		public static bool SetLighting2_Prefix(PlayfieldObject myObject, SpawnerMain __instance)
 		{
-			if (myObject.CompareTag("ObjectReal") &&
-				GC.challenges.Contains(nameof(NoObjectLights)) &&
-				!VObject.Electronics.Contains(myObject.objectName))
+			if (GC.challenges.Contains(nameof(NoObjectLights))
+				&& !VObject.Electronics.Contains(myObject.objectName)
+				&& myObject.CompareTag("ObjectReal"))
 			{
 				ObjectReal objectReal = (ObjectReal)myObject;
 				objectReal.noLight = true;
 			}
 
-			if (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage") &&
-				GC.challenges.Contains(nameof(NoItemLights)))
+			if (GC.challenges.Contains(nameof(NoItemLights)) 
+				&& myObject.CompareTag("Item") || myObject.CompareTag("Wreckage"))
             {
 				Item item = (Item)myObject;
 

@@ -124,6 +124,36 @@
   <data name="Casing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Casing.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="CigaretteButt1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CigaretteButt1.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CigaretteButt2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CigaretteButt2.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CigaretteButt3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CigaretteButt3.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CigaretteButt4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CigaretteButt4.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CigaretteButt5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CigaretteButt5.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Hypo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hypo1.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Hypo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hypo2.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Hypo3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hypo3.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Hypo4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hypo4.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Hypo5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hypo5.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="RifleCasing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RifleCasing.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

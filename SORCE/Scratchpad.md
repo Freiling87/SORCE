@@ -14,6 +14,9 @@ No ObjectReal mouse hover text
 	Or maybe only work with Space or other key
 	Save for a GUI mod
 #	T	Recent commit testing
+Litter algorithm
+	Increased gib spawn radius massively
+	Set the wall prox check on the specific gibs rather than the parent spawn location
 Trash cans don't seem to be spawning unless Core.Debug is in HasTrashcans. Test this.
 Big Black Blotch
 	I think this is muzzle flash.
@@ -283,28 +286,16 @@ New
 ####            C   Scale litter to chunk type & Slumminess
 House: scale to chance. Some people are slobs, some aren't.
 Some are also slobs in different ways. 
-####            T   Bathtub
-Find a way to make the splash smaller
-	Attempted
 ####            C   Bed
 Crumpled up tissues, make it look like they're under the bed
-####            C   Desk
-Frequency +
-Amount --
-Spread +
-####            C   Refrigerator
+####            H   Refrigerator
 Food waste
-####            C   Stove
-Food waste
-Added Oil splash
-####            C   Table (Big)
-Food OR paper waste
-####            C   Table (Small)
-Food OR paper waste
-####            C   Toilet
-Highest chances in public toilets
-Find a way to make the splash smaller
-#####				C	
+####            √   Bathtub
+####            √   Desk
+####            √   Stove
+####            √   Table (Big)
+####            √   Table (Small)
+####            √   Toilet
 ####            C   Trashcan
 ###		C	Consumerer Products
 On using consumables, spawn litter

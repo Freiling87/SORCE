@@ -59,7 +59,7 @@ namespace SORCE.MapGenUtilities
 					0.64f, 0.64f,
 					particleID: 0,
 					false, true);
-			} 
+			}
 		}
 
 		// TODO: This belongs in the library
@@ -86,12 +86,72 @@ namespace SORCE.MapGenUtilities
 				}
 
 				string wreckageType = objectType + "Wreckage" +
-					(particleID != 0
+						(particleID != 0
 						? particleID.ToString()
 						: (Random.Range(1, 5)).ToString());
 
 				if (spawnLoc != Vector3.zero)
 					GC.spawnerMain.SpawnWreckage2(spawnLoc, wreckageType, burnt);
+			}
+		}
+
+		public static void SpawnCustomLitter(Vector3 origin, string spriteGroup, bool burnt, int gibs, float radX, float radY, int particleID = 0, bool avoidPublic = false, bool avoidPrivate = false)
+		{
+			logger.LogDebug("SpawnCustomLitter");
+	
+			for (int i = 0; i < gibs; i++)
+			{
+				bool goodSpot = false;
+				Vector3 spawnLoc = Vector3.zero;
+
+				while (!goodSpot)
+				{
+					logger.LogDebug("Trying Spot");
+
+					spawnLoc = new Vector3(
+						origin.x + Random.Range(-radX, radX),
+						origin.y + Random.Range(-radY, radY),
+						0f);
+
+					bool isPublic = LevelGenTools.IsPublic(spawnLoc);
+
+
+					if (!GC.tileInfo.IsOverlapping(spawnLoc, "Wall") &&
+						!(avoidPublic && isPublic) &&
+						!(avoidPrivate && !isPublic))
+						goodSpot = true;
+				}
+
+				logger.LogDebug("goodSpot: " + goodSpot);
+
+				string spriteName = spriteGroup +
+						(particleID != 0
+							? particleID.ToString()
+							: (Random.Range(1, 5)).ToString());
+
+				if (spawnLoc != Vector3.zero)
+                {
+					//SpawnerMain sm = GC.spawnerMain;
+					//GameObject gameObject = sm.wreckage2Prefab.Spawn(spawnLoc, sm.tr.rotation);
+					//tk2dSprite component = gameObject.GetComponent<tk2dSprite>();
+					//gameObject.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360));
+					//component.SetSprite(component.GetSpriteIdByName(wreckageType));
+					//gameObject.transform.parent = GC.wreckageNest.transform;
+					//GC.wreckageList2.Add(gameObject);
+
+					//if (burnt)
+					//	component.color = GC.burntColor;
+
+					Vector3 vector = new Vector3(origin.x, origin.y, Random.Range(-0.78f, -1.82f));
+
+					Item trash = GC.spawnerMain.wreckagePrefab.Spawn(vector);
+					trash.DoEnable();
+					trash.isWreckage = true;
+					//casing.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
+					tk2dSprite component = trash.tr.GetChild(0).transform.GetChild(0).GetComponent<tk2dSprite>();
+					component.SetSprite(spriteName);
+				}
+
 			}
 		}
 
@@ -121,6 +181,9 @@ namespace SORCE.MapGenUtilities
 			return WreckageMisc.RandomElement();
 		}
 
+		public static string CustomLitterType() =>
+			WreckageCustom.RandomElement();
+
 		public static string FoodWreckageType() =>
 			WreckageFood.RandomElement();
 
@@ -129,6 +192,11 @@ namespace SORCE.MapGenUtilities
 			VObject.Shelf,
 			VObject.VendorCart,
 			VObject.BarStool,
+		};
+		public static List<string> WreckageCustom = new List<string>()
+		{
+			CSprite.CigaretteButt,
+			CSprite.Hypo,
 		};
 		public static List<string> WreckageMisc = new List<string>()
 		{

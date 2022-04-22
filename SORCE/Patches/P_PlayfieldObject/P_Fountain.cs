@@ -31,7 +31,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 			RogueLibs.CreateCustomName(CButtonText.FountainWishTrueFriendship, t, new CustomNameInfo("Wish for true friendship"));
 			RogueLibs.CreateCustomName(CButtonText.FountainWishWorldPeace, t, new CustomNameInfo("Wish for world peace"));
 
-			RogueLibs.CreateCustomName(COperatingText.FountainStealing, t, new CustomNameInfo("Being a piece of shit"));
+			RogueLibs.CreateCustomName(COperatingText.FountainStealing, t, new CustomNameInfo("Being a scumbag"));
 
 			RogueInteractions.CreateProvider<Fountain>(h =>
 			{

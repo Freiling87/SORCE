@@ -279,6 +279,16 @@
     <None Include="packages.config" />
     <None Include="Resources\BulletHole.bin" />
     <None Include="Resources\Casing.bin" />
+    <None Include="Resources\CigaretteButt1.bin" />
+    <None Include="Resources\CigaretteButt2.bin" />
+    <None Include="Resources\CigaretteButt3.bin" />
+    <None Include="Resources\CigaretteButt4.bin" />
+    <None Include="Resources\CigaretteButt5.bin" />
+    <None Include="Resources\Hypo1.bin" />
+    <None Include="Resources\Hypo2.bin" />
+    <None Include="Resources\Hypo3.bin" />
+    <None Include="Resources\Hypo4.bin" />
+    <None Include="Resources\Hypo5.bin" />
     <None Include="Resources\RifleCasing.bin" />
     <None Include="Resources\ShotgunShell.bin" />
     <None Include="Scratchpad.md" />

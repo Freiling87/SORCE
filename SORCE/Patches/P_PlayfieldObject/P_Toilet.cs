@@ -76,6 +76,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 							m.Object.PurgeStatusEffects();
 						});
 
+					// TODO: Structure this like Fountain, it's handled for you.
 					if (Core.debugMode)
 						h.AddButton(CButtonText.TakeHugeShit, toiletCost, m =>
 						{

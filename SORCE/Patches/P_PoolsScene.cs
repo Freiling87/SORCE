@@ -35,6 +35,7 @@ namespace SORCE.Patches
 			bool avoidPublic = !VFX.HasPublicLitter;
 			bool avoidPrivate = !VFX.HasPrivateLitter;
 			bool isPublicObject = LevelGenTools.IsPublic(spawnPosition);
+			//string chunkType = objectRealPrefab.GetComponent<Chunk>().description;
 
 			if (VFX.HasLeaves)
 			{
@@ -141,7 +142,7 @@ namespace SORCE.Patches
 						while (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
 						{
 							VFX.SpawnWreckagePileObject_Granular(
-								new Vector2(spawnPosition.x, spawnPosition.y - 0.16f),
+								new Vector2(spawnPosition.x, spawnPosition.y - 0.20f),
 								VObject.MovieScreen,
 								false,
 								Random.Range(2, 5),
@@ -254,23 +255,23 @@ namespace SORCE.Patches
 
 						break;
 
-					// need much smaller particles for this to look any good.
-					//case VObject.Refrigerator:
-					//	while (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
-					//	{
-					//		Wreckage.SpawnWreckagePileObject_Granular(
-					//			new Vector2(spawnPosition.x, spawnPosition.y - 0.24f),
-					//			Wreckage.FoodWreckageType(),
-					//			false,
-					//			5,
-					//			0.24f, 0.12f,
-					//			0,
-					//			avoidPublic, avoidPrivate);
-					//	}
+                    // need much smaller particles for this to look any good.
+        //            case VObject.Refrigerator:
+        //                while (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
+        //                {
+        //                    VFX.SpawnWreckagePileObject_Granular(
+        //                        new Vector2(spawnPosition.x, spawnPosition.y - 0.24f),
+								//VFX.FoodWreckageType(),
+        //                        false,
+        //                        5,
+        //                        0.24f, 0.12f,
+        //                        0,
+        //                        avoidPublic, avoidPrivate);
+        //                }
 
-					//	break;
+        //                break;
 
-					case VObject.Shelf:
+                    case VObject.Shelf:
 						if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 20f)))
 						{
 							while (GC.percentChance(chance))
