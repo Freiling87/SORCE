@@ -1,16 +1,19 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using SORCE.Challenges;
+using SORCE.Challenges.C_AmbientLightLevel;
 using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Lighting;
 using SORCE.Localization;
 using SORCE.Logging;
+using SORCE.Patches.P_PlayfieldObject;
+using System.Collections.Generic;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {
-    [HarmonyPatch(declaringType: typeof(SpawnerMain))]
+	[HarmonyPatch(declaringType: typeof(SpawnerMain))]
 	public static class P_SpawnerMain
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
@@ -142,24 +145,94 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SetLighting2), argumentTypes: new[] { typeof(PlayfieldObject) })]
 		public static bool SetLighting2_Prefix(PlayfieldObject myObject, SpawnerMain __instance)
 		{
-			if (GC.challenges.Contains(nameof(NoObjectLights))
-				&& !VObject.Electronics.Contains(myObject.objectName)
-				&& myObject.CompareTag("ObjectReal"))
+			if (GC.challenges.Contains(nameof(ObjectsRelit)))
 			{
-				ObjectReal objectReal = (ObjectReal)myObject;
-				objectReal.noLight = true;
+				if (!VObject.Electronics.Contains(myObject.objectName)
+					&& myObject.CompareTag("ObjectReal"))
+				{
+					ObjectReal objectReal = (ObjectReal)myObject;
+					objectReal.noLight = true;
+					return false;
+				}
 			}
 
-			if (GC.challenges.Contains(nameof(NoItemLights)) 
-				&& myObject.CompareTag("Item") || myObject.CompareTag("Wreckage"))
-            {
+			if (GC.challenges.Contains(nameof(ItemsRelit))
+				&& (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage")))
+			{
 				Item item = (Item)myObject;
 
-				myObject.defaultShader = GC.normalShader; // TODO: Test use LitShader with NewMoon to make them stand out subtly?
+				// myObject.defaultShader = GC.normalShader; // TODO: Test use LitShader with NewMoon to make them stand out subtly?
+				myObject.defaultShader = GC.litShader;
+
 				return false;
 			}
 
 			return true;
 		}
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SpawnLightReal), argumentTypes: new[] { typeof(Vector3), typeof(PlayfieldObject), typeof(int) })]
+		public static bool SpawnLightReal_Prefix(Vector3 lightPos, PlayfieldObject playfieldObject, int lightRange, SpawnerMain __instance, ref LightReal __result)
+		{
+			if (playfieldObject is null)
+				return true;
+
+			logger.LogDebug("SpawnLightReal_Prefix");
+			logger.LogDebug("PFO:\t\t\t" + playfieldObject.name);
+
+			if (Core.debugMode || GC.challenges.Contains(nameof(ObjectsRelit)) &&
+				playfieldObject != null && playfieldObject.objectName == "LightObject")
+			{
+				Vector3 vector = new Vector3(lightPos.x, lightPos.y, -0.5f);
+				GameObject original = __instance.lightReal2Prefab;
+				GameObject gameObject = Object.Instantiate(original, vector, Quaternion.Euler(0f, 0f, 0f));
+				LightReal lightReal = gameObject.GetComponent<LightReal>();
+				string objectName = playfieldObject.objectName;
+
+				lightReal.tr.SetParent(playfieldObject.tr);
+				playfieldObject.lightReal = lightReal;
+				lightReal.startingChunk = playfieldObject.startingChunk;
+				// Not sure which of these works, yet
+
+				if (CColor.RelitObjectColors.ContainsKey(objectName))
+				{
+					Color32 color = CColor.RelitObjectColors[objectName];
+
+					lightReal.fancyLight.Color = color;
+					lightReal.originalColor = color;
+					lightReal.lightReal2Color = color;
+				}
+
+				lightReal.lightRange = lightRange;
+				__result = lightReal;
+				return false;
+			}
+
+			return true;
+		}
+
+		static readonly private List<string> BrighterDiegetics = new List<string>()
+		{
+			VObject.FlamingBarrel,
+			VObject.Lamp,
+		};
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(SpawnerMain.SpawnBullet), argumentTypes: new[] { typeof(Vector3), typeof(bulletStatus), typeof(PlayfieldObject), typeof(int) })]
+		public static void SpawnBullet_Postfix(Vector3 bulletPos, bulletStatus bulletType, PlayfieldObject myPlayfieldObject, int bulletNetID, ref Bullet __result)
+		{
+			if (P_Bullet.GunplayRelit)
+			{
+				__result.particles.gameObject.SetActive(false);
+				__result.lightTemp.tr.Find("LightFancy").GetComponent<MeshRenderer>().enabled = false;
+			}
+		}
+
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SpawnItem), argumentTypes: new[] { typeof(Vector3), typeof(InvItem), typeof(bool), typeof(Agent), typeof(bool) })]
+		public static bool SpawnItem_Prefix(Vector3 itemPos, InvItem item, bool actionsAfterDrop, Agent owner, bool streamingSave)
+        {
+			logger.LogDebug("SpawnItem_Prefix\n" +
+				"item:\t" + item.invItemName);
+
+			return true;
+        }
 	}
 } 

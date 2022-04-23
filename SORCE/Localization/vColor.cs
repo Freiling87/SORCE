@@ -13,12 +13,6 @@ namespace SORCE.Localization
 			public static Color32 cyanColor = new Color32(0, 113, 159, 200);
 			public static Color32 cyanGreenColor = new Color32(0, 180, 143, 200);
 			public static Color32 defaultColor = new Color32(161, 161, 161, 105);
-			public static Color32 discoBlueColor = new Color32(64, 64, 255, 200);
-			public static Color32 discoGreenColor = new Color32(85, 170, 0, 200);
-			public static Color32 discoOrangeColor = new Color32(255, 188, 64, 200);
-			public static Color32 discoPurpleColor = new Color32(140, 52, 173, 200);
-			public static Color32 discoRedColor = new Color32(255, 85, 85, 200);
-			public static Color32 discoYellowColor = new Color32(255, 255, 85, 200);
 			public static Color32 fireStationColor = new Color32(125, 87, 248, 111);
 			public static Color32 greenColor = new Color32(0, 159, 60, 200);
 			public static Color32 homeColor = new Color32(199, 174, 120, 160);
@@ -38,6 +32,13 @@ namespace SORCE.Localization
 			public static Color32 redColor = new Color32(159, 0, 0, 200);
 			public static Color32 whiteColor = new Color32(255, 255, 255, 120);
 			public static Color32 zooColor = new Color32(0, 255, 181, 85);
+
+			public static Color32 discoBlueColor = new Color32(64, 64, 255, 200);
+			public static Color32 discoGreenColor = new Color32(85, 170, 0, 200);
+			public static Color32 discoOrangeColor = new Color32(255, 188, 64, 200);
+			public static Color32 discoPurpleColor = new Color32(140, 52, 173, 200);
+			public static Color32 discoRedColor = new Color32(255, 85, 85, 200);
+			public static Color32 discoYellowColor = new Color32(255, 255, 85, 200);
 
 			public static List<Color32> discoColors = new List<Color32>()
 			{
