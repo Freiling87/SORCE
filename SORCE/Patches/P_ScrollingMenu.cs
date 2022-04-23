@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using SORCE.Challenges.C_AmbientLightLevel;
 using SORCE.Challenges.C_Lighting;
+using SORCE.Challenges.C_VFX;
 using SORCE.Patches.P_PlayfieldObject;
 
 namespace SORCE.Patches.Interface
@@ -21,6 +22,7 @@ namespace SORCE.Patches.Interface
 
 			// Hopefully helps performance
 			P_Bullet.GunplayRelit = GC.challenges.Contains(nameof(GunplayRelit));
+			P_Gun.ShootierGuns = GC.challenges.Contains(nameof(ShootierGuns));
 
 			// TODO: Check for Mutator Menu, or that the button regards ambient light mutators. For now, this'll work.
 			GC.loadLevel.SetNormalLighting();

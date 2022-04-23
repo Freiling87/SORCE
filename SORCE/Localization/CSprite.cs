@@ -4,6 +4,7 @@
     {
         public const string
             BulletHole = "BulletHole",
+            BulletHoleGlass = "BulletHoleGlass",
             Casing = "Casing",
             CigaretteButt = "CigaretteButt",
             Hypo = "Hypo",

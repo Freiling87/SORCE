@@ -123,11 +123,10 @@
     <Compile Include="Challenges\C_Gangs\BandoBrothers.cs" />
     <Compile Include="Challenges\C_Gangs\CrooklynAve.cs" />
     <Compile Include="Challenges\C_Gangs\PiruSt.cs" />
-    <Compile Include="Challenges\C_LightSources\NoAgentLights.cs" />
-    <Compile Include="Challenges\C_LightSources\NoItemLights.cs" />
-    <Compile Include="Challenges\C_LightSources\NoObjectGlow.cs" />
-    <Compile Include="Challenges\C_LightSources\NoObjectLights.cs" />
-    <Compile Include="Challenges\C_LightSources\NoBulletLights.cs" />
+    <Compile Include="Challenges\C_LightSources\AgentsRelit.cs" />
+    <Compile Include="Challenges\C_LightSources\ItemsRelit.cs" />
+    <Compile Include="Challenges\C_LightSources\ObjectsRelit.cs" />
+    <Compile Include="Challenges\C_LightSources\GunplayRelit.cs" />
     <Compile Include="Challenges\C_MapSize\MapSizeChallenge.cs" />
     <Compile Include="Challenges\C_Overhaul\Hell.cs" />
     <Compile Include="Challenges\C_Overhaul\Tindertown.cs" />
@@ -190,6 +189,7 @@
     <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="Patches\P_LevelTransition.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_FillMapChunks2.cs" />
+    <Compile Include="Patches\P_ObjectPoolExtensions.cs" />
     <Compile Include="Resources\SpriteLoader.cs" />
     <Compile Include="Utilities\Audiovisual.cs" />
     <Compile Include="Utilities\MapGen\AmbientAudio.cs" />
@@ -278,6 +278,7 @@
     <None Include="Documentation\1.0. Installation.md" />
     <None Include="packages.config" />
     <None Include="Resources\BulletHole.bin" />
+    <None Include="Resources\BulletHoleGlass.bin" />
     <None Include="Resources\Casing.bin" />
     <None Include="Resources\CigaretteButt1.bin" />
     <None Include="Resources\CigaretteButt2.bin" />

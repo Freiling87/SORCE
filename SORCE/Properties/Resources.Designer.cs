@@ -73,6 +73,16 @@ namespace SORCE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] BulletHoleGlass {
+            get {
+                object obj = ResourceManager.GetObject("BulletHoleGlass", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Casing {
             get {
                 object obj = ResourceManager.GetObject("Casing", resourceCulture);

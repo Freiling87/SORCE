@@ -1,14 +1,9 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using RogueLibsCore;
-using SORCE.Challenges.C_Lighting;
 using SORCE.Localization;
 using SORCE.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
@@ -21,16 +16,33 @@ namespace SORCE.Patches.P_PlayfieldObject
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        public static bool NoBulletLights;
+        public static bool GunplayRelit = Core.debugMode;
         public static bool RealisticBullets = Core.debugMode;
 
-        //[HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.BulletHitEffect), argumentTypes: new[] { typeof(GameObject) })]
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.BulletHitEffect), argumentTypes: new[] { typeof(GameObject) })]
         public static void BulletHitEffect_Postfix(GameObject hitObject, Bullet __instance)
         {
-            if (bullets.Contains((int)__instance.bulletType) 
-                && hitObject.CompareTag("Wall"))
+            logger.LogDebug(hitObject.name);
+            // Need name for NON-MODDED glass wall to see if they differ
+
+            if (GunplayRelit
+                && bullets.Contains((int)__instance.bulletType) 
+                && hitObject.CompareTag("Wall")
+                && hitObject.name.Contains("Front")
+                && __instance.originalSpawnerPos.y < hitObject.transform.position.y)
             {
-                SpawnBulletHole(__instance.transform.position);
+                Vector3 pos = new Vector3(
+                    __instance.tr.position.x + Random.Range(-0.16f, 0.16f),
+                    __instance.tr.position.y + Random.Range(-0.30f, -0.04f),
+                    0);
+
+                if (hitObject.name.Contains("Glass"))
+                {
+                    SpawnBulletHole(pos, wallMaterialType.Glass);
+                    GC.audioHandler.Play(hitObject.GetComponent<PlayfieldObject>(), VAudioClip.WindowDamage);
+                }
+                else
+                    SpawnBulletHole(pos, wallMaterialType.Normal);
             }
         }
 
@@ -41,7 +53,7 @@ namespace SORCE.Patches.P_PlayfieldObject
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.RealAwake), argumentTypes: new Type[0] { })]
         public static void RealAwake_Postfix(Bullet __instance)
         {
-            if (NoBulletLights)
+            if (GunplayRelit)
                 __instance.lightTemp.fancyLightRenderer.enabled = false;
         }
 
@@ -52,26 +64,28 @@ namespace SORCE.Patches.P_PlayfieldObject
             if (bullets.Contains((int)__instance.bulletType)
                 && RealisticBullets) 
             {
-                __instance.tr.localScale *= 0.20f;
-                //__instance.speed = 27;
-
-                // Highest good     27
-                // Lowest bad       26
-                // Suddenly, very low values are noclipping badly.
+                __instance.tr.localScale = Vector3.one * 0.20f;
+                __instance.speed = 27;
+                // TODO: Change Collision Detection algos for bullets and wall to prevent noclipping
             }
         }
-        private static readonly List<int> bullets = new List<int>()
+        public static readonly List<int> bullets = new List<int>()
         {
             1, 2, 19
         };
 
-        public static void SpawnBulletHole(Vector3 pos)
+        public static void SpawnBulletHole(Vector3 pos, wallMaterialType wmt)
         {
             pos.z = 0.01f;
             GameObject gameObject = GC.spawnerMain.floorDecalPrefab.Spawn(pos);
             gameObject.layer = 5;
             // 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
             // ~ ~ X X ~ X X X X  X  X                       X  X  X           X
+            string sprite =
+                wmt == wallMaterialType.Glass
+                ? CSprite.BulletHoleGlass
+                : CSprite.BulletHole;
+
             gameObject.GetComponent<tk2dSprite>().SetSprite(CSprite.BulletHole);
 
             // GC.floorDecalsList.Add(gameObject); // Hoping this will cause it to not stay over level // DW 

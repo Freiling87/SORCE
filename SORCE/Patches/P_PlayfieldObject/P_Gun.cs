@@ -13,37 +13,32 @@ namespace SORCE.Patches.P_PlayfieldObject
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
+        public static bool ShootierGuns = Core.debugMode;
+
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Gun.Shoot), argumentTypes: new[] { typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(string) })]
         public static bool Shoot_Prefix(bool specialAbility, bool silenced, bool rubber, int bulletNetID, string bulletStatusEffect, Gun __instance)
         {
-            string invItem;
-
-            if (specialAbility)
-                invItem = __instance.agent.inventory.equippedSpecialAbility.invItemName;
-            else
-                invItem = __instance.agent.inventory.equippedWeapon.invItemName;
-
-            switch (invItem)
+            if (P_Bullet.GunplayRelit)
             {
-                case VItem.MachineGun:
-                    Audiovisual.MuzzleFlash(__instance.tr.position);
+                string invItem = specialAbility
+                    ? __instance.agent.inventory.equippedSpecialAbility.invItemName
+                    : __instance.agent.inventory.equippedWeapon.invItemName;
 
-                    break;
-
-                case VItem.Pistol:
-                    Audiovisual.MuzzleFlash(__instance.tr.position);
-
-                    break;
-
-                case VItem.Revolver:
-                    Audiovisual.MuzzleFlash(__instance.tr.position);
-
-                    break;
-
-                case VItem.Shotgun:
-                    Audiovisual.MuzzleFlash(__instance.tr.position);
-
-                    break;
+                switch (invItem)
+                {
+                    case VItem.MachineGun:
+                        Audiovisual.MuzzleFlash(__instance.tr.position);
+                        break;
+                    case VItem.Pistol:
+                        Audiovisual.MuzzleFlash(__instance.tr.position);
+                        break;
+                    case VItem.Revolver:
+                        Audiovisual.MuzzleFlash(__instance.tr.position);
+                        break;
+                    case VItem.Shotgun:
+                        Audiovisual.MuzzleFlash(__instance.tr.position);
+                        break;
+                }
             }
 
             return true;
@@ -61,32 +56,25 @@ namespace SORCE.Patches.P_PlayfieldObject
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Gun.Shoot), argumentTypes: new[] { typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(string) })]
         public static void Shoot_Postfix(bool specialAbility, bool silenced, bool rubber, int bulletNetID, string bulletStatusEffect, Gun __instance)
         {
-            string invItem;
+            if (!ShootierGuns)
+                return;
 
-            if (specialAbility)
-                invItem = __instance.agent.inventory.equippedSpecialAbility.invItemName;
-            else
-                invItem = __instance.agent.inventory.equippedWeapon.invItemName;
+            string invItem = specialAbility
+                ? __instance.agent.inventory.equippedSpecialAbility.invItemName
+                : __instance.agent.inventory.equippedWeapon.invItemName;
 
             switch (invItem)
             {
                 case VItem.MachineGun:
                     Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.Casing);
-
                     break;
-
                 case VItem.Pistol:
                     Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.Casing);
-
                     break;
-
                 case VItem.Revolver:
-
                     break;
-
                 case VItem.Shotgun:
                     Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.ShotgunShell);
-
                     break;
             }
         }
