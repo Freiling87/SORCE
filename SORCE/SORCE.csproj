@@ -187,6 +187,7 @@
     <Compile Include="Localization\VParticleEffect.cs" />
     <Compile Include="Localization\VAgentGoal.cs" />
     <Compile Include="Localization\VRelationship.cs" />
+    <Compile Include="Localization\VSpecialAbility.cs" />
     <Compile Include="Patches\P_LevelTransition.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_FillMapChunks2.cs" />
     <Compile Include="Patches\P_ObjectPoolExtensions.cs" />

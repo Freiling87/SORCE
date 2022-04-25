@@ -30,15 +30,15 @@ Spawned Conf centers when no cop bots
 Pending test of basic features
 ####            C   00 Add SORCE dependency and test
 New
-####            T	Flame Grate
-Refactored
-####            T   SawBlade
-Refactored
-####            T   Tube
-Refactored
+####            √	Flame Grate
+Complete
 ####            √   Manhole
 Complete
+####            √   SawBlade
+Complete
 ####            √   SlimeBarrel
+Complete
+####            √   Tube
 Complete
 ###         T   Pollution Solution
 ####			H	Split up into granular mutators?
@@ -60,9 +60,6 @@ Water.SpreadPoisonStart postfix
 This works, but need to vary timing, speed, transparency.
 Spawns past border of lake. Test TileInfo for water.
 	Added Water check to TileInfo.
-####            H   Scale chance to district
-Tie pollution amount to Slumminess
-Pending non-poisoned lake issue
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
@@ -198,7 +195,7 @@ StatusEffects
 	.WerewolfTransformBack
 LoadLevel
 	.SetNormalLighting 
-###         C   No Agent Lights
+###         H   No Agent Lights
 Light stays until body is gibbed
 	See what method that is and analyze it
 Attempts
@@ -219,33 +216,26 @@ This would be a stand-in for the flashlight
 New
 ###         H   Flashlight Gun Mod?
 Someday
-###			√H	No Item Lights
+###			√H	Items Re-Lit
 P_SpawnerMain.SetLighting2_Prefix
 ####			H	Omit briefcase
 Because Pulp Fiction
-###			√H	No Object Lights
+###			√H	Objects Re-Lit
 P_SpawnerMain.SetLighting2_Prefix
 ####			H	Custom Electronic lights
 Computer				Green glow
 SecurityCam				Sparse red blink
 TV						Blue ray
 etc.
-###			√	No Bullet Lights
+###			√	Gunplay Re-Lit
 P_Bullet.RealAwake_Postfix
 ###			√	No Object Glow
 Complete
-##		C	Gangs
-###			C	00 Gang Minimum
-Have a gang size minimum at which to cut off the gangspawner, since some of them don't make sense in too few numbers.
-###			C	00 Exclude Home Base
-New
-###			C	Gangs stop navigating
-Stopped in place
-###			C	Initial Relationship
-###			C	Not Swearwolves
-WerewolfB Spawned perma-wolves
-	Might want one specific to that anyway
-Try making an Office drone and giving him the special ability.
+##		T	Gangs
+###			T	Initial Relationship
+Added logging to end of Spawner main
+###			T	Not Swearwolves
+Attempted with special agent string
 ###			H	Modifiers
 ####			H	Blahd Runs Thick
 Blahd gangs are larger, same total number of agents.
@@ -279,27 +269,28 @@ Crepe gangs of 1, same total number of agents.
 ###			√	The Bluer Line
 ###			√	Union Town
 ###			√	We Love Our Job Creators
-##		C	VFX
-###         C   00 Spawns litter on level editor
-New
-###			C   Bachelorer Pads
-####            C   Scale litter to chunk type & Slumminess
+##		CT	VFX
+###         T   00 Spawns litter on level editor
+Added gate in call to VFX.SpawnPublicLitter in MapFeatureSpawners
+###			√H   Bachelorer Pads
+####            H   Scale litter to chunk type & Slumminess
 House: scale to chance. Some people are slobs, some aren't.
 Some are also slobs in different ways. 
-####            C   Bed
-Crumpled up tissues, make it look like they're under the bed
 ####            H   Refrigerator
 Food waste
+Will need custom sprites I think
 ####            √   Bathtub
+####            √   Bed
 ####            √   Desk
 ####            √   Stove
 ####            √   Table (Big)
 ####            √   Table (Small)
 ####            √   Toilet
-####            C   Trashcan
-###		C	Consumerer Products
+###			H	Consumerer Products
 On using consumables, spawn litter
 ####			C	00 Add some of these to generic litter sprite inventories
+####			C	ATM Receipt
+Also for most paid machines
 ####            C   Cigarette Butt
 Fucking everywhere 
 Tiny smoke particle that burns out quickly
@@ -310,19 +301,14 @@ Though this might not work with the throwable beer can
 With scorched Hot variant
 ####			C	Smeared Banana peel
 After someone slips on it
-###         H   Flammable Wreckage
+####			C	Whiskey Bottle
+###			H	Flammable Wreckage
 New
-###			C	Dirtier Districts
+###			T	Dirtier Districts
 PoolsScene.SpawnObjectReal
-####            C   Check for Indoors when spawning particle
-####            H   Spawn receipt when using machines
-More trash!
-####            H   Spawn very specific trash particles when consuming objects
-More trash! 
-####         C   Goodie Dispenser
-Add Vendor Cart parts
-Custom sprites, or smaller/slightly darker/on side
-###			C	Lootier Boxes
+####			T	00 Fix public litter algo
+Reduced walldistance, set gibs to 1 in VFX.SpawnLitterPublic
+###			H	Lootier Boxes
 Spawn "hoard" sprites around Safe or Chest in Armory
 Vary spawns per chunk type
 ###         CT  Shootier Guns

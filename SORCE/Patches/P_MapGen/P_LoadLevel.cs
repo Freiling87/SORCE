@@ -320,6 +320,9 @@ namespace SORCE.Patches
 		[HarmonyPostfix, HarmonyPatch(methodName: "SetupMore3_3", new Type[] { })]
 		public static void SetupMore3_3_Postfix()
 		{
+			if (GC.levelType == "HomeBase")
+				return;
+			
 			MapFeatureSpawners.Spawn_Master();
 			GangChallengeTools.Spawner_Main();
 			Roamers.Spawner_Main();

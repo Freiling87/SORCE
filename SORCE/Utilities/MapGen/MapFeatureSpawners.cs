@@ -47,7 +47,8 @@ namespace SORCE.MapGenUtilities
 			SpawnTrashBags();
 			SpawnTurntablesAndSpeakers();
 
-			VFX.SpawnPublicLitter();
+			if (!GC.levelEditing)
+				VFX.SpawnPublicLitter();
 		}
 
 		private static void BreakWindows()
@@ -89,12 +90,12 @@ namespace SORCE.MapGenUtilities
 			{
 				foreach (Water water in GC.watersList)
 				{
-					if (!water.effectContents.Contains("Poisoned") && !water.syringeContents.Contains("Poisoned"))
+					if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 100f)) &&
+						!water.effectContents.Contains("Poisoned") && !water.syringeContents.Contains("Poisoned"))
 					{
 						if (water.waterTiles.Count == 0)
-						{
 							water.SpreadPoisonStart(null, false);
-						}
+						
 						water.effectContents.Add("Poisoned");
 						water.poisonedWholeLevel = true;
 					}
@@ -135,9 +136,7 @@ namespace SORCE.MapGenUtilities
 				GC.tileInfo.tilemapFloors4.Build();
 			}
 			else
-			{
 				GC.playerAgent.objectMult.ObjectAction(GC.importantObjectList[0].objectNetID, "PoisonWater");
-			}
 		}
 		private static void RuinToilets()
 		{
