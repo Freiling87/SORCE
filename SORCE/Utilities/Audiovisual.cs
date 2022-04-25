@@ -1,5 +1,7 @@
 ﻿using BepInEx.Logging;
+using HarmonyLib;
 using SORCE.Logging;
+using System.Reflection;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,7 +17,7 @@ namespace SORCE.Utilities
             GC.spawnerMain.SpawnLightTemp(location, null, "PowerSap");
         }
 
-        public static void SpawnBulletCasing(Vector3 origin, string casingType)
+        public static void SpawnBulletCasing(Vector3 origin, string casingType, GameObject towardObject)
         {
             Vector3 vector = new Vector3(origin.x, origin.y, Random.Range(-0.78f, -1.82f));
 
@@ -33,9 +35,9 @@ namespace SORCE.Utilities
             Movement movement = casing.GetComponent<Movement>();
             //movement.SetPhysics("Ice"); Looks a little like rolling
             casing.animator.Play("ItemJump 1", -1, 0f);
-            movement.Spill(Random.Range(90, 120), null, null);
+            movement.Spill(120, towardObject, null);
 
             casing.FakeStart();
         }
-    }
+	}
 }

@@ -74,19 +74,19 @@ New
 ###         H   Public Pools
 Spawn as square or circle
 Always have water pump
-###         H   Screens
-####            C   Might not be compatible with building mods?
+###         C   Screens
+####			C	Custom Sprites
+####			C	Corner spawning issues
+Exclude diagonal wallchecks?
+####            C   Wall type issues
 Specifically seems to not work on Concrete walls. Hopefully there's another way to check and allow those.
-####            C   Did not spawn in Downtown
-Might have been wallmod
-####            C   Exclude Interiors
-not 100% they actually spawn indoors
 ####            C   Light spawns without screen 
 (or screen invisible?)
 ####            C   Disable vanilla screen light to improve saturation of selected color
 Might be in GetComponent if we want to be lazy.
 ####            C   Specific placement
 Commercial chunks
+Next to front doors (avoid unlocked & prohibited)
 Avoid alleys if possible, signs need vantage
 ####            H   Content
 |Overhaul                       |Palette    |Audio  |
@@ -100,6 +100,9 @@ Avoid alleys if possible, signs need vantage
 |Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
 |TinderTown                     |Blue       |Ads for water
 ###         H   Signs
+Pending resolution of Wall Layer for wall mounted signs
+Pending resolution of Custom Objects for floor-based signs
+
 Generate signs with premade text near business entrances
 Vary sprite
 	Slums:      A-Frame 
@@ -176,17 +179,6 @@ Certain overhauls
 ###         √H  Verdant Vistas
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
-##		√	Features - Archive
-###         √   Meats of Rogue
-Complete
-###         √   Power Whelming
-Complete
-###         √   Skyway District
-Complete
-###         √   This Land is Mine Land
-Complete
-###         √   Welcome Mats
-Complete
 ##		C	Light Sources
 CameraScript
 	.SetLighting
@@ -312,10 +304,19 @@ Reduced walldistance, set gibs to 1 in VFX.SpawnLitterPublic
 Spawn "hoard" sprites around Safe or Chest in Armory
 Vary spawns per chunk type
 ###         CT  Shootier Guns
-####			C	00 Destroy on Level End
+####			T	00 Destroy on Level End
 Lasted into Home Base
 ####			T	Decals
-#####				C	Blood 
+#####			T	Bullet holes
+######				T	Determine layer
+Test Layer -1, found it in a wreckage spawner
+######				T	Adjust placement per wall facing
+Reattempted
+######				T	Different sprites for wall types
+Glass might be the only one where it's appropriate
+Hedge can fully omit the hole
+Reattempted
+#####				H	Blood 
 ######					C	Exit wound
 ######					C	Pool
 Small pool on death
@@ -323,51 +324,47 @@ Small pool on death
 ######					C	Trail
 From recently-hit agents 
 	(no need for bleeding status effect yet)
-#####			H	Bullet holes
-Sprite spawn works
-######				C	Determine layer
-Certain layers are over wall, but not over player. Not sure if a vanilla layer can do this.
-######				C	Adjust placement per wall facing
-######				H	Different sprites for wall types
-Glass might be the only one where it's appropriate
-Hedge can fully omit the hole
-####			C	Shell Casings
-#####				C   Orient spill consistently
-New
-#####				C   Identify Bounce
+####			CT	Shell Casings
+#####				T   Orient spill consistently
+Test
+#####				H   Bounce
 Item.OnCollisionEnter2D
 	dw
 item.invItemName == "Wreckage" 
 !Item.isrealItem is for wreckage I think
 GC.AudioHandler.Play(item, "ShellCasing")
-#####				C   Randomize sprite rotation on bounce
+######					C   Randomize sprite rotation on bounce
 New
-#####				C   Audio on bounce
+######					C   Audio on bounce
 New
 GC.AudioHandler.Play(objectReal, "BulletHitwall")
 if objectReal.CompareTag("Wall")
 Then branch to wall types from there
 ####			H	Smoke from Rockets
 New
-####			C	Wall Fragments
+####			H	Wall Fragments
 Spawn TINY fragments of wood, glass, etc. when you shoot a wall
 Could also use a particle effect that resembles dust, which would dispose of itself rather than cluttering/slowing
-####			√   Muzzle Flash
+####			C   Muzzle Flash
 P_Gun.Shoot_Prefix
 P_Turret.FireGun_Postfix
+#####				C	Dark Spot
+Dark spot is spawned when too many flashes occur in a given area
 ###			C	Floraler Flora
 PoolsScene.SpawnObjectReal
 ####			C	Stopped working on Hedge Walls
 New
 ####			C	Throw leaves around when you hit a plant
 Before destruction
-##		C	Roamers
-###         C   Arsonist
+##		H	Roamers
+###         H   Arsonist
 DW
-###         C   Butler Bot
+###         H   Butler Bot
 Spawned, but only cleans bodies & not wreckage
 How to exclude private areas?
 ##		H	Decals
+Category pending resolution of Wall Decal Layer problem.
+
 Generate decoration across level.
 Most of these can be treated as Wreckage particles.
 Others would not be reactive in the same way.
@@ -893,6 +890,17 @@ P_RandomSelection.RandomSelect
 ###			√	Panoptikopolis
 ###         √   Shanty Town
 ###         √	Spelunky Dory
+##		√	Features - Archive
+###         √   Meats of Rogue
+Complete
+###         √   Power Whelming
+Complete
+###         √   Skyway District
+Complete
+###         √   This Land is Mine Land
+Complete
+###         √   Welcome Mats
+Complete
 ##		√	Map Size
 ###         √   Arthropolis
 ###         √   Claustropolis

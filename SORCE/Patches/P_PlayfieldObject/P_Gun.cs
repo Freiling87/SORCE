@@ -3,6 +3,7 @@ using HarmonyLib;
 using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.Utilities;
+using UnityEngine;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches.P_PlayfieldObject
@@ -78,5 +79,7 @@ namespace SORCE.Patches.P_PlayfieldObject
                     break;
             }
         }
+
+        public static GameObject towardObject = new GameObject();
     }
 }
