@@ -2,6 +2,7 @@
 using HarmonyLib;
 using SORCE.Challenges.C_Lighting;
 using SORCE.Logging;
+using SORCE.Utilities;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -39,7 +40,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 				else if (__instance is Toilet)
                 {
 					AnnoyWitnessesVictimless(__instance.interactingAgent);
-					P_Toilet.TakeHugeShit((Toilet)__instance, true);
+					Underdank.TakeHugeShit((Toilet)__instance, true);
 				}
 			}
 		}

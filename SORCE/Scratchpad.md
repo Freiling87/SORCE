@@ -910,73 +910,37 @@ Complete
 ##		C	Underdank Citizen
 ###         C   New features
 CHECK FEATURE LIST
-###			C	Opened manhole did not detect toilet exits
-Beginning of level
-###			C	Chance for Poopsplosion when exiting toilet
-Should work for vanilla flushing too
-Prevents future use, too disgusting
-Spawn tiny Hazard to make NPCs frightened of toilet permanently
-###			C	Death by E_
-Probably just setting a string
+###			T	Opened manhole did not detect toilet exits
+Verify diminutive
+###			T	Chance for Poopsplosion when exiting toilet
+Attempted
+###			T	Death by E_
+Tried reordering where damage is allocated
+Agent
+	.deathMethod
+	.deathMethodItem
+	.deathMethodObject
+	.deathKiller
 ###			T	Spawns near Water
 TileInfo.WaterNearby has a levelTheme check 😡
 	Transpiler patched, test
-###			C	Falling in does not randomize exit
-
-###			C	Manhole Agent Brain broken
+###			T	Manhole Agent Brain broken
 I think this is an import from BunnyMod
-###         C   Flushing to Manhole doesn't work
-Technically works, but they fall right back in and trigger the flush method again.
-Find BM's old jump method of exiting.
-###         C   Patch Toilet FlushYourself
-####			C	E_Agent.IsFlushable error
-
-	[Error  :RogueLibsCore] SimpleInteractionProvider's handler on Toilet (1541) (Toilet) threw an exception.
-	[Error  :RogueLibsCore] System.NullReferenceException: Object reference not set to an instance of an object
-	  at SORCE.Extensions.E_Agent.IsFlushable (Agent agent) [0x00000] in <a6d3df63bb624a78a65160bf3239316e>:0
-	  at SORCE.Patches.P_PlayfieldObject.P_Toilet+<>c.<Setup>b__3_0 (RogueLibsCore.SimpleInteractionProvider`1[T] h) [0x000e8] in <a6d3df63bb624a78a65160bf3239316e>:0
-	  at RogueLibsCore.SimpleInteractionProvider`1[T].RogueLibsCore.IInteractionProvider.GetInteractions (RogueLibsCore.InteractionModel model) [0x0001c] in <f2d3b562e3ca434aac96212154c6ffc3>:0
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	RogueLibsCore.VanillaInteractions+<>c.<Patch_Toilet>b__55_1 (RogueLibsCore.InteractionModel`1[T] m) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	RogueLibsCore.SimpleInteractionProvider`1+<>c__DisplayClass12_0[T].<SetStopCallback>g__Callback|0 () (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	RogueLibsCore.InteractionModel.OnDetermineButtons () (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	RogueLibsCore.RogueLibsPlugin.DetermineButtonsHook (PlayfieldObject __instance) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	Toilet.DetermineButtons () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	RogueLibsCore.RogueLibsPlugin.InteractHook (PlayfieldObject __instance, Agent agent) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	Toilet.Interact (Agent agent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	InteractionHelper.UpdateInteractionHelper () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Updater.UpdateInterface () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Updater.Update () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-###			C	Old Notes
-- Take small damage if you walk into manhole instead of activating
-  - Attempted
-- Walkover version of flushyourself:
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	BunnyMod.Content.BMObjects.Manhole_FlushYourself (Agent agent, ObjectReal __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
-	BunnyMod.Content.BMObjects.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
-	Hole.EnterRange (UnityEngine.GameObject myObject) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-	Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-	- This only occurred when no other manholes were open. There were active toilets.
-	- Walkover version also only sends to self.
-	- One manhole keeps getting excluded. Check that the random selection from lists isn't excluding anything from the running.
-- Water splash
-  - Needs a delay. It's appearing before the player is.
-	- Attempted Immediate teleportation
-  - No longer working
-- Manhole to Toilet
-  - Attempted
-- Toilet to Manhole
-  - Attempted
-##		C	Underdank VIP
-###			C	Poison Resistance
-###			C	No falling damage for Manholes
-###			C	Don't annoy except when poopy
+	Can't find anything
+Attempted calling BecomeUnhidden
+###         T   Flushing to Manhole doesn't work
+Tried out Agent.Jump()
+##		T	Underdank VIP
+###			T	Poison Resistance
+Attempted:
+P_StatusEffects.GetStatusEffectTime_Postfix
+###			T	No falling damage for Manholes
+Attempted
+###			T	Not afraid of disgusting toilets
+Attempted
 #	C	Release
 ##		C	Export
 - Scary Guns
-  - P_Bullet.SetupBullet_Postfix
 ##		C	Set Unlock costs
 To get those sweet nuggets 😈
 ##		C	Disable Core.DebugMode

@@ -8,28 +8,25 @@ using System.Threading.Tasks;
 
 namespace SORCE.Traits
 {
-    public class UnderdankCitizen : CustomTrait
+    public class UnderdankVIP : CustomTrait
     {
         [RLSetup]
         public static void Setup()
         {
-            RogueLibs.CreateCustomTrait<UnderdankCitizen>()
+            RogueLibs.CreateCustomTrait<UnderdankVIP>()
                 .WithDescription(new CustomNameInfo
                 {
                     [LanguageCode.English] = 
-                        "The Underdank is a vast subterranean network of caverns & tunnels, stretching between entire continents." +
-                        "It also smells like SHIT, because of our sewer system. The upside is that you might get to meet Pizzt Do'Turden, the Dank Smellf of legend!",
-                    [LanguageCode.Russian] = "Вы с лёгкостью оринтируетесь в канализации. Жители этих мест не считают вас лёгкой целью",
+                        "You're pretty big shit down there. The mayor might be #1, but you're #2! Your immune system is stronger for your exposure to poopoo, and nothing disgusts you.",
                 })
                 .WithName(new CustomNameInfo
                 {
-                    [LanguageCode.English] = "Underdank Citizen",
-                    [LanguageCode.Russian] = "Подземный житель",
+                    [LanguageCode.English] = "Underdank VIP",
                 })
                 .WithUnlock(new TraitUnlock
                 {
                     Cancellations = { VanillaTraits.TheLaw },
-                    CharacterCreationCost = 5,
+                    CharacterCreationCost = 8,
                     IsAvailable = false,
                     IsAvailableInCC = true,
                     UnlockCost = 0,

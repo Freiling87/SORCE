@@ -4,21 +4,16 @@ using RogueLibsCore;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Extensions;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
 using SORCE.Traits;
+using SORCE.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using static SORCE.Localization.NameLists;
-using Random = UnityEngine.Random;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
-	[HarmonyPatch(declaringType: typeof(Toilet))]
+    [HarmonyPatch(declaringType: typeof(Toilet))]
 	class P_Toilet
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
@@ -42,7 +37,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 
 			RogueInteractions.CreateProvider<Toilet>(h =>
 			{
-				if (h.Object.GetHook<P_Toilet_Hook>().disgusting)
+				if (h.Object.GetHook<P_Toilet_Hook>().disgusting
+					&& !h.Agent.HasTrait<UnderdankVIP>())
 				{
 					InteractionModel<Toilet> model = h.Model;
 					Agent agent = h.Agent;
@@ -89,70 +85,19 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Toilet.FlushYourself), argumentTypes: new Type[] { })]
 		public static bool FlushYourself_Prefix(Toilet __instance)
 		{
-			if (!__instance.interactingAgent.HasTrait<UnderdankCitizen>())
-				return true;
-
-			P_Manhole.FlushYourself(__instance.interactingAgent, __instance);
-			return false;
+			if (__instance.interactingAgent.HasTrait<UnderdankCitizen>())
+            {
+				Underdank.FlushYourself(__instance.interactingAgent, __instance);
+				return false;
+			}
+				
+			return true;
 		}
-
-		//[HarmonyPrefix, HarmonyPatch(methodName: nameof(Toilet.DetermineButtons), argumentTypes: new Type[] { })]
-		public static bool DetermineButtons_Prefix(Toilet __instance)
-        {
-			P_00_ObjectReal.DetermineButtons_base.GetMethodWithoutOverrides<Action>(__instance).Invoke();
-
-			return false;
-        } 
 
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Toilet.SetVars), argumentTypes: new Type[] { })]
 		public static void SetVars_Postfix(Toilet __instance)
         {
 			__instance.AddHook<P_Toilet_Hook>();
-		}
-
-		public static void TakeHugeShit(Toilet toilet, bool loud = true)
-		{
-			Poopsplosion(toilet, loud);
-			toilet.StopInteraction();
-		}
-
-		public static void Poopsplosion(ObjectReal targetObj, bool loud = true)
-		{
-			Agent agent = targetObj.interactingAgent;
-			Vector2 pos = targetObj.transform.position;
-			bool avoidPublic = !VFX.HasPublicLitter;
-			bool avoidPrivate = !VFX.HasPrivateLitter;
-
-			if (loud)
-				GC.spawnerMain.SpawnExplosion(targetObj, pos, VExplosion.Water);
-			else 
-				GC.tileInfo.SpillLiquidLarge(pos, VExplosion.Water, false, 2, !avoidPrivate);
-
-			VFX.SpawnWreckagePileObject_Granular(
-				new Vector2(pos.x, pos.y - 0.08f),
-				VObject.FlamingBarrel,
-				false,
-				Random.Range(1, 4),
-				0.24f, 0.24f,
-				0,
-				avoidPublic, avoidPrivate);
-
-			int chance = 100;
-			while (GC.percentChance(chance))
-			{
-				VFX.SpawnWreckagePileObject_Granular(
-					new Vector2(pos.x, pos.y - 0.08f),
-					VObject.MovieScreen,
-					false,
-					Random.Range(3, 6),
-					0.48f, 0.48f,
-					0,
-					avoidPublic, avoidPrivate);
-				chance -= 25;
-			}
-
-			if (targetObj is Toilet toilet)
-				toilet.GetComponent<PlayfieldObject>().GetHook<P_Toilet_Hook>().disgusting = true;
 		}
 	}
 
@@ -166,6 +111,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		public bool disgusting = false;
 		public bool hackedFree = false;
 		public bool hackedPoopsplosion = false;
+		public bool hackedToiletSmurves = false;
 		public bool hackedWaterSpray = false;
 		public int toiletCost = GC.challenges.Contains(nameof(AnCapistan)) 
 			? 10 
