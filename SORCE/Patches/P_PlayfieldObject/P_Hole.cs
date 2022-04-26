@@ -1,19 +1,16 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using RogueLibsCore;
+using SORCE.Extensions;
 using SORCE.Logging;
 using SORCE.Traits;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SORCE.Utilities;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
-	[HarmonyPatch(declaringType: typeof(Hole))]
+    [HarmonyPatch(declaringType: typeof(Hole))]
 	class P_Hole
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
@@ -35,17 +32,23 @@ namespace SORCE.Patches.P_PlayfieldObject
 			{
 				Agent agent = myObject.GetComponent<Agent>();
 
-				if (agent.HasTrait<UnderdankCitizen>() &&
-					!agent.statusEffects.hasStatusEffect(VStatusEffect.Giant))
+				if (!agent.statusEffects.hasStatusEffect(VStatusEffect.Giant))
 				{
-					P_Manhole.FlushYourself(agent, (Manhole)__instance.GetComponent<ObjectReal>());
+					if (agent.HasTrait<UnderdankCitizen>())
+					{
+						if (GC.challenges.Contains(VChallenge.LowHealth))
+							agent.statusEffects.ChangeHealth(-7f);
+						else
+							agent.statusEffects.ChangeHealth(-15f);
 
-					if (GC.challenges.Contains(VChallenge.LowHealth))
-						agent.statusEffects.ChangeHealth(-7f);
-					else
-						agent.statusEffects.ChangeHealth(-15f);
-
-					return false;
+						Underdank.FlushYourself(agent, (Manhole)__instance.GetComponent<ObjectReal>());
+						return false;
+					}
+					else if (agent.HasTrait<UnderdankVIP>())
+					{
+						Underdank.FlushYourself(agent, (Manhole)__instance.GetComponent<ObjectReal>());
+						return false;
+					}
 				}
 			}
 

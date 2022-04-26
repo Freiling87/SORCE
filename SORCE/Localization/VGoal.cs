@@ -5,8 +5,21 @@
         public static class VGoal // Vanilla Goal
 		{
 			public const string
-				Idle = "Idle"
-				;
+				CuriousObject = "CuriousObject",
+				Dance = "Dance",
+				Guard = "Guard",
+				IceSkate = "IceSkate",
+				Idle = "Idle",
+				TellJoke = "Joke",
+				ListenToJoke = "ListenToJokeNPC",
+				Null = "None",
+				Patrol = "Patrol",
+				Sit = "Sit",
+				Sleep = "Sleep",
+				Swim = "Swim",
+				Wander = "Wander",
+				WanderLevel = "WanderFar",
+				WanderOwned = "WanderInOwnedProperty";
 		}
 	}
 }

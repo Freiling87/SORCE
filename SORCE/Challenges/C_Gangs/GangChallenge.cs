@@ -1,5 +1,6 @@
 ﻿using BepInEx.Logging;
 using RogueLibsCore;
+using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
 using System.Collections.Generic;
@@ -48,9 +49,6 @@ namespace SORCE.Challenges.C_Gangs
 			SpawnGangs(challenge.LeaderAgent, challenge.MiddleAgents, challenge.LastAgent, challenge.TotalSpawns, challenge.GangSize, challenge.Relationship, challenge.AlwaysRun, challenge.MustBeGuilty, challenge.MakeTrouble, challenge.GangsAligned);
 		public static void SpawnGangs(string leaderAgent, string[] middleAgents, string lastAgent, int totalSpawns = 0, int gangSize = 0, string relationship = VRelationship.Neutral, bool alwaysRun = false, bool mustBeGuilty = true, bool makeTrouble = true, bool gangsAligned = false)
 		{
-			logger.LogDebug("RATIO: " + LevelSize.ChunkCountRatio);
-			logger.LogDebug("GANGTOTALCOUNT: " + GangTotalCount);
-
 			if (totalSpawns == 0)
 				totalSpawns = GangTotalCount;
 
@@ -108,7 +106,11 @@ namespace SORCE.Challenges.C_Gangs
 
 				if (pos != Vector2.zero)
 				{
-					Agent agent = GC.spawnerMain.SpawnAgent(pos, null, agentType);
+					Agent agent = GC.spawnerMain.SpawnAgent(pos, null, 
+						agentType == "OfficeDroneWerewolf"
+							? VAgent.OfficeDrone
+							: agentType);
+
 					agent.movement.RotateToAngleTransform((float)Random.Range(0, 360));
 					agent.gang = Agent.gangCount;
 					agent.modLeashes = 0;
@@ -134,6 +136,11 @@ namespace SORCE.Challenges.C_Gangs
 					}
 					else if (agentType == VAgent.CopBot)
 						agent.oma.securityType = agent.oma.convertSecurityTypeToInt(securityType);
+					else if (agentType == "OfficeDroneWerewolf")
+                    {
+						agent.originalWerewolf = true;
+						agent.statusEffects.GiveSpecialAbility(VSpecialAbility.WerewolfTransformation);
+                    }
 
 					if (agentType == VAgent.Thief
 						|| agentType == VAgent.Vampire
@@ -174,6 +181,15 @@ namespace SORCE.Challenges.C_Gangs
 
 				if (i % gangSize == gangSize - 1)
 					pos = Vector2.zero;
+			}
+
+			// Temporary, to diagnose initial relationship issues
+			foreach (Agent agent in spawnedAgentList)
+            {
+				if (GC.agentList.Contains(agent))
+					logger.LogDebug("In Agent List");
+				else
+					logger.LogDebug("Not in Agent List");
 			}
 		}
 	}

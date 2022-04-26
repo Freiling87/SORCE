@@ -27,9 +27,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 
             if (GunplayRelit
                 && bullets.Contains((int)__instance.bulletType) 
-                && hitObject.CompareTag("Wall")
+                && hitObject.CompareTag("Wall") // Might be redundant to "Front" in name
                 && hitObject.name.Contains("Front")
-                && __instance.originalSpawnerPos.y < hitObject.transform.position.y)
+                && __instance.startingPosition.y < hitObject.transform.position.y)
             {
                 Vector3 pos = new Vector3(
                     __instance.tr.position.x + Random.Range(-0.16f, 0.16f),
@@ -40,6 +40,11 @@ namespace SORCE.Patches.P_PlayfieldObject
                 {
                     SpawnBulletHole(pos, wallMaterialType.Glass);
                     GC.audioHandler.Play(hitObject.GetComponent<PlayfieldObject>(), VAudioClip.WindowDamage);
+                }
+                else if (hitObject.name.Contains("Hedge"))
+                {
+                    GC.spawnerMain.SpawnWreckage2(hitObject.transform.position, VObject.Bush, false);
+                    GC.audioHandler.Play(hitObject.GetComponent<PlayfieldObject>(), VAudioClip.BushDestroy);
                 }
                 else
                     SpawnBulletHole(pos, wallMaterialType.Normal);
@@ -78,20 +83,17 @@ namespace SORCE.Patches.P_PlayfieldObject
         {
             pos.z = 0.01f;
             GameObject gameObject = GC.spawnerMain.floorDecalPrefab.Spawn(pos);
-            gameObject.layer = 5;
-            // 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
+            gameObject.layer = -1;
+            // 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25        -1 ???
             // ~ ~ X X ~ X X X X  X  X                       X  X  X           X
             string sprite =
                 wmt == wallMaterialType.Glass
                 ? CSprite.BulletHoleGlass
                 : CSprite.BulletHole;
 
-            gameObject.GetComponent<tk2dSprite>().SetSprite(CSprite.BulletHole);
-
-            // GC.floorDecalsList.Add(gameObject); // Hoping this will cause it to not stay over level // DW 
-
-            int num = Random.Range(0, 360);
-            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, num);
+            gameObject.GetComponent<tk2dSprite>().SetSprite(sprite);
+            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360));
+            GC.floorDecalsList.Add(gameObject); // Hoping this will cause it to not stay over level // DW 
         } 
     }
 } 

@@ -187,10 +187,12 @@
     <Compile Include="Localization\VParticleEffect.cs" />
     <Compile Include="Localization\VAgentGoal.cs" />
     <Compile Include="Localization\VRelationship.cs" />
+    <Compile Include="Localization\VSpecialAbility.cs" />
     <Compile Include="Patches\P_LevelTransition.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_FillMapChunks2.cs" />
     <Compile Include="Patches\P_ObjectPoolExtensions.cs" />
     <Compile Include="Resources\SpriteLoader.cs" />
+    <Compile Include="Traits\UnderdankVIP.cs" />
     <Compile Include="Utilities\Audiovisual.cs" />
     <Compile Include="Utilities\MapGen\AmbientAudio.cs" />
     <Compile Include="Utilities\MapGen\LevelGenTools.cs" />
@@ -269,6 +271,7 @@
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Traits\UnderdankCitizen.cs" />
     <Compile Include="Utilities\MapGen\LevelSize.cs" />
+    <Compile Include="Utilities\Underdank.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Screenshots\" />

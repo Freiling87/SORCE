@@ -80,9 +80,6 @@ Water.SpreadPoisonStart postfix
 This works, but need to vary timing, speed, transparency.
 Spawns past border of lake. Test TileInfo for water.
 	Added Water check to TileInfo.
-####            H   Scale chance to district
-Tie pollution amount to Slumminess
-Pending non-poisoned lake issue
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces
@@ -97,9 +94,11 @@ New
 ###         H   Public Pools
 Spawn as square or circle
 Always have water pump
-###         H   Screens
-####			C	Custom Screens
-####            C   Might not be compatible with building mods?
+###         C   Screens
+####			C	Custom Sprites
+####			C	Corner spawning issues
+Exclude diagonal wallchecks?
+####            C   Wall type issues
 Specifically seems to not work on Concrete walls. Hopefully there's another way to check and allow those.
 I think this is just WallMaterialType == None. Concrete are an exception to avoid against-wall spawns.
 ####            C   Did not spawn in Downtown
@@ -112,6 +111,7 @@ not 100% they actually spawn indoors
 Might be in GetComponent if we want to be lazy.
 ####            C   Specific placement
 Commercial chunks
+Next to front doors (avoid unlocked & prohibited)
 Avoid alleys if possible, signs need vantage
 ####            H   Content
 |Overhaul                       |Palette    |Audio  |
@@ -125,6 +125,9 @@ Avoid alleys if possible, signs need vantage
 |Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
 |TinderTown                     |Blue       |Ads for water
 ###         H   Signs
+Pending resolution of Wall Layer for wall mounted signs
+Pending resolution of Custom Objects for floor-based signs
+
 Generate signs with premade text near business entrances
 Vary sprite
 	Slums:      A-Frame 
@@ -201,17 +204,6 @@ Certain overhauls
 ###         √H  Verdant Vistas
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
-##		√	Features - Archive
-###         √   Meats of Rogue
-Complete
-###         √   Power Whelming
-Complete
-###         √   Skyway District
-Complete
-###         √   This Land is Mine Land
-Complete
-###         √   Welcome Mats
-Complete
 ##		C	Light Sources
 CameraScript
 	.SetLighting
@@ -317,20 +309,21 @@ New
 ####            C   Scale litter to chunk type & Slumminess
 House: scale to chance. Some people are slobs, some aren't.
 Some are also slobs in different ways. 
-####            C   Bed
-Crumpled up tissues, make it look like they're under the bed
 ####            H   Refrigerator
 Food waste
+Will need custom sprites I think
 ####            √   Bathtub
+####            √   Bed
 ####            √   Desk
 ####            √   Stove
 ####            √   Table (Big)
 ####            √   Table (Small)
 ####            √   Toilet
-####            C   Trashcan
-###		C	Consumerer Products
+###			H	Consumerer Products
 On using consumables, spawn litter
 ####			C	00 Add some of these to generic litter sprite inventories
+####			C	ATM Receipt
+Also for most paid machines
 ####            C   Cigarette Butt
 Fucking everywhere 
 Tiny smoke particle that burns out quickly
@@ -341,26 +334,30 @@ Though this might not work with the throwable beer can
 With scorched Hot variant
 ####			C	Smeared Banana peel
 After someone slips on it
-###         H   Flammable Wreckage
+####			C	Whiskey Bottle
+###			H	Flammable Wreckage
 New
-###			C	Dirtier Districts
+###			T	Dirtier Districts
 PoolsScene.SpawnObjectReal
-####            C   Check for Indoors when spawning particle
-####            H   Spawn receipt when using machines
-More trash!
-####            H   Spawn very specific trash particles when consuming objects
-More trash! 
-####         C   Goodie Dispenser
-Add Vendor Cart parts
-Custom sprites, or smaller/slightly darker/on side
-###			C	Lootier Boxes
+####			T	00 Fix public litter algo
+Reduced walldistance, set gibs to 1 in VFX.SpawnLitterPublic
+###			H	Lootier Boxes
 Spawn "hoard" sprites around Safe or Chest in Armory
 Vary spawns per chunk type
 ###         CT  Shootier Guns
-####			C	00 Destroy on Level End
+####			T	00 Destroy on Level End
 Lasted into Home Base
 ####			T	Decals
-#####				C	Blood 
+#####			T	Bullet holes
+######				T	Determine layer
+Test Layer -1, found it in a wreckage spawner
+######				T	Adjust placement per wall facing
+Reattempted
+######				T	Different sprites for wall types
+Glass might be the only one where it's appropriate
+Hedge can fully omit the hole
+Reattempted
+#####				H	Blood 
 ######					C	Exit wound
 ######					C	Pool
 Small pool on death
@@ -368,51 +365,47 @@ Small pool on death
 ######					C	Trail
 From recently-hit agents 
 	(no need for bleeding status effect yet)
-#####			H	Bullet holes
-Sprite spawn works
-######				C	Determine layer
-Certain layers are over wall, but not over player. Not sure if a vanilla layer can do this.
-######				C	Adjust placement per wall facing
-######				H	Different sprites for wall types
-Glass might be the only one where it's appropriate
-Hedge can fully omit the hole
-####			C	Shell Casings
-#####				C   Orient spill consistently
-New
-#####				C   Identify Bounce
+####			CT	Shell Casings
+#####				T   Orient spill consistently
+Test
+#####				H   Bounce
 Item.OnCollisionEnter2D
 	dw
 item.invItemName == "Wreckage" 
 !Item.isrealItem is for wreckage I think
 GC.AudioHandler.Play(item, "ShellCasing")
-#####				C   Randomize sprite rotation on bounce
+######					C   Randomize sprite rotation on bounce
 New
-#####				C   Audio on bounce
+######					C   Audio on bounce
 New
 GC.AudioHandler.Play(objectReal, "BulletHitwall")
 if objectReal.CompareTag("Wall")
 Then branch to wall types from there
 ####			H	Smoke from Rockets
 New
-####			C	Wall Fragments
+####			H	Wall Fragments
 Spawn TINY fragments of wood, glass, etc. when you shoot a wall
 Could also use a particle effect that resembles dust, which would dispose of itself rather than cluttering/slowing
-####			√   Muzzle Flash
+####			C   Muzzle Flash
 P_Gun.Shoot_Prefix
 P_Turret.FireGun_Postfix
+#####				C	Dark Spot
+Dark spot is spawned when too many flashes occur in a given area
 ###			C	Floraler Flora
 PoolsScene.SpawnObjectReal
 ####			C	Stopped working on Hedge Walls
 New
 ####			C	Throw leaves around when you hit a plant
 Before destruction
-##		C	Roamers
-###         C   Arsonist
+##		H	Roamers
+###         H   Arsonist
 DW
-###         C   Butler Bot
+###         H   Butler Bot
 Spawned, but only cleans bodies & not wreckage
 How to exclude private areas?
 ##		H	Decals
+Category pending resolution of Wall Decal Layer problem.
+
 Generate decoration across level.
 Most of these can be treated as Wreckage particles.
 Others would not be reactive in the same way.
@@ -938,6 +931,17 @@ P_RandomSelection.RandomSelect
 ###			√	Panoptikopolis
 ###         √   Shanty Town
 ###         √	Spelunky Dory
+##		√	Features - Archive
+###         √   Meats of Rogue
+Complete
+###         √   Power Whelming
+Complete
+###         √   Skyway District
+Complete
+###         √   This Land is Mine Land
+Complete
+###         √   Welcome Mats
+Complete
 ##		√	Map Size
 ###         √   Arthropolis
 ###         √   Claustropolis
@@ -947,73 +951,37 @@ P_RandomSelection.RandomSelect
 ##		C	Underdank Citizen
 ###         C   New features
 CHECK FEATURE LIST
-###			C	Opened manhole did not detect toilet exits
-Beginning of level
-###			C	Chance for Poopsplosion when exiting toilet
-Should work for vanilla flushing too
-Prevents future use, too disgusting
-Spawn tiny Hazard to make NPCs frightened of toilet permanently
-###			C	Death by E_
-Probably just setting a string
+###			T	Opened manhole did not detect toilet exits
+Verify diminutive
+###			T	Chance for Poopsplosion when exiting toilet
+Attempted
+###			T	Death by E_
+Tried reordering where damage is allocated
+Agent
+	.deathMethod
+	.deathMethodItem
+	.deathMethodObject
+	.deathKiller
 ###			T	Spawns near Water
 TileInfo.WaterNearby has a levelTheme check 😡
 	Transpiler patched, test
-###			C	Falling in does not randomize exit
-
-###			C	Manhole Agent Brain broken
+###			T	Manhole Agent Brain broken
 I think this is an import from BunnyMod
-###         C   Flushing to Manhole doesn't work
-Technically works, but they fall right back in and trigger the flush method again.
-Find BM's old jump method of exiting.
-###         C   Patch Toilet FlushYourself
-####			C	E_Agent.IsFlushable error
-
-	[Error  :RogueLibsCore] SimpleInteractionProvider's handler on Toilet (1541) (Toilet) threw an exception.
-	[Error  :RogueLibsCore] System.NullReferenceException: Object reference not set to an instance of an object
-	  at SORCE.Extensions.E_Agent.IsFlushable (Agent agent) [0x00000] in <a6d3df63bb624a78a65160bf3239316e>:0
-	  at SORCE.Patches.P_PlayfieldObject.P_Toilet+<>c.<Setup>b__3_0 (RogueLibsCore.SimpleInteractionProvider`1[T] h) [0x000e8] in <a6d3df63bb624a78a65160bf3239316e>:0
-	  at RogueLibsCore.SimpleInteractionProvider`1[T].RogueLibsCore.IInteractionProvider.GetInteractions (RogueLibsCore.InteractionModel model) [0x0001c] in <f2d3b562e3ca434aac96212154c6ffc3>:0
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	RogueLibsCore.VanillaInteractions+<>c.<Patch_Toilet>b__55_1 (RogueLibsCore.InteractionModel`1[T] m) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	RogueLibsCore.SimpleInteractionProvider`1+<>c__DisplayClass12_0[T].<SetStopCallback>g__Callback|0 () (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	RogueLibsCore.InteractionModel.OnDetermineButtons () (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	RogueLibsCore.RogueLibsPlugin.DetermineButtonsHook (PlayfieldObject __instance) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	Toilet.DetermineButtons () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	RogueLibsCore.RogueLibsPlugin.InteractHook (PlayfieldObject __instance, Agent agent) (at <f2d3b562e3ca434aac96212154c6ffc3>:0)
-	Toilet.Interact (Agent agent) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	InteractionHelper.UpdateInteractionHelper () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Updater.UpdateInterface () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	Updater.Update () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-###			C	Old Notes
-- Take small damage if you walk into manhole instead of activating
-  - Attempted
-- Walkover version of flushyourself:
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	BunnyMod.Content.BMObjects.Manhole_FlushYourself (Agent agent, ObjectReal __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
-	BunnyMod.Content.BMObjects.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <8abc5006f52b44d7a55c9ddabc9a0e08>:0)
-	Hole.EnterRange (UnityEngine.GameObject myObject) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-	Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <5b00a25014d74f7f862ecdd1d48f7c04>:0)
-	- This only occurred when no other manholes were open. There were active toilets.
-	- Walkover version also only sends to self.
-	- One manhole keeps getting excluded. Check that the random selection from lists isn't excluding anything from the running.
-- Water splash
-  - Needs a delay. It's appearing before the player is.
-	- Attempted Immediate teleportation
-  - No longer working
-- Manhole to Toilet
-  - Attempted
-- Toilet to Manhole
-  - Attempted
-##		C	Underdank VIP
-###			C	Poison Resistance
-###			C	No falling damage for Manholes
-###			C	Don't annoy except when poopy
+	Can't find anything
+Attempted calling BecomeUnhidden
+###         T   Flushing to Manhole doesn't work
+Tried out Agent.Jump()
+##		T	Underdank VIP
+###			T	Poison Resistance
+Attempted:
+P_StatusEffects.GetStatusEffectTime_Postfix
+###			T	No falling damage for Manholes
+Attempted
+###			T	Not afraid of disgusting toilets
+Attempted
 #	C	Release
 ##		C	Export
 - Scary Guns
-  - P_Bullet.SetupBullet_Postfix
 ##		C	Set Unlock costs
 To get those sweet nuggets 😈
 ##		C	Disable Core.DebugMode

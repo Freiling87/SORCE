@@ -7,9 +7,9 @@ namespace SORCE.Challenges.C_Gangs
 	{
 		public NotSwearwolves(string name) : base(name) { }
 
-		public override string LeaderAgent =>		"Werewolf";
-		public override string[] MiddleAgents =>	new string[] { "Werewolf" };
-        public override string LastAgent =>			"Werewolf";
+		public override string LeaderAgent =>		"OfficeDroneWerewolf";
+		public override string[] MiddleAgents =>	new string[] { "OfficeDroneWerewolf" };
+        public override string LastAgent =>			"OfficeDroneWerewolf";
 
 		public override bool AlwaysRun =>			false;
         public override bool GangsAligned =>		true;
@@ -17,7 +17,7 @@ namespace SORCE.Challenges.C_Gangs
         public override bool MustBeGuilty =>		false;
 
         public override int GangSize =>				GangChallengeTools.GangSize;
-        public override int TotalSpawns =>			GangChallengeTools.GangTotalCount;
+        public override int TotalSpawns =>			GangChallengeTools.GangTotalCount / 2;
 
         public override string Relationship =>		VRelationship.Neutral;
 

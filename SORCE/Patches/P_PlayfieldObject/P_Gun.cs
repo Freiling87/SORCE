@@ -3,6 +3,7 @@ using HarmonyLib;
 using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.Utilities;
+using UnityEngine;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches.P_PlayfieldObject
@@ -63,20 +64,23 @@ namespace SORCE.Patches.P_PlayfieldObject
                 ? __instance.agent.inventory.equippedSpecialAbility.invItemName
                 : __instance.agent.inventory.equippedWeapon.invItemName;
 
+            towardObject.transform.position = __instance.tr.position + (Quaternion.AngleAxis(90f, Vector3.right) * Vector3.up).normalized;
+
             switch (invItem)
             {
                 case VItem.MachineGun:
-                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.Casing);
+                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.Casing, towardObject);
                     break;
                 case VItem.Pistol:
-                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.Casing);
+                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.Casing, towardObject);
                     break;
                 case VItem.Revolver:
                     break;
                 case VItem.Shotgun:
-                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.ShotgunShell);
+                    Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.ShotgunShell, towardObject);
                     break;
             }
         }
+        public static GameObject towardObject = new GameObject();
     }
 }

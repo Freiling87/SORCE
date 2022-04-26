@@ -1,16 +1,10 @@
 ﻿using BepInEx.Logging;
-using SORCE.Challenges.C_Features;
 using SORCE.Challenges.C_Overhaul;
-using SORCE.Challenges.C_VFX;
 using SORCE.Extensions;
 using SORCE.Logging;
-using SORCE.Patches.P_PlayfieldObject;
-using SORCE.Traits;
-using System;
+using SORCE.Utilities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
@@ -47,7 +41,8 @@ namespace SORCE.MapGenUtilities
 			SpawnTrashBags();
 			SpawnTurntablesAndSpeakers();
 
-			VFX.SpawnPublicLitter();
+			if (!GC.levelEditing)
+				VFX.SpawnPublicLitter();
 		}
 
 		private static void BreakWindows()
@@ -89,12 +84,12 @@ namespace SORCE.MapGenUtilities
 			{
 				foreach (Water water in GC.watersList)
 				{
-					if (!water.effectContents.Contains("Poisoned") && !water.syringeContents.Contains("Poisoned"))
+					if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 100f)) &&
+						!water.effectContents.Contains("Poisoned") && !water.syringeContents.Contains("Poisoned"))
 					{
 						if (water.waterTiles.Count == 0)
-						{
 							water.SpreadPoisonStart(null, false);
-						}
+						
 						water.effectContents.Add("Poisoned");
 						water.poisonedWholeLevel = true;
 					}
@@ -135,9 +130,7 @@ namespace SORCE.MapGenUtilities
 				GC.tileInfo.tilemapFloors4.Build();
 			}
 			else
-			{
 				GC.playerAgent.objectMult.ObjectAction(GC.importantObjectList[0].objectNetID, "PoisonWater");
-			}
 		}
 		private static void RuinToilets()
 		{
@@ -149,12 +142,9 @@ namespace SORCE.MapGenUtilities
 			foreach (ObjectReal objectReal in GC.objectRealList)
 				if (objectReal is Toilet toilet
 					&& GC.percentChance(chanceToShid))
-					P_Toilet.TakeHugeShit(toilet, false);
+					Underdank.TakeHugeShit(toilet, false);
 		}
 
-		/// <summary>
-		/// Copied from Computer.PoisonWater
-		/// </summary>
 		private static void SpawnKillerPlants()
 		{
 			if (!MapFeatures.HasKillerPlants)
@@ -168,7 +158,8 @@ namespace SORCE.MapGenUtilities
 				Vector2 location = Vector2.zero;
 				int attempts = 0;
 
-				do
+				while ((location == Vector2.zero
+					|| Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) && attempts < 100)
 				{
 					location = GC.tileInfo.FindRandLocationGeneral(objectBuffer);
 
@@ -179,8 +170,6 @@ namespace SORCE.MapGenUtilities
 
 					attempts++;
 				}
-				while ((location == Vector2.zero ||
-					Vector2.Distance(location, GC.playerAgent.tr.position) < 5f) && attempts < 100);
 
 				if (location != Vector2.zero)
 					GC.spawnerMain.spawnObjectReal(location, null, VObject.KillerPlant);
@@ -613,8 +602,6 @@ namespace SORCE.MapGenUtilities
 		{
 			if (!MapFeatures.HasRugs)
 				return;
-
-
 		}
 		private static void SpawnScreens()
 		{

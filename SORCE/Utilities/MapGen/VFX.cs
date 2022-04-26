@@ -43,20 +43,18 @@ namespace SORCE.MapGenUtilities
 			bool publicOnly = HasPublicLitter && !HasPrivateLitter;
 			bool privateOnly = HasPrivateLitter && !HasPublicLitter;
 
-			int numObjects = (int)(250 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio);
+			int numObjects = (int)(1000 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio);
 
 			for (int i = 0; i < numObjects; i++)
 			{
-				// Vector2 location = GC.tileInfo.FindRandLocationGeneral(0f); // Vanilla 2f
-				Vector2 location = LevelGenTools.RandomSpawnLocation(GC.tileInfo, 0.24f, publicOnly, privateOnly);
+				Vector2 location = LevelGenTools.RandomSpawnLocation(GC.tileInfo, 0.32f, publicOnly, privateOnly);
 
-				//GC.spawnerMain.SpawnWreckagePileObject(location, OverhaulWreckageType(), false);
 				SpawnWreckagePileObject_Granular(
 					location,
 					OverhaulWreckageType(),
 					burnt: GC.percentChance(20),
-					gibs: Random.Range(1, 12),
-					0.64f, 0.64f,
+					gibs: 1,
+					0.32f, 0.32f,
 					particleID: 0,
 					false, true);
 			}

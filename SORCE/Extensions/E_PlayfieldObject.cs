@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SORCE.Extensions
 {
-	public static class E_PlayfieldObject
+    public static class E_PlayfieldObject
 	{
 		/// <summary>
 		/// Ensures equal numbers of buttons, buttonsExtra and buttonsPrices 
