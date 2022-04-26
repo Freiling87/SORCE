@@ -700,9 +700,10 @@ namespace SORCE.MapGenUtilities
 						wallDirection = "N";
 					}
 					
-					GameObject gameObject2 = UnityEngine.Object.Instantiate(GC.spawnerMain.lightReal2Prefab, lightPosition, Quaternion.Euler(0f, 0f, 0f));
-					LightReal component3 = gameObject2.GetComponent<LightReal>();
-					GC.spawnerMain.SetLightRealDetails(component3, gameObject2, movieScreen1.startingChunk, movieScreen1.tr.GetComponent<Chunk>(), 5, 5, 5, "PurpleLight");
+					GameObject light = UnityEngine.Object.Instantiate(GC.spawnerMain.lightReal2Prefab, lightPosition, Quaternion.Euler(0f, 0f, 0f));
+					LightReal lightReal = light.GetComponent<LightReal>();
+					string color = GC.Choose("BlueLight", "CyanLight", "GreenLight", "PinkLight", "PurpleLight", "RedLight");
+					GC.spawnerMain.SetLightRealDetails(lightReal, light, movieScreen1.startingChunk, movieScreen1.tr.GetComponent<Chunk>(), 5, 5, 5, color);
 
 					// Place sides
 					// I think these always fire, because I never see only one.
@@ -712,7 +713,6 @@ namespace SORCE.MapGenUtilities
 						ObjectReal movieScreen2 = GC.spawnerMain.spawnObjectReal(neighborCell1, null, VObject.MovieScreen);
 						movieScreen2.ShiftTowardWalls();
 						movieScreen2.ambientAudio = VAmbience.Casino;
-						
 					}
 
 					if (E_TileInfo.IsWallDecorationPlaceable(neighborCell2, wallDirection) &&

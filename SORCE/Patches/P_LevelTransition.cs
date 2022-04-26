@@ -16,15 +16,14 @@ namespace SORCE.Patches
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
+        [HarmonyPostfix, HarmonyPatch(methodName: nameof (LevelTransition.ChangeLevel), argumentTypes: new Type[0])]
         public static void ChangeLevel_Postfix()
         {
-            if (GC.levelTheme != 4)
+            if (GC.levelTheme != 4 &&
+                !GC.challenges.Contains(nameof(ProtectAndServo)))
             {
-                if (!GC.challenges.Contains(nameof(ProtectAndServo)))
-                {
-                    GC.loadLevel.placedConfiscationCenter = true;
-                    GC.loadLevel.placedDeportationCenter = true;
-                }
+                GC.loadLevel.placedConfiscationCenter = true;
+                GC.loadLevel.placedDeportationCenter = true;
             }
         }
     }

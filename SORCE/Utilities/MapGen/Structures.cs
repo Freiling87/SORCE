@@ -138,7 +138,6 @@ namespace SORCE.MapGenUtilities
 		}
 		public static string BuildingWallType(string vanilla)
 		{
-
 			BuildingsChallenge mutator = (BuildingsChallenge)RogueFramework.Unlocks.OfType<MutatorUnlock>().FirstOrDefault(m => m is BuildingsChallenge && m.IsEnabled);
 
 			if (!(mutator is null) && !(mutator.WallStructural is null))

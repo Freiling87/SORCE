@@ -152,10 +152,14 @@ namespace SORCE.Patches.P_PlayfieldObject
 			}
 
 			if (targetObj is Toilet toilet)
+			{
 				toilet.GetComponent<PlayfieldObject>().GetHook<P_Toilet_Hook>().disgusting = true;
+				//GC.spawnerMain.SpawnDanger(toilet, "BadMusic1", "Medium");
+				// Can't seem to find one that works well for this.
+			}
 		}
 	}
-
+	 
 	public class P_Toilet_Hook : HookBase<PlayfieldObject>
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();

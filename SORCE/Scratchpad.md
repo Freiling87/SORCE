@@ -23,6 +23,26 @@ Big Black Blotch
 Map Size Downtown
 	I think Canals used up all the chunks, so vanilla ended up with 2 or 3 buildings
 Spawned Conf centers when no cop bots
+	A few attempts, still doing it
+Fatal error when loading park
+	[Info   : Unity Log] Loading Bear Traps
+	[Debug  :SORCE_P_SpawnerMain] SpawnItem_Prefix
+	item:   BearTrapPark
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	SORCE.Patches.P_PlayfieldObject.P_Item.DoEnable_Prefix (Item __instance) (at <0132fa4a33134da690bb7dc540fe772d>:0)
+	Item.DoEnable () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	SpawnerMain.SpawnItem (UnityEngine.Vector3 itemPos, InvItem item, System.Boolean actionsAfterDrop, Agent owner, System.Boolean streamingSave) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	SpawnerMain.SpawnItem (UnityEngine.Vector3 itemPos, System.String itemName) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	LoadLevel+<SetupMore3_3>d__148.MoveNext () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
+
+	Possible Culprits:
+		SpawnerMain
+			.SetLighting2_Prefix
+			.SpawnLightReal_Prefix
+
+
 #	CT	Mutators
 ##		CT	Features
 ###         CT   00 District Object Delimitation
@@ -30,22 +50,22 @@ Spawned Conf centers when no cop bots
 Pending test of basic features
 ####            C   00 Add SORCE dependency and test
 New
-####            T	Flame Grate
-Refactored
-####            T   SawBlade
-Refactored
-####            T   Tube
-Refactored
+####            √	Flame Grate
+Complete
 ####            √   Manhole
 Complete
+####            √   SawBlade
+Complete
 ####            √   SlimeBarrel
+Complete
+####            √   Tube
 Complete
 ###         T   Pollution Solution
 ####			H	Split up into granular mutators?
 Oil Spills
 Slime Barrels
 Poisoned Lakes
-####            T   Raise chance of poisoned lakes
+####            H   Raise chance of poisoned lakes
 PoisonLakes()
 	SpreadPoisonWait 
 		DW (?)
@@ -78,8 +98,10 @@ New
 Spawn as square or circle
 Always have water pump
 ###         H   Screens
+####			C	Custom Screens
 ####            C   Might not be compatible with building mods?
 Specifically seems to not work on Concrete walls. Hopefully there's another way to check and allow those.
+I think this is just WallMaterialType == None. Concrete are an exception to avoid against-wall spawns.
 ####            C   Did not spawn in Downtown
 Might have been wallmod
 ####            C   Exclude Interiors
@@ -198,7 +220,19 @@ StatusEffects
 	.WerewolfTransformBack
 LoadLevel
 	.SetNormalLighting 
-###         C   No Agent Lights
+
+###			C	Objects Re-Lit
+P_SpawnerMain.SetLighting2_Prefix
+####			C	Disable Object Glow removal
+Most players will not want this. It's better for CCU.
+####			C	00 Some objects lack a native light
+Slime Barrel
+Flame Grate
+####			C	Flicker Lamp light
+####			C	Flicker Flaming Barrel light
+####			C	Pulse radioactive lights
+####			C	Blink SecurityCam light
+###         H   Agents Re-Lit
 Light stays until body is gibbed
 	See what method that is and analyze it
 Attempts
@@ -210,8 +244,11 @@ Attempts
 		SetLightBrightness_Prefix
 	P_SpawnerMain
 		SetLighting2_Prefix
+		SpawnLightReal
+			NOT TRIED YET
 ####			C	Exclude Ghosts
 Or even add a blue glow
+####			C	Red light around Werewolf if you have Awareness
 ###         H   Player Agent Light Size
 New
 This would be a stand-in for the flashlight
@@ -219,21 +256,13 @@ This would be a stand-in for the flashlight
 New
 ###         H   Flashlight Gun Mod?
 Someday
-###			√H	No Item Lights
+###			√H	Items Re-Lit
 P_SpawnerMain.SetLighting2_Prefix
 ####			H	Omit briefcase
 Because Pulp Fiction
-###			√H	No Object Lights
-P_SpawnerMain.SetLighting2_Prefix
-####			H	Custom Electronic lights
-Computer				Green glow
-SecurityCam				Sparse red blink
-TV						Blue ray
-etc.
-###			√	No Bullet Lights
+###			C	Gunplay Re-Lit
 P_Bullet.RealAwake_Postfix
-###			√	No Object Glow
-Complete
+Ensmallen BulletHit particle effect
 ##		C	Gangs
 ###			C	00 Gang Minimum
 Have a gang size minimum at which to cut off the gangspawner, since some of them don't make sense in too few numbers.
@@ -282,6 +311,8 @@ Crepe gangs of 1, same total number of agents.
 ##		C	VFX
 ###         C   00 Spawns litter on level editor
 New
+###			C	00 Wreckage Rotation
+###			C	00 Spawn Trash when destroying Trashcan
 ###			C   Bachelorer Pads
 ####            C   Scale litter to chunk type & Slumminess
 House: scale to chance. Some people are slobs, some aren't.

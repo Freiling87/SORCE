@@ -30,7 +30,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 
             if (effectType != "Clean" && GC.percentChance(1) && GC.percentChance(50)
                 && GC.tileInfo.GetTileData(new Vector3(posX, posY, 0f)).water)
-                GC.spawnerMain.SpawnParticleEffect(VParticleEffect.SmokePuffs, new Vector3(posX * 0.64f, posY * 0.64f, __instance.tr.position.z), 0f);
+                GC.spawnerMain.SpawnParticleEffect(VParticleEffect.Smoke, new Vector3(posX * 0.64f, posY * 0.64f, __instance.tr.position.z), 0f);
         }
     }
 }

@@ -56,12 +56,17 @@ namespace SORCE.Patches.P_PlayfieldObject
         {
 			if (GC.challenges.Contains(nameof(TrapsUnlimited)))
 			{
-				if ((switchFloor.moveNS &&
-					switchFloor.stepCountN + switchFloor.stepCountS <= 4) ||
-					switchFloor.stepCountE + switchFloor.stepCountW <= 4)
+				if (switchFloor.moveNS)
+				{
+					if (switchFloor.stepCountN + switchFloor.stepCountS <= 4)
+						return "Crusher";
+					else
+						return GC.Choose("Crusher", "DartTrap", "SawBlade", "TrapDoor");
+				}
+				else if (switchFloor.stepCountE + switchFloor.stepCountW <= 4)
 					return "Crusher";
 				else
-					return GC.Choose("Crusher", "SawBlade", "DartTrap", "TrapDoor");
+					return GC.Choose("Crusher", "DartTrap", "SawBlade", "TrapDoor");
 			}
 
 			if (GC.levelTheme == 1)

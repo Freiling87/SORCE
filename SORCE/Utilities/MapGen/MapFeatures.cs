@@ -190,11 +190,13 @@ namespace SORCE.MapGenUtilities
 				GC.challenges.Contains(nameof(Arcology)) ||
 				GC.challenges.Contains(nameof(LakeItOrLeaveIt));
 		public static void SetHasFlameGrates(LoadLevel loadLevel) =>
-			loadLevel.hasFlameGrates = loadLevel.hasFlameGrates ||
+			loadLevel.hasFlameGrates = 
 				!GC.challenges.Contains(nameof(LowTechLowLife)) &&
-				GC.challenges.Contains(nameof(Technocracy));
+				GC.levelTheme == 1 ||
+				loadLevel.hasFlameGrates ||
+				GC.challenges.Contains(nameof(TrapsUnlimited));
 		public static void SetHasLockdownWalls(LoadLevel loadLevel) =>
-			loadLevel.hasTracks = loadLevel.hasTracks ||
+			loadLevel.hasLockdownWalls = loadLevel.hasLockdownWalls ||
 				Core.debugMode;
 		public static void SetHasTracks(LoadLevel loadLevel) =>
 			loadLevel.hasTracks = loadLevel.hasTracks ||

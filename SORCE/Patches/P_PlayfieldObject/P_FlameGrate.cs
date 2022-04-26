@@ -3,6 +3,7 @@ using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
 using JetBrains.Annotations;
 using SORCE.Challenges.C_Features;
+using SORCE.Challenges.C_Overhaul;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
 using System;
@@ -56,7 +57,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 		}
 
 		private static int AllowSpawn =>
+			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			GC.levelTheme == 1 ||
+			GC.loadLevel.hasFlameGrates ||
 			GC.challenges.Contains(nameof(TrapsUnlimited))
 				? 1
 				: 0;

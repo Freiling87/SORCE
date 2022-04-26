@@ -23,8 +23,8 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(Technocracy)); // Human butler?
 
 		public static int PopulationMultiplier() =>
-			RogueFramework.Unlocks.OfType<PopulationChallenge>().FirstOrDefault(c => c.IsEnabled)?.PopulationMultiplier
-				?? 1;
+			(int)((RogueFramework.Unlocks.OfType<PopulationChallenge>().FirstOrDefault(c => c.IsEnabled)?.PopulationMultiplier
+				?? 1) * LevelSize.ChunkCountRatio);
 
 		public static void Spawner_Main()
         {

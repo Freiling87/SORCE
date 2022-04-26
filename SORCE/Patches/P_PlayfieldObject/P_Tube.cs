@@ -58,7 +58,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 			GC.levelTheme == 1 || 
 			GC.levelTheme == 2 ||
 			GC.challenges.Contains(nameof(MeatsOfRogue))
-			? 1
-			: GC.levelTheme;
+				? 1 
+				: GC.levelTheme;
 	}
 }

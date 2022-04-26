@@ -26,13 +26,23 @@ namespace SORCE.Patches.P_PlayfieldObject
                 GC.audioHandler.Play(__instance, VAudioClip.ItemHitItem);
         }
 
-        [HarmonyPrefix, HarmonyPatch(methodName: "OnCollisionEnter2D", argumentTypes: new[] { typeof(Collision2D) })]
+        //[HarmonyPrefix, HarmonyPatch (methodName: nameof(Item.DoEnable), argumentTypes: new Type[0] )]
+        public static bool DoEnable_Prefix(Item __instance)
+        {
+            logger.LogDebug("DoEnable_Prefix");
+            logger.LogDebug("item:\t" + __instance.itemName);
+
+            return true;
+        }
+
+        // TODO: Pending figuring out item/floor collision detection
+        //[HarmonyPrefix, HarmonyPatch(methodName: "OnCollisionEnter2D", argumentTypes: new[] { typeof(Collision2D) })]
         public static void OnCollisionEnter2D_Postfix(Collision2D other, Item __instance)
         {
             if (__instance.itemName == CSprite.Casing)
-                GC.audioHandler.Play(__instance, VAudioClip.BulletHitWall);
+                GC.audioHandler.Play(__instance, VAudioClip.ArmorBreak);
             else if (__instance.itemName == CSprite.ShotgunShell)
-                GC.audioHandler.Play(__instance, VAudioClip.BulletHitWall);
+                GC.audioHandler.Play(__instance, VAudioClip.ArmorBreak);
         }
     }
 }
