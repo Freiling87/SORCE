@@ -30,6 +30,7 @@ namespace SORCE.Traits
                     IsAvailable = false,
                     IsAvailableInCC = true,
                     UnlockCost = 0,
+                    Unlock = { isUpgrade = true }
                 });
         }
         public override void OnAdded() { }
