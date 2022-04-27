@@ -864,7 +864,14 @@ Fountain.MakeChestNonInteractable()
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
 New
-##		√	Ambient Light Color
+##		C	Ambient Light Color
+Found a possible new avenue to approach this
+	LevelFeelings.HarmatIntervalEffect
+		Whatever you do with this, you'll need to ensure compatibility with the ShiftingStatus/Radiation disasters, since they modify these vars.
+		Attempted
+			Disabled LoadLevel patch
+			Attempt is in ScrollingMenu
+				SetNormalLighting() a bit below that is still active, try a run with it commented out
 ###			√	00 Test with Werewolf
 Works
 ###			√	Goodsprings

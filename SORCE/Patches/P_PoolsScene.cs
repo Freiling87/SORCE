@@ -1,15 +1,9 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using Light2D;
-using RogueLibsCore;
-using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Overhaul;
-using SORCE.Challenges.C_VFX;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
-using SORCE.Patches.P_PlayfieldObject;
 using System;
-using System.Linq;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
