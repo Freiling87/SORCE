@@ -11,7 +11,7 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |T					|To Test
 #	CT	Mutators
 ##		CT	Features
-###         CT   00 District Object Delimitation
+###         C   00 District Object Delimitation
 ####            C   00 Export all to Delimitation mod
 Pending test of basic features
 ####            C   00 Add SORCE dependency and test
@@ -26,26 +26,13 @@ Complete
 Complete
 ####            √   Tube
 Complete
-###         T   Pollution Solution
+###         √H  Pollution Solution
 ####			H	Split up into granular mutators?
 Oil Spills
 Slime Barrels
 Poisoned Lakes
-####            H   Raise chance of poisoned lakes
-PoisonLakes()
-	SpreadPoisonWait 
-		DW (?)
-	SpreadPoisonStart
-		DW
-	MapFeatureSpawners.PoisonLakes()
-		DW
-	Computer.PoisonLake
-		T
-####            T   Smoke particles from poisoned lakes
-Water.SpreadPoisonStart postfix
-This works, but need to vary timing, speed, transparency.
-Spawns past border of lake. Test TileInfo for water.
-	Added Water check to TileInfo.
+####            H   Modify smoke particles
+Vary timing, speed, transparency.
 ###         H   Department of Public Comfiness
 ####			C	Recommend for Grand City Hotel
 ####			C	Spawn public Armchairs & Fireplaces

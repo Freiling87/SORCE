@@ -46,8 +46,7 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(Arcology)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			!GC.challenges.Contains(nameof(MACITS)) &&
-			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
-			Core.debugMode;
+			GC.challenges.Contains(nameof(ThePollutionSolution));
 		public static bool HasRugs => 
 			GC.challenges.Contains(nameof(GrandCityHotel)) ||
 			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
@@ -179,6 +178,7 @@ namespace SORCE.MapGenUtilities
 			loadLevel.hasLakes = 
 				GC.levelTheme != 3 && // TODO: Allow spawn, but check for Bridges or skin canal chunks entirely
 				loadLevel.hasLakes ||
+				Core.debugMode ||
 				GC.challenges.Contains(nameof(Arcology)) ||
 				GC.challenges.Contains(nameof(LakeItOrLeaveIt));
 		public static void SetHasFlameGrates(LoadLevel loadLevel) =>

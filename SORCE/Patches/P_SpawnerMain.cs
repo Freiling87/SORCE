@@ -6,6 +6,7 @@ using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Lighting;
 using SORCE.Localization;
 using SORCE.Logging;
+using SORCE.MapGenUtilities;
 using SORCE.Patches.P_PlayfieldObject;
 using System.Collections.Generic;
 using UnityEngine;
@@ -228,11 +229,18 @@ namespace SORCE.Patches
 
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SpawnItem), argumentTypes: new[] { typeof(Vector3), typeof(InvItem), typeof(bool), typeof(Agent), typeof(bool) })]
 		public static bool SpawnItem_Prefix(Vector3 itemPos, InvItem item, bool actionsAfterDrop, Agent owner, bool streamingSave)
-        {
+		{
 			logger.LogDebug("SpawnItem_Prefix\n" +
 				"item:\t" + item.invItemName);
 
 			return true;
+		}
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(SpawnerMain.SpawnWater), argumentTypes: new[] { typeof(PlayfieldObject), typeof(Vector3), typeof(Vector3), typeof(Quaternion), typeof(bool), typeof(Chunk) })]
+		public static void SpawnWater_Postfix(PlayfieldObject playfieldObject, Vector3 waterPos, Vector3 waterScale, Quaternion waterRot, bool spawnDanger, Chunk myChunk, ref Water __result)
+        {
+			if (MapFeatures.HasLakesPolluted)
+				__result.SpreadPoisonWait(GC.playerAgent.statusEffects.ChooseRandomStatusEffectLake());
         }
 	}
 } 
