@@ -191,13 +191,13 @@
     <Compile Include="Localization\VAgentGoal.cs" />
     <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="Localization\VSpecialAbility.cs" />
-    <Compile Include="Patches\P_LevelTransition.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_FillMapChunks2.cs" />
     <Compile Include="Patches\P_ObjectPoolExtensions.cs" />
     <Compile Include="Resources\SpriteLoader.cs" />
     <Compile Include="Traits\UnderdankVIP.cs" />
     <Compile Include="Utilities\Audiovisual.cs" />
     <Compile Include="Utilities\MapGen\AmbientAudio.cs" />
+    <Compile Include="Utilities\MapGen\Chunks.cs" />
     <Compile Include="Utilities\MapGen\LevelGenTools.cs" />
     <Compile Include="Localization\VAgent.cs" />
     <Compile Include="Localization\VAmbience.cs" />

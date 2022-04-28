@@ -30,8 +30,8 @@ namespace SORCE.Challenges.C_Gangs
 				.WithName(new CustomNameInfo(
 					"Gangs - Protect & Servo"))
 				.WithDescription(new CustomNameInfo(
-					"Edison, Inc. presents: Police©!\n" +
-					"The futuristic solution to law enforcement."));
+					"Edison, Inc. presents: Police©! The futuristic solution to law enforcement.\n\n" +
+					"Bobby the Cop Bot says, \"I [ERROR: Emotion not found, 'E_Love'] all Citizens!\""));
 		}
 	}
 }

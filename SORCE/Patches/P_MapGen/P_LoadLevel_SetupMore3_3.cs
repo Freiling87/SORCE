@@ -1,6 +1,5 @@
 ﻿using BepInEx.Logging;
 using BTHarmonyUtils;
-using BTHarmonyUtils.InstructionSearch;
 using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
 using JetBrains.Annotations;
@@ -15,7 +14,7 @@ using System.Reflection.Emit;
 
 namespace SORCE.Patches.P_MapGen
 {
-	[HarmonyPatch(declaringType: typeof(LoadLevel))]
+    [HarmonyPatch(declaringType: typeof(LoadLevel))]
 	static class P_LoadLevel_SetupMore3_3
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();

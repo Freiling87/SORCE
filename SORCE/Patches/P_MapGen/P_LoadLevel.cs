@@ -10,6 +10,7 @@ using SORCE.Challenges.C_Gangs;
 using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
+using SORCE.Utilities.MapGen;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,11 +32,16 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.CanUseChunk), argumentTypes: new[] { typeof(GameObject), typeof(ChunkData), typeof(bool), typeof(int), typeof(int), typeof(Vector3) })]
 		public static bool CanUseChunk_Prefix(GameObject myChunkGo, ChunkData myChunkBasic, bool checkSessionData, int randChunkNum, int chunkShape, Vector3 myNewPos, ref bool __result)
         {
-			if (GC.challenges.Contains(nameof(ProtectAndServo)) &&
-				myChunkBasic.description == VChunkType.ConfiscationCenter ||
-				myChunkBasic.description == VChunkType.DeportationCenter)
-            {
-				__result = true;
+			if (myChunkBasic.description == VChunkType.ConfiscationCenter &&
+				Chunks.HasConfiscationCenters)
+			{
+				__result = !GC.loadLevel.placedConfiscationCenter;
+				return false;
+			}
+			else if (myChunkBasic.description == VChunkType.DeportationCenter &&
+				Chunks.HasDeportationCenters)
+			{
+				__result = !GC.loadLevel.placedDeportationCenter;
 				return false;
 			}
 
@@ -332,11 +338,9 @@ namespace SORCE.Patches
 		/// Ambient Light Color
 		/// </summary>
 		/// <param name="__instance"></param>
-		//[HarmonyPostfix, HarmonyPatch(methodName: nameof(LoadLevel.SetNormalLighting), new Type[] {})]
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LoadLevel.SetNormalLighting), new Type[] {})]
 		public static void SetNormalLighting_Postfix(LoadLevel __instance)
 		{
-			// TODO: Re-enable this if attempt in ScrollingMenu doesn't work
-
 			if (ChallengeManager.IsChallengeFromListActive(CColor.AmbientLightColor))
 			{
 				AmbientLightColorChallenge challenge = RogueFramework.Unlocks.OfType<AmbientLightColorChallenge>().FirstOrDefault(c => c.IsEnabled);

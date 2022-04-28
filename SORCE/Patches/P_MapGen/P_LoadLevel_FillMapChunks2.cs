@@ -5,6 +5,7 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using SORCE.Challenges.C_Gangs;
 using SORCE.Logging;
+using SORCE.Utilities.MapGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace SORCE.Patches.P_MapGen
 		private static IEnumerable<CodeInstruction> EnableCopBotCenters(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo HasCopBotCenters = AccessTools.PropertyGetter(typeof(P_LoadLevel_FillMapChunks2), nameof(P_LoadLevel_FillMapChunks2.HasCopBotCenters));
+			MethodInfo HasCopBotCenters = AccessTools.PropertyGetter(typeof(P_LoadLevel_FillMapChunks2), nameof(HasCopBotCenters));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -50,12 +51,11 @@ namespace SORCE.Patches.P_MapGen
 			return instructions;
 		}
 
-
 		[HarmonyTranspiler, UsedImplicitly]
 		private static IEnumerable<CodeInstruction> ChunkPlaced(IEnumerable<CodeInstruction> codeInstructions)
 		{
 			List<CodeInstruction> instructions = codeInstructions.ToList();
-			MethodInfo HasCopBotCenters = AccessTools.PropertyGetter(typeof(P_LoadLevel_FillMapChunks2), nameof(P_LoadLevel_FillMapChunks2.HasCopBotCenters));
+			MethodInfo HasCopBotCenters = AccessTools.PropertyGetter(typeof(P_LoadLevel_FillMapChunks2), nameof(HasCopBotCenters));
 
 			CodeReplacementPatch patch = new CodeReplacementPatch(
 				expectedMatches: 1,
@@ -67,6 +67,8 @@ namespace SORCE.Patches.P_MapGen
 				},
 				targetInstructionSequence: new List<CodeInstruction>
 				{
+					//	Class-view line 11801
+
 					new CodeInstruction(OpCodes.Ldloc_1),				//	this
 					new CodeInstruction(OpCodes.Ldfld),					//	this.GC
 					new CodeInstruction(OpCodes.Ldfld),					//	this.GC.levelTheme
@@ -81,9 +83,6 @@ namespace SORCE.Patches.P_MapGen
 		}
 
 		private static int HasCopBotCenters =>
-			GC.levelTheme == 4
-			|| GC.challenges.Contains(nameof(ProtectAndServo))
-				? 4
-				: 0;
+			Chunks.HasConfiscationCenters ? 4 : 0;
 	}
 }
