@@ -9,7 +9,7 @@ namespace SORCE.Challenges.C_AmbientLightColor
 	{
 		public Hellscape() : base(nameof(Hellscape)) { }
 
-        public override Color32 FilterColor => new Color32(255, 0, 0, 100);
+        public override Color32 FilterColor => new Color32(255, 125, 125, 100);
 
 		[RLSetup]
 		static void Start()

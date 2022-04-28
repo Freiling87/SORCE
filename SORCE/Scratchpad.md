@@ -9,11 +9,6 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
-#	T	Recent commit testing
-Map Size Downtown
-	I think Canals used up all the chunks, so vanilla ended up with 2 or 3 buildings
-Spawned Conf centers when no cop bots
-	A few attempts, still doing it
 #	CT	Mutators
 ##		CT	Features
 ###         CT   00 District Object Delimitation
@@ -876,14 +871,7 @@ Fountain.MakeChestNonInteractable()
 I don't really gaf unless people complain
 ####			H	AnCapistan: Poisoned Fountains
 New
-##		C	Ambient Light Color
-Found a possible new avenue to approach this
-	LevelFeelings.HarmatIntervalEffect
-		Whatever you do with this, you'll need to ensure compatibility with the ShiftingStatus/Radiation disasters, since they modify these vars.
-		Attempted
-			Disabled LoadLevel patch
-			Attempt is in ScrollingMenu
-				SetNormalLighting() a bit below that is still active, try a run with it commented out
+##		√	Ambient Light Color
 ###			√	00 Test with Werewolf
 Works
 ###			√	Goodsprings

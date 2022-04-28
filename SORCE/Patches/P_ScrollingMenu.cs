@@ -7,6 +7,7 @@ using SORCE.Challenges.C_Lighting;
 using SORCE.Challenges.C_VFX;
 using SORCE.Logging;
 using SORCE.Patches.P_PlayfieldObject;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -23,17 +24,7 @@ namespace SORCE.Patches.Interface
 		{
 			logger.LogDebug("Button Name:\t" + myButton.name);
 			logger.LogDebug("Button Text:\t:" + myButton.myText);
-
-			// TODO: Try doing all of this in LevelTransition.ChangeLevel 
-			if (RogueFramework.Unlocks.OfType<AmbientLightColorChallenge>().Any(c => c.Name == myButton.name))
-            {
-				Color32 color = RogueFramework.Unlocks.OfType<AmbientLightColorChallenge>().FirstOrDefault(c => c.IsEnabled).FilterColor;
-
-				GC.levelFeelingsScript.floorCover.color = color;
-				RenderSettings.ambientSkyColor = color;
-				RenderSettings.ambientIntensity = 255;
-			}
-
+			
 			// TODO: Eliminate this when you find a more elegant fix
 			if (GC.challenges.Contains(nameof(NewMoon)))
 				GC.cameraScript.lightingSystem.EnableAmbientLight = false;

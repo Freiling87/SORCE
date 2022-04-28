@@ -2,21 +2,13 @@
 using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Features;
 using SORCE.Challenges.C_Overhaul;
-using SORCE.Challenges.C_Gangs;
-using SORCE.Challenges.C_VFX;
-using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.Traits;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.MapGenUtilities
 {
-    internal class MapFeatures
+    public class MapFeatures
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
