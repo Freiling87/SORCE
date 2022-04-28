@@ -41,12 +41,12 @@ namespace SORCE.Patches.P_PlayfieldObject
 						else
 							agent.statusEffects.ChangeHealth(-15f);
 
-						Underdank.FlushYourself(agent, (Manhole)__instance.GetComponent<ObjectReal>());
+						Underdank.FlushYourself(agent, __instance.GetComponent<ObjectReal>());
 						return false;
 					}
 					else if (agent.HasTrait<UnderdankVIP>())
 					{
-						Underdank.FlushYourself(agent, (Manhole)__instance.GetComponent<ObjectReal>());
+						Underdank.FlushYourself(agent, __instance.GetComponent<ObjectReal>());
 						return false;
 					}
 				}

@@ -27,57 +27,52 @@ namespace SORCE.Utilities
 			if (E_Agent.IsFlushable(agent))
 				exits.AddRange(GC.objectRealList.OfType<Toilet>().Where(toilet => !toilet.destroyed));
 
-			foreach(ObjectReal or in exits)
-				logger.LogDebug(or.name);
-
 			return exits;
 		}
 
 		public static void ExitUnderdank(Agent agent, PlayfieldObject exit)
         {
-			Vector3 exitSpot = Vector3.zero;
+			Vector3 exitSpot = exit.tr.position;
 
-			if (exit is Manhole)
+			if (exit is Manhole manhole)
 			{
-				exitSpot = exit.curPosition;
+				exitSpot = manhole.curPosition;
 				Vector2 exitFacing = Random.insideUnitCircle.normalized;
 				agent.Teleport((Vector2)exitSpot + exitFacing, true, true);
-				agent.jumpDirection = exitFacing - (Vector2)exitSpot;
-				agent.jumpSpeed = 8f;
-				agent.Jump();
+				//agent.jumpDirection = exitFacing - (Vector2)exitSpot;
+				//agent.jumpSpeed = 8f;
+				//agent.Jump();
 			}
-			else if (exit is Toilet)
+			else if (exit is Toilet toilet)
 			{
 				switch (((ObjectReal)exit).direction)
 				{
 					case "E":
-						exitSpot = new Vector3(exit.tr.position.x + 0.32f, exit.tr.position.y, exit.tr.position.z);
+						exitSpot += new Vector3(0.32f, 0f, 0f);
 						break;
 					case "N":
-						exitSpot = new Vector3(exit.tr.position.x, exit.tr.position.y + 0.32f, exit.tr.position.z);
+						exitSpot += new Vector3(0f, 0.32f, 0f);
 						break;
 					case "S":
-						exitSpot = new Vector3(exit.tr.position.x, exit.tr.position.y - 0.32f, exit.tr.position.z);
+						exitSpot += new Vector3(0f, -0.32f, 0f);
 						break;
 					case "W":
-						exitSpot = new Vector3(exit.tr.position.x - 0.32f, exit.tr.position.y, exit.tr.position.z);
+						exitSpot += new Vector3(-0.32f, 0f, 0f);
 						break;
 				}
-
+				
 				agent.Teleport(exitSpot, false, true);
 			}
 
 			if (GC.percentChance(10))
-				Poopsplosion(exit, true);
+				Poopsplosion(exit, true, false);
 			else
-				GC.spawnerMain.SpawnExplosion(exit, exit.tr.position, VExplosion.Water, false, -1, false, ((ObjectReal)exit).FindMustSpawnExplosionOnClients(agent));
+				GC.spawnerMain.SpawnExplosion(exit, exitSpot, VExplosion.Water, false, -1, false, ((ObjectReal)exit).FindMustSpawnExplosionOnClients(agent));
 		}
 
 		public static void FlushYourself(Agent agent, PlayfieldObject entryObject)
 		{
-			logger.LogDebug("FlushYourself:\t" + entryObject);
 			List<PlayfieldObject> exits = Exits(agent);
-			logger.LogDebug("Exits:\t" + exits.Count());
 	
 			if (exits.Contains(entryObject))
 				exits.Remove(entryObject);
@@ -88,42 +83,40 @@ namespace SORCE.Utilities
 
 		public static void TakeHugeShit(Toilet toilet, bool loud = true)
 		{
-			Poopsplosion(toilet, loud);
+			Poopsplosion(toilet, loud, true);
 			toilet.StopInteraction();
 		}
 
-		public static void Poopsplosion(PlayfieldObject targetObj, bool loud = true)
+		public static void Poopsplosion(PlayfieldObject targetObj, bool loud = true, bool toiletPaper = false)
 		{
 			Agent agent = targetObj.interactingAgent;
 			Vector2 pos = targetObj.transform.position;
-			bool avoidPublic = !VFX.HasPublicLitter;
-			bool avoidPrivate = !VFX.HasPrivateLitter;
+			bool avoidPublic = !Wreckage.HasPublicLitter;
+			bool avoidPrivate = !Wreckage.HasPrivateLitter;
 
 			if (loud)
 				GC.spawnerMain.SpawnExplosion(targetObj, pos, VExplosion.Water);
 			else
 				GC.tileInfo.SpillLiquidLarge(pos, VExplosion.Water, false, 2, !avoidPrivate);
 
-			VFX.SpawnWreckagePileObject_Granular(
+			Wreckage.SpawnWreckagePileObject_Granular(
 				new Vector2(pos.x, pos.y - 0.08f),
 				VObject.FlamingBarrel,
 				false,
 				Random.Range(1, 4),
 				0.24f, 0.24f,
-				0,
-				avoidPublic, avoidPrivate);
+				0);
 
 			int chance = 100;
 			while (GC.percentChance(chance))
 			{
-				VFX.SpawnWreckagePileObject_Granular(
+				Wreckage.SpawnWreckagePileObject_Granular(
 					new Vector2(pos.x, pos.y - 0.08f),
 					VObject.MovieScreen,
 					false,
 					Random.Range(3, 6),
 					0.48f, 0.48f,
-					0,
-					avoidPublic, avoidPrivate);
+					0);
 				chance -= 25;
 			}
 

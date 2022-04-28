@@ -26,19 +26,17 @@ namespace SORCE.Patches
         public static void SpawnObjectReal_Postfix(string objectRealName, GameObject objectRealPrefab, Vector3 spawnPosition)
         {
 			int chance = 100;
-			bool avoidPublic = !VFX.HasPublicLitter;
-			bool avoidPrivate = !VFX.HasPrivateLitter;
 			bool isPublicObject = LevelGenTools.IsPublic(spawnPosition);
 			//string chunkType = objectRealPrefab.GetComponent<Chunk>().description;
 
-			if (VFX.HasLeaves)
+			if (Wreckage.HasLeaves)
 			{
 				switch (objectRealName)
 				{
 					case VObject.Bush:
 						while (GC.percentChance(50))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y),
 								VObject.Bush,
 								false,
@@ -51,7 +49,7 @@ namespace SORCE.Patches
 					case VObject.KillerPlant:
 						while (GC.percentChance(50))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y),
 								VObject.Bush,
 								false,
@@ -65,7 +63,7 @@ namespace SORCE.Patches
 
 						while (GC.percentChance(33)) 
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.16f),
 								VObject.Plant,
 								false,
@@ -79,7 +77,7 @@ namespace SORCE.Patches
 					case VObject.Tree:
 						while (GC.percentChance(75))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y),
 								VObject.Bush,
 								false,
@@ -91,21 +89,20 @@ namespace SORCE.Patches
 				}
 			}
 
-			if (VFX.HasPrivateLitter || VFX.HasPublicLitter)
+			if (Wreckage.HasPrivateLitter || Wreckage.HasPublicLitter)
 			{
 				switch (objectRealName)
 				{
 					case VObject.ATMMachine:
 						while (GC.percentChance(80))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y),
 								VObject.MovieScreen,
 								false,
 								Random.Range(1, 3),
 								0.80f, 0.80f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -113,14 +110,13 @@ namespace SORCE.Patches
 					case VObject.Barbecue:
 						while (GC.percentChance(75))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.24f),
 								VObject.Bush,
 								true,
 								Random.Range(2, 4),
 								0.24f, 0.0f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -128,21 +124,20 @@ namespace SORCE.Patches
 					case VObject.Bathtub:
 						//if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
 						if (GC.percentChance(100))
-							GC.tileInfo.SpillLiquidLarge(spawnPosition, VExplosion.Water, false, 2, !avoidPrivate); // Attempt at smaller pool. expandLevel is inverse to size.
+							GC.tileInfo.SpillLiquidLarge(spawnPosition, VExplosion.Water, false, 2, Wreckage.HasPrivateLitter); // Attempt at smaller pool. expandLevel is inverse to size.
 
 						break;
 
 					case VObject.Bed:
 						while (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 10f)))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.20f),
 								VObject.MovieScreen,
 								false,
 								Random.Range(2, 5),
 								0.24f, 0.12f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -154,16 +149,15 @@ namespace SORCE.Patches
 								spawnPosition.y + Random.Range(-0.24f, 0.00f)),
 								VItem.Rock);
 
-						while (GC.percentChance(80))
+						while (GC.percentChance(50))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y),
 								VObject.FlamingBarrel,
 								false,
 								4,
 								0.64f, 0.64f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -171,14 +165,13 @@ namespace SORCE.Patches
 					case VObject.BoulderSmall:
 						while (GC.percentChance(50))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.12f),
 								VObject.FlamingBarrel,
 								false,
 								3,
 								0.24f, 0.00f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -188,14 +181,13 @@ namespace SORCE.Patches
 						{
 							while (GC.percentChance(chance))
 							{
-								VFX.SpawnWreckagePileObject_Granular(
+								Wreckage.SpawnWreckagePileObject_Granular(
 									new Vector2(spawnPosition.x, spawnPosition.y - 0.12f),
 									VObject.MovieScreen,
 									false,
 									Random.Range(1, 3),
 									0.48f, 0.48f,
-									0,
-									avoidPublic, avoidPrivate);
+									0);
 
 								chance -= 34;
 							}
@@ -206,14 +198,13 @@ namespace SORCE.Patches
 					case VObject.Elevator:
 						if (GC.challenges.Contains(nameof(AnCapistan)))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y),
 								VObject.MovieScreen,
 								false,
 								5,
 								0.80f, 0.80f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -221,14 +212,13 @@ namespace SORCE.Patches
 					case VObject.Fireplace:
 						while (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 15f)))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.12f),
 								VObject.MovieScreen,
 								true,
 								5,
 								0.24f, 0.12f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -236,14 +226,13 @@ namespace SORCE.Patches
 					case VObject.FlamingBarrel:
 						while (GC.percentChance(chance))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.24f),
 								VObject.MovieScreen,
 								true,
 								5,
 								0.24f, 0.12f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 							chance -= 50;
 						}
 
@@ -259,8 +248,7 @@ namespace SORCE.Patches
         //                        false,
         //                        5,
         //                        0.24f, 0.12f,
-        //                        0,
-        //                        avoidPublic, avoidPrivate);
+        //                        0);
         //                }
 
         //                break;
@@ -270,14 +258,13 @@ namespace SORCE.Patches
 						{
 							while (GC.percentChance(chance))
 							{
-								VFX.SpawnWreckagePileObject_Granular(
+								Wreckage.SpawnWreckagePileObject_Granular(
 									new Vector2(spawnPosition.x, spawnPosition.y - 0.12f),
 									VObject.MovieScreen,
 									false,
 									1,
 									0.24f, 0.24f,
-									0,
-									avoidPublic, avoidPrivate);
+									0);
 
 								chance -= 34;
 							}
@@ -288,32 +275,30 @@ namespace SORCE.Patches
 					case VObject.Stove:
 						while (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 20f)))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.12f),
-								VFX.FoodWreckageType(),
+								Wreckage.FoodWreckageType(),
 								GC.percentChance(75),
 								5,
 								0.24f, 0.12f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						if (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 5f)))
-							GC.tileInfo.SpillLiquidLarge(spawnPosition, "Oil", false, 3, !avoidPrivate);
+							GC.tileInfo.SpillLiquidLarge(spawnPosition, "Oil", false, 3, Wreckage.HasPrivateLitter);
 
 						break;
 
 					case VObject.Table:
 						while (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 20f)))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.24f),
-								VFX.FoodWreckageType(),
+								Wreckage.FoodWreckageType(),
 								true,
 								3,
 								0.48f, 0.24f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -321,14 +306,13 @@ namespace SORCE.Patches
 					case VObject.TableBig:
 						while (GC.percentChance((int)(LevelGenTools.SlumminessFactor * 20f)))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y - 0.12f),
-								VFX.FoodWreckageType(),
+								Wreckage.FoodWreckageType(),
 								true,
 								5,
 								0.64f, 0.64f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 						}
 
 						break;
@@ -347,14 +331,13 @@ namespace SORCE.Patches
 
 						while (GC.percentChance(chance))
 						{
-							VFX.SpawnWreckagePileObject_Granular(
+							Wreckage.SpawnWreckagePileObject_Granular(
 								new Vector2(spawnPosition.x, spawnPosition.y),
-								VFX.OverhaulWreckageType(),
+								Wreckage.OverhaulWreckageType(),
 								GC.percentChance(50),
 								Random.Range(3, 7),
 								0.64f, 0.64f,
-								0,
-								avoidPublic, avoidPrivate);
+								0);
 							chance -= 15;
 						}
 

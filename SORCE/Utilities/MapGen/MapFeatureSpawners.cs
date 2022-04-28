@@ -42,7 +42,7 @@ namespace SORCE.MapGenUtilities
 			SpawnTurntablesAndSpeakers();
 
 			if (!GC.levelEditing)
-				VFX.SpawnPublicLitter();
+				Wreckage.SpawnPublicLitter();
 		}
 
 		private static void BreakWindows()
@@ -134,7 +134,7 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void RuinToilets()
 		{
-            if (!VFX.HasPrivateLitter)
+            if (!Wreckage.HasPrivateLitter)
                 return;
 
             int chanceToShid = (int)(LevelGenTools.SlumminessFactor * 15f);
@@ -1019,7 +1019,7 @@ namespace SORCE.MapGenUtilities
 		}
 		private static void SpawnTrashBags()
         {
-			if (!VFX.HasPublicLitter)
+			if (!Wreckage.HasPublicLitter)
 				return;
 
 			foreach (ObjectReal objectReal in GC.objectRealList.Where(o => o is TrashCan trashcan))

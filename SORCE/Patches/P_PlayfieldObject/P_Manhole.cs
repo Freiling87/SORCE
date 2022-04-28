@@ -41,6 +41,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 						h.AddButton(VButtonText.FlushYourself, m =>
 						{
 							Underdank.FlushYourself(m.Agent, m.Object);
+							m.StopInteraction();
 						});
 					else
 						h.StopInteraction();

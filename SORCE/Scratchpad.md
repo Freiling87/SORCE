@@ -9,40 +9,11 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
-#	C	Randomass ideas
-No ObjectReal mouse hover text
-	Or maybe only work with Space or other key
-	Save for a GUI mod
 #	T	Recent commit testing
-Litter algorithm
-	Increased gib spawn radius massively
-	Set the wall prox check on the specific gibs rather than the parent spawn location
-Trash cans don't seem to be spawning unless Core.Debug is in HasTrashcans. Test this.
-Big Black Blotch
-	I think this is muzzle flash.
 Map Size Downtown
 	I think Canals used up all the chunks, so vanilla ended up with 2 or 3 buildings
 Spawned Conf centers when no cop bots
 	A few attempts, still doing it
-Fatal error when loading park
-	[Info   : Unity Log] Loading Bear Traps
-	[Debug  :SORCE_P_SpawnerMain] SpawnItem_Prefix
-	item:   BearTrapPark
-	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
-	Stack trace:
-	SORCE.Patches.P_PlayfieldObject.P_Item.DoEnable_Prefix (Item __instance) (at <0132fa4a33134da690bb7dc540fe772d>:0)
-	Item.DoEnable () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	SpawnerMain.SpawnItem (UnityEngine.Vector3 itemPos, InvItem item, System.Boolean actionsAfterDrop, Agent owner, System.Boolean streamingSave) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	SpawnerMain.SpawnItem (UnityEngine.Vector3 itemPos, System.String itemName) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	LoadLevel+<SetupMore3_3>d__148.MoveNext () (at <9086a7372c854d5a8678e46a74a50fc1>:0)
-	UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <a5d0703505154901897ebf80e8784beb>:0)
-
-	Possible Culprits:
-		SpawnerMain
-			.SetLighting2_Prefix
-			.SpawnLightReal_Prefix
-
-
 #	CT	Mutators
 ##		CT	Features
 ###         CT   00 District Object Delimitation
@@ -85,7 +56,7 @@ Spawns past border of lake. Test TileInfo for water.
 ####			C	Spawn public Armchairs & Fireplaces
 ####			C	Spawn public Rugs (overlap with Grand City Hotel)
 ###         H   Lake Coloration test
-If doesn't work after first attempt, put on hold for overhauls since it's otherwise irrelevant for now.
+Pending Overhauls
 ###         H   Life Downhill
 Spawn Pipes as Trash Chutes in the slums or industrial
 May drop usable items, or live banana peels, etc.
@@ -951,12 +922,10 @@ Complete
 ##		C	Underdank Citizen
 ###         C   New features
 CHECK FEATURE LIST
-###			T	Opened manhole did not detect toilet exits
-Verify diminutive
-###			T	Chance for Poopsplosion when exiting toilet
-Attempted
-###			T	Death by E_
+###			H	Death by E_
 Tried reordering where damage is allocated
+	DW
+Honestly I don't care about this too much unless people gripe
 Agent
 	.deathMethod
 	.deathMethodItem
@@ -965,12 +934,9 @@ Agent
 ###			T	Spawns near Water
 TileInfo.WaterNearby has a levelTheme check 😡
 	Transpiler patched, test
-###			T	Manhole Agent Brain broken
-I think this is an import from BunnyMod
-	Can't find anything
+###			C	Manhole Agent Brain broken
 Attempted calling BecomeUnhidden
-###         T   Flushing to Manhole doesn't work
-Tried out Agent.Jump()
+	DW
 ##		T	Underdank VIP
 ###			T	Poison Resistance
 Attempted:

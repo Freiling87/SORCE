@@ -29,7 +29,7 @@ namespace SORCE.Traits
                 .WithUnlock(new TraitUnlock
                 {
                     Cancellations = { VanillaTraits.TheLaw },
-                    CharacterCreationCost = 5,
+                    CharacterCreationCost = 4,
                     IsAvailable = false,
                     IsAvailableInCC = true,
                     UnlockCost = 0,

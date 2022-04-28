@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 namespace SORCE.MapGenUtilities
 {
-    internal class VFX
+    internal class Wreckage
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
@@ -40,51 +40,48 @@ namespace SORCE.MapGenUtilities
 			if (!HasPublicLitter)
 				return;
 
-			bool publicOnly = HasPublicLitter && !HasPrivateLitter;
-			bool privateOnly = HasPrivateLitter && !HasPublicLitter;
-
-			int numObjects = (int)(1000 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio);
+			int numObjects = (int)(250 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio);
 
 			for (int i = 0; i < numObjects; i++)
 			{
-				Vector2 location = LevelGenTools.RandomSpawnLocation(GC.tileInfo, 0.32f, publicOnly, privateOnly);
+				Vector2 location = LevelGenTools.RandomSpawnLocation(GC.tileInfo, 0.24f);
 
 				SpawnWreckagePileObject_Granular(
 					location,
 					OverhaulWreckageType(),
 					burnt: GC.percentChance(20),
-					gibs: 1,
-					0.32f, 0.32f,
-					particleID: 0,
-					false, true);
+					gibs: Random.Range(1, 12),
+					0.64f, 0.64f,
+					particleID: 0);
 			}
 		}
 
 		// TODO: This belongs in the library
-		public static void SpawnWreckagePileObject_Granular(Vector3 origin, string objectType, bool burnt, int gibs, float radX, float radY, int particleID = 0, bool avoidPublic = false, bool avoidPrivate = false)
+		public static void SpawnWreckagePileObject_Granular(Vector3 origin, string objectType, bool burnt, int gibs, float radX, float radY, int particleID = 0)
 		{
 			for (int i = 0; i < gibs; i++)
 			{
 				bool goodSpot = false;
 				Vector3 spawnLoc = Vector3.zero;
 
-				while (!goodSpot)
+				for (int j = 0; j < 1000 && !goodSpot; j++)
 				{
 					spawnLoc = new Vector3(
 						origin.x + Random.Range(-radX, radX),
-						origin.y + Random.Range(-radY, radY), 
+						origin.y + Random.Range(-radY, radY),
 						0f);
 
 					bool isPublic = LevelGenTools.IsPublic(spawnLoc);
 
-					if (!GC.tileInfo.IsOverlapping(spawnLoc, "Wall") &&
-						!(avoidPublic && isPublic) &&
-						!(avoidPrivate && !isPublic))
+					if (!
+						(GC.tileInfo.IsOverlapping(spawnLoc, "Wall") ||
+						(!HasPublicLitter && isPublic) ||
+						(!HasPrivateLitter && !isPublic)))
 						goodSpot = true;
 				}
 
 				string wreckageType = objectType + "Wreckage" +
-						(particleID != 0
+					(particleID != 0
 						? particleID.ToString()
 						: (Random.Range(1, 5)).ToString());
 
@@ -93,7 +90,7 @@ namespace SORCE.MapGenUtilities
 			}
 		}
 
-		public static void SpawnCustomLitter(Vector3 origin, string spriteGroup, bool burnt, int gibs, float radX, float radY, int particleID = 0, bool avoidPublic = false, bool avoidPrivate = false)
+		public static void SpawnCustomLitter(Vector3 origin, string spriteGroup, bool burnt, int gibs, float radX, float radY, int particleID = 0)
 		{
 			logger.LogDebug("SpawnCustomLitter");
 	
@@ -113,10 +110,10 @@ namespace SORCE.MapGenUtilities
 
 					bool isPublic = LevelGenTools.IsPublic(spawnLoc);
 
-
-					if (!GC.tileInfo.IsOverlapping(spawnLoc, "Wall") &&
-						!(avoidPublic && isPublic) &&
-						!(avoidPrivate && !isPublic))
+					if (!
+						(GC.tileInfo.IsOverlapping(spawnLoc, "Wall") ||
+						(!HasPublicLitter && isPublic) ||
+						(!HasPrivateLitter && !isPublic)))
 						goodSpot = true;
 				}
 

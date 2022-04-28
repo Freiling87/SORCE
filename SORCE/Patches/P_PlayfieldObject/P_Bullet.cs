@@ -27,13 +27,12 @@ namespace SORCE.Patches.P_PlayfieldObject
 
             if (GunplayRelit
                 && bullets.Contains((int)__instance.bulletType) 
-                && hitObject.CompareTag("Wall") // Might be redundant to "Front" in name
-                && hitObject.name.Contains("Front")
-                && __instance.startingPosition.y < hitObject.transform.position.y)
+                && hitObject.CompareTag("Wall") // Might be redundant to "Front" in name 
+                && hitObject.name.Contains("Front"))
             {
                 Vector3 pos = new Vector3(
                     __instance.tr.position.x + Random.Range(-0.16f, 0.16f),
-                    __instance.tr.position.y + Random.Range(-0.30f, -0.04f),
+                    __instance.tr.position.y + Random.Range(-0.32f, -0.04f),
                     0);
 
                 if (hitObject.name.Contains("Glass"))
@@ -59,7 +58,10 @@ namespace SORCE.Patches.P_PlayfieldObject
         public static void RealAwake_Postfix(Bullet __instance)
         {
             if (GunplayRelit)
-                __instance.lightTemp.fancyLightRenderer.enabled = false;
+            {
+                if (__instance.lightTemp != null)
+                    __instance.lightTemp.fancyLightRenderer.enabled = false;
+            }
         }
 
         // TODO: Export to Gunplay mod
@@ -83,8 +85,8 @@ namespace SORCE.Patches.P_PlayfieldObject
         {
             pos.z = 0.01f;
             GameObject gameObject = GC.spawnerMain.floorDecalPrefab.Spawn(pos);
-            gameObject.layer = -1;
-            // 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25        -1 ???
+            gameObject.layer = 5;
+            // 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
             // ~ ~ X X ~ X X X X  X  X                       X  X  X           X
             string sprite =
                 wmt == wallMaterialType.Glass

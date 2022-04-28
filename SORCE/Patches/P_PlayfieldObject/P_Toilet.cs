@@ -55,7 +55,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 					// Vanilla button removal
 					FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
 					List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
-					interactions.RemoveAll(i => i.ButtonName is VButtonText.FlushYourself);
+					interactions.RemoveAll(i => i.ButtonName is VButtonText.FlushYourself); // Doesn't seem to work
 					interactions.RemoveAll(i => i.ButtonName is VButtonText.PurgeStatusEffects);
 
 					int toiletCost = h.Object.GetHook<P_Toilet_Hook>().toiletCost;
@@ -63,13 +63,15 @@ namespace SORCE.Patches.P_PlayfieldObject
 					if (E_Agent.IsFlushable(h.Agent))
 						h.AddButton(VButtonText.FlushYourself, toiletCost, m =>
 						{
-							m.Object.FlushYourself();
+							Underdank.FlushYourself(m.Agent, m.Object);
+							m.StopInteraction();
 						});
 
 					if (h.Object.hasPurgeStatusEffects())
 						h.AddButton(VButtonText.PurgeStatusEffects, toiletCost, m =>
 						{
 							m.Object.PurgeStatusEffects();
+							m.StopInteraction();
 						});
 
 					// TODO: Structure this like Fountain, it's handled for you.
