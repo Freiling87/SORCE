@@ -33,6 +33,7 @@ namespace SORCE.Traits
                     IsAvailable = false,
                     IsAvailableInCC = true,
                     UnlockCost = 0,
+                    Unlock = { upgrade = nameof(UnderdankVIP) },
                 });
         }
         public override void OnAdded() { }

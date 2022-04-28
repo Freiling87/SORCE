@@ -36,6 +36,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 				{
 					if (agent.HasTrait<UnderdankCitizen>())
 					{
+						agent.deathMethod = "FellInHole";
+						agent.deathKiller = "Self";
+
 						if (GC.challenges.Contains(VChallenge.LowHealth))
 							agent.statusEffects.ChangeHealth(-7f);
 						else

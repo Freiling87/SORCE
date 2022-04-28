@@ -332,9 +332,11 @@ namespace SORCE.Patches
 		/// Ambient Light Color
 		/// </summary>
 		/// <param name="__instance"></param>
-		[HarmonyPostfix, HarmonyPatch(methodName: nameof(LoadLevel.SetNormalLighting), new Type[] {})]
+		//[HarmonyPostfix, HarmonyPatch(methodName: nameof(LoadLevel.SetNormalLighting), new Type[] {})]
 		public static void SetNormalLighting_Postfix(LoadLevel __instance)
 		{
+			// TODO: Re-enable this if attempt in ScrollingMenu doesn't work
+
 			if (ChallengeManager.IsChallengeFromListActive(CColor.AmbientLightColor))
 			{
 				AmbientLightColorChallenge challenge = RogueFramework.Unlocks.OfType<AmbientLightColorChallenge>().FirstOrDefault(c => c.IsEnabled);

@@ -3,15 +3,11 @@ using HarmonyLib;
 using RogueLibsCore;
 using SORCE.Challenges.C_Buildings;
 using SORCE.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SORCE.Patches
 {
-	[HarmonyPatch(declaringType: typeof(RandomSelection))]
+    [HarmonyPatch(declaringType: typeof(RandomSelection))]
 	internal class P_RandomSelection
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
