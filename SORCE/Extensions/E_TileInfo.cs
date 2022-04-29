@@ -11,7 +11,8 @@ namespace SORCE.Extensions
 		public static GameController GC => GameController.gameController;
 
 		public static bool HasWall(TileData tile) =>
-            tile.wallMaterial != wallMaterialType.None;
+			tile.wallMaterial != wallMaterialType.None ||
+			GC.tileInfo.IsOverlapping(new Vector2(tile.posX, tile.posY), "Wall");
 
 		public static Vector2 EastOf(Vector2 origin, float distance = 0.64f) =>
 			new Vector2(origin.x + distance, origin.y);

@@ -628,11 +628,6 @@ namespace SORCE.MapGenUtilities
 							GC.tileInfo.GetTileData(E_TileInfo.SouthOf(spot)).owner == 0 &&
 							GC.tileInfo.GetTileData(E_TileInfo.EastOf(spot)).owner == 0) ||
 							
-							(!GC.tileInfo.IsOverlapping(E_TileInfo.NorthOf(spot), "Wall") &&
-							!GC.tileInfo.IsOverlapping(E_TileInfo.SouthOf(spot), "Wall") &&
-							!GC.tileInfo.IsOverlapping(E_TileInfo.EastOf(spot), "Wall") &&
-							!GC.tileInfo.IsOverlapping(E_TileInfo.WestOf(spot), "Wall")) ||
-
 							GC.tileInfo.IsOverlapping(spot, "ObjectRealSprite", 0.64f) ||
 							spawnedInChunks.Contains(GC.tileInfo.GetTileData(spot).chunkID) ||
 							GC.tileInfo.DestroyIfBetweenWalls(spot))
@@ -645,14 +640,6 @@ namespace SORCE.MapGenUtilities
 				// Spawning
 				if (spot != Vector2.zero)
 				{
-					// Middle screen (not appearing)
-					ObjectReal movieScreen1 = GC.spawnerMain.spawnObjectReal(spot, null, VObject.MovieScreen);
-					movieScreen1.ShiftTowardWalls();
-					movieScreen1.ambientAudio = VAmbience.Casino;
-					TileData tileData = GC.tileInfo.GetTileData(spot);
-					spawnedInChunks.Add(tileData.chunkID);
-
-					// Determine Direction
 					string wallDirection = "";
 					Vector2 neighborCell1 = Vector2.zero;
 					Vector2 neighborCell2 = Vector2.zero;
@@ -660,54 +647,57 @@ namespace SORCE.MapGenUtilities
 
 					if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.SouthOf(spot))))
 					{
+						lightPosition = E_TileInfo.NorthOf(spot, 0.32f);
 						neighborCell1 = E_TileInfo.EastOf(spot);
 						neighborCell2 = E_TileInfo.WestOf(spot);
-						lightPosition = E_TileInfo.NorthOf(spot);
 						wallDirection = "S";
 					}
 					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.EastOf(spot))))
 					{
+						lightPosition = E_TileInfo.WestOf(spot, 0.32f);
 						neighborCell1 = E_TileInfo.NorthOf(spot);
 						neighborCell2 = E_TileInfo.SouthOf(spot);
-						lightPosition = E_TileInfo.WestOf(spot);
 						wallDirection = "E";
 					}
 					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.WestOf(spot))))
 					{
+						lightPosition = E_TileInfo.EastOf(spot, 0.32f);
 						neighborCell1 = E_TileInfo.NorthOf(spot);
 						neighborCell2 = E_TileInfo.SouthOf(spot);
-						lightPosition = E_TileInfo.EastOf(spot);
 						wallDirection = "W";
 					}
 					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.NorthOf(spot)))) // North is last, to hide that screens are blank
 					{
+						lightPosition = E_TileInfo.SouthOf(spot, 0.32f);
 						neighborCell1 = E_TileInfo.EastOf(spot);
 						neighborCell2 = E_TileInfo.WestOf(spot);
-						lightPosition = E_TileInfo.SouthOf(spot);
 						wallDirection = "N";
 					}
-					
-					GameObject light = UnityEngine.Object.Instantiate(GC.spawnerMain.lightReal2Prefab, lightPosition, Quaternion.Euler(0f, 0f, 0f));
-					LightReal lightReal = light.GetComponent<LightReal>();
-					string color = GC.Choose("BlueLight", "CyanLight", "GreenLight", "PinkLight", "PurpleLight", "RedLight");
-					GC.spawnerMain.SetLightRealDetails(lightReal, light, movieScreen1.startingChunk, movieScreen1.tr.GetComponent<Chunk>(), 5, 5, 5, color);
 
-					// Place sides
-					// I think these always fire, because I never see only one.
 					if (E_TileInfo.IsWallDecorationPlaceable(neighborCell1, wallDirection) &&
-						neighborCell1 != Vector2.zero)
-					{
-						ObjectReal movieScreen2 = GC.spawnerMain.spawnObjectReal(neighborCell1, null, VObject.MovieScreen);
-						movieScreen2.ShiftTowardWalls();
-						movieScreen2.ambientAudio = VAmbience.Casino;
-					}
-
-					if (E_TileInfo.IsWallDecorationPlaceable(neighborCell2, wallDirection) &&
+						E_TileInfo.IsWallDecorationPlaceable(neighborCell2, wallDirection) &&
+						neighborCell1 != Vector2.zero &&
 						neighborCell2 != Vector2.zero)
 					{
+						// Middle screen
+						ObjectReal movieScreen1 = GC.spawnerMain.spawnObjectReal(spot, null, VObject.MovieScreen);
+						movieScreen1.ShiftTowardWalls();
+
+						ObjectReal movieScreen2 = GC.spawnerMain.spawnObjectReal(neighborCell1, null, VObject.MovieScreen);
+						movieScreen2.ShiftTowardWalls();
+
 						ObjectReal movieScreen3 = GC.spawnerMain.spawnObjectReal(neighborCell2, null, VObject.MovieScreen);
 						movieScreen3.ShiftTowardWalls();
-						movieScreen3.ambientAudio = VAmbience.Casino;
+
+						GameObject light = Object.Instantiate(GC.spawnerMain.lightReal2Prefab, lightPosition, Quaternion.Euler(0f, 0f, 0f));
+						LightReal lightReal = light.GetComponent<LightReal>();
+						string color = GC.Choose("BlueLight", "CyanLight", "GreenLight", "PinkLight", "PurpleLight", "RedLight");
+						GC.spawnerMain.SetLightRealDetails(lightReal, light, movieScreen1.startingChunk, movieScreen1.tr.GetComponent<Chunk>(), 5, 5, 5, color);
+
+						movieScreen1.ambientAudio = VAmbience.Casino;
+
+						TileData tileData = GC.tileInfo.GetTileData(spot);
+						spawnedInChunks.Add(tileData.chunkID);
 					}
 				}
 			}
