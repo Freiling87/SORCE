@@ -28,7 +28,7 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(SpelunkyDory));
 		public static bool HasCoziness =>
 			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
-			Core.debugMode;
+			DebugTools.debugMode;
 		public static bool HasFountains =>
 			GC.challenges.Contains(nameof(BroughtbackFountain)) ||
 			GC.challenges.Contains(nameof(MACITS)) ||
@@ -50,11 +50,12 @@ namespace SORCE.MapGenUtilities
 		public static bool HasRugs => 
 			GC.challenges.Contains(nameof(GrandCityHotel)) ||
 			GC.challenges.Contains(nameof(DepartmentOfPublicComfiness)) ||
-			Core.debugMode;
+			DebugTools.debugMode;
 		public static bool HasScreens =>
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
 			GC.challenges.Contains(nameof(Technocracy)) ||
-			Core.debugMode;
+			GC.challenges.Contains(nameof(PublicScreens)) ||
+			DebugTools.debugMode;
 		public static bool HasSecurityCamsAndTurrets =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(PoliceState)) ||
@@ -74,7 +75,7 @@ namespace SORCE.MapGenUtilities
 		public static bool HasBarbecues(bool vanilla) =>
 			!GC.challenges.Contains(nameof(PoliceState)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||
-			Core.debugMode ||
+			DebugTools.debugMode ||
 			vanilla;
 		public static bool HasBearTraps(bool vanilla) =>
 			GC.challenges.Contains(nameof(WelcomeMats)) ||
@@ -82,7 +83,7 @@ namespace SORCE.MapGenUtilities
 		public static bool HasBoulders(bool vanilla) =>
 			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(DUMP)) ||
-			Core.debugMode ||
+			DebugTools.debugMode ||
 			vanilla;
 		public static bool HasBushes(bool vanilla) =>
 			GC.challenges.Contains(nameof(Arcology)) ||
@@ -113,7 +114,7 @@ namespace SORCE.MapGenUtilities
 			GC.challenges.Contains(nameof(ThePollutionSolution)) ||
 			vanilla;
 		public static bool HasExplodingBarrels() =>
-			Core.debugMode;
+			DebugTools.debugMode;
 		public static bool HasFireHydrants(bool vanilla) =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) ||
@@ -166,7 +167,7 @@ namespace SORCE.MapGenUtilities
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(VerdantVistas)) ||
-			Core.debugMode ||
+			DebugTools.debugMode ||
             vanilla;
         public static bool HasVendorCarts(bool vanilla) =>
 			GC.challenges.Contains(nameof(AnCapistan)) ||
@@ -178,7 +179,6 @@ namespace SORCE.MapGenUtilities
 			loadLevel.hasLakes = 
 				GC.levelTheme != 3 && // TODO: Allow spawn, but check for Bridges or skin canal chunks entirely
 				loadLevel.hasLakes ||
-				Core.debugMode ||
 				GC.challenges.Contains(nameof(Arcology)) ||
 				GC.challenges.Contains(nameof(LakeItOrLeaveIt));
 		public static void SetHasFlameGrates(LoadLevel loadLevel) =>
@@ -189,10 +189,10 @@ namespace SORCE.MapGenUtilities
 				GC.challenges.Contains(nameof(TrapsUnlimited));
 		public static void SetHasLockdownWalls(LoadLevel loadLevel) =>
 			loadLevel.hasLockdownWalls = loadLevel.hasLockdownWalls ||
-				Core.debugMode;
+				DebugTools.debugMode;
 		public static void SetHasTracks(LoadLevel loadLevel) =>
 			loadLevel.hasTracks = loadLevel.hasTracks ||
-				Core.debugMode;
+				DebugTools.debugMode;
         #endregion
     }
 }

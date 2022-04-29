@@ -3,9 +3,9 @@ using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
 using JetBrains.Annotations;
 using SORCE.Challenges.C_Features;
+using SORCE.Challenges.C_Lighting;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,16 @@ namespace SORCE.Patches.P_PlayfieldObject
     [HarmonyPatch(declaringType: typeof(FlameGrate))]
     class P_FlameGrate
     {
-        //private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+        private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
-    }
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(FlameGrate.SetVars), argumentTypes: new Type[0] { })]
+		public static void SetVars_Postfix(FlameGrate __instance)
+		{
+			if (GC.challenges.Contains(nameof(ObjectsRelit)))
+				__instance.noLight = false;
+		}
+	}
 
 	[HarmonyPatch(typeof(FlameGrate))]
 	[HarmonyPatch("Start")]

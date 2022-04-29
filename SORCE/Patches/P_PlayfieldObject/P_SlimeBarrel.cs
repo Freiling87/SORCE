@@ -2,11 +2,11 @@
 using BTHarmonyUtils.TranspilerUtils;
 using HarmonyLib;
 using JetBrains.Annotations;
+using SORCE.Challenges.C_Lighting;
 using SORCE.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Reflection.Emit;
 
 namespace SORCE.Patches.P_PlayfieldObject
@@ -14,10 +14,15 @@ namespace SORCE.Patches.P_PlayfieldObject
     [HarmonyPatch(declaringType: typeof(SlimeBarrel))]
 	class P_SlimeBarrel
 	{
-		//private static readonly ManualLogSource logger = SORCELogger.GetLogger();
+		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-        public static object CCULogger { get; private set; }
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof (SlimeBarrel.SetVars), argumentTypes: new Type[0] { })]
+		public static void SetVars_Postfix(SlimeBarrel __instance)
+        {
+			if (GC.challenges.Contains(nameof(ObjectsRelit)))
+				__instance.noLight = false;
+        }
 	}
 
 	[HarmonyPatch(typeof(SlimeBarrel))]

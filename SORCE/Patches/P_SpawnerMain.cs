@@ -146,12 +146,13 @@ namespace SORCE.Patches
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SetLighting2), argumentTypes: new[] { typeof(PlayfieldObject) })]
 		public static bool SetLighting2_Prefix(PlayfieldObject myObject, SpawnerMain __instance)
 		{
-			if (GC.challenges.Contains(nameof(ObjectsRelit)))
+			if (GC.challenges.Contains(nameof(ObjectsRelit))
+				&& myObject.CompareTag("ObjectReal"))
 			{
-				if (!VObject.Electronics.Contains(myObject.objectName)
-					&& myObject.CompareTag("ObjectReal"))
+				ObjectReal objectReal = (ObjectReal)myObject;
+
+				if (!VObject.DiegeticLightObjects.Contains(myObject.objectName))
 				{
-					ObjectReal objectReal = (ObjectReal)myObject;
 					objectReal.noLight = true;
 					return false;
 				}
@@ -177,10 +178,10 @@ namespace SORCE.Patches
 			if (playfieldObject is null)
 				return true;
 
-			logger.LogDebug("SpawnLightReal_Prefix");
-			logger.LogDebug("PFO:\t\t\t" + playfieldObject.name);
+			//logger.LogDebug("SpawnLightReal_Prefix");
+			//logger.LogDebug("PFO:\t\t\t" + playfieldObject.name);
 
-			if (Core.debugMode || GC.challenges.Contains(nameof(ObjectsRelit)) &&
+			if (DebugTools.debugMode || GC.challenges.Contains(nameof(ObjectsRelit)) &&
 				playfieldObject != null && playfieldObject.objectName == "LightObject")
 			{
 				Vector3 vector = new Vector3(lightPos.x, lightPos.y, -0.5f);

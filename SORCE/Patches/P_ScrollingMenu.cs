@@ -32,8 +32,8 @@ namespace SORCE.Patches.Interface
 				GC.cameraScript.lightingSystem.EnableAmbientLight = true;
 
 			// Hopefully helps performance
-			P_Bullet.GunplayRelit = GC.challenges.Contains(nameof(GunplayRelit));
-			P_Gun.ShootierGuns = GC.challenges.Contains(nameof(ShootierGuns));
+			P_Bullet.GunplayRelit = GC.challenges.Contains(nameof(GunplayRelit)) || DebugTools.debugMode;
+			P_Gun.ShootierGuns = GC.challenges.Contains(nameof(ShootierGuns)) || DebugTools.debugMode;
 
 			// TODO: Check for Mutator Menu, or that the button regards ambient light mutators. For now, this'll work.
 			GC.loadLevel.SetNormalLighting();

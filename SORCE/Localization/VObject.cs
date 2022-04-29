@@ -86,7 +86,7 @@ namespace SORCE.Localization
 					Well = "Well",
 					Window = "Window";
 
-			public static List<string> Electronics = new List<string>()
+			public static List<string> DiegeticLightObjects = new List<string>()
 			{
 				AirConditioner,
 				AlarmButton,
@@ -98,6 +98,7 @@ namespace SORCE.Localization
 				CloneMachine,
 				Computer,
 				Elevator,
+				FlameGrate, // Not working yet
 				Generator,
 				Generator2,
 				Jukebox,
@@ -112,6 +113,8 @@ namespace SORCE.Localization
 				Safe,
 				SatelliteDish,
 				SecurityCam,
+				SlimeBarrel, // Not working yet
+				SlimePuddle, // Not working yet
 				SlotMachine,
 				Speaker,
 				Television,

@@ -624,11 +624,11 @@ namespace SORCE.MapGenUtilities
 					if (spot != Vector2.zero)
 					{
 						if ((GC.tileInfo.GetTileData(E_TileInfo.NorthOf(spot)).owner == 0 &&
-							GC.tileInfo.GetTileData(E_TileInfo.WestOf(spot)).owner == 0 &&
-							GC.tileInfo.GetTileData(E_TileInfo.SouthOf(spot)).owner == 0 &&
-							GC.tileInfo.GetTileData(E_TileInfo.EastOf(spot)).owner == 0) ||
-							
-							GC.tileInfo.IsOverlapping(spot, "ObjectRealSprite", 0.64f) ||
+                            GC.tileInfo.GetTileData(E_TileInfo.WestOf(spot)).owner == 0 &&
+                            GC.tileInfo.GetTileData(E_TileInfo.SouthOf(spot)).owner == 0 &&
+                            GC.tileInfo.GetTileData(E_TileInfo.EastOf(spot)).owner == 0) ||
+
+                            GC.tileInfo.IsOverlapping(spot, "ObjectRealSprite", 0.64f) ||
 							spawnedInChunks.Contains(GC.tileInfo.GetTileData(spot).chunkID) ||
 							GC.tileInfo.DestroyIfBetweenWalls(spot))
 							spot = Vector2.zero;
@@ -647,28 +647,28 @@ namespace SORCE.MapGenUtilities
 
 					if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.SouthOf(spot))))
 					{
-						lightPosition = E_TileInfo.NorthOf(spot, 0.32f);
+						lightPosition = E_TileInfo.NorthOf(spot, 0.16f);
 						neighborCell1 = E_TileInfo.EastOf(spot);
 						neighborCell2 = E_TileInfo.WestOf(spot);
 						wallDirection = "S";
 					}
 					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.EastOf(spot))))
 					{
-						lightPosition = E_TileInfo.WestOf(spot, 0.32f);
+						lightPosition = E_TileInfo.WestOf(spot, 0.16f);
 						neighborCell1 = E_TileInfo.NorthOf(spot);
 						neighborCell2 = E_TileInfo.SouthOf(spot);
 						wallDirection = "E";
 					}
 					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.WestOf(spot))))
 					{
-						lightPosition = E_TileInfo.EastOf(spot, 0.32f);
+						lightPosition = E_TileInfo.EastOf(spot, 0.16f);
 						neighborCell1 = E_TileInfo.NorthOf(spot);
 						neighborCell2 = E_TileInfo.SouthOf(spot);
 						wallDirection = "W";
 					}
 					else if (E_TileInfo.HasWall(GC.tileInfo.GetTileData(E_TileInfo.NorthOf(spot)))) // North is last, to hide that screens are blank
 					{
-						lightPosition = E_TileInfo.SouthOf(spot, 0.32f);
+						lightPosition = E_TileInfo.SouthOf(spot, 0.16f);
 						neighborCell1 = E_TileInfo.EastOf(spot);
 						neighborCell2 = E_TileInfo.WestOf(spot);
 						wallDirection = "N";
@@ -682,6 +682,7 @@ namespace SORCE.MapGenUtilities
 						// Middle screen
 						ObjectReal movieScreen1 = GC.spawnerMain.spawnObjectReal(spot, null, VObject.MovieScreen);
 						movieScreen1.ShiftTowardWalls();
+						movieScreen1.ambientAudio = VAmbience.Casino;
 
 						ObjectReal movieScreen2 = GC.spawnerMain.spawnObjectReal(neighborCell1, null, VObject.MovieScreen);
 						movieScreen2.ShiftTowardWalls();
@@ -689,15 +690,15 @@ namespace SORCE.MapGenUtilities
 						ObjectReal movieScreen3 = GC.spawnerMain.spawnObjectReal(neighborCell2, null, VObject.MovieScreen);
 						movieScreen3.ShiftTowardWalls();
 
+						int lightX = wallDirection == "N" || wallDirection == "S" ? 3 : 2;
+						int lightY = wallDirection == "E" || wallDirection == "W" ? 3 : 2;
+						string color = GC.Choose("BlueLight", "CyanLight", "GreenLight", "PinkLight", "PurpleLight", "RedLight");
+
 						GameObject light = Object.Instantiate(GC.spawnerMain.lightReal2Prefab, lightPosition, Quaternion.Euler(0f, 0f, 0f));
 						LightReal lightReal = light.GetComponent<LightReal>();
-						string color = GC.Choose("BlueLight", "CyanLight", "GreenLight", "PinkLight", "PurpleLight", "RedLight");
-						GC.spawnerMain.SetLightRealDetails(lightReal, light, movieScreen1.startingChunk, movieScreen1.tr.GetComponent<Chunk>(), 5, 5, 5, color);
+						GC.spawnerMain.SetLightRealDetails(lightReal, light, movieScreen1.startingChunk, movieScreen1.tr.GetComponent<Chunk>(), 5, lightX, lightY, color);
 
-						movieScreen1.ambientAudio = VAmbience.Casino;
-
-						TileData tileData = GC.tileInfo.GetTileData(spot);
-						spawnedInChunks.Add(tileData.chunkID);
+						spawnedInChunks.Add(GC.tileInfo.GetTileData(spot).chunkID);
 					}
 				}
 			}
