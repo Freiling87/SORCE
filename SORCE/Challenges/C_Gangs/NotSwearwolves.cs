@@ -7,9 +7,9 @@ namespace SORCE.Challenges.C_Gangs
 	{
 		public NotSwearwolves(string name) : base(name) { }
 
-		public override string LeaderAgent =>		"OfficeDroneWerewolf";
-		public override string[] MiddleAgents =>	new string[] { "OfficeDroneWerewolf" };
-        public override string LastAgent =>			"OfficeDroneWerewolf";
+		public override string LeaderAgent =>		VAgent.OfficeDroneWerewolf;
+		public override string[] MiddleAgents =>	new string[] { VAgent.OfficeDroneWerewolf };
+        public override string LastAgent =>			VAgent.OfficeDroneWerewolf;
 
 		public override bool AlwaysRun =>			false;
         public override bool GangsAligned =>		true;

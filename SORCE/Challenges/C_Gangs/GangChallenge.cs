@@ -62,6 +62,7 @@ namespace SORCE.Challenges.C_Gangs
 			int middleAgentIndex = 0;
 			List<Agent> slaveMasters = new List<Agent>();
 			string securityType = GC.Choose("Normal", "Weapons", "ID");
+			int ownerGroupOffset = 0;
 
 			for (int i = 0; i < totalSpawns; i++)
 			{
@@ -70,6 +71,10 @@ namespace SORCE.Challenges.C_Gangs
 
 				if (i % gangSize == 0) // First
 				{
+					// Prevent gangs of 1
+					if (i == totalSpawns)
+						return;
+
 					Agent.gangCount++;
 
 					if (!gangsAligned)
@@ -78,7 +83,7 @@ namespace SORCE.Challenges.C_Gangs
 					if (slaveMasters.Any())
 						slaveMasters.Clear();
 
-					securityType = GC.Choose("Normal", "Weapons", "ID");
+					securityType = GC.Choose("Normal", "Weapons", "ID"); // Match per gang
 
 					while ((pos == Vector2.zero || Vector2.Distance(pos, GC.playerAgent.tr.position) < 20f) && attempts < 300)
 					{
@@ -106,11 +111,15 @@ namespace SORCE.Challenges.C_Gangs
 
 				if (pos != Vector2.zero)
 				{
-					Agent agent = GC.spawnerMain.SpawnAgent(pos, null, 
-						agentType == "OfficeDroneWerewolf"
-							? VAgent.OfficeDrone
-							: agentType);
+					bool specialWerewolf = false;
 
+					if (agentType == VAgent.OfficeDroneWerewolf)
+                    {
+						specialWerewolf = true;
+						agentType = VAgent.OfficeDrone;
+					}
+						
+					Agent agent = GC.spawnerMain.SpawnAgent(pos, null, agentType);
 					agent.movement.RotateToAngleTransform((float)Random.Range(0, 360));
 					agent.gang = Agent.gangCount;
 					agent.modLeashes = 0;
@@ -122,7 +131,9 @@ namespace SORCE.Challenges.C_Gangs
 					spawnedAgentList.Add(agent);
 
 					if (agentType == VAgent.Slavemaster)
+					{
 						slaveMasters.Add(agent);
+					}
 					else if (agentType == VAgent.Slave &&
 						slaveMasters.Any())
 					{
@@ -136,16 +147,25 @@ namespace SORCE.Challenges.C_Gangs
 					}
 					else if (agentType == VAgent.CopBot)
 						agent.oma.securityType = agent.oma.convertSecurityTypeToInt(securityType);
-					else if (agentType == "OfficeDroneWerewolf")
+					else if (specialWerewolf)
                     {
 						agent.originalWerewolf = true;
 						agent.statusEffects.GiveSpecialAbility(VSpecialAbility.WerewolfTransformation);
                     }
+					
+					if (agentType == VAgent.Bartender || 
+						agentType == VAgent.DrugDealer ||
+						agentType == VAgent.Shopkeeper ||
+						agentType == VAgent.Slavemaster)
+                    {
+						agent.oma.shookDown = false;
+						agent.ownerID = 42069 + ownerGroupOffset++;
+					}
 
-					if (agentType == VAgent.Thief
-						|| agentType == VAgent.Vampire
-						|| agentType == VAgent.Cannibal
-						|| agentType == VAgent.CopBot)
+					if (agentType == VAgent.Cannibal ||
+						agentType == VAgent.CopBot ||
+						agentType == VAgent.Thief ||
+						agentType == VAgent.Vampire)
 					{
 						if (makeTrouble)
 							agent.losCheckAtIntervals = GC.percentChance(50);

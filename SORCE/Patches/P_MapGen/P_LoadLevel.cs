@@ -7,9 +7,13 @@ using SORCE.Challenges;
 using SORCE.Challenges.C_AmbientLightColor;
 using SORCE.Challenges.C_Features;
 using SORCE.Challenges.C_Gangs;
+using SORCE.Challenges.C_Lighting;
+using SORCE.Challenges.C_Preview;
+using SORCE.Challenges.C_VFX;
 using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
+using SORCE.Patches.P_PlayfieldObject;
 using SORCE.Utilities.MapGen;
 using System;
 using System.Collections;
@@ -225,11 +229,30 @@ namespace SORCE.Patches
 		}
 
 		/// <summary>
+		/// Bool setters
+		/// </summary>
+		/// <returns></returns>
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff), new Type[0] { })]
+		public static bool LoadStuff_Prefix()
+		{
+			logger.LogDebug("loadStuff_Prefix");
+
+			// Reduces performance to complex boolean calls
+			P_Bullet.SpawnBulletholes = GC.challenges.Contains(nameof(BuggierBulletholes)) || DebugTools.debugMode;
+			P_Bullet.GunplayRelit = GC.challenges.Contains(nameof(GunplayRelit)) || DebugTools.debugMode;
+			P_Bullet.RealisticBullets = GC.challenges.Contains(nameof(ScaryGunsPreview)) || DebugTools.debugMode;
+			P_Gun.ShootierGuns = GC.challenges.Contains(nameof(ShootierGuns)) || DebugTools.debugMode;
+			Wreckage.HasObjectExtraWreckage = GC.challenges.Contains(nameof(DestroyederDestroyage)) || DebugTools.debugMode;
+
+			return true;
+		}
+
+		/// <summary>
 		/// Skyway District Holes
 		/// </summary>
 		/// <param name="__instance"></param>
 		/// <returns></returns>
-		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2), new Type[] { })]
+		[HarmonyPrefix, HarmonyPatch(methodName: nameof(LoadLevel.loadStuff2), new Type[0] { })]
 		public static bool LoadStuff2_Prefix()
 		{
 			if (GC.challenges.Contains(nameof(SkywayDistrict)))

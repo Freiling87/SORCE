@@ -34,6 +34,7 @@ namespace SORCE.Localization
 					Mobster = "Mafia",
 					Musician = "Musician",
 					OfficeDrone = "OfficeDrone",
+					OfficeDroneWerewolf = "OfficeDroneWerewolf",
 					ResistanceLeader = "ResistanceLeader",
 					Robot = "Robot",
 					RobotPlayer = "RobotPlayer",
