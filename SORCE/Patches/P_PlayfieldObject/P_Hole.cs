@@ -1,7 +1,6 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using RogueLibsCore;
-using SORCE.Extensions;
 using SORCE.Logging;
 using SORCE.Traits;
 using SORCE.Utilities;
@@ -11,7 +10,7 @@ using static SORCE.Localization.NameLists;
 namespace SORCE.Patches.P_PlayfieldObject
 {
     [HarmonyPatch(declaringType: typeof(Hole))]
-	class P_Hole
+	public static class P_Hole
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;

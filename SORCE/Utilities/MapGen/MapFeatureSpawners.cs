@@ -2,6 +2,7 @@
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Extensions;
 using SORCE.Logging;
+using SORCE.Traits;
 using SORCE.Utilities;
 using System.Collections.Generic;
 using System.Linq;
@@ -590,13 +591,25 @@ namespace SORCE.MapGenUtilities
 
 				Agent agent = GC.spawnerMain.SpawnAgent(hideManhole.tr.position, hideManhole, agentType);
 				agent.SetDefaultGoal(VGoal.Idle);
-				agent.statusEffects.BecomeHidden(hideManhole);
+				agent.statusEffects.BecomeHidden(null);
+				agent.hiddenInObject = hideManhole;
+				agent.noEnforcerAlert = true;
 				agent.oma.mustBeGuilty = true;
 
-				// TODO: Transpile Brain.Update to disable hostility against UDC
-				//(agentType != VAgent.Thief || !GC.challenges.Contains("ThiefNoSteal"))
-				//	&& (agentType != VAgent.Cannibal || !GC.challenges.Contains(VanillaMutators.CoolWithCannibals)
-			}
+                foreach (Agent playerAgent in GC.playerAgentList)
+                {
+                    if (agentType == VAgent.Thief)
+                    {
+                        if (playerAgent.statusEffects.hasTrait(nameof(UnderdankCitizen)))
+                            agent.relationships.SetRel(playerAgent, VRelationship.Friendly);
+                        else if (playerAgent.statusEffects.hasTrait(nameof(UnderdankVIP)))
+                            agent.relationships.SetRel(playerAgent, VRelationship.Loyal);
+                    }
+                    else if (agentType == VAgent.Cannibal)
+                        if (playerAgent.statusEffects.hasTrait(nameof(UnderdankVIP)))
+                            agent.relationships.SetRel(playerAgent, VRelationship.Friendly);
+                }
+            }
 		}
 		private static void SpawnRugs()
 		{

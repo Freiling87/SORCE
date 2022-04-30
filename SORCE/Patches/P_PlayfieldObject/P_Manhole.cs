@@ -25,9 +25,11 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[RLSetup]
 		public static void Setup()
 		{
-			string t = 
-				VNameType.Dialogue;
+			string t = VNameType.Dialogue;
 			RogueLibs.CreateCustomName(CDialogue.NeedCrowbar, t, new CustomNameInfo("I need a crowbar. I could break a nail!"));
+
+			t = VNameType.Interface;
+			RogueLibs.CreateCustomName(CButtonText.ManholePryBarehanded, t, new CustomNameInfo("Pry open barehanded"));
 
 			RogueInteractions.CreateProvider<Manhole>(h =>
 			{
@@ -36,8 +38,9 @@ namespace SORCE.Patches.P_PlayfieldObject
 
 				if (h.Object.opened)
 				{
-					if (h.Agent.HasTrait<UnderdankCitizen>()
-						&& Underdank.Exits(h.Agent).Count() > 1)
+					if (Underdank.Exits(h.Agent).Count() > 1 &&
+						h.Agent.HasTrait<UnderdankCitizen>() ||
+						h.Agent.HasTrait<UnderdankVIP>())
 						h.AddButton(VButtonText.FlushYourself, m =>
 						{
 							Underdank.FlushYourself(m.Agent, m.Object);
@@ -57,6 +60,13 @@ namespace SORCE.Patches.P_PlayfieldObject
 						h.AddButton(VButtonText.UseCrowbar, extra, m =>
 						{
 							m.StartOperating(VItem.Crowbar, 2f, true, "Tampering");
+						});
+					}
+					else if (h.Agent.statusEffects.hasTrait(nameof(UnderdankVIP)))
+					{
+						h.AddButton(CButtonText.ManholePryBarehanded, m =>
+						{
+							m.StartOperating(2f, true, "Tampering");
 						});
 					}
 					else

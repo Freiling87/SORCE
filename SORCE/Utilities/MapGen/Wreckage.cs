@@ -148,15 +148,6 @@ namespace SORCE.MapGenUtilities
 
 				if (spawnLoc != Vector3.zero)
                 {
-					//Vector3 vector = new Vector3(origin.x, origin.y, Random.Range(-0.78f, -1.82f));
-					//Item trash = GC.spawnerMain.wreckagePrefab.Spawn(vector);
-					//trash.DoEnable();
-					//trash.isWreckage = true;
-					////casing.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
-					//tk2dSprite component = trash.tr.GetChild(0).transform.GetChild(0).GetComponent<tk2dSprite>();
-					//component.SetSprite(spriteName);
-
-					//////
 
 					Item trash = GC.spawnerMain.wreckagePrefab.Spawn(spawnLoc);
 					trash.DoEnable();

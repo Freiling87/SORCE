@@ -39,7 +39,8 @@ namespace SORCE.MapGenUtilities
 		public static bool HasManholes_Underdank =>
 			!GC.challenges.Contains(nameof(AnCapistan)) &&
 			!GC.challenges.Contains(nameof(LowTechLowLife)) &&
-			TraitManager.IsPlayerTraitActive<UnderdankCitizen>();
+			TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
+			TraitManager.IsPlayerTraitActive<UnderdankVIP>();
 		public static bool HasLakesColored =>
 			false;
 		public static bool HasLakesPolluted =>

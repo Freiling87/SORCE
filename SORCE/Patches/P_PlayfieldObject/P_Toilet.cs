@@ -30,7 +30,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		public static void Setup()
 		{
 			string t = VNameType.Interface;
-			RogueLibs.CreateCustomName(CButtonText.TakeHugeShit, t, new CustomNameInfo("Take a huge shit"));
+			RogueLibs.CreateCustomName(CButtonText.ToiletTakeHugeShit, t, new CustomNameInfo("Take a huge shit"));
 			RogueLibs.CreateCustomName(COperatingText.ToiletShitting, t, new CustomNameInfo("Taking a huge shit"));
 			t = VNameType.Dialogue;
 			RogueLibs.CreateCustomName(CDialogue.ToiletDisgusting, t, new CustomNameInfo("*Gag* Nope."));
@@ -55,8 +55,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 					// Vanilla button removal
 					FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
 					List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
-					interactions.RemoveAll(i => i.ButtonName is VButtonText.FlushYourself); // Doesn't seem to work
-					interactions.RemoveAll(i => i.ButtonName is VButtonText.PurgeStatusEffects);
+					interactions.RemoveAll(i => i.ButtonName == VButtonText.FlushYourself); // Trying again with ==
+					interactions.RemoveAll(i => i.ButtonName == VButtonText.PurgeStatusEffects);
 
 					int toiletCost = h.Object.GetHook<P_Toilet_Hook>().toiletCost;
 
@@ -75,8 +75,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 						});
 
 					// TODO: Structure this like Fountain, it's handled for you.
-					if (Core.debugMode)
-						h.AddButton(CButtonText.TakeHugeShit, toiletCost, m =>
+					if (DebugTools.debugMode)
+						h.AddButton(CButtonText.ToiletTakeHugeShit, toiletCost, m =>
 						{
 							m.StartOperating(2f, false, COperatingText.ToiletShitting);
 						});
