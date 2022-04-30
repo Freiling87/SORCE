@@ -5,6 +5,7 @@ using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_VFX;
 using SORCE.Localization;
 using SORCE.Logging;
+using SORCE.Resources;
 using System.Collections.Generic;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
@@ -18,47 +19,67 @@ namespace SORCE.MapGenUtilities
 		public static GameController GC => GameController.gameController;
 
 		public static bool HasLeaves =>
-			Core.debugMode ||
+			DebugTools.debugMode ||
 			GC.challenges.Contains(nameof(Arcology)) || // Leaves
 			GC.challenges.Contains(nameof(FloralerFlora));
 		public static bool HasPrivateLitter =>
-			Core.debugMode ||
+			DebugTools.debugMode ||
 			GC.challenges.Contains(nameof(BachelorerPads));
 		public static bool HasPublicLitter =>
 			!GC.challenges.Contains(nameof(MACITS)) &&
 			!GC.challenges.Contains(nameof(PoliceState)) &&
-			Core.debugMode ||
+			DebugTools.debugMode ||
 			GC.challenges.Contains(nameof(AnCapistan)) ||
 			GC.challenges.Contains(nameof(Arcology)) || // Leaves
 			GC.challenges.Contains(nameof(DirtierDistricts)) ||
 			GC.challenges.Contains(nameof(DUMP)) || // Rock Debris (FlamingBarrel)
 			GC.challenges.Contains(nameof(Eisburg)) || // Ice chunks
 			GC.challenges.Contains(nameof(Tindertown)) /*Ash*/;
+		public static bool HasObjectExtraWreckage;
 
 		internal static void SpawnPublicLitter()
 		{
 			if (!HasPublicLitter)
 				return;
 
-			int numObjects = (int)(250 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio);
+			logger.LogInfo("Spawning Litter");
 
-			for (int i = 0; i < numObjects; i++)
-			{
-				Vector2 location = LevelGenTools.RandomSpawnLocation(GC.tileInfo, 0.24f);
+			int numObjects = (int)(2400 * LevelGenTools.SlumminessFactor * LevelSize.ChunkCountRatio);
 
-				SpawnWreckagePileObject_Granular(
-					location,
-					OverhaulWreckageType(),
-					burnt: GC.percentChance(20),
-					gibs: Random.Range(1, 12),
-					0.64f, 0.64f,
-					particleID: 0);
+            for (int i = 0; i < numObjects; i++)
+            {
+                Vector2 location = LevelGenTools.RandomSpawnLocation(GC.tileInfo, 0.56f);
+
+				if (GC.percentChance(100)) // Temporarily disabling custom trash
+					SpawnWreckagePileObject_Granular(
+						location,
+						OverhaulWreckageType(),
+						burnt: GC.percentChance(15),
+						gibs: 1,
+						0.32f, 0.32f,
+						particleID: 0);
+				else
+					SpawnCustomLitter(
+						location,
+						WreckageCustom.RandomElement(),
+						burnt: false,
+						gibs: 1,
+						0.32f, 0.32f,
+						particleID: 0);
 			}
 		}
 
 		// TODO: This belongs in the library
 		public static void SpawnWreckagePileObject_Granular(Vector3 origin, string objectType, bool burnt, int gibs, float radX, float radY, int particleID = 0)
 		{
+			if (objectType == VObject.Window)
+			{
+				gibs = Random.Range(4, 6);
+				burnt = false;
+				radX = 0.32f;
+				radY = 0.32f;
+			}
+
 			for (int i = 0; i < gibs; i++)
 			{
 				bool goodSpot = false;
@@ -99,10 +120,8 @@ namespace SORCE.MapGenUtilities
 				bool goodSpot = false;
 				Vector3 spawnLoc = Vector3.zero;
 
-				while (!goodSpot)
+				for (int j = 0; j < 1000 && !goodSpot; j++)
 				{
-					logger.LogDebug("Trying Spot");
-
 					spawnLoc = new Vector3(
 						origin.x + Random.Range(-radX, radX),
 						origin.y + Random.Range(-radY, radY),
@@ -120,31 +139,37 @@ namespace SORCE.MapGenUtilities
 				logger.LogDebug("goodSpot: " + goodSpot);
 
 				string spriteName = spriteGroup +
-						(particleID != 0
-							? particleID.ToString()
-							: (Random.Range(1, 5)).ToString());
+					(particleID != 0
+						? particleID.ToString()
+						: (Random.Range(1, 5)).ToString());
+
+				if (!SpriteLoader.SpriteGroups.Contains(spriteGroup))
+					spriteName = spriteGroup;
 
 				if (spawnLoc != Vector3.zero)
                 {
-					//SpawnerMain sm = GC.spawnerMain;
-					//GameObject gameObject = sm.wreckage2Prefab.Spawn(spawnLoc, sm.tr.rotation);
-					//tk2dSprite component = gameObject.GetComponent<tk2dSprite>();
-					//gameObject.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360));
-					//component.SetSprite(component.GetSpriteIdByName(wreckageType));
-					//gameObject.transform.parent = GC.wreckageNest.transform;
-					//GC.wreckageList2.Add(gameObject);
+					//Vector3 vector = new Vector3(origin.x, origin.y, Random.Range(-0.78f, -1.82f));
+					//Item trash = GC.spawnerMain.wreckagePrefab.Spawn(vector);
+					//trash.DoEnable();
+					//trash.isWreckage = true;
+					////casing.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
+					//tk2dSprite component = trash.tr.GetChild(0).transform.GetChild(0).GetComponent<tk2dSprite>();
+					//component.SetSprite(spriteName);
 
-					//if (burnt)
-					//	component.color = GC.burntColor;
+					//////
 
-					Vector3 vector = new Vector3(origin.x, origin.y, Random.Range(-0.78f, -1.82f));
-
-					Item trash = GC.spawnerMain.wreckagePrefab.Spawn(vector);
+					Item trash = GC.spawnerMain.wreckagePrefab.Spawn(spawnLoc);
 					trash.DoEnable();
 					trash.isWreckage = true;
-					//casing.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
+					//trash.invItem.itemType = "NonItem";
+					trash.itemName = "CustomWreckage";
 					tk2dSprite component = trash.tr.GetChild(0).transform.GetChild(0).GetComponent<tk2dSprite>();
 					component.SetSprite(spriteName);
+					component.transform.localPosition = spawnLoc;
+					//Movement movement = trash.GetComponent<Movement>();
+					//trash.animator.Play("ItemJump 1", -1, 0f);
+					//movement.Spill(120, null, null); // Handles null towardObject
+					trash.FakeStart();
 				}
 
 			}
@@ -182,6 +207,30 @@ namespace SORCE.MapGenUtilities
 		public static string FoodWreckageType() =>
 			WreckageFood.RandomElement();
 
+		public static void ThrowTrash(Vector3 origin, string spriteName, GameObject towardObject = null, bool rotate = true)
+		{
+			Vector3 vector = new Vector3(origin.x, origin.y, Random.Range(-0.78f, -1.82f));
+
+			Item trash = GC.spawnerMain.wreckagePrefab.Spawn(vector);
+			trash.itemName = "CustomWreckage"; // So far, to avoid SetLighting2 errors. Test
+			trash.DoEnable();
+			trash.isWreckage = true;
+			trash.justSpilled = true;
+			if (rotate) 
+				trash.tr.Rotate(0, 0, Random.Range(0, 360));
+			tk2dSprite component = trash.tr.GetChild(0).transform.GetChild(0).GetComponent<tk2dSprite>();
+			component.SetSprite(spriteName);
+			if (rotate) 
+				component.transform.Rotate(0, 0, Random.Range(0, 360));
+			component.transform.localPosition = Vector3.zero;
+			Movement movement = trash.GetComponent<Movement>();
+			//movement.SetPhysics("Ice"); Looks a little like rolling
+			trash.animator.enabled = true;
+			//trash.animator.Play("ItemJump 1", -1, 0f);
+			movement.Spill(90, towardObject, null); // Handles null towardObject
+			trash.FakeStart();
+		}
+
 		public static List<string> WreckageFood = new List<string>()
 		{
 			VObject.Shelf,
@@ -190,8 +239,12 @@ namespace SORCE.MapGenUtilities
 		};
 		public static List<string> WreckageCustom = new List<string>()
 		{
+			CSprite.BeerCan,
 			CSprite.CigaretteButt,
+			CSprite.FudJar,
+			CSprite.FudJarScorched,
 			CSprite.Hypo,
+			CSprite.WhiskeyBottle,
 		};
 		public static List<string> WreckageMisc = new List<string>()
 		{
