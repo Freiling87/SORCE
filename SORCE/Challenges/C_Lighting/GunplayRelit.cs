@@ -10,7 +10,8 @@ namespace SORCE.Challenges.C_Lighting
 			UnlockBuilder unlockBuilder = RogueLibs.CreateCustomUnlock(new MutatorUnlock(nameof(GunplayRelit), true))
 				.WithDescription(new CustomNameInfo
 				{
-					[LanguageCode.English] = "Disables Bullet Halos, and adds Muzzle Flash.",
+					[LanguageCode.English] = "Disables Bullet Halos, and adds Muzzle Flash.\n\n" +
+					"Bug: Lots of muzzle flash may create a permanent dark void on the map. It's probably your conscience telling you to stop shooting people.",
 				})
 				.WithName(new CustomNameInfo
 				{

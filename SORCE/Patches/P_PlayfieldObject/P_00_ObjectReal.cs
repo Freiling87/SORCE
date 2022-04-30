@@ -1,12 +1,15 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using SORCE.Challenges.C_Lighting;
+using Light2D;
 using SORCE.Logging;
+using SORCE.MapGenUtilities;
 using SORCE.Utilities;
 using System;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using static SORCE.Localization.NameLists;
+using Random = UnityEngine.Random;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
@@ -22,6 +25,65 @@ namespace SORCE.Patches.P_PlayfieldObject
 		public static MethodInfo ObjectAction_base = AccessTools.DeclaredMethod(typeof(ObjectReal), "ObjectAction", new Type[5] { typeof(string), typeof(string), typeof(float), typeof(Agent), typeof(PlayfieldObject) });
 		public static MethodInfo PressedButton_base = AccessTools.DeclaredMethod(typeof(ObjectReal), "PressedButton", new Type[2] { typeof(string), typeof(int) });
 		public static MethodInfo Start_base = AccessTools.DeclaredMethod(typeof(ObjectReal), "Start", new Type[0] { });
+
+		[HarmonyPostfix, HarmonyPatch(methodName: nameof(ObjectReal.DestroyMe2), argumentTypes: new[] { typeof(PlayfieldObject) })]
+		public static void DestroyMe2_Postfix(PlayfieldObject damagerObject, ObjectReal __instance)
+        {
+			if (!Wreckage.HasObjectExtraWreckage)
+				return;
+
+			if (__instance is FlamingBarrel flamingBarrel)
+			{
+				int gibs = Random.Range(4, 16);
+				int j = 1;
+
+				for (int i = 0; i < gibs; i++)
+				{
+					InvItem invItem = new InvItem();
+					invItem.invItemName = "Wreckage";
+					invItem.SetupDetails(false);
+					invItem.LoadItemSprite(VObject.MovieScreen + "Wreckage" + j++);
+					GC.spawnerMain.SpawnWreckage(flamingBarrel.tr.position, invItem, __instance, damagerObject, GC.percentChance(100));
+
+					if (j == 6)
+						j = 1;
+				}
+			}
+			else if (__instance is CapsuleMachine capsuleMachine)
+			{
+				int piles = Random.Range(4, 16);
+				int j = 1;
+
+				for (int i = 0; i < piles; i++)
+				{
+					InvItem invItem = new InvItem();
+					invItem.invItemName = "Wreckage";
+					invItem.SetupDetails(false);
+					invItem.LoadItemSprite(Wreckage.WreckageMisc.RandomElement() + "Wreckage" + j++);
+					GC.spawnerMain.SpawnWreckage(capsuleMachine.tr.position, invItem, __instance, damagerObject, false);
+
+					if (j == 6)
+						j = 1;
+				}
+			}
+			else if (__instance is TrashCan trashCan)
+            {
+				int piles = Random.Range(4, 16);
+				int j = 1;
+
+				for (int i = 0; i < piles; i++)
+                {
+					InvItem invItem = new InvItem();
+					invItem.invItemName = "Wreckage";
+					invItem.SetupDetails(false);
+					invItem.LoadItemSprite(Wreckage.WreckageMisc.RandomElement() + "Wreckage" + j++);
+					GC.spawnerMain.SpawnWreckage(trashCan.tr.position, invItem, __instance, damagerObject, GC.percentChance(20));
+
+					if (j == 6)
+						j = 1;
+				}
+            }
+        }
 
 		/// <summary>
 		/// WARNING: Original was a replacement. This may need to be a transpiler.
@@ -45,6 +107,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 			}
 		}
 
+		// TODO: To Library
 		public static void AnnoyWitnessesVictimless(Agent perp)
 		{
 			if (!GC.agentList.Any())
@@ -77,6 +140,5 @@ namespace SORCE.Patches.P_PlayfieldObject
 				}
 			}
 		}
-
 	}
 }

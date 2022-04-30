@@ -5,9 +5,9 @@
         public static class CButtonText // Custom Button Text
         {
 			public const string
-				CameraDetectEnforcer = "CameraDetectEnforcer",
-				CameraDetectGuilty = "CameraDetectGuilty",
-				CameraDetectWanted = "CameraDetectWanted",
+				SecurityCamDetectEnforcer = "SecurityCamDetectEnforcer",
+				SecurityCamDetectGuilty = "SecurityCamDetectGuilty",
+				SecurityCamDetectWanted = "SecurityCamDetectWanted",
 				ElevatorBuy = "ElevatorBuyTicket",
 				FountainSteal = "FountainSteal",
 				FountainWishFabulousWealth = "FountainWishFabulousWealth",
@@ -15,8 +15,9 @@
 				FountainWishGoodHealth = "FountainWishGoodHealth",
 				FountainWishTrueFriendship = "FountainWishTrueFriendship",
 				FountainWishWorldPeace = "FountainWishWorldPeace",
-				FireHydrantBuy = "HydrantBuy",
-				TakeHugeShit = "TakeHugeShit"
+				FireHydrantBuy = "FireHydrantBuy",
+				ManholePryBarehanded = "ManholePryBarehanded",
+				ToiletTakeHugeShit = "ToiletTakeHugeShit"
 				;
 		}
 	}

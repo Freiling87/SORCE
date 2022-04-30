@@ -88,7 +88,6 @@ namespace SORCE.Localization
 
 			public static List<string> DiegeticLightObjects = new List<string>()
 			{
-				AirConditioner,
 				AlarmButton,
 				AmmoDispenser,
 				ArcadeGame,

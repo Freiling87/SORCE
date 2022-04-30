@@ -14,8 +14,18 @@ namespace SORCE.Patches.P_PlayfieldObject
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        public static bool ShootierGuns = Core.debugMode;
+        public static bool ShootierGuns;
 
+        /// <summary>
+        /// ShootierGuns Muzzle Flash
+        /// </summary>
+        /// <param name="specialAbility"></param>
+        /// <param name="silenced"></param>
+        /// <param name="rubber"></param>
+        /// <param name="bulletNetID"></param>
+        /// <param name="bulletStatusEffect"></param>
+        /// <param name="__instance"></param>
+        /// <returns></returns>
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(Gun.Shoot), argumentTypes: new[] { typeof(bool), typeof(bool), typeof(bool), typeof(int), typeof(string) })]
         public static bool Shoot_Prefix(bool specialAbility, bool silenced, bool rubber, int bulletNetID, string bulletStatusEffect, Gun __instance)
         {
@@ -46,7 +56,7 @@ namespace SORCE.Patches.P_PlayfieldObject
         }
 
         /// <summary>
-        /// Bullet casing spawners
+        /// ShootierGuns Casings
         /// </summary>
         /// <param name="specialAbility"></param>
         /// <param name="silenced"></param>

@@ -16,34 +16,34 @@ namespace SORCE.Patches.P_PlayfieldObject
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        public static bool GunplayRelit = Core.debugMode;
-        public static bool RealisticBullets = Core.debugMode;
+        public static bool GunplayRelit;
+        public static bool RealisticBullets;
+        public static bool SpawnBulletholes;
 
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.BulletHitEffect), argumentTypes: new[] { typeof(GameObject) })]
         public static void BulletHitEffect_Postfix(GameObject hitObject, Bullet __instance)
         {
-            logger.LogDebug(hitObject.name);
-            // Need name for NON-MODDED glass wall to see if they differ
-
-            if (GunplayRelit
+            if (SpawnBulletholes
                 && bullets.Contains((int)__instance.bulletType) 
-                && hitObject.CompareTag("Wall") // Might be redundant to "Front" in name 
+                //&& hitObject.CompareTag("Wall") // Might be redundant to "Front" in name 
                 && hitObject.name.Contains("Front"))
             {
                 Vector3 pos = new Vector3(
-                    __instance.tr.position.x + Random.Range(-0.16f, 0.16f),
-                    __instance.tr.position.y + Random.Range(-0.32f, -0.04f),
+                    __instance.tr.position.x + Random.Range(-0.12f, 0.12f),
+                    __instance.tr.position.y + Random.Range(-0.32f, -0.08f),
                     0);
+
+                TileData tileData = GC.tileInfo.GetTileData(hitObject.transform.position);
 
                 if (hitObject.name.Contains("Glass"))
                 {
                     SpawnBulletHole(pos, wallMaterialType.Glass);
-                    GC.audioHandler.Play(hitObject.GetComponent<PlayfieldObject>(), VAudioClip.WindowDamage);
+                    GC.audioHandler.Play(__instance, VAudioClip.WindowDamage);
                 }
-                else if (hitObject.name.Contains("Hedge"))
+                else if (tileData.wallMaterialOffsetTop == 1365) // Is this seriosuly the only way to detect a Hedge wall??
                 {
                     GC.spawnerMain.SpawnWreckage2(hitObject.transform.position, VObject.Bush, false);
-                    GC.audioHandler.Play(hitObject.GetComponent<PlayfieldObject>(), VAudioClip.BushDestroy);
+                    GC.audioHandler.Play(__instance, VAudioClip.BushDestroy);
                 }
                 else
                     SpawnBulletHole(pos, wallMaterialType.Normal);
@@ -68,8 +68,8 @@ namespace SORCE.Patches.P_PlayfieldObject
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.SetupBullet), argumentTypes: new Type[0] { })]
         public static void SetupBullet_Postfix(Bullet __instance)
         {
-            if (bullets.Contains((int)__instance.bulletType)
-                && RealisticBullets) 
+            if (RealisticBullets && 
+                bullets.Contains((int)__instance.bulletType))
             {
                 __instance.tr.localScale = Vector3.one * 0.20f;
                 __instance.speed = 27;

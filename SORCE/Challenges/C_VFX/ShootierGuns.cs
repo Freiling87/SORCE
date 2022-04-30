@@ -13,7 +13,7 @@ namespace SORCE.Challenges.C_VFX
 				.WithName(new CustomNameInfo(
 					"VFX - Shootier Guns"))
 				.WithDescription(new CustomNameInfo(
-					"Muzzle Flash, shell casings, and other visual adjustments for realism."));
+					"Guns throw shell casings, and bullet impacts create smoke particles."));
 		}
 	}
 }
