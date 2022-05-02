@@ -13,7 +13,9 @@
 				MachineBusy = "MachineBusy",
 				NeedCrowbar = "NeedCrowbar",
 				ToiletBuyFail = "ToiletBuyFail",
-				ToiletDisgusting = "ToiletDisgusting"
+				ToiletDisgusting = "ToiletDisgusting",
+				ToiletTouristNoPoint = "ToiletTouristNoPoint",
+				ToiletTouristPoint = "ToiletTouristPoint"
 				;
 		}
 	}

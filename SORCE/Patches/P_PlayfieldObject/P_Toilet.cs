@@ -34,6 +34,17 @@ namespace SORCE.Patches.P_PlayfieldObject
 			RogueLibs.CreateCustomName(COperatingText.ToiletShitting, t, new CustomNameInfo("Taking a huge shit"));
 			t = VNameType.Dialogue;
 			RogueLibs.CreateCustomName(CDialogue.ToiletDisgusting, t, new CustomNameInfo("*Gag* Nope."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristNoPoint, t, new CustomNameInfo("*Sigh* Been there, done that, took a huge shit. Old news."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 1, t, new CustomNameInfo("Worst... dump... EVER. I'd rather have someone shit on me than shit in there again. One Wype."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 2, t, new CustomNameInfo("I'm... confused. Is that a toilet, or a porcelain piece of shit? Completely unacceptable. But I did find a dollar, so 2 Wypes."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 3, t, new CustomNameInfo("Wow, what can I say? Not the worst bathroom ever, but damn close. There is something fragrant about the piss puddles here, so 3 Wypes."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 4, t, new CustomNameInfo("They can't all be winners. I'd only give this toilet 4 Wypes, but I might be back sometime soon. *Grumble* Real soon."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 5, t, new CustomNameInfo("Pretty lackluster, if I'm being honest. Still, I had a solid dump. Five Wypes."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 6, t, new CustomNameInfo("This dump was solid. Check it out if you're in the area! Six Wypes."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 7, t, new CustomNameInfo("Maybe the best dump I've taken all week. But I did have a lot of coffee, so I'll have to come back. Seven Wypes!"));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 8, t, new CustomNameInfo("Just left this big chunky chungus in a QUALITY 8-Wyper, and I'm not flushing it. Tag me in a photo and I'll give you a shoutout!"));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 9, t, new CustomNameInfo("Few things in life are perfect. This came close, but I thought I heard a fly. Nine Wypes!"));
+			RogueLibs.CreateCustomName(CDialogue.ToiletTouristPoint + 10, t, new CustomNameInfo("That was frickin' incredible! I wish I could give more than 10 Wypes!"));
 
 			RogueInteractions.CreateProvider<Toilet>(h =>
 			{
@@ -110,6 +121,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 
 		protected override void Initialize() { }
 
+		public bool bigQuestShidded = false;
 		public bool disgusting = false;
 		public bool hackedFree = false;
 		public bool hackedPoopsplosion = false;

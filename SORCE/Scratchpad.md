@@ -22,16 +22,31 @@ Quest mark current score:
 Quest mark accrual:
 	Quests.AddBigQuestPoints
 ##			C	Shidding General Mechanics
-##			C	Toilet Tourist
+##			T	Toilet Tourist
 Shit in every chunk with a toilet on the level
 Annoy or enrage owners depending on severity
+##			C	Disciple of Ludd
+Destroy machinery
+##			C	Fight the Power
+Dismantle any police infrastructure:
+	Public security cams / Turrets
+	Police Box
+	Alarm Button
+##			C	Mouse in a China Shop
+Avoid destruction
+##			C	Underdank Trailblazer
+Cops now guard all Manhole exits
+No more Thieves & Cannibals hiding inside
+Gain marks for opening Manhole covers
 #	CT	Mutators
 ##		CT	Features
-###         CT   00 District Object Delimitation
+###         CT   00 Object Delimitation
 ####            C   00 Export all to Delimitation mod
 Pending test of basic features
 ####            C   00 Add SORCE dependency and test
 New
+####			T	Crate
+Test
 ####            √	Flame Grate
 Complete
 ####            √   Manhole

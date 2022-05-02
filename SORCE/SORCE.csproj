@@ -195,6 +195,8 @@
     <Compile Include="Patches\P_LevelTransition.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_FillMapChunks2.cs" />
     <Compile Include="Patches\P_ObjectPoolExtensions.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Crate.cs" />
+    <Compile Include="Patches\P_Quests.cs" />
     <Compile Include="Resources\SpriteLoader.cs" />
     <Compile Include="StatusEffects\Soiled.cs" />
     <Compile Include="StatusEffects\CleanedOut.cs" />
