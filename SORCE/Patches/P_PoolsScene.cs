@@ -326,26 +326,26 @@ namespace SORCE.Patches
 						break;
 
                     case VObject.TrashCan:
-						while (GC.percentChance(1)) // TODO: Move this part to Trash mod
-							GC.spawnerMain.SpawnItem(new Vector2(
-								spawnPosition.x + Random.Range(-0.32f, 0.32f),
-								spawnPosition.y + Random.Range(-0.32f, 0.32f)),
-								VItem.BananaPeel);
+                        while (GC.percentChance(1)) // TODO: Move this part to Trash mod
+                            GC.spawnerMain.SpawnItem(new Vector2(
+                                spawnPosition.x + Random.Range(-0.32f, 0.32f),
+                                spawnPosition.y + Random.Range(-0.32f, 0.32f)),
+                                VItem.BananaPeel);
 
-						while (GC.percentChance(chance))
-						{
-							Wreckage.SpawnWreckagePileObject_Granular(
-								new Vector2(spawnPosition.x, spawnPosition.y),
-								Wreckage.OverhaulWreckageType(),
-								GC.percentChance(50),
-								Random.Range(3, 7),
-								0.64f, 0.64f,
-								0);
-							chance -= 15;
-						}
+                        while (GC.percentChance(chance))
+                        {
+                            Wreckage.SpawnWreckagePileObject_Granular(
+                                new Vector2(spawnPosition.x, spawnPosition.y),
+                                Wreckage.OverhaulWreckageType(),
+                                GC.percentChance(50),
+                                Random.Range(3, 7),
+                                0.64f, 0.64f,
+                                0);
+                            chance -= 50;
+                        }
 
-						break;
-				}
+                        break;
+                }
 			}
 		}
     }

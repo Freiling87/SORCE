@@ -63,6 +63,56 @@ namespace SORCE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] BeerCan1 {
+            get {
+                object obj = ResourceManager.GetObject("BeerCan1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BeerCan2 {
+            get {
+                object obj = ResourceManager.GetObject("BeerCan2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BeerCan3 {
+            get {
+                object obj = ResourceManager.GetObject("BeerCan3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BeerCan4 {
+            get {
+                object obj = ResourceManager.GetObject("BeerCan4", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BeerCan5 {
+            get {
+                object obj = ResourceManager.GetObject("BeerCan5", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] BulletHole {
             get {
                 object obj = ResourceManager.GetObject("BulletHole", resourceCulture);
@@ -143,6 +193,26 @@ namespace SORCE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] FudJar {
+            get {
+                object obj = ResourceManager.GetObject("FudJar", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] FudLid {
+            get {
+                object obj = ResourceManager.GetObject("FudLid", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Hypo1 {
             get {
                 object obj = ResourceManager.GetObject("Hypo1", resourceCulture);
@@ -206,6 +276,16 @@ namespace SORCE.Properties {
         internal static byte[] ShotgunShell {
             get {
                 object obj = ResourceManager.GetObject("ShotgunShell", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] WhiskeyBottle {
+            get {
+                object obj = ResourceManager.GetObject("WhiskeyBottle", resourceCulture);
                 return ((byte[])(obj));
             }
         }

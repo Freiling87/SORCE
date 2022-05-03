@@ -141,11 +141,13 @@ namespace SORCE.Patches
 		/// Light Sources
 		/// </summary>
 		/// <param name="myObject"></param>
-		/// <param name="__instance"></param>
 		/// <returns></returns>
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(SpawnerMain.SetLighting2), argumentTypes: new[] { typeof(PlayfieldObject) })]
-		public static bool SetLighting2_Prefix(PlayfieldObject myObject, SpawnerMain __instance)
+		public static bool SetLighting2_Prefix(PlayfieldObject myObject)
 		{
+			//if (myObject.playfieldObjectItem.itemName == "CustomWreckage")
+			//	return false;
+
 			if (GC.challenges.Contains(nameof(ObjectsRelit))
 				&& myObject.CompareTag("ObjectReal"))
 			{
@@ -162,7 +164,7 @@ namespace SORCE.Patches
 				&& (myObject.CompareTag("Item") || myObject.CompareTag("Wreckage")))
 			{
 				Item item = (Item)myObject;
-
+				 
 				// myObject.defaultShader = GC.normalShader; // TODO: Test use LitShader with NewMoon to make them stand out subtly?
 				myObject.defaultShader = GC.litShader;
 

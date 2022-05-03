@@ -1,15 +1,7 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using RogueLibsCore;
-using SORCE.Challenges.C_AmbientLightColor;
 using SORCE.Challenges.C_AmbientLightLevel;
-using SORCE.Challenges.C_Lighting;
-using SORCE.Challenges.C_VFX;
 using SORCE.Logging;
-using SORCE.Patches.P_PlayfieldObject;
-using System.Collections;
-using System.Linq;
-using UnityEngine;
 
 namespace SORCE.Patches.Interface
 {
@@ -30,10 +22,6 @@ namespace SORCE.Patches.Interface
 				GC.cameraScript.lightingSystem.EnableAmbientLight = false;
 			else
 				GC.cameraScript.lightingSystem.EnableAmbientLight = true;
-
-			// Hopefully helps performance
-			P_Bullet.GunplayRelit = GC.challenges.Contains(nameof(GunplayRelit)) || DebugTools.debugMode;
-			P_Gun.ShootierGuns = GC.challenges.Contains(nameof(ShootierGuns)) || DebugTools.debugMode;
 
 			// TODO: Check for Mutator Menu, or that the button regards ambient light mutators. For now, this'll work.
 			GC.loadLevel.SetNormalLighting();

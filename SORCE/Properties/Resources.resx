@@ -118,6 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BeerCan1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BeerCan1.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BeerCan2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BeerCan2.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BeerCan3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BeerCan3.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BeerCan4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BeerCan4.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BeerCan5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BeerCan5.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="BulletHole" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BulletHole.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -142,6 +157,12 @@
   <data name="CigaretteButt5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CigaretteButt5.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="FudJar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FudJar.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FudLid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FudLid.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Hypo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Hypo1.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -162,5 +183,8 @@
   </data>
   <data name="ShotgunShell" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ShotgunShell.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="WhiskeyBottle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WhiskeyBottle.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

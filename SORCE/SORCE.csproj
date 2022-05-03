@@ -105,6 +105,7 @@
     <Compile Include="Challenges\C_Buildings\ConcreteJungle.cs" />
     <Compile Include="Challenges\C_Features\MeatsOfRogue.cs" />
     <Compile Include="Challenges\C_Features\TrapsUnlimited.cs" />
+    <Compile Include="Challenges\C_Features\PublicScreens.cs" />
     <Compile Include="Challenges\C_Features\WelcomeMats.cs" />
     <Compile Include="Challenges\C_Features\VerdantVistas.cs" />
     <Compile Include="Challenges\C_Gangs\BananaSmugglers.cs" />
@@ -126,10 +127,10 @@
     <Compile Include="Challenges\C_Gangs\BandoBrothers.cs" />
     <Compile Include="Challenges\C_Gangs\CrooklynAve.cs" />
     <Compile Include="Challenges\C_Gangs\PiruSt.cs" />
-    <Compile Include="Challenges\C_LightSources\AgentsRelit.cs" />
-    <Compile Include="Challenges\C_LightSources\ItemsRelit.cs" />
-    <Compile Include="Challenges\C_LightSources\ObjectsRelit.cs" />
-    <Compile Include="Challenges\C_LightSources\GunplayRelit.cs" />
+    <Compile Include="Challenges\C_Lighting\AgentsRelit.cs" />
+    <Compile Include="Challenges\C_Lighting\ItemsRelit.cs" />
+    <Compile Include="Challenges\C_Lighting\ObjectsRelit.cs" />
+    <Compile Include="Challenges\C_Lighting\GunplayRelit.cs" />
     <Compile Include="Challenges\C_MapSize\MapSizeChallenge.cs" />
     <Compile Include="Challenges\C_Overhaul\Hell.cs" />
     <Compile Include="Challenges\C_Overhaul\Tindertown.cs" />
@@ -148,6 +149,10 @@
     <Compile Include="Challenges\C_Overhaul\LowTechLowLife.cs" />
     <Compile Include="Challenges\C_Population\PopulationChallenge.cs" />
     <Compile Include="Challenges\C_Gangs\GangChallenge.cs" />
+    <Compile Include="Challenges\C_Preview\ScaryGunsPreview.cs" />
+    <Compile Include="Challenges\C_VFX\BuggierBulletholes.cs" />
+    <Compile Include="Challenges\C_VFX\DestroyederDestroyage.cs" />
+    <Compile Include="Challenges\C_VFX\ConsumererProducts.cs" />
     <Compile Include="Challenges\C_VFX\ShootierGuns.cs" />
     <Compile Include="Challenges\C_VFX\BachelorerPads.cs" />
     <Compile Include="Challenges\C_VFX\FloralerFlora.cs" />
@@ -191,8 +196,13 @@
     <Compile Include="Localization\VAgentGoal.cs" />
     <Compile Include="Localization\VRelationship.cs" />
     <Compile Include="Localization\VSpecialAbility.cs" />
+    <Compile Include="Patches\P_BrainUpdate.cs" />
+    <Compile Include="Patches\P_ItemFunctions.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_FillMapChunks2.cs" />
     <Compile Include="Patches\P_ObjectPoolExtensions.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_KillerPlant.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_SlimePuddle.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Tree.cs" />
     <Compile Include="Resources\SpriteLoader.cs" />
     <Compile Include="Traits\UnderdankVIP.cs" />
     <Compile Include="Utilities\Audiovisual.cs" />
@@ -282,6 +292,11 @@
     <None Include="Documentation\2.0. Features.md" />
     <None Include="Documentation\1.0. Installation.md" />
     <None Include="packages.config" />
+    <None Include="Resources\BeerCan1.bin" />
+    <None Include="Resources\BeerCan2.bin" />
+    <None Include="Resources\BeerCan3.bin" />
+    <None Include="Resources\BeerCan4.bin" />
+    <None Include="Resources\BeerCan5.bin" />
     <None Include="Resources\BulletHole.bin" />
     <None Include="Resources\BulletHoleGlass.bin" />
     <None Include="Resources\Casing.bin" />
@@ -290,6 +305,8 @@
     <None Include="Resources\CigaretteButt3.bin" />
     <None Include="Resources\CigaretteButt4.bin" />
     <None Include="Resources\CigaretteButt5.bin" />
+    <None Include="Resources\FudJar.bin" />
+    <None Include="Resources\FudLid.bin" />
     <None Include="Resources\Hypo1.bin" />
     <None Include="Resources\Hypo2.bin" />
     <None Include="Resources\Hypo3.bin" />
@@ -297,6 +314,7 @@
     <None Include="Resources\Hypo5.bin" />
     <None Include="Resources\RifleCasing.bin" />
     <None Include="Resources\ShotgunShell.bin" />
+    <None Include="Resources\WhiskeyBottle.bin" />
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>

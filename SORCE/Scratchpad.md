@@ -9,8 +9,11 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |H					|On hold (Should have specifics in header)
 |N					|To be implemented in next release
 |T					|To Test
+#	C	Unspecified Bugs
+##		C	Water & Fire particles invisible
+Probably just need to gate a bullet patch
 #	CT	Mutators
-##		CT	Features
+##		C	Features
 ###         C   00 District Object Delimitation
 ####            C   00 Export all to Delimitation mod
 Pending test of basic features
@@ -26,6 +29,29 @@ Complete
 Complete
 ####            √   Tube
 Complete
+###         √H  Public Screens
+####			H	Custom Sprites
+New
+####            C   Wall type issues
+Specifically seems to not work on Concrete walls. Hopefully there's another way to check and allow those.
+I think this is just WallMaterialType == None. Concrete are an exception to avoid against-wall spawns.
+####			C	Destroy when host wall destroyed
+Should include Light & Ambient Audio as well
+####            C   Specific placement
+Commercial chunks
+Next to front doors (avoid unlocked & prohibited)
+Avoid alleys if possible, signs need vantage
+####            H   Content
+|Overhaul                       |Palette    |Audio  |
+|:------------------------------|:----------|:------|
+|AnCapistan                     |Neon       |TV noise
+|DiscoCityDanceoff              |Primary    |Disco  
+|GrandCityHotel                 |Blue       |Customer Service Muzak
+|MACITS                         |Red        |Anthem/Propaganda
+|PoliceState                    |?          |Dystopian Loudspeaker
+|Technocracy                    |?          |Beep Boop Bop
+|Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
+|TinderTown                     |Blue       |Ads for water
 ###         √H  Pollution Solution
 ####			H	Split up into granular mutators?
 Oil Spills
@@ -47,36 +73,6 @@ New
 ###         H   Public Pools
 Spawn as square or circle
 Always have water pump
-###         C   Screens
-####			C	Custom Sprites
-####			C	Corner spawning issues
-Exclude diagonal wallchecks?
-####            C   Wall type issues
-Specifically seems to not work on Concrete walls. Hopefully there's another way to check and allow those.
-I think this is just WallMaterialType == None. Concrete are an exception to avoid against-wall spawns.
-####            C   Did not spawn in Downtown
-Might have been wallmod
-####            C   Exclude Interiors
-not 100% they actually spawn indoors
-####            C   Light spawns without screen 
-(or screen invisible?)
-####            C   Disable vanilla screen light to improve saturation of selected color
-Might be in GetComponent if we want to be lazy.
-####            C   Specific placement
-Commercial chunks
-Next to front doors (avoid unlocked & prohibited)
-Avoid alleys if possible, signs need vantage
-####            H   Content
-|Overhaul                       |Palette    |Audio  |
-|:------------------------------|:----------|:------|
-|AnCapistan                     |Neon       |TV noise
-|DiscoCityDanceoff              |Primary    |Disco  
-|GrandCityHotel                 |Blue       |Customer Service Muzak
-|MACITS                         |Red        |Anthem/Propaganda
-|PoliceState                    |?          |Dystopian Loudspeaker
-|Technocracy                    |?          |Beep Boop Bop
-|Test Tube City                 |?          |Study Participant Warnings, futuristic PSA music
-|TinderTown                     |Blue       |Ads for water
 ###         H   Signs
 Pending resolution of Wall Layer for wall mounted signs
 Pending resolution of Custom Objects for floor-based signs
@@ -157,7 +153,7 @@ Certain overhauls
 ###         √H  Verdant Vistas
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
-##		C	Light Sources
+##		√H	Light Sources
 CameraScript
 	.SetLighting
 		Objects & Items
@@ -166,17 +162,6 @@ StatusEffects
 LoadLevel
 	.SetNormalLighting 
 
-###			C	Objects Re-Lit
-P_SpawnerMain.SetLighting2_Prefix
-####			C	Disable Object Glow removal
-Most players will not want this. It's better for CCU.
-####			C	00 Some objects lack a native light
-Slime Barrel
-Flame Grate
-####			C	Flicker Lamp light
-####			C	Flicker Flaming Barrel light
-####			C	Pulse radioactive lights
-####			C	Blink SecurityCam light
 ###         H   Agents Re-Lit
 Light stays until body is gibbed
 	See what method that is and analyze it
@@ -205,21 +190,23 @@ Someday
 P_SpawnerMain.SetLighting2_Prefix
 ####			H	Omit briefcase
 Because Pulp Fiction
-###			C	Gunplay Re-Lit
+###			√H	Gunplay Re-Lit
 P_Bullet.RealAwake_Postfix
-Ensmallen BulletHit particle effect
-##		C	Gangs
-###			C	00 Gang Minimum
-Have a gang size minimum at which to cut off the gangspawner, since some of them don't make sense in too few numbers.
-###			C	00 Exclude Home Base
-New
-###			C	Gangs stop navigating
-Stopped in place
-###			C	Initial Relationship
-###			C	Not Swearwolves
-WerewolfB Spawned perma-wolves
-	Might want one specific to that anyway
-Try making an Office drone and giving him the special ability.
+####			√H   Muzzle Flash
+P_Gun.Shoot_Prefix
+P_Turret.FireGun_Postfix
+#####				C	Dark Spot
+Dark spot is spawned when too many flashes occur in a given area
+###			√H	Objects Re-Lit
+P_SpawnerMain.SetLighting2_Prefix
+####			C	00 Some objects lack a native light
+Slime Barrel
+Flame Grate
+####			C	Flicker Lamp light
+####			C	Flicker Flaming Barrel light
+####			C	Pulse radioactive lights
+####			C	Blink SecurityCam light
+##		√H	Gangs
 ###			H	Modifiers
 ####			H	Blahd Runs Thick
 Blahd gangs are larger, same total number of agents.
@@ -234,6 +221,9 @@ Crepe gangs of 1, same total number of agents.
 ####			H	Innocent Gangs
 ###			√H	Protect & Servo
 ####			H	Split into enforcement & spawn types
+###			√H	The Blue Line
+####			H	Allow Bribe on level 1
+Agent.DetermineButtons
 ###			√	Back Draft
 ###			√	Banana Smugglers
 ###			√	Bando Brothers
@@ -244,22 +234,17 @@ Crepe gangs of 1, same total number of agents.
 ###			√	Home Team
 ###			√	Lunch Hour
 ###			√	Merchant Caravans
+###			√	Not Swearwolves
 ###			√	Piru St.
-###			C	Professional Network
-####			C	Disable thief's pickpocket
+###			√	Professional Network
 ###			√	Rougher Ruffians
 ###			√	Team Melvin
-###			√	The Blue Line
 ###			√	The Bluer Line
 ###			√	Union Town
 ###			√	We Love Our Job Creators
-##		C	VFX
-###         C   00 Spawns litter on level editor
-New
-###			C	00 Wreckage Rotation
-###			C	00 Spawn Trash when destroying Trashcan
-###			C   Bachelorer Pads
-####            C   Scale litter to chunk type & Slumminess
+##		√H	VFX
+###			√H   Bachelorer Pads
+####            H   Scale litter to chunk type
 House: scale to chance. Some people are slobs, some aren't.
 Some are also slobs in different ways. 
 ####            H   Refrigerator
@@ -272,32 +257,57 @@ Will need custom sprites I think
 ####            √   Table (Big)
 ####            √   Table (Small)
 ####            √   Toilet
-###			H	Consumerer Products
+###			√H	Consumerer Products
 On using consumables, spawn litter
-####			C	00 Add some of these to generic litter sprite inventories
-####			C	ATM Receipt
+####			H	Hot Fud Jar
+####			H	ATM Receipt
 Also for most paid machines
-####            C   Cigarette Butt
-Fucking everywhere 
-Tiny smoke particle that burns out quickly
-If it lands on oil, light it up!
-####            C   Beer can
-Though this might not work with the throwable beer can
-####			C	Fud Jar
-With scorched Hot variant
-####			C	Smeared Banana peel
+####			H	Smeared Banana peel
 After someone slips on it
-####			C	Whiskey Bottle
+####            √H	Cigarette Butt
+#####				C	Light Oil
+#####				C	Smoke Particles
+####            √H	Beer can
+#####				C	Audio
+####			√H	Whiskey Bottle
+####			√	Fud Jar
+#####				C	Shatter
+###			H	Destroyeder Destroyage
+####			C	Burned Wall
+#####				C	Barbed Wire
+#####				C	Hedge
+#####				C	Wood
+#####				C	Scorch decal on surviving wall near fire
+####			C	Demolished Wall
+#####				C	Barbed Wire
+#####				C	Bars
+#####				C	Border/Concrete
+#####				C	Brick
+#####				C	Glass
+#####				C	Hedge
+#####				C	Steel
+#####				C	Wood
+####			C	Destroyed Object Wreckage
+#####				C	Ammo Dispenser
+Shell casings
+#####				C	Goodie Machine
+Broken goodies
+#####				C	Plant
+Pile of soil that was inside pot
+#####				C	Trash Can
+Trash
+####			C	Burned Object Scorch Decal
+####			C	Explosions, General
+#####				C	Fling wreckage further
 ###			H	Flammable Wreckage
 New
-###			T	Dirtier Districts
+###			√H	Dirtier Districts
 PoolsScene.SpawnObjectReal
-####			T	00 Fix public litter algo
-Reduced walldistance, set gibs to 1 in VFX.SpawnLitterPublic
+####			C	Add Custom Litter
 ###			H	Lootier Boxes
 Spawn "hoard" sprites around Safe or Chest in Armory
 Vary spawns per chunk type
-###         CT  Shootier Guns
+###			√H  Shootier Guns
 ####			T	00 Destroy on Level End
 Lasted into Home Base
 ####			T	Decals
@@ -339,17 +349,14 @@ New
 ####			H	Wall Fragments
 Spawn TINY fragments of wood, glass, etc. when you shoot a wall
 Could also use a particle effect that resembles dust, which would dispose of itself rather than cluttering/slowing
-####			C   Muzzle Flash
-P_Gun.Shoot_Prefix
-P_Turret.FireGun_Postfix
-#####				C	Dark Spot
-Dark spot is spawned when too many flashes occur in a given area
-###			C	Floraler Flora
+###			√H	Floraler Flora
 PoolsScene.SpawnObjectReal
-####			C	Stopped working on Hedge Walls
-New
-####			C	Throw leaves around when you hit a plant
-Before destruction
+##		H	Agent Spawns
+###			C	Spawn bodyguards for Vendor Carts
+###			C	Spawn slaves in rich homes
+###			C	Factory slave labor
+"Overseer" agent, combines Worker & Slavemaster
+Good place for "Roam between Agents"
 ##		H	Roamers
 ###         H   Arsonist
 DW
@@ -870,11 +877,20 @@ Works
 ##		√	Audio
 ###			√	Ambienter Ambience
 Complete, until Overhauls are scoped
-###         C   Footsteps
+###         C   Footsteps 
 New, for stealth
 ###         C   Zombies Moan
 New
-##		√	Buildings
+##		√H	Buildings
+###			C	Flammable Floors
+Oil increases burn range
+Grass burns 1 square
+Scorch decals
+###			C	Remixers
+Except a less lame name
+No curated orders, those are for overhauls
+####			C	Random Building mod every level
+####			C	Random Building mod every District
 ###         √   00 Flammable buildings don't spawn Fire Spewers
 P_RandomSelection.RandomSelect
 ###         √   Brixton
@@ -901,38 +917,58 @@ Complete
 ###         √   Megapolis
 ###         √   Ultrapolis
 #	C	Traits
-##		C	Underdank Citizen
-###         C   New features
-CHECK FEATURE LIST
+##		C	Underdank General
+###			H	Flush Banana to summon Toilet Smurves
+They think it's the golden turd of prophecy
+###			H	"Call of the Sewers" 
+###			C	Taking huge shit no longer annoys witnesses
+
+###			C	Big Quest: Toilet Tourist
+Get a mark for every toilet you take a huge shit in.
+Gain the "cleaned out" status whenever you take a dump, cured by eating food.
+###			C	Headfirst Exit
+####			C	Jump any hidden agent first
+####			C	Helmets reduce damage
+####			C	Exclude Falling In
+Because this would mean a total of 60 points of damage. This is an edge case.
+When falling in with no exits, do vanilla behavior.
+####			C	Toilet
+If you're small, no damage and not destroyed
+Else destroy toilet while exiting it
+####			C	Manhole
+#####				C	Sound effect
+###			C	Exits does not include toilets
+They might only get added to the objectList if you come near the chunk
+###			C	Shitsplosion
+####			C	Poison self
+####			C	Poison nearby
+####			C	Anger nearby
+###			C	Manhole
+####			C	Jump Exit
+Possible solution: don't use Teleport. Just change their tr.pos - it was alarmingly simple the first time, if memory serves, but I'm fuzzy on this one
+###			C	Falling In Hole 
+####			C	Animation
+####			C	Find exits correctly
 ###			H	Death by E_
-Tried reordering where damage is allocated
-	DW
 Honestly I don't care about this too much unless people gripe
 Agent
 	.deathMethod
 	.deathMethodItem
 	.deathMethodObject
 	.deathKiller
-###			T	Spawns near Water
-TileInfo.WaterNearby has a levelTheme check 😡
-	Transpiler patched, test
-###			C	Manhole Agent Brain broken
-Attempted calling BecomeUnhidden
-	DW
-##		T	Underdank VIP
-###			T	Poison Resistance
-Attempted:
+###			H	Select Exit
+Fully disappear player
+Center screen on currently selected Exit
+WSAD to move to next exit
+E to pop out of selected
+###			√	Poison Resistance
 P_StatusEffects.GetStatusEffectTime_Postfix
-###			T	No falling damage for Manholes
-Attempted
-###			T	Not afraid of disgusting toilets
-Attempted
 #	C	Release
 ##		C	Export
 - Scary Guns
 ##		C	Set Unlock costs
 To get those sweet nuggets 😈
-##		C	Disable Core.DebugMode
+##		C	Disable DebugTools.debugMode
 ##		C	Version number
 1.0.0
 ##		C	Documentation
@@ -940,6 +976,9 @@ To get those sweet nuggets 😈
 ###         C   Feature List
 ###         C   Planned Feature List
 ###         C   Thanks
+####			C	Sprites
+UwuMacaroniTime
+GenEric
 ##		C	Uploads
 ###			C	BananaMods
 ###			C	Discord
