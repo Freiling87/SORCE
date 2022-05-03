@@ -1,6 +1,7 @@
 ﻿using BepInEx.Logging;
 using Light2D;
 using RogueLibsCore;
+using SORCE.BigQuests;
 using SORCE.Extensions;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
@@ -155,6 +156,33 @@ namespace SORCE.Utilities
 		public static void TakeHugeShit(Toilet toilet, bool loud = true)
 		{
 			Shitsplode(toilet, loud, true);
+			Agent agent = toilet.interactingAgent;
+			Poopsplosion(toilet, loud, true);
+
+			if (agent.bigQuest == nameof(ToiletTourist))
+            {
+				bool questFlag = true;
+
+				foreach (ObjectReal objectReal in GC.objectRealList)
+                {
+					if (objectReal is Toilet toilet2 
+						&& toilet2.GetHook<P_Toilet_Hook>().bigQuestShidded
+						&& toilet2.curChunk == toilet.curChunk)
+                    {
+						questFlag = false;
+						break;
+                    }
+                }
+
+				if (questFlag)
+                {
+					agent.SayDialogue(CDialogue.ToiletTouristPoint + Random.Range(1, 10));
+					GC.quests.AddBigQuestPoints(agent, nameof(ToiletTourist));
+				}
+				else
+					agent.SayDialogue(CDialogue.ToiletTouristNoPoint);
+            }
+
 			toilet.StopInteraction();
 		}
 

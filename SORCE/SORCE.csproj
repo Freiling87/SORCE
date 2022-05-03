@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BigQuests\ToiletTourist.cs" />
     <Compile Include="Challenges\ChallengeController.cs" />
     <Compile Include="Challenges\ChallengeInfo.cs" />
     <Compile Include="Challenges\ChallengeManager.cs" />
@@ -203,7 +204,11 @@
     <Compile Include="Patches\P_PlayfieldObject\P_KillerPlant.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_SlimePuddle.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_Tree.cs" />
+    <Compile Include="Patches\P_PlayfieldObject\P_Crate.cs" />
+    <Compile Include="Patches\P_Quests.cs" />
     <Compile Include="Resources\SpriteLoader.cs" />
+    <Compile Include="StatusEffects\Soiled.cs" />
+    <Compile Include="StatusEffects\CleanedOut.cs" />
     <Compile Include="Traits\UnderdankVIP.cs" />
     <Compile Include="Utilities\Audiovisual.cs" />
     <Compile Include="Utilities\MapGen\AmbientAudio.cs" />

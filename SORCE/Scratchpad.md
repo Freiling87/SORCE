@@ -7,8 +7,37 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |!					|Urgent
 |C					|To Code (Includes any non-testing task)
 |H					|On hold (Should have specifics in header)
-|N					|To be implemented in next release
 |T					|To Test
+#	T	Recent commit testing
+Map Size Downtown
+	I think Canals used up all the chunks, so vanilla ended up with 2 or 3 buildings
+Spawned Conf centers when no cop bots
+	A few attempts, still doing it
+#		H	Big Quests
+##			C	Initial research
+Quest mark goal: 
+	agent.bigQuestObjectCountTotalTemp
+Quest mark current score:
+	agent.bigQuestObjectCountTemp
+Quest mark accrual:
+	Quests.AddBigQuestPoints
+##			C	Shidding General Mechanics
+##			T	Toilet Tourist
+Shit in every chunk with a toilet on the level
+Annoy or enrage owners depending on severity
+##			C	Disciple of Ludd
+Destroy machinery
+##			C	Fight the Power
+Dismantle any police infrastructure:
+	Public security cams / Turrets
+	Police Box
+	Alarm Button
+##			C	Mouse in a China Shop
+Avoid destruction
+##			C	Underdank Trailblazer
+Cops now guard all Manhole exits
+No more Thieves & Cannibals hiding inside
+Gain marks for opening Manhole covers
 #	C	Unspecified Bugs
 ##		C	Water & Fire particles invisible
 Probably just need to gate a bullet patch
@@ -19,6 +48,8 @@ Probably just need to gate a bullet patch
 Pending test of basic features
 ####            C   00 Add SORCE dependency and test
 New
+####			T	Crate
+Test
 ####            √	Flame Grate
 Complete
 ####            √   Manhole
@@ -963,6 +994,89 @@ WSAD to move to next exit
 E to pop out of selected
 ###			√	Poison Resistance
 P_StatusEffects.GetStatusEffectTime_Postfix
+###			T	No falling damage for Manholes
+Attempted
+###			T	Not afraid of disgusting toilets
+Attempted
+##		H	Crohn's Disease
+Every time you eat food or drink something, you gain a 60-second status called Have to Take a Huge Shit. 
+If you don't use the bathroom before then, you shit yourself in public and annoy everyone around you, regardless of their existing relationship. 
+You also gain the Shidded Pants status which annoys everyone who sees you, and have to use a Bathtub to remove it.
+#		H	Status Effects
+##			C	Fresh
+Gained by using Bathtub
+Charisma bonus
+60s
+##			C	Soiled
+Applied 180 seconds after Fresh wears off
+Charisma penalty, annoys everyone
+60s
+##			C	Shid effects
+If under 10s left, bonus to speed
+Taking damage reduces timer
+Can release a fart with a special key
+	Large chance to pause shid timer a bit
+	Small chance to shart
+	Annoys nearby
+	Makes noise
+	Small hazard
+###				C	Constipated
+No timer
+Zero shart chance
+Blocks toilet
+###				C	Gassy Shits
+Low shart chance
+On release:
+	Grey smoke particles
+	Small hazard
+	Annoy owner
+	Very loud
+On accident:
+	Soiled
+###				C	Sick Shits
+High shart chance
+Shorter timer
+On release:
+	Slime spill with shid decal sprite
+	Player immune until they step away from it
+	Toxic fumes from toilet
+	Annoys owner
+On accident:
+	Toxic waste explosion
+	Soiled
+###				C	Solid Shits
+Low shart chance
+Normal dump
+Thank god
+###				C	Spicy Shits
+Medium shart chance
+Shorter timer
+On release:
+	First fire, then fire smoke particles
+	Can ignite neighboring walls
+	Enrages owner
+	Huge mess
+	Medium loudness
+On accident:
+	Molotov explosion
+	Soiled
+##			C	Cleaned Out
+Can't shid
+Cleared by eating 12 shid points
+Some foods can cause special shids
+|Food				|Pts.	|Special|
+|:------------------|------:|:------|
+|Banana				|4		|Clean
+|Beer				|6		|Poison
+|Cannibalism		|2 x Qty|Awful
+|Cheeseburger		|12		|Awful
+|Cocktail			|6		|Poison
+|Fud				|4		|Clean
+|Hot Fud			|6		|Fiery
+|Ham Sandwich		|6		|Clean
+|Oil (Oil-Reliant)	|.5x Qty|Fiery
+|Sugar				|6		|Awful
+|Whiskey			|6		|Poison
 #	C	Release
 ##		C	Export
 - Scary Guns

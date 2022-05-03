@@ -1,17 +1,8 @@
 ﻿using RogueLibsCore;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using SORCE;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using SORCE.Challenges;
-using SORCE.Localization;
-using System.Linq;
 
 namespace SORCE.Challenges.C_VFX
 {
-	public class BachelorerPads
+    public class BachelorerPads
 	{
 		[RLSetup]
 		static void Start()
