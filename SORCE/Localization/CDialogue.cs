@@ -11,9 +11,11 @@
 				FireHydrantBuyFail = "FireHydrantBuyFail",
 				FireHydrantBuySuccess = "FireHydrantBuySuccess",
 				MachineBusy = "MachineBusy",
-				NeedCrowbar = "NeedCrowbar",
+				ManholeNeedCrowbar = "NeedCrowbar",
+				ManholeNoExits = "ManholeNoExits",
 				ToiletBuyFail = "ToiletBuyFail",
-				ToiletDisgusting = "ToiletDisgusting"
+				ToiletDisgusting = "ToiletDisgusting",
+				ToiletDisgustingOkay = "ToiletDisgustingOkay"
 				;
 		}
 	}

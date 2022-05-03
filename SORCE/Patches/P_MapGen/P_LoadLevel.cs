@@ -14,6 +14,8 @@ using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
 using SORCE.Patches.P_PlayfieldObject;
+using SORCE.Traits;
+using SORCE.Utilities;
 using SORCE.Utilities.MapGen;
 using System;
 using System.Collections;
@@ -242,6 +244,9 @@ namespace SORCE.Patches
 			P_Bullet.GunplayRelit = GC.challenges.Contains(nameof(GunplayRelit)) || DebugTools.debugMode;
 			P_Bullet.RealisticBullets = GC.challenges.Contains(nameof(ScaryGunsPreview)) || DebugTools.debugMode;
 			P_Gun.ShootierGuns = GC.challenges.Contains(nameof(ShootierGuns)) || DebugTools.debugMode;
+			Underdank.UnderdankActive =
+				TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
+				TraitManager.IsPlayerTraitActive<UnderdankVIP>();
 			Wreckage.HasObjectExtraWreckage = GC.challenges.Contains(nameof(DestroyederDestroyage)) || DebugTools.debugMode;
 
 			return true;

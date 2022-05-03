@@ -596,6 +596,7 @@ namespace SORCE.MapGenUtilities
 				agent.noEnforcerAlert = true;
 				agent.oma.mustBeGuilty = true;
 
+                // Doesn't seem to work
                 foreach (Agent playerAgent in GC.playerAgentList)
                 {
                     if (agentType == VAgent.Thief)

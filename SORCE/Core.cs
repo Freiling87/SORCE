@@ -2,23 +2,19 @@
 using BepInEx.Logging;
 using HarmonyLib;
 using RogueLibsCore;
+using SORCE.Challenges.C_Gangs;
 using SORCE.Properties;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SORCE
 {
-	[BepInPlugin(ModInfo.BepInExPluginId, ModInfo.Title, ModInfo.Version)]
+    [BepInPlugin(ModInfo.BepInExPluginId, ModInfo.Title, ModInfo.Version)]
 	[BepInProcess("StreetsOfRogue.exe")]
 	[BepInDependency(RogueLibs.GUID, RogueLibs.CompiledVersion)]
 	public class Core : BaseUnityPlugin
 	{
-		public const bool debugMode = true;
-
 		public static ManualLogSource ConsoleMessage;
 		public static BaseUnityPlugin MainInstance;
 
@@ -58,5 +54,14 @@ namespace SORCE
 			string text = GC.nameDB.GetName(customNameInfo, vNameType);
 			objectReal.Say(text);
 		}
+	}
+	 
+	public static class DebugTools
+	{
+		public const bool debugMode = true;
+
+		public static List<string> debugChallenges = new List<string>()
+		{
+		};
 	}
 }

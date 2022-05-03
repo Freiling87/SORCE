@@ -1,9 +1,11 @@
 ﻿using BepInEx.Logging;
+using Light2D;
 using RogueLibsCore;
 using SORCE.Extensions;
 using SORCE.Logging;
 using SORCE.MapGenUtilities;
 using SORCE.Patches.P_PlayfieldObject;
+using SORCE.Traits;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,77 +19,146 @@ namespace SORCE.Utilities
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;
 
-		public static List<PlayfieldObject> Exits(Agent agent)
+		public static bool UnderdankActive;
+
+		public static PlayfieldObject ClosedExit(PlayfieldObject entry)
 		{
 			List<PlayfieldObject> exits = new List<PlayfieldObject>();
+			exits.AddRange(GC.objectRealList.OfType<Manhole>().Where(manhole => !manhole.opened));
+			exits.AddRange(GC.objectRealList.OfType<Toilet>().Where(toilet => !toilet.destroyed));
 
+			if (exits.OfType<Manhole>().Any(mh => mh.hole == entry))
+				exits.Remove(exits.OfType<Manhole>().FirstOrDefault(mh => mh.hole == entry));
+
+			if (exits.Contains(entry))
+				exits.Remove(entry);
+
+			return exits.RandomElement();
+		}
+
+		public static List<PlayfieldObject> Exits(Agent agent, PlayfieldObject entry)
+		{
+			List<PlayfieldObject> exits = new List<PlayfieldObject>();
 			exits.AddRange(GC.objectRealList.OfType<Manhole>().Where(manhole => manhole.opened));
-			exits.AddRange(GC.objectRealList.OfType<Hole>().Where(e => e.objectHoleType == VObject.Manhole));
 
-			if (E_Agent.IsFlushable(agent))
+			if (E_Agent.IsFlushableToilet(agent))
 				exits.AddRange(GC.objectRealList.OfType<Toilet>().Where(toilet => !toilet.destroyed));
+
+			if (exits.OfType<Manhole>().Any(mh => mh.hole == entry))
+				exits.Remove(exits.OfType<Manhole>().FirstOrDefault(mh => mh.hole == entry));
+
+			if (exits.Contains(entry))
+				exits.Remove(entry);
 
 			return exits;
 		}
 
-		public static void ExitUnderdank(Agent agent, PlayfieldObject exit)
-        {
-			Vector3 exitSpot = exit.tr.position;
+		public static void ExitUnderdank(Agent agent, PlayfieldObject exit, bool pressurizedExit)
+		{
+			Vector3 exitSpot = exit.curPosition;
+			Vector2 exitFacing = Vector2.zero;
 
 			if (exit is Manhole manhole)
 			{
-				exitSpot = manhole.curPosition;
-				Vector2 exitFacing = Random.insideUnitCircle.normalized;
-				agent.Teleport((Vector2)exitSpot + exitFacing, true, true);
-				//agent.jumpDirection = exitFacing - (Vector2)exitSpot;
-				//agent.jumpSpeed = 8f;
-				//agent.Jump();
+				exitFacing = Random.insideUnitCircle.normalized;
+
+				if (pressurizedExit)
+					PressurizedExitDamage(agent, manhole);
 			}
 			else if (exit is Toilet toilet)
 			{
-				switch (((ObjectReal)exit).direction)
+				switch (toilet.direction)
 				{
 					case "E":
-						exitSpot += new Vector3(0.32f, 0f, 0f);
+						exitFacing = new Vector3(0.32f, 0f, 0f);
 						break;
 					case "N":
-						exitSpot += new Vector3(0f, 0.32f, 0f);
+						exitFacing = new Vector3(0f, 0.32f, 0f);
 						break;
 					case "S":
-						exitSpot += new Vector3(0f, -0.32f, 0f);
+						exitFacing = new Vector3(0f, -0.32f, 0f);
 						break;
 					case "W":
-						exitSpot += new Vector3(-0.32f, 0f, 0f);
+						exitFacing = new Vector3(-0.32f, 0f, 0f);
 						break;
 				}
-				
-				agent.Teleport(exitSpot, false, true);
+
+				if (pressurizedExit)
+					PressurizedExitDamage(agent, toilet);
 			}
 
+			agent.tr.position = exitSpot + (Vector3)exitFacing;
+			agent.jumpDirection = (Vector2)exitSpot + exitFacing * 2f;
+			agent.jumpSpeed = 0.5f;
+			agent.Jump();
+
+			GC.audioHandler.Play(agent, VAudioClip.ToiletTeleportOut);
+
 			if (GC.percentChance(10))
-				Poopsplosion(exit, true, false);
-			else
+				Shitsplode(exit, true, false);
+			else if (!(pressurizedExit && exit is Toilet toilet)) // Explosion called in Toilet.DestroyMe
 				GC.spawnerMain.SpawnExplosion(exit, exitSpot, VExplosion.Water, false, -1, false, ((ObjectReal)exit).FindMustSpawnExplosionOnClients(agent));
 		}
 
-		public static void FlushYourself(Agent agent, PlayfieldObject entryObject)
-		{
-			List<PlayfieldObject> exits = Exits(agent);
-	
-			if (exits.Contains(entryObject))
-				exits.Remove(entryObject);
+		/// <summary>
+		/// Damage player and destroy exit object
+		/// </summary>
+		/// <param name="agent"></param>
+		/// <param name="exit"></param>
+		private static void PressurizedExitDamage(Agent agent, PlayfieldObject exit)
+        {
+			float damage = -30f;
 
-			PlayfieldObject exit = exits[Random.Range(0, exits.Count - 1)];
-			ExitUnderdank(agent, exit);
+			if (agent.HasTrait<UnderdankCitizen>())
+				damage -= 5f;
+			else if (agent.HasTrait<UnderdankVIP>())
+				damage -= 10f;
+
+			if (GC.challenges.Contains(VChallenge.LowHealth))
+				damage *= 0.50f;
+
+			if (agent.inventory.equippedArmorHead != null)
+            {
+				InvItem helmet = agent.agentInvDatabase.equippedArmorHead;
+				int storedDurability = helmet.invItemCount;
+				agent.agentInvDatabase.DepleteArmor("Head", (int)damage);
+				damage -= storedDurability;
+			}
+
+			damage = Mathf.RoundToInt(damage);
+
+			if (damage > 0)
+			{
+				agent.deathMethod = "FellInHole";
+				agent.deathKiller = "Self";
+				agent.statusEffects.ChangeHealth(damage);
+			}
+
+			if (exit is Manhole manhole)
+				manhole.HoleAppear();
+			else if (exit is Toilet toilet)
+				toilet.DestroyMe();
+		}
+
+		public static void FlushYourself(Agent agent, PlayfieldObject entry)
+		{
+			logger.LogDebug("FlushYourself");
+			GC.audioHandler.Play(agent, VAudioClip.ToiletTeleportIn);
+			List<PlayfieldObject> exits = Exits(agent, entry);
+
+			if (exits.Any())
+				ExitUnderdank(agent, exits.RandomElement(), false);
+            else
+				ExitUnderdank(agent, ClosedExit(entry), true);
 		}
 
 		public static void TakeHugeShit(Toilet toilet, bool loud = true)
 		{
-			Poopsplosion(toilet, loud, true);
+			Shitsplode(toilet, loud, true);
 			toilet.StopInteraction();
 		}
 
-		public static void Poopsplosion(PlayfieldObject targetObj, bool loud = true, bool toiletPaper = false)
+		public static void Shitsplode(PlayfieldObject targetObj, bool loud = true, bool toiletPaper = false)
 		{
 			Agent agent = targetObj.interactingAgent;
 			Vector2 pos = targetObj.transform.position;

@@ -6,6 +6,7 @@ using RogueLibsCore;
 using SORCE.Logging;
 using SORCE.Traits;
 using SORCE.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -26,7 +27,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 		public static void Setup()
 		{
 			string t = VNameType.Dialogue;
-			RogueLibs.CreateCustomName(CDialogue.NeedCrowbar, t, new CustomNameInfo("I need a crowbar. I could break a nail!"));
+			RogueLibs.CreateCustomName(CDialogue.ManholeNeedCrowbar, t, new CustomNameInfo("I need a crowbar. I could break a nail!"));
+			RogueLibs.CreateCustomName(CDialogue.ManholeNoExits, t, new CustomNameInfo("I need to explore exits first!"));
 
 			t = VNameType.Interface;
 			RogueLibs.CreateCustomName(CButtonText.ManholePryBarehanded, t, new CustomNameInfo("Pry open barehanded"));
@@ -36,24 +38,34 @@ namespace SORCE.Patches.P_PlayfieldObject
 				if (h.Helper.interactingFar) 
 					return;
 
-				if (h.Object.opened)
+				if (h.Object.opened &&
+					(h.Agent.HasTrait<UnderdankCitizen>() ||
+					h.Agent.HasTrait<UnderdankVIP>()))
 				{
-					if (Underdank.Exits(h.Agent).Count() > 1 &&
-						h.Agent.HasTrait<UnderdankCitizen>() ||
-						h.Agent.HasTrait<UnderdankVIP>())
+					if (Underdank.Exits(h.Agent, h.Object).Any())
 						h.AddButton(VButtonText.FlushYourself, m =>
 						{
 							Underdank.FlushYourself(m.Agent, m.Object);
 							m.StopInteraction();
 						});
-					else
+                    else
+                    {
+						h.Agent.SayDialogue(CDialogue.ManholeNoExits);
 						h.StopInteraction();
+					}
 				}
 				else
 				{
 					InvItem crowbar = h.Agent.inventory.FindItem(VItem.Crowbar);
 
-					if (crowbar != null)
+					if (h.Agent.statusEffects.hasTrait(nameof(UnderdankVIP)))
+					{
+						h.AddButton(CButtonText.ManholePryBarehanded, m =>
+						{
+							m.StartOperating(2f, true, "Tampering");
+						});
+					}
+					else if (crowbar != null)
 					{
 						string extra = $" ({crowbar.invItemCount} - {crowbarTamperCost})";
 
@@ -62,19 +74,12 @@ namespace SORCE.Patches.P_PlayfieldObject
 							m.StartOperating(VItem.Crowbar, 2f, true, "Tampering");
 						});
 					}
-					else if (h.Agent.statusEffects.hasTrait(nameof(UnderdankVIP)))
-					{
-						h.AddButton(CButtonText.ManholePryBarehanded, m =>
-						{
-							m.StartOperating(2f, true, "Tampering");
-						});
-					}
 					else
 					{
 						h.SetStopCallback(m =>
 						{
 							m.gc.audioHandler.Play(m.Agent, VDialogue.CantDo);
-							m.Agent.SayDialogue(CDialogue.NeedCrowbar);
+							m.Agent.SayDialogue(CDialogue.ManholeNeedCrowbar);
 						});
 					}
 				}

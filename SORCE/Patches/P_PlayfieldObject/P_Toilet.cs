@@ -34,6 +34,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 			RogueLibs.CreateCustomName(COperatingText.ToiletShitting, t, new CustomNameInfo("Taking a huge shit"));
 			t = VNameType.Dialogue;
 			RogueLibs.CreateCustomName(CDialogue.ToiletDisgusting, t, new CustomNameInfo("*Gag* Nope."));
+			RogueLibs.CreateCustomName(CDialogue.ToiletDisgustingOkay, t, new CustomNameInfo("Smells fine to me!"));
 
 			RogueInteractions.CreateProvider<Toilet>(h =>
 			{
@@ -55,12 +56,18 @@ namespace SORCE.Patches.P_PlayfieldObject
 					// Vanilla button removal
 					FieldInfo interactionsField = AccessTools.Field(typeof(InteractionModel), "interactions");
 					List<Interaction> interactions = (List<Interaction>)interactionsField.GetValue(h.Model);
-					interactions.RemoveAll(i => i.ButtonName == VButtonText.FlushYourself); // Trying again with ==
-					interactions.RemoveAll(i => i.ButtonName == VButtonText.PurgeStatusEffects);
+					interactions.RemoveAll(i => i.ButtonName is VButtonText.FlushYourself); // Trying again with ==
+					interactions.RemoveAll(i => i.ButtonName is VButtonText.PurgeStatusEffects);
+
+					if (h.Object.GetHook<P_Toilet_Hook>().disgusting &&
+                        h.Agent.HasTrait<UnderdankVIP>())
+                    {
+						h.Agent.SayDialogue(CDialogue.ToiletDisgustingOkay);
+					}
 
 					int toiletCost = h.Object.GetHook<P_Toilet_Hook>().toiletCost;
 
-					if (E_Agent.IsFlushable(h.Agent))
+					if (E_Agent.IsFlushableToilet(h.Agent))
 						h.AddButton(VButtonText.FlushYourself, toiletCost, m =>
 						{
 							Underdank.FlushYourself(m.Agent, m.Object);
@@ -87,7 +94,8 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[HarmonyPrefix, HarmonyPatch(methodName: nameof(Toilet.FlushYourself), argumentTypes: new Type[] { })]
 		public static bool FlushYourself_Prefix(Toilet __instance)
 		{
-			if (__instance.interactingAgent.HasTrait<UnderdankCitizen>())
+			if (__instance.interactingAgent.HasTrait<UnderdankCitizen>() ||
+				__instance.interactingAgent.HasTrait<UnderdankVIP>())
             {
 				Underdank.FlushYourself(__instance.interactingAgent, __instance);
 				return false;
