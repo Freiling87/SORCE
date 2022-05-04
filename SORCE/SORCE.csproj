@@ -326,6 +326,7 @@
     <None Include="Scratchpad.md" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Hosted\UnityEngine.Networking.dll" />
     <Content Include="Images\SORCE_64x64.png" />
   </ItemGroup>
   <ItemGroup>
