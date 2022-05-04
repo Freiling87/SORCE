@@ -1,7 +1,7 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
+using SORCE.Utilities;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 

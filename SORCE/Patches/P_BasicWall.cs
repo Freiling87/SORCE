@@ -1,22 +1,14 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using UnityEngine;
-using RogueLibsCore;
-using Random = UnityEngine.Random;
-using System.Collections;
-using System.Reflection;
-using System;
-using SORCE;
-using SORCE.Challenges;
-using SORCE.Logging;
 using SORCE.Challenges.C_VFX;
+using SORCE.Logging;
+using UnityEngine;
 using static SORCE.Localization.NameLists;
-using SORCE.Localization;
-using SORCE.MapGenUtilities;
+using Random = UnityEngine.Random;
 
 namespace SORCE.Patches
 {
-	[HarmonyPatch(declaringType: typeof(BasicWall))]
+    [HarmonyPatch(declaringType: typeof(BasicWall))]
 	public static class P_BasicWall
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
@@ -34,11 +26,11 @@ namespace SORCE.Patches
 		public static bool Spawn_Prefix(SpawnerBasic spawner, ref string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
 			if (wallName == VWall.Border)
-				wallName = Structures.BorderWallType();
+				wallName = Utilities.MapGen.Structures.BorderWallType();
 			else if (VWall.Fence.Contains(wallName))
-				wallName = Structures.FenceWallType(wallName);
+				wallName = Utilities.MapGen.Structures.FenceWallType(wallName);
 			else if (VWall.Structural.Contains(wallName))
-				wallName = Structures.BuildingWallType(wallName);
+				wallName = Utilities.MapGen.Structures.BuildingWallType(wallName);
 
 			return true;
 		}
@@ -54,7 +46,8 @@ namespace SORCE.Patches
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(BasicWall.Spawn), argumentTypes: new[] { typeof(SpawnerBasic), typeof(string), typeof(Vector2), typeof(Vector2), typeof(Chunk) })]
 		public static void Spawn_Postfix(SpawnerBasic spawner, string wallName, Vector2 myPos, Vector2 myScale, Chunk startingChunkReal)
 		{
-			if (wallName == "Hedge" && (GC.challenges.Contains(nameof(FloralerFlora))))
+			if (wallName == "Hedge" && 
+				GC.challenges.Contains(nameof(FloralerFlora)))
 			{
 				int chance = 100;
 

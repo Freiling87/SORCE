@@ -1,23 +1,16 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using UnityEngine;
 using RogueLibsCore;
-using Random = UnityEngine.Random;
-using System.Collections;
-using System.Reflection;
-using System;
-using Light2D;
-using SORCE.Challenges;
-using SORCE.Logging;
-using SORCE.Localization;
-using static SORCE.Localization.NameLists;
-using System.Linq;
 using SORCE.Challenges.C_Buildings;
-using SORCE.MapGenUtilities;
+using SORCE.Logging;
+using SORCE.Utilities.MapGen;
+using System.Linq;
+using UnityEngine;
+using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {
-	[HarmonyPatch(declaringType: typeof(RandomWalls))]
+    [HarmonyPatch(declaringType: typeof(RandomWalls))]
 	static class P_RandomWalls
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();

@@ -1,7 +1,12 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
+using RogueLibsCore;
 using SORCE.BigQuests;
 using SORCE.Logging;
+using SORCE.Patches.P_PlayfieldObject;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace SORCE.Patches
 {
@@ -19,5 +24,38 @@ namespace SORCE.Patches
 
             return true;
         }
+
+		// This is to be called within BigQuestUpdate.
+		// Haven't written the transpiler yet, as BQs aren't ready in RL yet.
+		public static void BigQuestUpdate_InsertSequence(Agent agent)
+		{
+			if (agent.bigQuest == nameof(ToiletTourist))
+			{
+				List<int> chunksScored = new List<int>();
+				List<int> chunksTotal = new List<int>();
+
+				for (int j = 0; j < GC.objectRealListWithDestroyed.Count; j++)
+				{
+					ObjectReal objectReal = GC.objectRealListWithDestroyed[j];
+
+					if (objectReal is Toilet toilet)
+					{
+						int curChunk = toilet.curChunk;
+
+						if (!chunksTotal.Contains(curChunk))
+							chunksTotal.Add(curChunk);
+
+						if (toilet.GetHook<P_Toilet_Hook>().bigQuestShidded &&
+							!chunksScored.Contains(curChunk))
+                        {
+							chunksScored.Add(curChunk);
+						}
+					}
+				}
+
+				agent.bigQuestObjectCountTemp = chunksScored.Count;
+				agent.bigQuestObjectCountTotalTemp = chunksTotal.Count;
+			}
+		}
     }
 }

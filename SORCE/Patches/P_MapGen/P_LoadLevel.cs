@@ -12,8 +12,6 @@ using SORCE.Challenges.C_Preview;
 using SORCE.Challenges.C_VFX;
 using SORCE.Localization;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
-using SORCE.Patches.P_PlayfieldObject;
 using SORCE.Traits;
 using SORCE.Utilities;
 using SORCE.Utilities.MapGen;

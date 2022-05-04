@@ -214,7 +214,7 @@
     <Compile Include="Status_Effects\C_Underdank\CleanedOut.cs" />
     <Compile Include="Traits\UnderdankVIP.cs" />
     <Compile Include="Utilities\Gunplay.cs" />
-    <Compile Include="Utilities\MapGen\AmbientAudio.cs" />
+    <Compile Include="Utilities\AmbientAudio.cs" />
     <Compile Include="Utilities\MapGen\Chunks.cs" />
     <Compile Include="Utilities\MapGen\LevelGenTools.cs" />
     <Compile Include="Localization\VAgent.cs" />
@@ -242,9 +242,9 @@
     <Compile Include="Logging\SORCELogger.cs" />
     <Compile Include="Utilities\MapGen\MapFeatures.cs" />
     <Compile Include="Utilities\MapGen\MapFeatureSpawners.cs" />
-    <Compile Include="Utilities\MapGen\Roamers.cs" />
+    <Compile Include="Utilities\Roamers.cs" />
     <Compile Include="Utilities\MapGen\Structures.cs" />
-    <Compile Include="Utilities\MapGen\Wreckage.cs" />
+    <Compile Include="Utilities\Wreckage.cs" />
     <Compile Include="Patches\P_MapGen\P_LoadLevel_SetupMore3_3.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_00_PlayfieldObject.cs" />
     <Compile Include="Patches\P_PlayfieldObject\P_AlarmButton.cs" />

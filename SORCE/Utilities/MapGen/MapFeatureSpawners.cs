@@ -3,14 +3,13 @@ using SORCE.Challenges.C_Overhaul;
 using SORCE.Extensions;
 using SORCE.Logging;
 using SORCE.Traits;
-using SORCE.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
 
-namespace SORCE.MapGenUtilities
+namespace SORCE.Utilities.MapGen
 {
     internal class MapFeatureSpawners
 	{

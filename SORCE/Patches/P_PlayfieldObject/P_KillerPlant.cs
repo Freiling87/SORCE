@@ -1,13 +1,13 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
+using SORCE.Utilities;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches.P_PlayfieldObject
 {
-	[HarmonyPatch(declaringType: typeof(KillerPlant))]
+    [HarmonyPatch(declaringType: typeof(KillerPlant))]
 	public static class P_KillerPlant
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();

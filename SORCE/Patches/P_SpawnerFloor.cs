@@ -1,24 +1,18 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using UnityEngine;
 using RogueLibsCore;
-using Random = UnityEngine.Random;
-using System.Collections;
-using System.Reflection;
-using System;
-using System.Collections.Generic;
-using Object = UnityEngine.Object;
-using SORCE.Logging;
-using SORCE.Challenges;
-using SORCE.Localization;
-using static SORCE.Localization.NameLists;
 using SORCE.Challenges.C_Buildings;
+using SORCE.Logging;
+using SORCE.Utilities.MapGen;
+using System.Collections.Generic;
 using System.Linq;
-using SORCE.MapGenUtilities;
+using UnityEngine;
+using static SORCE.Localization.NameLists;
+using Object = UnityEngine.Object;
 
 namespace SORCE.Patches
 {
-	class P_SpawnerFloor
+    class P_SpawnerFloor
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
 		public static GameController GC => GameController.gameController;

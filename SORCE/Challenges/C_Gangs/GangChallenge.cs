@@ -2,7 +2,7 @@
 using RogueLibsCore;
 using SORCE.Localization;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
+using SORCE.Utilities.MapGen;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;

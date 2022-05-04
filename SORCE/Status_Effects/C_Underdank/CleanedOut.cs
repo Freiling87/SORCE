@@ -1,6 +1,6 @@
 ﻿using RogueLibsCore;
 
-namespace SORCE.StatusEffects
+namespace SORCE.Status_Effects
 {
     [EffectParameters]
     class CleanedOut : CustomEffect

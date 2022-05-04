@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static SORCE.Localization.NameLists;
 
-namespace SORCE.MapGenUtilities
+namespace SORCE.Utilities
 {
     internal class AmbientAudio
 	{

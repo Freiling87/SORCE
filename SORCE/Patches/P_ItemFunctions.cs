@@ -1,14 +1,12 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
+using SORCE.Challenges.C_VFX;
 using SORCE.Localization;
 using SORCE.Logging;
-using System;
-using static SORCE.Localization.NameLists;
-using UnityEngine;
-using Random = UnityEngine.Random;
-using SORCE.MapGenUtilities;
-using SORCE.Challenges.C_VFX;
+using SORCE.Utilities;
 using System.Collections.Generic;
+using static SORCE.Localization.NameLists;
+using Random = UnityEngine.Random;
 
 namespace SORCE.Patches
 {

@@ -4,8 +4,6 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using SORCE.Challenges.C_Features;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;

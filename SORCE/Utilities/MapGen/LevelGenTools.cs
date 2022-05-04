@@ -3,7 +3,7 @@ using SORCE.Logging;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SORCE.MapGenUtilities
+namespace SORCE.Utilities.MapGen
 {
     class LevelGenTools
 	{

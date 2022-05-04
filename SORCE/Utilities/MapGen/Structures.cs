@@ -8,7 +8,7 @@ using SORCE.Logging;
 using System.Linq;
 using static SORCE.Localization.NameLists;
 
-namespace SORCE.MapGenUtilities
+namespace SORCE.Utilities.MapGen
 {
     internal class Structures
 	{

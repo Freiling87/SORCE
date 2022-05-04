@@ -6,7 +6,7 @@ using SORCE.Logging;
 using System.Linq;
 using UnityEngine;
 
-namespace SORCE.MapGenUtilities
+namespace SORCE.Utilities.MapGen
 {
     public class LevelSize
 	{

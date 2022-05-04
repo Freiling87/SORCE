@@ -1,5 +1,4 @@
 ﻿using RogueLibsCore;
-using SORCE.MapGenUtilities;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Challenges.C_Gangs

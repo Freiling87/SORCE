@@ -1,11 +1,6 @@
 ﻿using BepInEx.Logging;
 using SORCE.Challenges.C_Gangs;
 using SORCE.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SORCE.Utilities.MapGen
 {
@@ -23,6 +18,5 @@ namespace SORCE.Utilities.MapGen
             !GC.loadLevel.placedDeportationCenter &&
             GC.levelTheme == 4 ||
             GC.challenges.Contains(nameof(ProtectAndServo));
-
     }
 }

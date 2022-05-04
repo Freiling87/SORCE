@@ -6,7 +6,7 @@ using SORCE.Logging;
 using SORCE.Traits;
 using static SORCE.Localization.NameLists;
 
-namespace SORCE.MapGenUtilities
+namespace SORCE.Utilities.MapGen
 {
     public class MapFeatures
 	{

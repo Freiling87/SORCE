@@ -1,14 +1,12 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using SORCE.Challenges.C_Lighting;
 using SORCE.Challenges.C_Overhaul;
-using SORCE.Localization;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
+using SORCE.Utilities;
+using SORCE.Utilities.MapGen;
 using System;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace SORCE.Patches
@@ -29,7 +27,7 @@ namespace SORCE.Patches
         public static void SpawnObjectReal_Postfix(string objectRealName, GameObject objectRealPrefab, Vector3 spawnPosition)
         {
 			int chance = 100;
-			bool isPublicObject = LevelGenTools.IsPublic(spawnPosition);
+            bool isPublicObject = LevelGenTools.IsPublic(spawnPosition);
 			//string chunkType = objectRealPrefab.GetComponent<Chunk>().description;
 
 			if (Wreckage.HasLeaves)

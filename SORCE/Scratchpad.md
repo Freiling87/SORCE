@@ -8,49 +8,22 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |C					|To Code (Includes any non-testing task)
 |H					|On hold (Should have specifics in header)
 |T					|To Test
-#	T	Recent commit testing
-Map Size Downtown
-	I think Canals used up all the chunks, so vanilla ended up with 2 or 3 buildings
-Spawned Conf centers when no cop bots
-	A few attempts, still doing it
-#		H	Big Quests
-##			C	Initial research
-Quest mark goal: 
-	agent.bigQuestObjectCountTotalTemp
-Quest mark current score:
-	agent.bigQuestObjectCountTemp
-Quest mark accrual:
-	Quests.AddBigQuestPoints
-##			C	Shidding General Mechanics
-##			T	Toilet Tourist
-Shit in every chunk with a toilet on the level
-Annoy or enrage owners depending on severity
-##			C	Disciple of Ludd
-Destroy machinery
-##			C	Fight the Power
-Dismantle any police infrastructure:
-	Public security cams / Turrets
-	Police Box
-	Alarm Button
-##			C	Mouse in a China Shop
-Avoid destruction
-##			C	Underdank Trailblazer
-Cops now guard all Manhole exits
-No more Thieves & Cannibals hiding inside
-Gain marks for opening Manhole covers
-#	C	Unspecified Bugs
-##		C	Water & Fire particles invisible
-Probably just need to gate a bullet patch
+#		Miscellaneous notes
+##		C	Cave Ambience doens't work
+##		C	Gate leaf dropping from plants
+Generates excessively with Fire/Water particles
 #	CT	Mutators
 ##		C	Features
+###			C	00 No Fire Hydrants spawning
+
 ###         C   00 District Object Delimitation
 ####            C   00 Export all to Delimitation mod
 Pending test of basic features
 ####            C   00 Add SORCE dependency and test
 New
-####			T	Crate
-Test
-####            √	Flame Grate
+####            C	Flame Grate
+I think limitation gate is not working
+####			√	Crate
 Complete
 ####            √   Manhole
 Complete
@@ -60,6 +33,8 @@ Complete
 Complete
 ####            √   Tube
 Complete
+###			H	Venting Frustration
+Spawns Vents & Air Conditioners on chunks that lack it
 ###         √H  Public Screens
 ####			H	Custom Sprites
 New
@@ -184,6 +159,9 @@ Certain overhauls
 ###         √H  Verdant Vistas
 ####            H   Exclude Bush Cannibals in certain circumstances
 Arcology overhaul is only one so far
+###         √   Welcome Mats
+Complete
+NPCs aren't pathing around them but I might be misremembering vanilla behavior
 ##		√H	Light Sources
 CameraScript
 	.SetLighting
@@ -238,6 +216,8 @@ Flame Grate
 ####			C	Pulse radioactive lights
 ####			C	Blink SecurityCam light
 ##		√H	Gangs
+###			C	00 Extortion does not work
+Main vendor goes submissive, but not followers
 ###			H	Modifiers
 ####			H	Blahd Runs Thick
 Blahd gangs are larger, same total number of agents.
@@ -912,12 +892,14 @@ Complete, until Overhauls are scoped
 New, for stealth
 ###         C   Zombies Moan
 New
-##		√H	Buildings
-###			C	Flammable Floors
+##		C	Buildings
+###			C	00 People don't flee flaming Hedge buildings
+###			C	00 Teleporting into 
+###			H	Flammable Floors
 Oil increases burn range
 Grass burns 1 square
 Scorch decals
-###			C	Remixers
+###			H	Remixers
 Except a less lame name
 No curated orders, those are for overhauls
 ####			C	Random Building mod every level
@@ -939,8 +921,6 @@ Complete
 ###         √   Skyway District
 Complete
 ###         √   This Land is Mine Land
-Complete
-###         √   Welcome Mats
 Complete
 ##		√	Map Size
 ###         √   Arthropolis
@@ -1002,6 +982,52 @@ Attempted
 Every time you eat food or drink something, you gain a 60-second status called Have to Take a Huge Shit. 
 If you don't use the bathroom before then, you shit yourself in public and annoy everyone around you, regardless of their existing relationship. 
 You also gain the Shidded Pants status which annoys everyone who sees you, and have to use a Bathtub to remove it.
+#	C	Release
+##		C	Export
+- Scary Guns
+##		C	Set Unlock costs
+To get those sweet nuggets 😈
+##		C	Disable DebugTools.debugMode
+##		C	Version number
+1.0.0
+##		C	Documentation
+###         C   ReadMe
+###         C   Feature List
+###         C   Planned Feature List
+###         C   Thanks
+####			C	Sprites
+UwuMacaroniTime
+GenEric
+##		C	Uploads
+###			C	BananaMods
+###			C	Discord
+###			C	NexusModsw
+#		H	Big Quests
+These aren't complete in RogueLibs yet.
+##			C	Initial research
+Quest mark goal: 
+	agent.bigQuestObjectCountTotalTemp
+Quest mark current score:
+	agent.bigQuestObjectCountTemp
+Quest mark accrual:
+	Quests.AddBigQuestPoints
+##			C	Shidding General Mechanics
+##			T	Toilet Tourist
+Shit in every chunk with a toilet on the level
+Annoy or enrage owners depending on severity
+##			C	Disciple of Ludd
+Destroy machinery
+##			C	Fight the Power
+Dismantle any police infrastructure:
+	Public security cams / Turrets
+	Police Box
+	Alarm Button
+##			C	Mouse in a China Shop
+Avoid destruction
+##			C	Underdank Trailblazer
+Cops now guard all Manhole exits
+No more Thieves & Cannibals hiding inside
+Gain marks for opening Manhole covers
 #		H	Status Effects
 ##			C	Fresh
 Gained by using Bathtub
@@ -1077,26 +1103,6 @@ Some foods can cause special shids
 |Oil (Oil-Reliant)	|.5x Qty|Fiery
 |Sugar				|6		|Awful
 |Whiskey			|6		|Poison
-#	C	Release
-##		C	Export
-- Scary Guns
-##		C	Set Unlock costs
-To get those sweet nuggets 😈
-##		C	Disable DebugTools.debugMode
-##		C	Version number
-1.0.0
-##		C	Documentation
-###         C   ReadMe
-###         C   Feature List
-###         C   Planned Feature List
-###         C   Thanks
-####			C	Sprites
-UwuMacaroniTime
-GenEric
-##		C	Uploads
-###			C	BananaMods
-###			C	Discord
-###			C	NexusModsw
 #      H   Shelved Release notes
 Overhauls are shelved for now, but I think this will be the right format. They might even need a page to each.
 

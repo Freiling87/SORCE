@@ -1,20 +1,19 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using SORCE.Challenges;
-using SORCE.Challenges.C_AmbientLightLevel;
 using SORCE.Challenges.C_Buildings;
 using SORCE.Challenges.C_Lighting;
 using SORCE.Localization;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
-using SORCE.Patches.P_PlayfieldObject;
+using SORCE.Utilities;
+using SORCE.Utilities.MapGen;
 using System.Collections.Generic;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {
-	[HarmonyPatch(declaringType: typeof(SpawnerMain))]
+    [HarmonyPatch(declaringType: typeof(SpawnerMain))]
 	public static class P_SpawnerMain
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();
@@ -223,7 +222,8 @@ namespace SORCE.Patches
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(SpawnerMain.SpawnBullet), argumentTypes: new[] { typeof(Vector3), typeof(bulletStatus), typeof(PlayfieldObject), typeof(int) })]
 		public static void SpawnBullet_Postfix(Vector3 bulletPos, bulletStatus bulletType, PlayfieldObject myPlayfieldObject, int bulletNetID, ref Bullet __result)
 		{
-			if (P_Bullet.GunplayRelit)
+			if (Gunplay.ModGunLighting &&
+				Gunplay.bullets.Contains((int)bulletType))
 			{
 				__result.particles.gameObject.SetActive(false);
 				__result.lightTemp.tr.Find("LightFancy").GetComponent<MeshRenderer>().enabled = false;

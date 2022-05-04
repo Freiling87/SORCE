@@ -6,12 +6,13 @@ using SORCE.Challenges.C_VFX;
 using SORCE.Localization;
 using SORCE.Logging;
 using SORCE.Resources;
+using SORCE.Utilities.MapGen;
 using System.Collections.Generic;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
 
-namespace SORCE.MapGenUtilities
+namespace SORCE.Utilities
 {
     internal class Wreckage
 	{
@@ -20,7 +21,7 @@ namespace SORCE.MapGenUtilities
 
 		public static bool HasLeaves =>
 			DebugTools.debugMode ||
-			GC.challenges.Contains(nameof(Arcology)) || // Leaves
+			GC.challenges.Contains(nameof(Arcology)) ||
 			GC.challenges.Contains(nameof(FloralerFlora));
 		public static bool HasPrivateLitter =>
 			DebugTools.debugMode ||

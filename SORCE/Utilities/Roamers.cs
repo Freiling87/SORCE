@@ -8,7 +8,7 @@ using System.Linq;
 using UnityEngine;
 using static SORCE.Localization.NameLists;
 
-namespace SORCE.MapGenUtilities
+namespace SORCE.Utilities
 {
     internal class Roamers
 	{

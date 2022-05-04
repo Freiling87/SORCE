@@ -2,17 +2,11 @@
 using HarmonyLib;
 using SORCE.Logging;
 using SORCE.Traits;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using static SORCE.Localization.NameLists;
 
 namespace SORCE.Patches
 {
-	[HarmonyPatch(declaringType: typeof(StatusEffects))]
+    [HarmonyPatch(declaringType: typeof(StatusEffects))]
 	class P_StatusEffects
 	{
 		private static readonly ManualLogSource logger = SORCELogger.GetLogger();

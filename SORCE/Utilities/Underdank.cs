@@ -4,7 +4,6 @@ using RogueLibsCore;
 using SORCE.BigQuests;
 using SORCE.Extensions;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
 using SORCE.Patches.P_PlayfieldObject;
 using SORCE.Traits;
 using System.Collections.Generic;
@@ -89,7 +88,7 @@ namespace SORCE.Utilities
 			}
 
 			agent.tr.position = exitSpot + (Vector3)exitFacing;
-			agent.jumpDirection = (Vector2)exitSpot + exitFacing * 2f;
+			agent.jumpDirection = agent.tr.position * exitFacing;
 			agent.jumpSpeed = 0.5f;
 			agent.Jump();
 
@@ -156,32 +155,35 @@ namespace SORCE.Utilities
 		public static void TakeHugeShit(Toilet toilet, bool loud = true)
 		{
 			Shitsplode(toilet, loud, true);
-			Agent agent = toilet.interactingAgent;
-			Poopsplosion(toilet, loud, true);
 
-			if (agent.bigQuest == nameof(ToiletTourist))
-            {
-				bool questFlag = true;
+			if (toilet.interactingAgent != null)
+			{
+				Agent agent = toilet.interactingAgent;
 
-				foreach (ObjectReal objectReal in GC.objectRealList)
-                {
-					if (objectReal is Toilet toilet2 
-						&& toilet2.GetHook<P_Toilet_Hook>().bigQuestShidded
-						&& toilet2.curChunk == toilet.curChunk)
-                    {
-						questFlag = false;
-						break;
-                    }
-                }
+				if (agent.bigQuest == nameof(ToiletTourist))
+				{
+					bool questFlag = true;
 
-				if (questFlag)
-                {
-					agent.SayDialogue(CDialogue.ToiletTouristPoint + Random.Range(1, 10));
-					GC.quests.AddBigQuestPoints(agent, nameof(ToiletTourist));
+					foreach (ObjectReal objectReal in GC.objectRealList)
+					{
+						if (objectReal is Toilet toilet2
+							&& toilet2.GetHook<P_Toilet_Hook>().bigQuestShidded
+							&& toilet2.curChunk == toilet.curChunk)
+						{
+							questFlag = false;
+							break;
+						}
+					}
+
+					if (questFlag)
+					{
+						agent.SayDialogue(CDialogue.ToiletTouristPoint + Random.Range(1, 10));
+						GC.quests.AddBigQuestPoints(agent, nameof(ToiletTourist));
+					}
+					else
+						agent.SayDialogue(CDialogue.ToiletTouristNoPoint);
 				}
-				else
-					agent.SayDialogue(CDialogue.ToiletTouristNoPoint);
-            }
+			}
 
 			toilet.StopInteraction();
 		}

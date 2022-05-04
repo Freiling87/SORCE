@@ -2,7 +2,6 @@
 using HarmonyLib;
 using Light2D;
 using SORCE.Logging;
-using SORCE.MapGenUtilities;
 using SORCE.Utilities;
 using System;
 using System.Linq;

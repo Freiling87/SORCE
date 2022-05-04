@@ -2,6 +2,7 @@
 using HarmonyLib;
 using SORCE.Logging;
 using SORCE.Patches.P_PlayfieldObject;
+using SORCE.Utilities;
 using UnityEngine;
 
 namespace SORCE.Patches
@@ -15,7 +16,7 @@ namespace SORCE.Patches
         [HarmonyPrefix, HarmonyPatch(methodName: nameof(ObjectPool.Spawn), argumentTypes: new[] {typeof(GameObject), typeof(Transform), typeof(Vector3), typeof(Quaternion) })]
         public static bool Spawn_Prefix(ref GameObject prefab, Transform parent, Vector3 position, Quaternion rotation)
         {
-            if (P_Gun.ShootierGuns &&
+            if (Gunplay.ModGunParticles &&
                 prefab == GC.spawnerMain.particleBulletHitPrefab)
             {
                 //prefab = null;
