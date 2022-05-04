@@ -1,20 +1,31 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
 using SORCE.Logging;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using static SORCE.Localization.NameLists;
 using Random = UnityEngine.Random;
 
 namespace SORCE.Utilities
 {
-    internal class Audiovisual
+    internal class Gunplay
     {
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        public static void MuzzleFlash(Vector3 location)
+        public static bool ModBulletholes;
+        public static bool ModFastBullets;
+        public static bool ModGunLighting;
+        public static bool ModGunParticles;
+
+        public static void MuzzleFlash(Vector3 location, bool longFlash = false)
         {
-            GC.spawnerMain.SpawnLightTemp(location, null, "PowerSap");
+            string type = longFlash
+                ? "GunFlash"
+                : "PowerSap";
+
+            GC.spawnerMain.SpawnLightTemp(location, null, type);
         }
 
         public static void SpawnBulletCasing(Vector3 origin, string casingType, GameObject towardObject = null)
@@ -37,5 +48,23 @@ namespace SORCE.Utilities
             movement.Spill(120, towardObject, null); // Handles null towardObject
             casing.FakeStart();
         }
-	}
+
+        public static readonly List<int> bullets = new List<int>()
+        {
+            1, 2, 19
+        };
+
+        public static List<string> MuzzleFlashShort = new List<string>()
+        {
+            VItem.MachineGun,
+            VItem.Pistol,
+            VItem.Revolver,
+            VItem.Shotgun,
+        };
+
+        public static List<string> MuzzleFlashLong = new List<string>()
+        {
+            VItem.RocketLauncher,
+        };
+    }
 }

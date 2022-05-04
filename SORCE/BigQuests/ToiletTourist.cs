@@ -4,7 +4,7 @@ namespace SORCE.BigQuests
 {
     public class ToiletTourist : CustomTrait
     {
-        [RLSetup]
+        //[RLSetup]
         public static void Setup()
         {
             RogueLibs.CreateCustomUnlock(new BigQuestUnlock(nameof(ToiletTourist))

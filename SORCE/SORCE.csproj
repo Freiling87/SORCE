@@ -69,6 +69,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\Libraries\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>..\Libraries\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
@@ -207,10 +210,10 @@
     <Compile Include="Patches\P_PlayfieldObject\P_Crate.cs" />
     <Compile Include="Patches\P_Quests.cs" />
     <Compile Include="Resources\SpriteLoader.cs" />
-    <Compile Include="StatusEffects\Soiled.cs" />
-    <Compile Include="StatusEffects\CleanedOut.cs" />
+    <Compile Include="Status_Effects\C_Underdank\Soiled.cs" />
+    <Compile Include="Status_Effects\C_Underdank\CleanedOut.cs" />
     <Compile Include="Traits\UnderdankVIP.cs" />
-    <Compile Include="Utilities\Audiovisual.cs" />
+    <Compile Include="Utilities\Gunplay.cs" />
     <Compile Include="Utilities\MapGen\AmbientAudio.cs" />
     <Compile Include="Utilities\MapGen\Chunks.cs" />
     <Compile Include="Utilities\MapGen\LevelGenTools.cs" />

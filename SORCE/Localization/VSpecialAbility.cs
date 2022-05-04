@@ -33,5 +33,4 @@ namespace SORCE.Localization
 				WerewolfTransformation = "WerewolfTransform",
 				ZombieSpit = "ZombieSpit";
 	}
-
 }

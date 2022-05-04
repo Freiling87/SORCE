@@ -23,7 +23,7 @@ namespace SORCE.Patches.P_PlayfieldObject
         [HarmonyPrefix, HarmonyPatch(methodName: nameof (Turret.FireGun), argumentTypes: new[] { typeof(int), typeof(NetworkInstanceId) })]
         public static bool FireGun_Prefix(int bulletNetID, NetworkInstanceId opponentID, Turret __instance)
         {
-			Audiovisual.MuzzleFlash(__instance.tr.position);
+			Gunplay.MuzzleFlash(__instance.tr.position);
 
 			return true;
 		}
@@ -31,7 +31,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(Turret.FireGun), argumentTypes: new[] { typeof(int), typeof(NetworkInstanceId) })]
 		public static void FireGun_Postfix(int bulletNetID, NetworkInstanceId opponentID, Turret __instance)
 		{
-			Audiovisual.SpawnBulletCasing(__instance.tr.position, CSprite.RifleCasing); // This breaks firing, deletes the bullet or something
+			Gunplay.SpawnBulletCasing(__instance.tr.position, CSprite.RifleCasing); // This breaks firing, deletes the bullet or something
 			//__instance.timeSinceLastBullet = 0.1f; // TODO: Move to Security mod
 		}
 #pragma warning restore CS0618 // Type or member is obsolete

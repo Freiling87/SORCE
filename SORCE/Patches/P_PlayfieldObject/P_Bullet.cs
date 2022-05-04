@@ -2,6 +2,7 @@
 using HarmonyLib;
 using SORCE.Localization;
 using SORCE.Logging;
+using SORCE.Utilities;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +17,12 @@ namespace SORCE.Patches.P_PlayfieldObject
         private static readonly ManualLogSource logger = SORCELogger.GetLogger();
         public static GameController GC => GameController.gameController;
 
-        public static bool GunplayRelit;
-        public static bool RealisticBullets;
-        public static bool SpawnBulletholes;
 
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.BulletHitEffect), argumentTypes: new[] { typeof(GameObject) })]
         public static void BulletHitEffect_Postfix(GameObject hitObject, Bullet __instance)
         {
-            if (SpawnBulletholes
-                && bullets.Contains((int)__instance.bulletType) 
+            if (Gunplay.ModBulletholes
+                && Gunplay.bullets.Contains((int)__instance.bulletType) 
                 //&& hitObject.CompareTag("Wall") // Might be redundant to "Front" in name 
                 && hitObject.name.Contains("Front"))
             {
@@ -57,29 +55,24 @@ namespace SORCE.Patches.P_PlayfieldObject
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.RealAwake), argumentTypes: new Type[0] { })]
         public static void RealAwake_Postfix(Bullet __instance)
         {
-            if (GunplayRelit)
+            if (Gunplay.ModGunLighting)
             {
                 if (__instance.lightTemp != null)
                     __instance.lightTemp.fancyLightRenderer.enabled = false;
             }
         }
 
-        // TODO: Export to Gunplay mod
         [HarmonyPostfix, HarmonyPatch(methodName: nameof(Bullet.SetupBullet), argumentTypes: new Type[0] { })]
-        public static void SetupBullet_Postfix(Bullet __instance)
+        public static void SetupBullet_Postfix(Bullet __instance) 
         {
-            if (RealisticBullets && 
-                bullets.Contains((int)__instance.bulletType))
+            if (Gunplay.ModFastBullets &&
+                Gunplay.bullets.Contains((int)__instance.bulletType))
             {
                 __instance.tr.localScale = Vector3.one * 0.20f;
                 __instance.speed = 27;
                 // TODO: Change Collision Detection algos for bullets and wall to prevent noclipping
             }
         }
-        public static readonly List<int> bullets = new List<int>()
-        {
-            1, 2, 19
-        };
 
         public static void SpawnBulletHole(Vector3 pos, wallMaterialType wmt)
         {
@@ -91,7 +84,7 @@ namespace SORCE.Patches.P_PlayfieldObject
             string sprite =
                 wmt == wallMaterialType.Glass
                 ? CSprite.BulletHoleGlass
-                : CSprite.BulletHole;
+                : CSprite.BulletHole; 
 
             gameObject.GetComponent<tk2dSprite>().SetSprite(sprite);
             gameObject.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0, 360));

@@ -240,10 +240,10 @@ namespace SORCE.Patches
 			logger.LogDebug("loadStuff_Prefix");
 
 			// Reduces performance to complex boolean calls
-			P_Bullet.SpawnBulletholes = GC.challenges.Contains(nameof(BuggierBulletholes)) || DebugTools.debugMode;
-			P_Bullet.GunplayRelit = GC.challenges.Contains(nameof(GunplayRelit)) || DebugTools.debugMode;
-			P_Bullet.RealisticBullets = GC.challenges.Contains(nameof(ScaryGunsPreview)) || DebugTools.debugMode;
-			P_Gun.ShootierGuns = GC.challenges.Contains(nameof(ShootierGuns)) || DebugTools.debugMode;
+			Gunplay.ModBulletholes = GC.challenges.Contains(nameof(BuggierBulletholes));
+			Gunplay.ModFastBullets = GC.challenges.Contains(nameof(ScaryGunsPreview));
+			Gunplay.ModGunLighting = GC.challenges.Contains(nameof(GunplayRelit));
+			Gunplay.ModGunParticles = GC.challenges.Contains(nameof(ShootierGuns));
 			Underdank.UnderdankActive =
 				TraitManager.IsPlayerTraitActive<UnderdankCitizen>() ||
 				TraitManager.IsPlayerTraitActive<UnderdankVIP>();

@@ -15,10 +15,9 @@
 				ManholeNoExits = "ManholeNoExits",
 				ToiletBuyFail = "ToiletBuyFail",
 				ToiletDisgusting = "ToiletDisgusting",
+				ToiletDisgustingOkay = "ToiletDisgustingOkay",
 				ToiletTouristNoPoint = "ToiletTouristNoPoint",
 				ToiletTouristPoint = "ToiletTouristPoint"
-				ToiletDisgusting = "ToiletDisgusting",
-				ToiletDisgustingOkay = "ToiletDisgustingOkay"
 				;
 		}
 	}
