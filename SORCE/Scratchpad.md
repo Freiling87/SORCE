@@ -162,6 +162,16 @@ Arcology overhaul is only one so far
 ###         √   Welcome Mats
 Complete
 NPCs aren't pathing around them but I might be misremembering vanilla behavior
+##		C	Guards
+Replaces Hideout guards
+###			C	Goon Shortage
+Random NPCs, not district-appropriate
+###			C	Goon Shortage 2
+Random NPCs, district-appropriate
+###			C	Goonrillas
+Gorgia
+###			C	To Protect And Only Serve
+Cops, then Supercops
 ##		√H	Light Sources
 CameraScript
 	.SetLighting
