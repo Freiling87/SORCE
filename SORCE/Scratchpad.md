@@ -12,6 +12,11 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 ##		C	Cave Ambience doens't work
 ##		C	Gate leaf dropping from plants
 Generates excessively with Fire/Water particles
+##		C	Cool stuff to try
+LightingSystem.BlurAmbientLight: Maybe an interesting look
+LightingSystem.HDR
+Agent.roguelight
+Agent.roguelight.roguelight (bool)
 #	CT	Mutators
 ##		C	Features
 ###			C	00 No Fire Hydrants spawning
