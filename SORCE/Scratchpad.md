@@ -28,6 +28,9 @@ Pending test of basic features
 New
 ####            C	Flame Grate
 I think limitation gate is not working
+####			C	Rush Hour
+Carts & Trains much more frequent
+Separate from enabling feature
 ####			√	Crate
 Complete
 ####            √   Manhole
@@ -167,16 +170,29 @@ Arcology overhaul is only one so far
 ###         √   Welcome Mats
 Complete
 NPCs aren't pathing around them but I might be misremembering vanilla behavior
+##		C	Chunks
+###			C	Security Cordon
+Mayor Village entrance chunk on every level
+Bribe cost scaled downwards
 ##		C	Guards
 Replaces Hideout guards
+Non-exclusive (Additive)
+###			C	Automatic Assurance
+Cop Bots
+###			C	Family Business
+Mobsters
 ###			C	Goon Shortage
 Random NPCs, not district-appropriate
 ###			C	Goon Shortage 2
 Random NPCs, district-appropriate
 ###			C	Goonrillas
 Gorgia
-###			C	To Protect And Only Serve
+###			C	Public-Private Partnership
+Soldiers
+###			C	To Protect And Serve (Certain People)
 Cops, then Supercops
+###			C	Volunteer Hours
+Random between Blahd & Crepe
 ##		√H	Light Sources
 CameraScript
 	.SetLighting
