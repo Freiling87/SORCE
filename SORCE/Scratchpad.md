@@ -8,6 +8,14 @@ This file is meant to be viewed in raw format. I just use markdown because its c
 |C					|To Code (Includes any non-testing task)
 |H					|On hold (Should have specifics in header)
 |T					|To Test
+#		Bug Reports
+
+##			C	Hole bug
+	[Error  : Unity Log] NullReferenceException: Object reference not set to an instance of an object
+	Stack trace:
+	SORCE.Patches.P_PlayfieldObject.P_Hole.Hole_EnterRange (UnityEngine.GameObject myObject, Hole __instance) (at <1f7534e775f047b78adf6c12ea42e7b0>:0)
+	Hole.EnterRange (UnityEngine.GameObject myObject) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
+	Hole.OnTriggerStay2D (UnityEngine.Collider2D other) (at <9086a7372c854d5a8678e46a74a50fc1>:0)
 #		Miscellaneous notes
 ##		C	Cave Ambience doens't work
 ##		C	Gate leaf dropping from plants
@@ -24,7 +32,7 @@ New
 ####            C	Flame Grate
 I think limitation gate is not working
 ####			√	Crate
-Complete
+Complete 
 ####            √   Manhole
 Complete
 ####            √   SawBlade
@@ -228,6 +236,8 @@ Flame Grate
 ##		√H	Gangs
 ###			C	00 Extortion does not work
 Main vendor goes submissive, but not followers
+###			C	Hare Krishna
+Walk around making noise (not too big radius), annoy everyone they come into contact with
 ###			H	Modifiers
 ####			H	Blahd Runs Thick
 Blahd gangs are larger, same total number of agents.
@@ -373,6 +383,8 @@ Could also use a particle effect that resembles dust, which would dispose of its
 ###			√H	Floraler Flora
 PoolsScene.SpawnObjectReal
 ##		H	Agent Spawns
+###			C	Protection
+Business owners should sometimes have gang protection hired. Instead of Goons, they've paid protection money to the local Blahds/Crepes/Mafia, who are your competitors if you're an Extortionist. If you are making above a certain threshold in extortion income, they are Annoyed or Hostile on sight.
 ###			C	Spawn bodyguards for Vendor Carts
 ###			C	Spawn slaves in rich homes
 ###			C	Factory slave labor
@@ -1113,8 +1125,9 @@ Some foods can cause special shids
 |Oil (Oil-Reliant)	|.5x Qty|Fiery
 |Sugar				|6		|Awful
 |Whiskey			|6		|Poison
+
 #      H   Shelved Release notes
-Overhauls are shelved for now, but I think this will be the right format. They might even need a page to each.
+Shelved, but convert these back into dev notes and rewrite this when it's actually releasable.
 
 ## Overhauls
 
@@ -1129,24 +1142,29 @@ This just makes the game act like normal life in America. By the way, it's polit
 - All Law Enforcement chunks disabled
 - All Criminal-type chunks made more common
 
-#### Map Features
-- All Pollution-related features made more common
-- Most public good features disabled or made pay-only
 
 #### NPCs
-- Law Enforcement roaming NPCs disabled
 - Criminal roaming NPCs made more common
+- Vampires give you a tip and are Friendly after suqq
+- Thieves give you a tip and are Friendly after pickpocketing you
+- All transactions with NPCs will cause them to solicit a tip. If you don't tip them, they'll become Annoyed.
+- Goons & Supergoons can be bribed
+- Cops will solicit a bribe before attacking (or before getting Annoyed in the case of minor crimes).
+- Cop Bots are leased by a private company. They have a timer that will switch them to "Off-Duty" when it expires. If there is a Cop on a level with Cop Bots, they will put change into the Cop Bots to keep them active.
+- The Mech runs on a coin-op timer, too. Because fuck you.
+- Doctors sell drugs
 
-#### Object Interactions
+#### Objects
 |Name                   |Effects
 |:----------------------|
 |Alarm Button           |- Now costs money
-|Elevator               |- Now costs money
+|Elevator               |- Now requires an Elevator Ticket. This can be bought at the elevator, or found on certain NPCs.
 |Fire Hydrant           |- Now costs money
+|Lamp					|- No longer spawned in public
 |Toilet                 |- Now costs money
+|Trash Can				|- No longer spawned in public
 
 ### Disco City Dance-off
-Notes
 
 ### Mostly Automated Comfortable Inclusive Terrestrial Socialism
 A post-scarcity mode. It's a lot easier and friendlier, if you're into that kind of thing. Turns out you thrive on conflict!

@@ -202,15 +202,6 @@ namespace SORCE.Challenges.C_Gangs
 				if (i % gangSize == gangSize - 1)
 					pos = Vector2.zero;
 			}
-
-			// Temporary, to diagnose initial relationship issues
-			foreach (Agent agent in spawnedAgentList)
-            {
-				if (GC.agentList.Contains(agent))
-					logger.LogDebug("In Agent List");
-				else
-					logger.LogDebug("Not in Agent List");
-			}
 		}
 	}
 }

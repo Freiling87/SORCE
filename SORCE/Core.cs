@@ -58,8 +58,8 @@ namespace SORCE
 	 
 	public static class DebugTools
 	{
-		public const bool debugMode = true;
-
+		public const bool debugMode = false;
+		 
 		public static List<string> debugChallenges = new List<string>()
 		{
 		};

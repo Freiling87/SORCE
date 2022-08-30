@@ -92,6 +92,7 @@ namespace SORCE.Patches.P_PlayfieldObject
 		[HarmonyPostfix, HarmonyPatch(methodName: nameof(ObjectReal.FinishedOperating), argumentTypes: new Type[0] { })]
 		public static void FinishedOperating_Postfix(ObjectReal __instance)
 		{
+			// TODO: Add references to strings, for the purpose of traceability.
 			if (!__instance.interactingAgent.interactionHelper.interactingFar)
 			{
 				if (__instance is Manhole)

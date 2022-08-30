@@ -51,7 +51,7 @@ namespace SORCE.Utilities
             {
                 Vector2 location = LevelGenTools.RandomSpawnLocation(GC.tileInfo, 0.56f);
 
-				if (GC.percentChance(100)) // Temporarily disabling custom trash
+				if (GC.percentChance(100))
 					SpawnWreckagePileObject_Granular(
 						location,
 						OverhaulWreckageType(),

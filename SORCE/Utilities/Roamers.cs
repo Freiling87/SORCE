@@ -3,6 +3,7 @@ using RogueLibsCore;
 using SORCE.Challenges.C_Overhaul;
 using SORCE.Challenges.C_Population;
 using SORCE.Logging;
+using SORCE.Utilities.MapGen;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;

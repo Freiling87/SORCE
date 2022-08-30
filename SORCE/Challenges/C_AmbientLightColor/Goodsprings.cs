@@ -24,4 +24,4 @@ namespace SORCE.Challenges.C_AmbientLightColor
 					"Kinda makes you wish for a nuclear winter."));
 		}
 	}
-}
+}   
